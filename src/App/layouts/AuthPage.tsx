@@ -38,7 +38,7 @@ const AuthPage: React.FC = () => {
 
     return (
         <form
-            className="container pt-10
+            className="container pt-10 mt-40
              text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]"
             onSubmit={submitHandler}
         >
