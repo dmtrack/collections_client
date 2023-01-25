@@ -78,3 +78,5 @@
         @apply opacity-50 cursor-not-allowed;
     }
 }
+
+/* "build": "postcss src/tailwind.css -o public/build/tailwind.css", */
