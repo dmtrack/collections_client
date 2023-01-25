@@ -1,6 +1,4 @@
-import { logOut } from './../actions/auth.actions';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { act } from 'react-dom/test-utils';
 import { DeleteUserProp, IUser, IUserState } from '../../interfaces/IUser';
 
 const initialState: IUserState = {
