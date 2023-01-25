@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './tailwind.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { setupStore } from './App/store';
 
@@ -14,9 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <BrowserRouter>
+            <Router basename="https://students-client.onrender.com">
                 <App />
-            </BrowserRouter>
+            </Router>
         </Provider>
     </React.StrictMode>
 );
