@@ -15,11 +15,10 @@ const URL = process.env.REACT_APP_BASE_URL;
 
 const UsersList = ({ usersProps }: IUsersListProps) => {
     const [dataId, setDataId] = useState<Array<any>>([]);
-
     const [checked, setChecked] = useState(false);
+
     const { users } = useAppSelector((state) => state.users);
     const { userId } = useAppSelector((state) => state.auth);
-    console.log(dataId, userId);
 
     const dispatch = useAppDispatch();
     async function toggleBlock(params: number[]) {
