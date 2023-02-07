@@ -1,21 +1,24 @@
 const USERID_KEY = 'USERID_KEY';
+const TOKEN = 'TOKEN';
 
-type SetUserProps = {
-    userId: string;
-};
+export function setToken(token: string) {
+    localStorage.setItem(TOKEN, token);
+}
 
-export function setUser({ userId }: SetUserProps) {
+export function setUser(userId: number) {
     localStorage.setItem(USERID_KEY, String(userId));
 }
 
 export function removeAuthData() {
     localStorage.removeItem(USERID_KEY);
+    localStorage.removeItem(TOKEN);
 }
 
 export function getUserId() {
     return localStorage.getItem(USERID_KEY);
 }
 const localStorageService = {
+    setToken,
     getUserId,
     removeAuthData,
     setUser,

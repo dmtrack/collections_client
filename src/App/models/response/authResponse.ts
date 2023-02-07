@@ -1,18 +1,25 @@
+import { AxiosResponse } from 'axios';
+import { IUser } from '../IUser';
+
+export interface IAuthResponse {
+    accessToken: string;
+    refreshToken: string;
+    user: IUser;
+}
+
 export interface IError extends Error {
     response: { data: { message: string; error: number } };
 }
 
 export interface IAuthData {
-    nickname: string;
+    name: string;
     email: string;
-    registered: string;
     password: string;
-    login: string;
+    avatarUrl: string;
 }
 export interface ILoginData {
     email: string;
     password: string;
-    login: string;
 }
 
 export interface IAuthResponse {

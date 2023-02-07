@@ -1,21 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
 import { useInput } from '../hook/input';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 import { login } from '../store/actions/auth.actions';
-import { getDate } from '../utils/date';
 
-const LoginPage: React.FC = () => {
+const LoginPage: FC = () => {
     const { error } = useAppSelector((state) => state.auth);
 
     const navigate = useNavigate();
     const email = useInput('');
     const password = useInput('');
     const dispatch = useAppDispatch();
-
-    const logindate =
-        getDate().day + '.' + getDate().month + 1 + '.' + getDate().year;
 
     const isFormValid = () => email.value && password.value;
 
@@ -26,7 +22,6 @@ const LoginPage: React.FC = () => {
                 login({
                     email: email.value,
                     password: password.value,
-                    login: logindate,
                 })
             )
                 .then(() => navigate('/'))

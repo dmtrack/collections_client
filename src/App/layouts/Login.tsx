@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthPage } from './AuthPage';
+import { RegistrationPage } from './RegistrationPage';
 import { LoginPage } from './LoginPage';
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
         <div>
             {formType === 'register' ? (
                 <>
-                    <AuthPage />
+                    <RegistrationPage />
                     <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
                         Already have account?{' '}
                         <a

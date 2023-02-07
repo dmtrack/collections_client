@@ -1,10 +1,11 @@
 export interface IUser {
     id: number;
-    nickname: string;
+    name: string;
     email: string;
-    registered: string;
-    login: string;
     blocked: boolean;
+    isActivated: boolean;
+    access: string;
+    avatarUrl: string;
 }
 
 export interface IUserState {
@@ -13,9 +14,9 @@ export interface IUserState {
     users: IUser[];
 }
 
-export interface IServerResponce<T> {
+export interface IServerResponce {
     config: {};
-    data: T[];
+    data: [];
     message: string;
     headers: {};
     request: {};

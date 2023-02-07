@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 
-import { IUser } from '../interfaces/IUser';
+import { IUser } from '../models/IUser';
 import { logOut } from '../store/actions/auth.actions';
 import { userSlice } from '../store/slices/user.slice';
 import Button from './button';

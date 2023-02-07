@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUser } from '../interfaces/IUser';
+import { IUser } from '../models/IUser';
 
 interface IUserProps {
     user: IUser;
@@ -8,7 +8,7 @@ interface IUserProps {
 }
 
 function User({ user, dataId, setDataId }: IUserProps) {
-    const { id, nickname, email, registered, login, blocked } = user;
+    const { id, name, email, blocked } = user;
 
     const chooseCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
         const id = parseInt(e.target.value);
@@ -35,10 +35,10 @@ function User({ user, dataId, setDataId }: IUserProps) {
                     />
                 </td>
                 <td className="px-5 py-4">{id}</td>
-                <td className="px-5 py-4">{nickname}</td>
+                <td className="px-5 py-4">{name}</td>
                 <td className="px-5 py-4">{email}</td>
-                <td className="px-5 py-4">{registered}</td>
-                <td className="px-5 py-4">{login}</td>
+                <td className="px-5 py-4">123</td>
+                <td className="px-5 py-4">456</td>
                 <td className="px-5 py-4">{blocked ? 'blocked' : 'active'}</td>
             </tr>
         </>

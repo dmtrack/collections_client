@@ -1,17 +1,18 @@
 import { userSlice } from './../slices/user.slice';
 import { AppDispatch } from '..';
-import axios from '../../axios';
-import { IServerResponce, IUser, IUserState } from '../../interfaces/IUser';
-import localStorageService from '../../utils/localStorage';
+
+import { IUser, IUserState } from '../../models/IUser';
+import localStorageService from '../../services/localStorageService';
+import api from '../../http';
 
 export const fetchUsers = () => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(userSlice.actions.fetching());
-            const response = await axios.get<IServerResponce<IUser>>(
-                'getusers'
-            );
-            dispatch(userSlice.actions.fetchSuccess(response.data.data));
+            const response = await api.get('/user/getusers');
+            console.log('response', response);
+
+            dispatch(userSlice.actions.fetchSuccess(response.data));
         } catch (e) {
             dispatch(userSlice.actions.fetchError(e as Error));
         }

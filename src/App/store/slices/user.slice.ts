@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DeleteUserProp, IUser, IUserState } from '../../interfaces/IUser';
+import { DeleteUserProp, IUser, IUserState } from '../../models/IUser';
 
 const initialState: IUserState = {
     loading: false,
@@ -15,6 +15,8 @@ export const userSlice = createSlice({
             state.loading = true;
         },
         fetchSuccess(state, action: PayloadAction<IUser[]>) {
+            console.log('payload', action.payload);
+
             state.loading = false;
             state.users = action.payload;
         },

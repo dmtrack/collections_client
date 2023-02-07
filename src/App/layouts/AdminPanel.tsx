@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UsersList } from '../components/Userslist';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
+import userService from '../services/userService';
 import { fetchUsers } from '../store/actions/userActions';
 
-export function MainPage() {
+export function AdminPanel() {
     const dispatch = useAppDispatch();
     const { users, loading, error } = useAppSelector((state) => state.users);
     const { isAuth } = useAppSelector((state) => state.auth);

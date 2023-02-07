@@ -1,30 +1,31 @@
+import { AxiosResponse } from 'axios';
+import { IAuthResponse } from './../../models/response/authResponse';
 import { authSlice } from './../slices/auth.slice';
 import { AppDispatch } from '..';
-import axios from '../../axios';
+
 import {
     IAuthData,
-    IAuthResponse,
     IError,
     ILoginData,
-} from '../../interfaces/IAuth';
-import localStorageService from '../../utils/localStorage';
-
-const URL = process.env.REACT_APP_BASE_URL;
+} from '../../models/response/authResponse';
+import localStorageService from '../../services/localStorageService';
+import AuthService from '../../services/authService';
 
 export const register = (data: IAuthData) => {
     return async (dispatch: AppDispatch) => {
         try {
-            const response = await axios.post<IAuthResponse>(
-                URL + '/signup',
-                data
+            const { name, email, password, avatarUrl } = data;
+            const response = await AuthService.register(
+                name,
+                email,
+                password,
+                avatarUrl
             );
-
-            dispatch(
-                authSlice.actions.signIn({
-                    userId: response.data.data.id,
-                })
-            );
-        } catch (e) {
+            console.log(response);
+            localStorageService.setToken(response.data.accessToken);
+            dispatch(authSlice.actions.login(response.data));
+        } catch (e: any) {
+            console.log(e.response?.data?.message);
             dispatch(authSlice.actions.fetchError(e as IError));
         }
     };
@@ -33,17 +34,13 @@ export const register = (data: IAuthData) => {
 export const login = (data: ILoginData) => {
     return async (dispatch: AppDispatch) => {
         try {
-            const response = await axios.post<IAuthResponse>(
-                URL + '/signin',
-                data
-            );
+            const { email, password } = data;
+            const response = await AuthService.login(email, password);
+            localStorageService.setToken(response.data.accessToken);
 
-            dispatch(
-                authSlice.actions.signIn({
-                    userId: response.data.data.id,
-                })
-            );
-        } catch (e) {
+            dispatch(authSlice.actions.login(response.data));
+        } catch (e: any) {
+            console.log(e.response?.data?.message);
             dispatch(authSlice.actions.fetchError(e as IError));
         }
     };

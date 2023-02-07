@@ -4,20 +4,15 @@ import Button from '../components/button';
 import { useInput } from '../hook/input';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 import { register } from '../store/actions/auth.actions';
-import { getDate } from '../utils/date';
+import getRandomAvatar from '../utils/avatar';
 
-const AuthPage: React.FC = () => {
+const RegistrationPage: React.FC = () => {
     const { error } = useAppSelector((state) => state.auth);
     const navigate = useNavigate();
     const username = useInput('');
     const email = useInput('');
     const password = useInput('');
     const dispatch = useAppDispatch();
-
-    const regdate =
-        getDate().day + '.' + getDate().month + 1 + '.' + getDate().year;
-    const logindate =
-        getDate().day + '.' + getDate().month + 1 + '.' + getDate().year;
 
     const isFormValid = () => username.value && email.value && password.value;
 
@@ -26,11 +21,10 @@ const AuthPage: React.FC = () => {
         if (isFormValid()) {
             dispatch(
                 register({
-                    nickname: username.value,
+                    name: username.value,
                     email: email.value,
                     password: password.value,
-                    registered: regdate,
-                    login: logindate,
+                    avatarUrl: getRandomAvatar(),
                 })
             ).then(() => navigate('/'));
         } else alert('Please, fill up all fields');
@@ -94,4 +88,4 @@ const AuthPage: React.FC = () => {
     );
 };
 
-export { AuthPage };
+export { RegistrationPage };
