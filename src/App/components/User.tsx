@@ -8,7 +8,8 @@ interface IUserProps {
 }
 
 function User({ user, dataId, setDataId }: IUserProps) {
-    const { id, name, email, blocked } = user;
+    const { id, name, email, blocked, isActivated } = user;
+    const { access } = user.access;
 
     const chooseCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
         const id = parseInt(e.target.value);
@@ -37,8 +38,8 @@ function User({ user, dataId, setDataId }: IUserProps) {
                 <td className="px-5 py-4">{id}</td>
                 <td className="px-5 py-4">{name}</td>
                 <td className="px-5 py-4">{email}</td>
-                <td className="px-5 py-4">123</td>
-                <td className="px-5 py-4">456</td>
+                <td className="px-5 py-4">{access}</td>
+                <td className="px-5 py-4">{isActivated ? 'yes' : 'no'}</td>
                 <td className="px-5 py-4">{blocked ? 'blocked' : 'active'}</td>
             </tr>
         </>

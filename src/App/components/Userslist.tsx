@@ -1,15 +1,14 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 
 import { IUser } from '../models/IUser';
-import { logOut } from '../store/actions/auth.actions';
+
 import {
     toggleBlock,
     toggleUnBlock,
     deleteUser,
 } from '../store/actions/userActions';
-import { userSlice } from '../store/slices/user.slice';
+
 import Button from './button';
 import { User } from './User';
 
@@ -85,16 +84,16 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                                         id
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Nickname
+                                        name
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         E-mail
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Registered
+                                        access
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Login
+                                        Activated
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Status

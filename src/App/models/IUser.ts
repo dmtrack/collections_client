@@ -1,15 +1,21 @@
+export interface IAccess {
+    id: number;
+    access: string;
+    userId: number;
+}
+
 export interface IUser {
     id: number;
     name: string;
     email: string;
     blocked: boolean;
     isActivated: boolean;
-    access: string;
+    access: IAccess;
     avatarUrl: string;
 }
 
 export interface IUserState {
-    loading: boolean;
+    usersLoading: boolean;
     error: string;
     users: IUser[];
 }

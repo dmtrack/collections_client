@@ -9,7 +9,7 @@ import { logOut } from './auth.actions';
 export const fetchUsers = () => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(userSlice.actions.fetching());
+            dispatch(userSlice.actions.fetchingUsers());
             const response = await api.get('/user/getusers');
             dispatch(userSlice.actions.fetchSuccess(response.data));
         } catch (e) {
