@@ -15,8 +15,6 @@ export const userSlice = createSlice({
             state.loading = true;
         },
         fetchSuccess(state, action: PayloadAction<IUser[]>) {
-            console.log('payload', action.payload);
-
             state.loading = false;
             state.users = action.payload;
         },
@@ -40,7 +38,7 @@ export const userSlice = createSlice({
                 });
             });
         },
-        toggleUnblockState(state, action: PayloadAction<DeleteUserProp>) {
+        toggleUnBlockState(state, action: PayloadAction<DeleteUserProp>) {
             action.payload.forEach((id) => {
                 state.users.forEach((user) => {
                     if (user.id === Number(id)) {
