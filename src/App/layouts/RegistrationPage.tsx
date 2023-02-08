@@ -15,7 +15,6 @@ const RegistrationPage: React.FC = () => {
     const dispatch = useAppDispatch();
 
     const isFormValid = () => username.value && email.value && password.value;
-
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         if (isFormValid()) {
