@@ -39,13 +39,7 @@ export const login = (data: ILoginData) => {
         try {
             const { email, password } = data;
             const response = await AuthService.login(email, password);
-            console.log(response);
-
             localStorageService.setToken(response.data.accessToken);
-            localStorageService.setUser(
-                response.data.user.id,
-                response.data.user.access.access
-            );
             dispatch(authSlice.actions.login(response.data));
         } catch (e: any) {
             console.log(e.response?.data?.message);

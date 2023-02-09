@@ -15,7 +15,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         dispatch(reconnect(userId));
-    }, [dispatch]);
+    }, [isAuth]);
 
     return (
         <>
@@ -23,7 +23,7 @@ const App: React.FC = () => {
                 <Navigation />
                 <Routes>
                     <Route path="/login/:type?" element={<Login />} />
-                    <Route path="/" element={<AdminPanel />} />
+                    <Route path="/admin" element={<AdminPanel />} />
                     <Route path="/logout" element={<LogOut />} />
                 </Routes>
             </Router>
