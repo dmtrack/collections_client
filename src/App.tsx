@@ -20,7 +20,7 @@ const App: React.FC = () => {
         <>
             <Router>
                 <Navigation />
-                <Routes baseUrl="">
+                <Routes>
                     <Route path="/login/:type?" element={<Login />} />
                     <Route path="/" element={<AdminPanel />} />
                     <Route path="/logout" element={<LogOut />} />
