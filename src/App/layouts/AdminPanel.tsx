@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UsersList } from '../components/Userslist';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
-import userService from '../services/userService';
-import { login } from '../store/actions/auth.actions';
+
 import { fetchUsers } from '../store/actions/userActions';
 
 export function AdminPanel() {
@@ -18,12 +17,6 @@ export function AdminPanel() {
     useEffect(() => {
         if (isAuth) {
             dispatch(fetchUsers());
-            // dispatch(
-            //     login({
-            //         email: email.value,
-            //         password: password.value,
-            //     })
-            // );
         }
     }, []);
 
