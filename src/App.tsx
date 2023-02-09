@@ -12,7 +12,6 @@ const App: React.FC = () => {
     const dispatch = useAppDispatch();
     const userId = Number(localStorageService.getUserId());
     const isAuth = !!userId;
-
     useEffect(() => {
         dispatch(reconnect(userId));
     }, [isAuth]);
