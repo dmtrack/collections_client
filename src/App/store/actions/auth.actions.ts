@@ -21,8 +21,11 @@ export const register = (data: IAuthData) => {
                 password,
                 avatarUrl
             );
-            console.log(response);
             localStorageService.setToken(response.data.accessToken);
+            localStorageService.setUser(
+                response.data.user.id,
+                response.data.user.access.access
+            );
             dispatch(authSlice.actions.login(response.data));
         } catch (e: any) {
             console.log(e.response?.data?.message);
@@ -37,6 +40,23 @@ export const login = (data: ILoginData) => {
             const { email, password } = data;
             const response = await AuthService.login(email, password);
             localStorageService.setToken(response.data.accessToken);
+            dispatch(authSlice.actions.login(response.data));
+        } catch (e: any) {
+            console.log(e.response?.data?.message);
+            dispatch(authSlice.actions.fetchError(e as IError));
+        }
+    };
+};
+
+export const reconnect = (id: number) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            const response = await AuthService.reconnect(id);
+            localStorageService.setToken(response.data.accessToken);
+            localStorageService.setUser(
+                response.data.user.id,
+                response.data.user.access.access
+            );
 
             dispatch(authSlice.actions.login(response.data));
         } catch (e: any) {

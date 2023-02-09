@@ -24,6 +24,10 @@ export default class AuthService {
         });
     }
 
+    static async reconnect(id: number): Promise<AxiosResponse<IAuthResponse>> {
+        return api.post<IAuthResponse>('/user/reconnect', { id });
+    }
+
     static async logout(): Promise<void> {
         return api.post('/logout');
     }

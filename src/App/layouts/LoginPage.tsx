@@ -24,7 +24,7 @@ const LoginPage: FC = () => {
                     password: password.value,
                 })
             )
-                .then(() => navigate('/'))
+                .then(() => navigate('/admin'))
                 .catch((e) => console.log(e.message));
         } else alert('Please, fill up all fields');
     };

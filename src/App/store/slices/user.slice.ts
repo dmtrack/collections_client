@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DeleteUserProp, IUser, IUserState } from '../../models/IUser';
 
 const initialState: IUserState = {
-    loading: false,
+    usersLoading: false,
     error: '',
     users: [],
 };
@@ -11,17 +11,15 @@ export const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        fetching(state) {
-            state.loading = true;
+        fetchingUsers(state) {
+            state.usersLoading = true;
         },
         fetchSuccess(state, action: PayloadAction<IUser[]>) {
-            console.log('payload', action.payload);
-
-            state.loading = false;
+            state.usersLoading = false;
             state.users = action.payload;
         },
         fetchError(state, action: PayloadAction<Error>) {
-            state.loading = false;
+            state.usersLoading = false;
             state.error = action.payload.message + ': ' + action.payload?.cause;
         },
         deleteUser(state, action: PayloadAction<DeleteUserProp>) {
@@ -40,7 +38,7 @@ export const userSlice = createSlice({
                 });
             });
         },
-        toggleUnblockState(state, action: PayloadAction<DeleteUserProp>) {
+        toggleUnBlockState(state, action: PayloadAction<DeleteUserProp>) {
             action.payload.forEach((id) => {
                 state.users.forEach((user) => {
                     if (user.id === Number(id)) {

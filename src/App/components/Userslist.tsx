@@ -1,10 +1,14 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 
 import { IUser } from '../models/IUser';
-import { logOut } from '../store/actions/auth.actions';
-import { userSlice } from '../store/slices/user.slice';
+
+import {
+    toggleBlock,
+    toggleUnBlock,
+    deleteUser,
+} from '../store/actions/userActions';
+
 import Button from './button';
 import { User } from './User';
 
@@ -21,59 +25,6 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
     const { userId } = useAppSelector((state) => state.auth);
 
     const dispatch = useAppDispatch();
-    async function toggleBlock(params: number[]) {
-        try {
-            await axios
-                .put(URL + '/block', { params })
-                .then((data) =>
-                    dispatch(
-                        userSlice.actions.toggleBlockState(data.data.id.params)
-                    )
-                )
-                .then(() => {
-                    if (dataId.includes(Number(userId))) {
-                        dispatch(logOut());
-                    }
-                });
-        } catch (e) {
-            console.log(e as Error);
-        }
-    }
-
-    async function toggleUnblock(params: number[]) {
-        try {
-            await axios
-                .put(URL + '/unblock', { params })
-                .then((data) =>
-                    dispatch(
-                        userSlice.actions.toggleUnblockState(
-                            data.data.id.params
-                        )
-                    )
-                );
-        } catch (e) {
-            console.log(e as Error);
-        }
-    }
-
-    async function handleDelete(params: number[]) {
-        try {
-            const res = await axios
-                .delete(URL + '/deleteuser', {
-                    data: { params: params },
-                })
-                .then((data) =>
-                    dispatch(userSlice.actions.deleteUser(data.data.id.params))
-                )
-                .then(() => {
-                    if (dataId.includes(Number(userId))) {
-                        dispatch(logOut());
-                    }
-                });
-        } catch (e) {
-            console.log(e as Error);
-        }
-    }
 
     function handleChange(): void {
         setChecked((prevState) => !prevState);
@@ -92,21 +43,25 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                 <div>
                     <div className="flex justify-end">
                         <Button
-                            onClick={() => toggleBlock(dataId)}
+                            onClick={() =>
+                                dispatch(toggleBlock(dataId, userId))
+                            }
                             variant="warning"
                             size="sm"
                         >
                             block
                         </Button>
                         <Button
-                            onClick={() => toggleUnblock(dataId)}
+                            onClick={() =>
+                                dispatch(toggleUnBlock(dataId, userId))
+                            }
                             variant="info"
                             size="sm"
                         >
                             unblock
                         </Button>
                         <Button
-                            onClick={() => handleDelete(dataId)}
+                            onClick={() => dispatch(deleteUser(dataId, userId))}
                             variant="danger"
                             size="sm"
                         >
@@ -129,16 +84,16 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                                         id
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Nickname
+                                        name
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         E-mail
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Registered
+                                        access
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Login
+                                        Activated
                                     </th>
                                     <th scope="col" className="px-6 py-3">
                                         Status
