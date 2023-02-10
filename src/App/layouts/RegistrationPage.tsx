@@ -25,7 +25,7 @@ const RegistrationPage: React.FC = () => {
                     password: password.value,
                     avatarUrl: getRandomAvatar(),
                 })
-            ).then(() => navigate('/admin'));
+            ).then(() => navigate('/'));
         } else alert('Please, fill up all fields');
     };
 

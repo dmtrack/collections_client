@@ -11,10 +11,10 @@ import localStorageService from './App/services/localStorageService';
 const App: React.FC = () => {
     const dispatch = useAppDispatch();
     const userId = Number(localStorageService.getUserId());
-    const isAuth = !!userId;
+    const { isAuth } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
-        dispatch(reconnect(userId));
+        if (isAuth && userId) dispatch(reconnect(userId));
     }, [isAuth]);
 
     return (
@@ -23,7 +23,7 @@ const App: React.FC = () => {
                 <Navigation />
                 <Routes>
                     <Route path="/login/:type?" element={<Login />} />
-                    <Route path="/admin" element={<AdminPanel />} />
+                    <Route path="/" element={<AdminPanel />} />
                     <Route path="/logout" element={<LogOut />} />
                 </Routes>
             </Router>
