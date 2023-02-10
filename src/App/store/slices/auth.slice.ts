@@ -42,7 +42,7 @@ export const authSlice = createSlice({
             );
         },
         fetchError(state, action: PayloadAction<IError>) {
-            state.error = action.payload.response.data.message;
+            state.error = action.payload.message;
         },
         userLoggedOut(state) {
             state.isAuth = false;

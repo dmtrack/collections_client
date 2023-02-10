@@ -10,6 +10,10 @@ const rootReducer = combineReducers({
 export function setupStore() {
     return configureStore({
         reducer: rootReducer,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware({
+                serializableCheck: false,
+            }),
     });
 }
 
