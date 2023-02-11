@@ -3,7 +3,11 @@ import { useParams } from 'react-router-dom';
 import { RegistrationPage } from './RegistrationPage';
 import { LoginPage } from './LoginPage';
 
+import LangContext from '../../langContext';
+import React from 'react';
+
 const Login = () => {
+    const language = React.useContext(LangContext);
     const { type } = useParams();
     const [formType, setFormType] = useState(
         type === 'register' ? type : 'login'
@@ -20,14 +24,14 @@ const Login = () => {
                 <>
                     <RegistrationPage />
                     <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
-                        Already have account?{' '}
+                        {language.haveAccount}
                         <a
                             role="button"
                             onClick={toggleFormType}
                             className="text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]"
                         >
                             {' '}
-                            Sign In
+                            {language.login}
                         </a>
                     </p>
                 </>
@@ -35,14 +39,14 @@ const Login = () => {
                 <>
                     <LoginPage />
                     <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
-                        Don't have account?
+                        {language.dontHaveAccount}
                         <a
                             role="button"
                             onClick={toggleFormType}
                             className="text-sm text-left text-gray-500 dark:text-gray-400 mx-auto"
                         >
                             {' '}
-                            Sign Up
+                            {language.registration}
                         </a>
                     </p>
                 </>

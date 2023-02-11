@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LangContext from '../../langContext';
 import Button from '../components/button';
 import { useInput } from '../hook/input';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 import { login } from '../store/actions/auth.actions';
 
 const LoginPage: FC = () => {
+    const language = React.useContext(LangContext);
     const { error } = useAppSelector((state) => state.auth);
 
     const navigate = useNavigate();
@@ -37,7 +39,7 @@ const LoginPage: FC = () => {
         >
             <div className="">
                 <label className="block" htmlFor="email">
-                    email
+                    {language.email}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -46,7 +48,7 @@ const LoginPage: FC = () => {
                     id="email"
                 />
                 <label className="block" htmlFor="password">
-                    password
+                    {language.password}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -70,7 +72,7 @@ const LoginPage: FC = () => {
                         size="sm"
                         type="submit"
                     >
-                        submit
+                        {language.buttonsubmit}
                     </Button>
                 </div>
             </div>
