@@ -1,0 +1,12 @@
+{
+    "buttonsubmit": "отправить",
+    "username": "имя пользователя",
+    "email": "электронная почта",
+    "password": "пароль",
+    "dontHaveAccount": "Нет аккаунта?",
+    "registrationlink": "Регистрация",
+    "haveAccount": "У вас уже есть аккаунт",
+    "loginlink": "Вход",
+    "logout": "выход",
+    "profile": "профиль"
+}

@@ -4,6 +4,7 @@ import './tailwind.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { setupStore } from './App/store';
+import './i18n';
 
 const store = setupStore();
 

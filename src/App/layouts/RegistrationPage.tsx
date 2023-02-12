@@ -1,6 +1,6 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import LangContext from '../../langContext';
 import Button from '../components/button';
 import { useInput } from '../hook/input';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
@@ -8,7 +8,8 @@ import { register } from '../store/actions/auth.actions';
 import getRandomAvatar from '../utils/avatar';
 
 const RegistrationPage: React.FC = () => {
-    const language = React.useContext(LangContext);
+    const { t } = useTranslation(['auth', 'common']);
+
     const { error } = useAppSelector((state) => state.auth);
     const navigate = useNavigate();
     const username = useInput('');
@@ -39,7 +40,7 @@ const RegistrationPage: React.FC = () => {
         >
             <div className="">
                 <label className="block" htmlFor="username">
-                    {language.username}
+                    {t('auth:username')}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -48,7 +49,7 @@ const RegistrationPage: React.FC = () => {
                     id="username"
                 />
                 <label className="block" htmlFor="email">
-                    {language.email}
+                    {t('auth:email')}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -57,7 +58,7 @@ const RegistrationPage: React.FC = () => {
                     id="email"
                 />
                 <label className="block" htmlFor="password">
-                    {language.password}
+                    {t('auth:password')}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -81,7 +82,7 @@ const RegistrationPage: React.FC = () => {
                         size="sm"
                         type="submit"
                     >
-                        {language.buttonsubmit}
+                        {t('buttonsubmit')}
                     </Button>
                 </div>
             </div>

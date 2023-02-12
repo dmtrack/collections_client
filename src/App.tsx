@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
+import './i18n';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
-import { Navigation } from './App/components/Navigation';
 import LogOut from './App/components/LogOut';
 import { AdminPanel } from './App/layouts/AdminPanel';
 import Login from './App/layouts/Login';
 import { useAppDispatch, useAppSelector } from './App/hook/redux';
 import { reconnect } from './App/store/actions/auth.actions';
 import localStorageService from './App/services/localStorageService';
-import LangContext, { langs } from './langContext';
+import { useTranslation } from 'react-i18next';
+import Home from './App/layouts/Home';
+import { Navigation } from './App/components/Navigation';
 
 const App: React.FC = () => {
-    useEffect(() => {
-        const selectedLang = localStorageService.getSelectedLanguage();
-        const selectedLangObject =
-            localStorageService.getSelectedLanguageObject();
+    const { t, i18n } = useTranslation();
 
-        if (selectedLang && selectedLangObject) {
-            setSelectedLanguage(selectedLang);
-            setLang(JSON.parse(selectedLangObject));
-        }
-    }, []);
-    const [lang, setLang] = useState(langs.ru);
-    const [selectedLanguage, setSelectedLanguage] = useState('ru');
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
+    };
 
     const dispatch = useAppDispatch();
     const userId = Number(localStorageService.getUserId());
@@ -31,33 +26,20 @@ const App: React.FC = () => {
         if (isAuth && userId) dispatch(reconnect(userId));
     }, [isAuth]);
 
-    const handleSwitchLanguage = () => {
-        setSelectedLanguage(selectedLanguage === 'ru' ? 'en' : 'ru');
-        lang === langs.ru ? setLang(langs.en) : setLang(langs.ru);
-
-        localStorageService.setSelectedLanguage(
-            selectedLanguage === 'ru' ? 'en' : 'ru'
-        );
-        localStorageService.setSelectedLanguageObject(
-            lang === langs.ru ? langs.en : langs.ru
-        );
-    };
     return (
         <>
-            <LangContext.Provider value={lang}>
+            <Suspense fallback={null}>
                 <Router>
-                    <Navigation
-                        switchLang={handleSwitchLanguage}
-                        selectedLanguage={selectedLanguage}
-                    />
+                    <Navigation />
 
                     <Routes>
+                        <Route path="/" element={<Home />} />
                         <Route path="/login/:type?" element={<Login />} />
-                        <Route path="/" element={<AdminPanel />} />
+                        <Route path="/admin" element={<AdminPanel />} />
                         <Route path="/logout" element={<LogOut />} />
                     </Routes>
                 </Router>
-            </LangContext.Provider>
+            </Suspense>
         </>
     );
 };
