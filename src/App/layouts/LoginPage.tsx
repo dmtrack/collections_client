@@ -4,10 +4,11 @@ import Button from '../components/button';
 import { useInput } from '../hook/input';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 import { login } from '../store/actions/auth.actions';
+import { useTranslation } from 'react-i18next';
 
 const LoginPage: FC = () => {
+    const { t } = useTranslation(['auth', 'common']);
     const { error } = useAppSelector((state) => state.auth);
-
     const navigate = useNavigate();
     const email = useInput('');
     const password = useInput('');
@@ -26,7 +27,7 @@ const LoginPage: FC = () => {
             )
                 .then(() => navigate('/'))
                 .catch((e) => console.log(e.message));
-        } else alert('Please, fill up all fields');
+        } else alert(t);
     };
 
     return (
@@ -37,7 +38,7 @@ const LoginPage: FC = () => {
         >
             <div className="">
                 <label className="block" htmlFor="email">
-                    email
+                    {t('auth:email')}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -46,7 +47,7 @@ const LoginPage: FC = () => {
                     id="email"
                 />
                 <label className="block" htmlFor="password">
-                    password
+                    {t('auth:password')}
                 </label>
                 <input
                     className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
@@ -70,7 +71,7 @@ const LoginPage: FC = () => {
                         size="sm"
                         type="submit"
                     >
-                        submit
+                        {t('buttonsubmit')}
                     </Button>
                 </div>
             </div>

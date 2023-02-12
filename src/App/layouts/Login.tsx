@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RegistrationPage } from './RegistrationPage';
 import { LoginPage } from './LoginPage';
 
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 const Login = () => {
+    const { t, i18n } = useTranslation(['common', 'auth']);
+
     const { type } = useParams();
     const [formType, setFormType] = useState(
         type === 'register' ? type : 'login'
@@ -20,14 +25,14 @@ const Login = () => {
                 <>
                     <RegistrationPage />
                     <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
-                        Already have account?{' '}
+                        {t('auth:haveAccount')}
                         <a
                             role="button"
                             onClick={toggleFormType}
                             className="text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]"
                         >
                             {' '}
-                            Sign In
+                            {t('auth:loginlink')}
                         </a>
                     </p>
                 </>
@@ -35,14 +40,14 @@ const Login = () => {
                 <>
                     <LoginPage />
                     <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
-                        Don't have account?
+                        {t('auth:dontHaveAccount')}
                         <a
                             role="button"
                             onClick={toggleFormType}
                             className="text-sm text-left text-gray-500 dark:text-gray-400 mx-auto"
                         >
                             {' '}
-                            Sign Up
+                            {t('auth:registrationlink')}
                         </a>
                     </p>
                 </>

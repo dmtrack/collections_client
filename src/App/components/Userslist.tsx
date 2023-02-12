@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 
 import { IUser } from '../models/IUser';
@@ -18,6 +19,8 @@ interface IUsersListProps {
 const URL = process.env.REACT_APP_BASE_URL;
 
 const UsersList = ({ usersProps }: IUsersListProps) => {
+    const { t } = useTranslation(['admin', 'auth']);
+
     const [dataId, setDataId] = useState<Array<any>>([]);
     const [checked, setChecked] = useState(false);
 
@@ -49,7 +52,7 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                             variant="warning"
                             size="sm"
                         >
-                            block
+                            {t('blockb')}
                         </Button>
                         <Button
                             onClick={() =>
@@ -58,14 +61,14 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                             variant="info"
                             size="sm"
                         >
-                            unblock
+                            {t('unblockb')}
                         </Button>
                         <Button
                             onClick={() => dispatch(deleteUser(dataId, userId))}
                             variant="danger"
                             size="sm"
                         >
-                            delete
+                            {t('deleteb')}
                         </Button>
                     </div>
                     <div className="relative overflow-x-auto">
@@ -84,19 +87,19 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                                         id
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        name
+                                        {t('auth:username')}
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        E-mail
+                                        {t('auth:email')}
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        access
+                                        {t('access')}
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Activated
+                                        {t('activated')}
                                     </th>
                                     <th scope="col" className="px-6 py-3">
-                                        Status
+                                        {t('status')}
                                     </th>
                                 </tr>
                             </thead>

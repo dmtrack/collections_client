@@ -1,0 +1,12 @@
+{
+    "buttonsubmit": "submit",
+    "username": "username",
+    "email": "email",
+    "password": "password",
+    "dontHaveAccount": "Don't have account?",
+    "registrationlink": "Registration",
+    "haveAccount": "Already have account?",
+    "loginlink": "Login",
+    "logout": "logout",
+    "profile": "profile"
+}

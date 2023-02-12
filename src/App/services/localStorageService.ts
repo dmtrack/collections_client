@@ -1,6 +1,8 @@
 const USERID_KEY = 'USERID_KEY';
 const TOKEN = 'TOKEN';
 const ACCESS = 'ACCESS';
+const SELECTED_LANGUAGE = 'SELECTED_LANGUAGE';
+const LANGUAGE_OBJECT = 'LANGUAGE_OBJECT';
 
 export function setToken(token: string) {
     localStorage.setItem(TOKEN, token);
@@ -9,6 +11,22 @@ export function setToken(token: string) {
 export function setUser(userId: number, access: string) {
     localStorage.setItem(USERID_KEY, String(userId));
     localStorage.setItem(ACCESS, access);
+}
+
+export function setSelectedLanguage(language: string) {
+    localStorage.setItem(SELECTED_LANGUAGE, language);
+}
+
+export function setSelectedLanguageObject(langObj: any) {
+    localStorage.setItem(LANGUAGE_OBJECT, JSON.stringify(langObj));
+}
+
+export function getSelectedLanguage() {
+    return localStorage.getItem(SELECTED_LANGUAGE);
+}
+
+export function getSelectedLanguageObject() {
+    return localStorage.getItem(LANGUAGE_OBJECT);
 }
 
 export function removeAuthData() {
@@ -31,5 +49,9 @@ const localStorageService = {
     removeAuthData,
     setUser,
     getUserAccess,
+    setSelectedLanguage,
+    setSelectedLanguageObject,
+    getSelectedLanguage,
+    getSelectedLanguageObject,
 };
 export default localStorageService;
