@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../hook/redux';
-import { logOut } from '../store/actions/auth.actions';
+import { logOut } from '../state/actions/auth.actions';
 
 const LogOut = () => {
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { userSlice } from './../slices/user.slice';
+import { userSlice } from '../slices/user.slice';
 import { AppDispatch } from '..';
 
 import { IUser, IUserState } from '../../models/IUser';

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { UsersList } from '../components/Userslist';
-import { useAppDispatch, useAppSelector } from '../hook/redux';
+import { UsersList } from '../../components/Userslist';
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
 
-import { fetchUsers } from '../store/actions/userActions';
+import { fetchUsers } from '../../state/actions/userActions';
 
 export function AdminPanel() {
     const dispatch = useAppDispatch();

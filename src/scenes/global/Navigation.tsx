@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../hook/redux';
-import NavProfile from './NavProfile';
-import Language from './Languages';
+import { useAppSelector } from '../../hook/redux';
+import NavProfile from '../../components/NavProfile';
+import Language from '../../components/Languages';
 import { useTranslation } from 'react-i18next';
 
 export const Navigation = () => {

@@ -1,35 +1,33 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/button';
-import { useInput } from '../hook/input';
-import { useAppDispatch, useAppSelector } from '../hook/redux';
-import { register } from '../store/actions/auth.actions';
-import getRandomAvatar from '../utils/avatar';
+import Button from '../../components/button';
+import { useInput } from '../../hook/input';
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
+import { login } from '../../state/actions/auth.actions';
+import { useTranslation } from 'react-i18next';
 
-const RegistrationPage: React.FC = () => {
+const LoginPage: FC = () => {
     const { t } = useTranslation(['auth', 'common']);
-
-    const { error } = useAppSelector((state) => state.auth);
+    const { error } = useAppSelector((state: any) => state.auth);
     const navigate = useNavigate();
-    const username = useInput('');
     const email = useInput('');
     const password = useInput('');
     const dispatch = useAppDispatch();
 
-    const isFormValid = () => username.value && email.value && password.value;
+    const isFormValid = () => email.value && password.value;
+
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         if (isFormValid()) {
             dispatch(
-                register({
-                    name: username.value,
+                login({
                     email: email.value,
                     password: password.value,
-                    avatarUrl: getRandomAvatar(),
                 })
-            ).then(() => navigate('/'));
-        } else alert('Please, fill up all fields');
+            )
+                .then(() => navigate('/'))
+                .catch((e) => console.log(e.message));
+        } else alert(t);
     };
 
     return (
@@ -39,15 +37,6 @@ const RegistrationPage: React.FC = () => {
             onSubmit={submitHandler}
         >
             <div className="">
-                <label className="block" htmlFor="username">
-                    {t('auth:username')}
-                </label>
-                <input
-                    className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                    type="text"
-                    {...username}
-                    id="username"
-                />
                 <label className="block" htmlFor="email">
                     {t('auth:email')}
                 </label>
@@ -90,4 +79,4 @@ const RegistrationPage: React.FC = () => {
     );
 };
 
-export { RegistrationPage };
+export { LoginPage };

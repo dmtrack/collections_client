@@ -8,7 +8,7 @@ import {
     toggleBlock,
     toggleUnBlock,
     deleteUser,
-} from '../store/actions/userActions';
+} from '../state/actions/userActions';
 
 import Button from './button';
 import { User } from './User';

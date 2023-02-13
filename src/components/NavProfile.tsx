@@ -31,7 +31,7 @@ const NavProfile = (): JSX.Element => {
                 <Link to={`/users/${userId}`} className="dropdown-item">
                     {t('auth:profile')}
                 </Link>
-                <Link to="/logout" className="dropdown-item">
+                <Link to="logout" className="dropdown-item">
                     {t('auth:logout')}
                 </Link>
             </div>
