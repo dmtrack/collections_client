@@ -7,6 +7,8 @@ import { shades } from '../../theme';
 
 const importAll = (r: any) =>
     r.keys().reduce((acc: any, item: any) => {
+        console.log(r, 'r');
+
         acc[item.replace('./', '')] = r(item);
         return acc;
     }, {});
@@ -22,8 +24,8 @@ const MainCarousel = () => {
         <Carousel
             infiniteLoop={true}
             showThumbs={false}
-            showIndicators={true}
-            showStatus={false}
+            showIndicators={false}
+            showStatus={true}
             renderArrowPrev={(onClickHandler, hasPrev, label) => (
                 <IconButton
                     onClick={onClickHandler}
@@ -60,7 +62,7 @@ const MainCarousel = () => {
                         alt={`carousel-${index}`}
                         style={{
                             width: '100%',
-                            height: '500px',
+                            height: '450px',
                             objectFit: 'cover',
                             backgroundAttachment: 'fixed',
                         }}
