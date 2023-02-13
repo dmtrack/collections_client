@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-import { IAuthResponse } from '../../models/response/authResponse';
 import { authSlice } from '../slices/auth.slice';
 import { AppDispatch } from '..';
 

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DeleteUserProp, IUser, IUserState } from '../../models/IUser';
+import { IUser } from '../../models/IUser';
+import { IUserState, DeleteUserProp } from '../models/IUsers.state';
 
 const initialState: IUserState = {
     usersLoading: false,

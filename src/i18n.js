@@ -9,7 +9,7 @@ i18n.use(Backend)
     .init({
         backend: { loadPath: 'i18n/{{ns}}/{{lng}}.json' },
         fallbackLng: 'en',
-        debug: true,
+        debug: false,
         ns: [
             'common',
             'auth',

@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import {
+    ChangeEvent,
+    ChangeEventHandler,
+    ReactEventHandler,
+    useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
-
-import { IUser } from '../models/IUser';
-
+import { IUsersListProps } from '../models/IUser';
 import {
     toggleBlock,
     toggleUnBlock,
@@ -13,23 +16,21 @@ import {
 import Button from './button';
 import { User } from './User';
 
-interface IUsersListProps {
-    usersProps: IUser[];
-}
-const URL = process.env.REACT_APP_BASE_URL;
-
 const UsersList = ({ usersProps }: IUsersListProps) => {
+    const dispatch = useAppDispatch();
     const { t } = useTranslation(['admin', 'auth']);
 
     const [dataId, setDataId] = useState<Array<any>>([]);
     const [checked, setChecked] = useState(false);
+    console.log(checked);
 
     const { users } = useAppSelector((state) => state.users);
     const { userId } = useAppSelector((state) => state.auth);
 
-    const dispatch = useAppDispatch();
+    // проверить чек боксы
 
-    function handleChange(): void {
+    function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+        console.log(e.target);
         setChecked((prevState) => !prevState);
         if (dataId.length !== users.length) {
             const idCollection: number[] = [];
@@ -80,7 +81,7 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                                             type="checkbox"
                                             className="checkbox"
                                             checked={checked}
-                                            onChange={handleChange}
+                                            onChange={(e) => handleChange(e)}
                                         />
                                     </th>
                                     <th scope="col" className="px-6 py-3">

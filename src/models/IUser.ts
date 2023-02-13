@@ -12,12 +12,11 @@ export interface IUser {
     isActivated: boolean;
     access: IAccess;
     avatarUrl: string;
+    created: number;
 }
 
-export interface IUserState {
-    usersLoading: boolean;
-    error: string;
-    users: IUser[];
+export interface IUsersListProps {
+    usersProps: IUser[];
 }
 
 export interface IServerResponce {
@@ -29,10 +28,3 @@ export interface IServerResponce {
     status: number;
     statusText: string;
 }
-
-export type UsersListProps = {
-    user: IUser[];
-    loading: boolean;
-};
-
-export type DeleteUserProp = string[];

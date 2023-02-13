@@ -1,7 +1,8 @@
 import { userSlice } from '../slices/user.slice';
 import { AppDispatch } from '..';
+import { IUser } from '../../models/IUser';
+import { IUserState } from '../models/IUsers.state';
 
-import { IUser, IUserState } from '../../models/IUser';
 import localStorageService from '../../services/localStorageService';
 import api from '../../http';
 import { logOut } from './auth.actions';
