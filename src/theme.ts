@@ -1,4 +1,14 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, PaletteOptions } from '@mui/material/styles';
+
+declare module '@mui/material/styles/createPalette' {
+    interface Palette {
+        neutral: { main: string; dark: string; light: string };
+    }
+
+    interface PaletteOptions {
+        neutral?: { main: string; dark: string; light: string };
+    }
+}
 
 export const shades = {
     primary: {

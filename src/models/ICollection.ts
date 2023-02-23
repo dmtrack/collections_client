@@ -1,9 +1,10 @@
-import { IField } from './IField';
-import { IItem } from './IItem';
-
-export interface ITheme {
-    id: number;
+export interface ICreateCollection {
     name: string;
+    description: string;
+    image: string;
+    created: string;
+    userId: number;
+    themeId: number;
 }
 
 export interface ICollection {
@@ -11,8 +12,7 @@ export interface ICollection {
     name: string;
     description: string;
     image: string;
+    created: string;
     userId: number;
-    theme: ITheme;
-    item: IItem[];
-    fields: IField[];
+    themeId: number;
 }

@@ -4,10 +4,23 @@ import { ITag } from './ITag';
 
 export interface IItem {
     id: number;
+    name?: string;
+    created?: string;
+    collectionId?: string;
+    image?: string;
+    comments?: IComment[];
+    item?: { image: string; name: string };
+    count?: string;
+    tags?: ITag[];
+    likes?: ILike[];
+}
+
+export interface ICreateItem {
     name: string;
-    created: number;
     collectionId: number;
-    comments: IComment[];
-    tags: ITag[];
-    likes: ILike[];
+}
+
+export interface IItemProps {
+    item: IItem;
+    width: string;
 }

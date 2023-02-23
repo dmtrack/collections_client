@@ -6,10 +6,11 @@ const initialState: IItemState = {
     itemsLoading: false,
     error: '',
     items: [],
+    topRated: [],
 };
 
-export const ItemSlice = createSlice({
-    name: 'Items',
+export const itemSlice = createSlice({
+    name: 'items',
     initialState,
     reducers: {
         fetchingItems: (state) => {
@@ -19,6 +20,10 @@ export const ItemSlice = createSlice({
             state.itemsLoading = false;
             state.items = action.payload;
         },
+        fetchTopRatedSuccess: (state, action: PayloadAction<IItem[]>) => {
+            state.itemsLoading = false;
+            state.topRated = action.payload;
+        },
         fetchError: (state, action: PayloadAction<Error>) => {
             state.itemsLoading = false;
             state.error = action.payload.message + ': ' + action.payload?.cause;
@@ -26,9 +31,9 @@ export const ItemSlice = createSlice({
         addItem: (state, action: PayloadAction<IItem>) => {
             state.items = [...state.items, action.payload];
         },
-        deleteColection: (state, action: PayloadAction<DeleteItem>) => {
+        deleteItem: (state, action: PayloadAction<DeleteItem>) => {
             state.items = state.items.filter((item) => {
-                item.id !== action.payload.id;
+                return item.id !== action.payload.id;
             });
         },
 
@@ -36,4 +41,4 @@ export const ItemSlice = createSlice({
     },
 });
 
-export default ItemSlice.reducer;
+export default itemSlice.reducer;

@@ -31,7 +31,7 @@ export const collectionSlice = createSlice({
         },
         deleteColection: (state, action: PayloadAction<DeleteCollection>) => {
             state.collections = state.collections.filter((col) => {
-                col.id !== action.payload.id;
+                return col.id !== action.payload.id;
             });
         },
 

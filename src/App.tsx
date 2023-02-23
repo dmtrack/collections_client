@@ -14,20 +14,11 @@ import { reconnect } from './state/actions/auth.actions';
 import localStorageService from './services/localStorageService';
 import { useTranslation } from 'react-i18next';
 import Home from './scenes/home/Home';
-import { Navigation } from './scenes/global/Navigation';
 import Collection from './scenes/collection/collectionPage';
 import UserPage from './scenes/userPage/userPage';
 import Navbar from './scenes/global/Navbar';
-
-const ScrollToTop = () => {
-    const { pathname } = useLocation();
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-
-    return null;
-};
+import { ScrollToTop } from './utils/scrollToTop';
+import ItemPage from './scenes/itemDetailsPage/Itempage';
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -57,6 +48,7 @@ const App: React.FC = () => {
                             path="collection/:collectionId"
                             element={<Collection />}
                         />
+                        <Route path="item/:itemId/" element={<ItemPage />} />
                         <Route path="user/:userId" element={<UserPage />} />
                         <Route path="login/:type?" element={<Login />} />
                         <Route path="admin" element={<AdminPanel />} />

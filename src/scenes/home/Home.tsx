@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hook/redux';
 import MainCarousel from './MainCarousel';
+import LastItemList from './LastItemList';
 
 const Home = () => {
     const { t } = useTranslation(['home']);
@@ -11,6 +12,7 @@ const Home = () => {
     return (
         <div className="home">
             <MainCarousel />
+            <LastItemList />
 
             {/* {isAuth ? (
                 <div className="container mx-auto  pt-5">

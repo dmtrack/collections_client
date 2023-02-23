@@ -22,11 +22,6 @@ const initialState: IAuthState = {
     error: '',
 };
 
-// localStorageService.setUser(
-//     response.data.user.id,
-//     response.data.user.access.access
-// );
-
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
