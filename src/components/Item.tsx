@@ -28,7 +28,7 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                     height="400px"
                     src={image}
                     onClick={() => navigate(`item/${id}`)}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', borderRadius: '5px' }}
                 />
                 <Box
                     display={isHovered ? 'blocked' : 'none'}

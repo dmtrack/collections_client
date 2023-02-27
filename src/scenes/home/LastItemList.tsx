@@ -6,6 +6,7 @@ import {
     fetchItems,
     fetchTopRatedItems,
 } from '../../state/actions/items.actions';
+import { IItem } from '../../models/IItem';
 
 const LastItemList = () => {
     const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ const LastItemList = () => {
             name: element.item?.name,
         };
     });
+    console.log(topRatedFlat);
 
     const [value, setValue] = useState('newItems');
     const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -30,12 +32,6 @@ const LastItemList = () => {
         dispatch(fetchItems());
         dispatch(fetchTopRatedItems());
     }, [dispatch]);
-
-    const newItems = items.slice(items.length - 3, items.length);
-    const topThreeRatedItems = topRatedFlat.slice(
-        items.length - 3,
-        items.length
-    );
 
     const mostCommented = items.slice(items.length - 3, items.length);
     return (
@@ -70,28 +66,20 @@ const LastItemList = () => {
                 columnGap="1.33%"
             >
                 {value === 'newItems' &&
-                    newItems.map((item) => (
-                        <Item
-                            item={item}
-                            key={Number(item.id)}
-                            width={'20px'}
-                        />
-                    ))}
+                    items
+                        .slice(0, 3)
+                        .map((item: IItem) => (
+                            <Item item={item} key={Number(item.id)} />
+                        ))}
                 {value === 'topRated' &&
-                    topThreeRatedItems.map((item) => (
-                        <Item
-                            item={item}
-                            key={Number(item.id)}
-                            width={'20px'}
-                        />
-                    ))}
+                    topRatedFlat
+                        .slice(0, 3)
+                        .map((item: IItem) => (
+                            <Item item={item} key={Number(item.id)} />
+                        ))}
                 {value === 'mostCommented' &&
-                    mostCommented.map((item) => (
-                        <Item
-                            item={item}
-                            key={Number(item.id)}
-                            width={'20px'}
-                        />
+                    mostCommented.map((item: IItem) => (
+                        <Item item={item} key={Number(item.id)} />
                     ))}
             </Box>
         </Box>

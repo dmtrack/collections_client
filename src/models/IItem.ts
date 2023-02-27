@@ -22,5 +22,5 @@ export interface ICreateItem {
 
 export interface IItemProps {
     item: IItem;
-    width: string;
+    width?: string;
 }
