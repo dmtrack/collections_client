@@ -3,8 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './tailwind.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import { setupStore } from './App/store';
+import { setupStore } from './state';
 import './i18n';
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { theme } from './theme';
 
 const store = setupStore();
 
@@ -15,7 +18,10 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <App />
+            </ThemeProvider>
         </Provider>
     </React.StrictMode>
 );

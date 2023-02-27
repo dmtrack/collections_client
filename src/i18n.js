@@ -7,10 +7,18 @@ i18n.use(Backend)
     .use(languageDetector)
     .use(initReactI18next)
     .init({
-        backend: { loadPath: 'assets/i18n/{{ns}}/{{lng}}.json' },
+        backend: { loadPath: 'i18n/{{ns}}/{{lng}}.json' },
         fallbackLng: 'en',
         debug: false,
-        ns: ['common', 'login', 'registration', 'admin'],
+        ns: [
+            'common',
+            'auth',
+            'registration',
+            'admin',
+            'collection_page',
+            'item_page',
+            'user_page',
+        ],
         detection: {
             order: ['queryString', 'cookie'],
             cache: ['cookie'],
