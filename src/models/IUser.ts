@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 export interface IAccess {
     id: number;
     access: string;
@@ -27,4 +29,15 @@ export interface IServerResponce {
     request: {};
     status: number;
     statusText: string;
+}
+
+export interface IGetUsersResponse extends AxiosResponse {
+    id: number;
+    name: string;
+    email: string;
+    blocked: boolean;
+    isActivated: boolean;
+    access: IAccess;
+    avatarUrl: string;
+    created: number;
 }

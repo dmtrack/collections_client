@@ -31,7 +31,7 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                     style={{ cursor: 'pointer', borderRadius: '5px' }}
                 />
                 <Box
-                    display={isHovered ? 'blocked' : 'none'}
+                    display={isHovered ? 'block' : 'none'}
                     position="absolute"
                     bottom="10%"
                     left="0"
@@ -43,12 +43,11 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                             display="flex"
                             alignItems="center"
                             borderRadius="3px"
-                            sx={{ backgroundColor: shades.neutral[100] }}
+                            // sx={{ backgroundColor: shades.neutral[100] }}
                         >
-                            <Typography color={shades.primary[300]}>
-                                info
-                            </Typography>
+                            <Typography color="white">{item.name}</Typography>
                         </Box>
+                        <Box></Box>
                         <Button
                             onClick={() => navigate(`item/${id}`)}
                             sx={{

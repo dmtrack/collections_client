@@ -1,6 +1,6 @@
-import { IAuthResponse } from '../models/response/authResponse';
+import { IUserAuthResponse } from '../models/response/authResponse';
 import { Axios, AxiosResponse } from 'axios';
-import api from '../http';
+import api from '../api/axios/apiClient';
 import { IItem, ICreateItem } from '../models/IItem';
 
 export default class itemService {

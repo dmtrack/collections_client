@@ -26,8 +26,8 @@ const LoginPage: FC = () => {
                 })
             )
                 .then(() => navigate('/'))
-                .catch((e) => console.log(e.message));
-        } else alert(t);
+                .catch((e) => console.error(e.message));
+        } else console.error('Please, fill up all fields');
     };
 
     return (

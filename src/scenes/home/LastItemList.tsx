@@ -18,9 +18,9 @@ const LastItemList = () => {
             count: element.count,
             image: element.item?.image,
             name: element.item?.name,
+            created: element.item?.created,
         };
     });
-    console.log(topRatedFlat);
 
     const [value, setValue] = useState('newItems');
     const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -69,17 +69,17 @@ const LastItemList = () => {
                     items
                         .slice(0, 3)
                         .map((item: IItem) => (
-                            <Item item={item} key={Number(item.id)} />
+                            <Item item={item} key={Number(item.created)} />
                         ))}
                 {value === 'topRated' &&
                     topRatedFlat
                         .slice(0, 3)
                         .map((item: IItem) => (
-                            <Item item={item} key={Number(item.id)} />
+                            <Item item={item} key={Number(item.created)} />
                         ))}
                 {value === 'mostCommented' &&
                     mostCommented.map((item: IItem) => (
-                        <Item item={item} key={Number(item.id)} />
+                        <Item item={item} key={Number(item.created)} />
                     ))}
             </Box>
         </Box>

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { IUser } from '../IUser';
 
-export interface IAuthResponse {
+export interface IUserAuthResponse extends AxiosResponse {
     accessToken: string;
     refreshToken: string;
     user: IUser;
@@ -22,12 +22,15 @@ export interface ILoginData {
     password: string;
 }
 
-export interface IAuthResponse {
-    data: {
-        id: string;
-    };
-}
-
 export type LogOutProps = {
     id?: number;
 };
+
+// export interface IUserResponse extends AxiosResponse {
+//     type: string;
+//     value: {
+//         accessToken: string;
+//         refreshToken: string;
+//         user: IUser;
+//     };
+// }

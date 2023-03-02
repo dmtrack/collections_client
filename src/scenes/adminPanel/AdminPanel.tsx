@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { UsersList } from '../../components/Userslist';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';

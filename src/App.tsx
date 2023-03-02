@@ -5,6 +5,7 @@ import {
     Route,
     BrowserRouter as Router,
     useLocation,
+    BrowserRouter,
 } from 'react-router-dom';
 import LogOut from './components/LogOut';
 import { AdminPanel } from './scenes/adminPanel/AdminPanel';
@@ -19,6 +20,7 @@ import UserPage from './scenes/userPage/userPage';
 import Navbar from './scenes/global/Navbar';
 import { ScrollToTop } from './utils/scrollToTop';
 import ItemPage from './scenes/itemDetailsPage/Itempage';
+import Footer from './scenes/global/Footer';
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -38,9 +40,8 @@ const App: React.FC = () => {
     return (
         <div className="app">
             <Suspense fallback={null}>
-                <Router>
+                <BrowserRouter>
                     <ScrollToTop />
-                    {/* <Navigation /> */}
                     <Navbar />
                     <Routes>
                         <Route path="/" element={<Home />} />
@@ -54,7 +55,8 @@ const App: React.FC = () => {
                         <Route path="admin" element={<AdminPanel />} />
                         <Route path="logout" element={<LogOut />} />
                     </Routes>
-                </Router>
+                    <Footer />
+                </BrowserRouter>
             </Suspense>
         </div>
     );

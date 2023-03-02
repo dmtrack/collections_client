@@ -9,18 +9,26 @@ const initialState: ICollectionState = {
     collectionsLoading: false,
     error: '',
     collections: [],
+    topAmount: [],
 };
 
 export const collectionSlice = createSlice({
     name: 'collections',
     initialState,
     reducers: {
-        fetchingcollections: (state) => {
+        fetchingCollections: (state) => {
             state.collectionsLoading = true;
         },
         fetchSuccess: (state, action: PayloadAction<ICollection[]>) => {
             state.collectionsLoading = false;
             state.collections = action.payload;
+        },
+        fetchTopAmountSuccess: (
+            state,
+            action: PayloadAction<ICollection[]>
+        ) => {
+            state.collectionsLoading = false;
+            state.topAmount = action.payload;
         },
         fetchError: (state, action: PayloadAction<Error>) => {
             state.collectionsLoading = false;
