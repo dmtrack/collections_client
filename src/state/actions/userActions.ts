@@ -4,18 +4,27 @@ import { IUser } from '../../models/IUser';
 import { IUserState } from '../models/IUsers.state';
 
 import localStorageService from '../../services/localStorageService';
-import api from '../../http';
+import api from '../../api/axios/apiClient';
 import { logOut } from './auth.actions';
+import AuthService from '../../services/authService';
 
 export const fetchUsers = () => {
     return async (dispatch: AppDispatch) => {
-        try {
-            dispatch(userSlice.actions.fetchingUsers());
-            const response = await api.get('/user/getusers');
-            dispatch(userSlice.actions.fetchSuccess(response.data));
-        } catch (e) {
-            dispatch(userSlice.actions.fetchError(e as Error));
-        }
+        dispatch(userSlice.actions.fetchingUsers());
+        const response = await AuthService.getAllUsers();
+
+        response
+            .mapRight(({ data: users }) => {
+                dispatch(userSlice.actions.fetchSuccess(users));
+            })
+            .mapLeft((e: any) => {
+                dispatch(userSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
     };
 };
 

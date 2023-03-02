@@ -28,8 +28,10 @@ const RegistrationPage: React.FC = () => {
                     password: password.value,
                     avatarUrl: getRandomAvatar(),
                 })
-            ).then(() => navigate('/'));
-        } else alert('Please, fill up all fields');
+            )
+                .then(() => navigate('/'))
+                .catch((e) => console.log(e));
+        } else console.error('Please, fill up all fields');
     };
 
     return (

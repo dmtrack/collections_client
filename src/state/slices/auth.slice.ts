@@ -1,7 +1,7 @@
+import { IUserAuthResponse } from './../../models/response/authResponse';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
 import { IAccess } from '../../models/IUser';
-import { IAuthResponse, IError } from '../../models/response/authResponse';
+import { IError } from '../../models/response/authResponse';
 import localStorageService from '../../services/localStorageService';
 
 interface IAuthState {
@@ -26,7 +26,7 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login(state, action: PayloadAction<IAuthResponse>) {
+        login(state, action: PayloadAction<IUserAuthResponse>) {
             state.userId = action.payload.user.id;
             state.access = action.payload.user.access;
             state.avatarUrl = action.payload.user.avatarUrl;
@@ -36,7 +36,7 @@ export const authSlice = createSlice({
                 action.payload.user.access.access
             );
         },
-        fetchError(state, action: PayloadAction<IError>) {
+        fetchError(state, action) {
             state.error = action.payload.message;
         },
         userLoggedOut(state) {

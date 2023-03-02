@@ -1,11 +1,15 @@
-import { IAuthResponse } from '../models/response/authResponse';
+import { IUserAuthResponse } from '../models/response/authResponse';
 import { Axios, AxiosResponse } from 'axios';
-import api from '../http';
+import api from '../api/axios/apiClient';
 import { ICollection, ICreateCollection } from '../models/ICollection';
 
 export default class collectionService {
     static fetchCollections(): Promise<AxiosResponse> {
         return api.get<ICollection[]>('collection/getcollections');
+    }
+
+    static fetchTopAmountOfItemsCollections(): Promise<AxiosResponse> {
+        return api.get<ICollection[]>('collection/topamountofitems');
     }
 
     static createCollection(): Promise<AxiosResponse> {
@@ -17,6 +21,7 @@ export default class collectionService {
             `collection/getusercollections/:${userId}`
         );
     }
+
     static getOneCollection(id: number): Promise<AxiosResponse> {
         return api.get<ICollection>(`collection/getone/:${id}`);
     }

@@ -9,7 +9,7 @@ export interface IItem {
     collectionId?: string;
     image?: string;
     comments?: IComment[];
-    item?: { image: string; name: string };
+    item?: { image: string; name: string; created: string };
     count?: string;
     tags?: ITag[];
     likes?: ILike[];
