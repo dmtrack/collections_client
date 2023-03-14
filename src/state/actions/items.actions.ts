@@ -40,25 +40,6 @@ export const fetchTopRatedItems = () => {
     };
 };
 
-// export const fetchAllItems = () => {
-//     return async (dispatch: AppDispatch) => {
-//         dispatch(itemSlice.actions.fetchingItems());
-//         const response = await itemService.fetchTopRatedItems();
-//         response
-//             .mapRight(({ data: data }) => {
-//                 dispatch(itemSlice.actions.fetchTopRatedSuccess(data));
-//             })
-//             .mapLeft((e: any) => {
-//                 dispatch(itemSlice.actions.fetchError(e.response?.data));
-//                 console.error({
-//                     type: e.response.statusText,
-//                     code: e.response.status,
-//                     message: e.response.data,
-//                 });
-//             });
-//     };
-// };
-
 export const createItem = (data: ICreateItem) => {
     return async (dispatch: AppDispatch) => {
         const response = await itemService.createItem(data);
