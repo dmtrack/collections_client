@@ -35,8 +35,7 @@ const MainCarousel = () => {
                         left: '0',
                         padding: '5px',
                         zIndex: '10',
-                    }}
-                >
+                    }}>
                     <NavigateBeforeIcon sx={{ fontSize: 40 }} />
                 </IconButton>
             )}
@@ -49,12 +48,10 @@ const MainCarousel = () => {
                         right: '0',
                         padding: '5px',
                         zIndex: '10',
-                    }}
-                >
+                    }}>
                     <NavigateNextIcon sx={{ fontSize: 40 }} />
                 </IconButton>
-            )}
-        >
+            )}>
             {Object.values(heroTextureImports).map((texture, index) => (
                 <Box key={`carousel-image-${index}`}>
                     <img
@@ -72,25 +69,23 @@ const MainCarousel = () => {
                             color: 'white',
                             backgroundColor: 'rgb(0,0,0,0.4)',
                         }}
-                        padding="20px"
-                        borderRadius="2px"
-                        textAlign="left"
-                        position="absolute"
-                        top="70%"
+                        padding='20px'
+                        borderRadius='2px'
+                        textAlign='left'
+                        position='absolute'
+                        top='70%'
                         left={isNonMobile ? '10%' : '0'}
                         right={isNonMobile ? undefined : '0'}
                         margin={isNonMobile ? undefined : '0 auto'}
-                        maxWidth={isNonMobile ? undefined : '240px'}
-                    >
+                        maxWidth={isNonMobile ? undefined : '240px'}>
                         <Typography color={shades.secondary[200]}></Typography>
-                        <Typography variant="h2">Theme</Typography>
-                        <Typography variant="h6">items: 5</Typography>
+                        <Typography variant='h2'>Theme</Typography>
+                        <Typography variant='h6'>items: 5</Typography>
 
                         <Typography
-                            fontWeight="bold"
+                            fontWeight='bold'
                             color={shades.secondary[300]}
-                            sx={{ textDecoration: 'underline' }}
-                        >
+                            sx={{ textDecoration: 'underline' }}>
                             Owner
                         </Typography>
                     </Box>

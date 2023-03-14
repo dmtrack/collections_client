@@ -12,12 +12,10 @@ import Loader from '../../utils/loader';
 const LastItemList = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchItems());
-    }, []);
-
-    useEffect(() => {
         dispatch(fetchTopRatedItems());
-    }, []);
+        dispatch(fetchItems());
+    }, [dispatch]);
+
     const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
     const items = useAppSelector((state) => state.items.items);
     const topRated = useAppSelector((state) => state.items.topRated);
