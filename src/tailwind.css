@@ -17,6 +17,15 @@ body {
     margin: auto;
 }
 
+.home {
+    text-align: center;
+}
+
+.loading-spinner {
+    margin-top: 36px;
+    color: #e2e1e1;
+}
+
 @layer components {
     .btn {
         @apply py-1 px-4 mr-2 mb-3 rounded text-sm;
