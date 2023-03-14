@@ -17,6 +17,9 @@ const LastItemList = () => {
     }, [dispatch]);
 
     const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
+    const topRatedItemsLoading = useAppSelector(
+        (state) => state.items.topRatedItemsLoading
+    );
     const items = useAppSelector((state) => state.items.items);
     const topRated = useAppSelector((state) => state.items.topRated);
     const topRatedFlat = topRated.map((element) => {
@@ -43,7 +46,7 @@ const LastItemList = () => {
     return (
         <>
             {' '}
-            {items.length > 0 && topRated.length > 0 ? (
+            {!itemsLoading && !topRatedItemsLoading ? (
                 <Box width='90%' margin='80px auto'>
                     <Typography variant='h5' textAlign='center'>
                         discover items
