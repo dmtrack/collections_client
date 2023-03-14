@@ -9,6 +9,7 @@ import { DeleteItem, IItemState } from '../models/IItem.state';
 
 const initialState: IItemState = {
     itemsLoading: false,
+    topRatedItemsLoading: false,
     error: '',
     items: [],
     topRated: [],
@@ -21,13 +22,16 @@ export const itemSlice = createSlice({
         fetchingItems: (state) => {
             state.itemsLoading = true;
         },
+        fetchingTopRatedItems: (state) => {
+            state.topRatedItemsLoading = true;
+        },
         fetchSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.items = action.payload;
             state.itemsLoading = false;
         },
         fetchTopRatedSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.topRated = action.payload;
-            state.itemsLoading = false;
+            state.topRatedItemsLoading = false;
         },
         fetchError: (state, action: PayloadAction<Error>) => {
             state.itemsLoading = false;
