@@ -33,7 +33,8 @@ const LastItemList = () => {
     useEffect(() => {
         dispatch(fetchItems());
         dispatch(fetchTopRatedItems());
-    }, [dispatch]);
+        console.log('test');
+    }, []);
     console.log(itemsLoading, 'itemsLoading');
     const mostCommented = items.slice(items.length - 3, items.length);
     return (
@@ -41,10 +42,10 @@ const LastItemList = () => {
             {itemsLoading ? (
                 <Loader />
             ) : (
-                <Box width='80%' margin='80px auto'>
-                    {/* <Typography variant='h4' textAlign='center'>
-                        discover <b>items</b>
-                    </Typography> */}
+                <Box width='90%' margin='80px auto'>
+                    <Typography variant='h5' textAlign='center'>
+                        discover items
+                    </Typography>
                     <Tabs
                         textColor='primary'
                         indicatorColor='primary'
@@ -58,7 +59,7 @@ const LastItemList = () => {
                             m: '25px',
                             '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                         }}>
-                        <Tab label='NEW ITEMS' value='newItems' />
+                        <Tab label='NEW' value='newItems' />
                         <Tab label='TOP RATED' value='topRated' />
                         <Tab label='MOST COMMENTED' value='mostCommented' />
                     </Tabs>
