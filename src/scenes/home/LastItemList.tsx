@@ -42,7 +42,7 @@ const LastItemList = () => {
 
     return (
         <>
-            {items && topRatedFlat ? (
+            {items.length > 0 && topRatedFlat.length > 0 ? (
                 <Box width='90%' margin='80px auto'>
                     <Typography variant='h5' textAlign='center'>
                         discover items
