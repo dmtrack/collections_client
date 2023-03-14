@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { Either, left, right } from '@sweet-monads/either';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { left, right } from '@sweet-monads/either';
 import {
     IAxiosDelete,
     IAxiosGet,
@@ -15,7 +15,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-    (config: AxiosRequestConfig): AxiosRequestConfig => {
+    (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
         config.headers.Authorization = `Bearer ${localStorage.getItem(
             'TOKEN'
         )}`;

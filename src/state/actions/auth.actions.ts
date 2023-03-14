@@ -32,7 +32,6 @@ export const login = (data: ILoginData) => {
         const response = await AuthService.login(data);
         response
             .mapRight(({ data: data }) => {
-                console.log('data', data);
                 localStorageService.setToken(data.accessToken);
                 dispatch(authSlice.actions.login(data));
             })
@@ -50,7 +49,6 @@ export const login = (data: ILoginData) => {
 export const reconnect = (id: number) => {
     return async (dispatch: AppDispatch) => {
         const response = await AuthService.reconnect(id);
-        console.log('response', response);
         response
             .mapRight(({ data: data }) => {
                 localStorageService.setToken(data.accessToken);

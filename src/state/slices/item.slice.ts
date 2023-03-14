@@ -1,5 +1,10 @@
+import {
+    IItemCreateResponse,
+    IItemDeleteResponse,
+} from './../../models/response/itemResponce';
+import { IItemResponse } from '../../models/response/itemResponce';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IItem } from '../../models/IItem';
+
 import { DeleteItem, IItemState } from '../models/IItem.state';
 
 const initialState: IItemState = {
@@ -16,11 +21,11 @@ export const itemSlice = createSlice({
         fetchingItems: (state) => {
             state.itemsLoading = true;
         },
-        fetchSuccess: (state, action: PayloadAction<IItem[]>) => {
+        fetchSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.itemsLoading = false;
             state.items = action.payload;
         },
-        fetchTopRatedSuccess: (state, action: PayloadAction<IItem[]>) => {
+        fetchTopRatedSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.itemsLoading = false;
             state.topRated = action.payload;
         },
@@ -28,10 +33,10 @@ export const itemSlice = createSlice({
             state.itemsLoading = false;
             state.error = action.payload.message + ': ' + action.payload?.cause;
         },
-        addItem: (state, action: PayloadAction<IItem>) => {
+        addItem: (state, action: PayloadAction<IItemCreateResponse>) => {
             state.items = [...state.items, action.payload];
         },
-        deleteItem: (state, action: PayloadAction<DeleteItem>) => {
+        deleteItem: (state, action: PayloadAction<IItemDeleteResponse>) => {
             state.items = state.items.filter((item) => {
                 return item.id !== action.payload.id;
             });

@@ -18,37 +18,37 @@ const Navbar = () => {
 
     return (
         <Box
-            display="flex"
-            alignItems="center"
-            width="100%"
-            height="60px"
+            display='flex'
+            alignItems='center'
+            width='100%'
+            height='60px'
             sx={{ background: 'rgba(255,255,255, 0.95)' }}
-            color="black"
-            position="fixed"
-            top="0"
-            left="0"
-            zIndex="1"
-        >
+            color='black'
+            // position='fixed'
+            top='0'
+            left='0'
+            zIndex='1'>
             <Box
-                width="80%"
-                margin="auto"
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-            >
+                width='80%'
+                margin='auto'
+                display='flex'
+                justifyContent='space-between'
+                alignItems='center'>
                 <Box
                     onClick={() => navigate('/')}
-                    sx={{ '&:hover': { cursor: 'pointer' } }}
-                    color={shades.secondary[500]}
-                >
+                    sx={{
+                        '&:hover': { cursor: 'pointer' },
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                    }}
+                    color={shades.secondary[500]}>
                     Collections
                 </Box>
                 <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    columnGap="20px"
-                    zIndex="2"
-                >
+                    display='flex'
+                    justifyContent='space-between'
+                    columnGap='20px'
+                    zIndex='2'>
                     <IconButton sx={{ color: 'black' }}>
                         <SearchOutlined />
                     </IconButton>

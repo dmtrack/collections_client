@@ -35,13 +35,13 @@ const LastItemList = () => {
 
     const mostCommented = items.slice(items.length - 3, items.length);
     return (
-        <Box width="80%" margin="80px auto">
-            <Typography variant="h3" textAlign="center">
+        <Box width='80%' margin='80px auto'>
+            <Typography variant='h4' textAlign='center'>
                 Discover <b>items</b>
             </Typography>
             <Tabs
-                textColor="primary"
-                indicatorColor="primary"
+                textColor='primary'
+                indicatorColor='primary'
                 value={value}
                 onChange={handleChange}
                 centered
@@ -51,20 +51,18 @@ const LastItemList = () => {
                 sx={{
                     m: '25px',
                     '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
-                }}
-            >
-                <Tab label="NEW ITEMS" value="newItems" />
-                <Tab label="TOP RATED" value="topRated" />
-                <Tab label="MOST COMMENTED" value="mostCommented" />
+                }}>
+                <Tab label='NEW ITEMS' value='newItems' />
+                <Tab label='TOP RATED' value='topRated' />
+                <Tab label='MOST COMMENTED' value='mostCommented' />
             </Tabs>
             <Box
-                margin="0 auto"
-                display="grid"
-                gridTemplateColumns="repeat(auto-fill, 300px)"
-                justifyContent="space-around"
-                rowGap="20px"
-                columnGap="1.33%"
-            >
+                margin='0 auto'
+                display='grid'
+                gridTemplateColumns='repeat(auto-fill, 300px)'
+                justifyContent='space-around'
+                rowGap='20px'
+                columnGap='1.33%'>
                 {value === 'newItems' &&
                     items
                         .slice(0, 3)

@@ -1,10 +1,9 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import './i18n';
 import {
     Routes,
     Route,
     BrowserRouter as Router,
-    useLocation,
     BrowserRouter,
 } from 'react-router-dom';
 import LogOut from './components/LogOut';
