@@ -1,7 +1,6 @@
-import { IUserAuthResponse } from './../../models/response/authResponse';
+import { IUserAuthResponse } from '../../models/response/authResponse';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAccess } from '../../models/IUser';
-import { IError } from '../../models/response/authResponse';
 import localStorageService from '../../services/localStorageService';
 
 interface IAuthState {

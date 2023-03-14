@@ -1,63 +1,95 @@
 import { AppDispatch } from '..';
 import { itemSlice } from '../slices/item.slice';
 import itemService from '../../services/itemService';
+import { ICreateItem, IItem, IUpdateItem } from '../../models/IItem';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {
-        try {
-            dispatch(itemSlice.actions.fetchingItems());
-            const response = await itemService.fetchItems();
-            dispatch(itemSlice.actions.fetchSuccess(response.data.data));
-        } catch (e) {
-            dispatch(itemSlice.actions.fetchError(e as Error));
-        }
+        dispatch(itemSlice.actions.fetchingItems());
+        const response = await itemService.fetchItems();
+        response
+            .mapRight(({ data: data }) => {
+                dispatch(itemSlice.actions.fetchSuccess(data));
+            })
+            .mapLeft((e: any) => {
+                dispatch(itemSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
     };
 };
 export const fetchTopRatedItems = () => {
     return async (dispatch: AppDispatch) => {
-        try {
-            const response = await itemService.fetchTopRatedItems();
-            dispatch(
-                itemSlice.actions.fetchTopRatedSuccess(response.data.data)
-            );
-        } catch (e) {
-            dispatch(itemSlice.actions.fetchError(e as Error));
-        }
+        const response = await itemService.fetchTopRatedItems();
+        response
+            .mapRight(({ data: data }) => {
+                dispatch(itemSlice.actions.fetchTopRatedSuccess(data));
+            })
+            .mapLeft((e: any) => {
+                dispatch(itemSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
     };
 };
 
-// export const toggleUnBlock = (dataId: number[], itemId: number) => {
-//     return async (dispatch: AppDispatch) => {
-//         try {
-//             const response = await api
-//                 .put('/item/unblock', { dataId })
-//                 .then((data) =>
-//                     dispatch(
-//                         itemSlice.actions.toggleUnBlockState(data.data.itemId)
-//                     )
-//                 )
-//                 .then(() => {
-//                     if (dataId.includes(Number(itemId))) {
-//                         // dispatch(logOut());
-//                     }
-//                 });
-//         } catch (e) {}
-//     };
-// };
+export const createItem = (data: ICreateItem) => {
+    return async (dispatch: AppDispatch) => {
+        const response = await itemService.createItem(data);
+        response
+            .mapRight(({ data: data }) => {
+                dispatch(itemSlice.actions.addItem(data));
+            })
+            .mapLeft((e: any) => {
+                dispatch(itemSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+    };
+};
 
-// export const deleteitem = (dataId: number[], itemId: number) => {
-//     return async (dispatch: AppDispatch) => {
-//         try {
-//             const response = await api
-//                 .delete('/item/delete', { data: { dataId } })
-//                 .then((data) =>
-//                     dispatch(itemSlice.actions.deleteitem(data.data.itemId))
-//                 )
-//                 .then(() => {
-//                     if (dataId.includes(Number(itemId))) {
-//                         // dispatch(logOut());
-//                     }
-//                 });
-//         } catch (e) {}
-// };
-// };
+export const deleteItem = (id: number) => {
+    return async (dispatch: AppDispatch) => {
+        const response = await itemService.deleteItem(id);
+        response
+            .mapRight(({ data: data }) => {
+                console.log(data);
+            })
+            .mapLeft((e: any) => {
+                dispatch(itemSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+    };
+};
+
+export const updateItem = (data: IUpdateItem) => {
+    return async (dispatch: AppDispatch) => {};
+};
+
+// static getUserItems(collectionId: number): Promise<AxiosResponse> {
+//     return api.get<IItem[]>(`item/getcollectionitems/:${collectionId}`);
+// }
+// static getOneitem(id: number): Promise<AxiosResponse> {
+//     return api.get<IItem>(`item/getone/:${id}`);
+// }
+
+// static updateitem(): Promise<AxiosResponse> {
+//     return api.put<IItem>('item/update');
+// }
+
+// static deleteItem(id: number): Promise<AxiosResponse> {
+//     return api.delete<IItem>(`item/deleteone/:${id}`);
+// }

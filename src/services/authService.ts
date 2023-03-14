@@ -1,13 +1,9 @@
 import { AuthorizationError } from './../models/errors/AuthorizationError';
-import {
-    IAuthData,
-    ILoginData,
-    IUserAuthResponse,
-} from '../models/response/authResponse';
-import { AxiosResponse } from 'axios';
-import api, { axiosGet, axiosPost } from '../api/axios/apiClient';
+import { IAuthData, ILoginData } from '../models/response/authResponse';
+import { axiosGet, axiosPost } from '../api/axios/apiClient';
 import { DataBaseError } from '../models/errors/DataBaseError';
-import { IGetUsersResponse, IUser } from '../models/IUser';
+import { IGetUsersResponse } from '../models/IUser';
+import { IUserAuthResponse } from '../models/response/authResponse';
 
 export default class AuthService {
     static async register(data: IAuthData) {
