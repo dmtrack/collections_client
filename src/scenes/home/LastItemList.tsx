@@ -11,28 +11,30 @@ import Loader from '../../utils/loader';
 
 const LastItemList = () => {
     const dispatch = useAppDispatch();
+    const items = useAppSelector((state) => state.items.items);
+    const topRated = useAppSelector((state) => state.items.topRated);
+    const topRatedFlat = topRated?.map((element) => {
+        return {
+            id: element.id,
+            count: element.count,
+            image: element.item?.image,
+            name: element.item?.name,
+            created: element.item?.created,
+        };
+    });
+    const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
+    const topRatedItemsLoading = useAppSelector(
+        (state) => state.items.topRatedItemsLoading
+    );
+
     useEffect(() => {
         dispatch(fetchTopRatedItems());
         dispatch(fetchItems());
     }, []);
 
-    const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
-    const topRatedItemsLoading = useAppSelector(
-        (state) => state.items.topRatedItemsLoading
-    );
-    const items = useAppSelector((state) => state.items.items);
     console.log(items, 'items!');
+    console.log(topRatedFlat, 'topRatedFlatitems!');
 
-    const topRated = useAppSelector((state) => state.items.topRated);
-    // const topRatedFlat = topRated.map((element) => {
-    //     return {
-    //         id: element.id,
-    //         count: element.count,
-    //         image: element.item?.image,
-    //         name: element.item?.name,
-    //         created: element.item?.created,
-    //     };
-    // });
     // const mostCommented = items.slice(items.length - 3, items.length);
 
     const [value, setValue] = useState('newItems');
@@ -63,7 +65,7 @@ const LastItemList = () => {
                             '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                         }}>
                         <Tab label='NEW' value='newItems' />
-                        {/* <Tab label='TOP RATED' value='topRated' /> */}
+                        <Tab label='TOP RATED' value='topRated' />
                         <Tab label='MOST COMMENTED' value='mostCommented' />
                     </Tabs>
                     <Box
@@ -82,7 +84,7 @@ const LastItemList = () => {
                                         key={Number(item.created)}
                                     />
                                 ))}
-                        {/* {value === 'topRated' &&
+                        {value === 'topRated' &&
                             topRatedFlat
                                 .slice(0, 3)
                                 .map((item: IItem) => (
@@ -90,7 +92,7 @@ const LastItemList = () => {
                                         item={item}
                                         key={Number(item.created)}
                                     />
-                                ))} */}
+                                ))}
                         {value === 'mostCommented' &&
                             items
                                 .slice(0, 3)
