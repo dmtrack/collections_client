@@ -42,7 +42,7 @@ const LastItemList = () => {
 
     return (
         <>
-            {items.length > 0 && topRatedFlat.length > 0 ? (
+            {items.length > 0 && topRatedFlat.length > 0 && (
                 <Box width='90%' margin='80px auto'>
                     <Typography variant='h5' textAlign='center'>
                         discover items
@@ -100,8 +100,6 @@ const LastItemList = () => {
                                 ))}
                     </Box>
                 </Box>
-            ) : (
-                <Loader />
             )}
         </>
     );
