@@ -14,13 +14,15 @@ const LastItemList = () => {
     useEffect(() => {
         dispatch(fetchTopRatedItems());
         dispatch(fetchItems());
-    }, [dispatch]);
+    }, []);
 
     const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
     const topRatedItemsLoading = useAppSelector(
         (state) => state.items.topRatedItemsLoading
     );
     const items = useAppSelector((state) => state.items.items);
+    console.log(items, 'items!');
+
     const topRated = useAppSelector((state) => state.items.topRated);
     // const topRatedFlat = topRated.map((element) => {
     //     return {
@@ -42,7 +44,7 @@ const LastItemList = () => {
     return (
         <>
             {' '}
-            {!itemsLoading && !topRatedItemsLoading && (
+            {!itemsLoading && !topRatedItemsLoading ? (
                 <Box width='90%' margin='80px auto'>
                     <Typography variant='h5' textAlign='center'>
                         discover items
@@ -100,6 +102,8 @@ const LastItemList = () => {
                                 ))}
                     </Box>
                 </Box>
+            ) : (
+                <Loader />
             )}
         </>
     );
