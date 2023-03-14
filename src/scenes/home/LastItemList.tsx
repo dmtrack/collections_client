@@ -69,32 +69,17 @@ const LastItemList = () => {
                         rowGap='20px'
                         columnGap='1.33%'>
                         {value === 'newItems' &&
-                            items
-                                .slice(0, 3)
-                                .map((item: IItem) => (
-                                    <Item
-                                        item={item}
-                                        key={Number(item.created)}
-                                    />
-                                ))}
+                            items.map((item: IItem) => (
+                                <Item item={item} key={Number(item.created)} />
+                            ))}
                         {value === 'topRated' &&
-                            topRatedFlat
-                                .slice(0, 3)
-                                .map((item: IItem) => (
-                                    <Item
-                                        item={item}
-                                        key={Number(item.created)}
-                                    />
-                                ))}
+                            topRatedFlat.map((item: IItem) => (
+                                <Item item={item} key={Number(item.created)} />
+                            ))}
                         {value === 'mostCommented' &&
-                            items
-                                .slice(0, 3)
-                                .map((item: IItem) => (
-                                    <Item
-                                        item={item}
-                                        key={Number(item.created)}
-                                    />
-                                ))}
+                            items.map((item: IItem) => (
+                                <Item item={item} key={Number(item.created)} />
+                            ))}
                     </Box>
                 </Box>
             ) : (
