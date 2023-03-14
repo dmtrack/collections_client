@@ -23,7 +23,7 @@ export const fetchItems = () => {
 };
 export const fetchTopRatedItems = () => {
     return async (dispatch: AppDispatch) => {
-        dispatch(itemSlice.actions.fetchingItems());
+        dispatch(itemSlice.actions.fetchingTopRatedItems());
         const response = await itemService.fetchTopRatedItems();
         response
             .mapRight(({ data: data }) => {
