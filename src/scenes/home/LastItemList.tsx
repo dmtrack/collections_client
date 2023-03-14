@@ -13,6 +13,9 @@ const LastItemList = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchItems());
+    }, []);
+
+    useEffect(() => {
         dispatch(fetchTopRatedItems());
     }, []);
     const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
@@ -41,54 +44,68 @@ const LastItemList = () => {
 
     return (
         <>
-            <Box width='90%' margin='80px auto'>
-                <Typography variant='h5' textAlign='center'>
-                    discover items
-                </Typography>
-                <Tabs
-                    textColor='primary'
-                    indicatorColor='primary'
-                    value={value}
-                    onChange={handleChange}
-                    centered
-                    TabIndicatorProps={{
-                        sx: { display: isNonMobile ? 'block' : 'none' },
-                    }}
-                    sx={{
-                        m: '15px',
-                        '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
-                    }}>
-                    <Tab label='NEW' value='newItems' />
-                    <Tab label='TOP RATED' value='topRated' />
-                    <Tab label='MOST COMMENTED' value='mostCommented' />
-                </Tabs>
-                <Box
-                    margin='0 auto'
-                    display='grid'
-                    gridTemplateColumns='repeat(auto-fill, 300px)'
-                    justifyContent='space-around'
-                    rowGap='20px'
-                    columnGap='1.33%'>
-                    {value === 'newItems' &&
-                        items
-                            .slice(0, 3)
-                            .map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
-                    {value === 'topRated' &&
-                        topRatedFlat
-                            .slice(0, 3)
-                            .map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
-                    {value === 'mostCommented' &&
-                        items
-                            .slice(0, 3)
-                            .map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
+            {' '}
+            {items.length > 0 && topRated.length > 0 ? (
+                <Box width='90%' margin='80px auto'>
+                    <Typography variant='h5' textAlign='center'>
+                        discover items
+                    </Typography>
+                    <Tabs
+                        textColor='primary'
+                        indicatorColor='primary'
+                        value={value}
+                        onChange={handleChange}
+                        centered
+                        TabIndicatorProps={{
+                            sx: { display: isNonMobile ? 'block' : 'none' },
+                        }}
+                        sx={{
+                            m: '15px',
+                            '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
+                        }}>
+                        <Tab label='NEW' value='newItems' />
+                        <Tab label='TOP RATED' value='topRated' />
+                        <Tab label='MOST COMMENTED' value='mostCommented' />
+                    </Tabs>
+                    <Box
+                        margin='0 auto'
+                        display='grid'
+                        gridTemplateColumns='repeat(auto-fill, 300px)'
+                        justifyContent='space-around'
+                        rowGap='20px'
+                        columnGap='1.33%'>
+                        {value === 'newItems' &&
+                            items
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
+                        {value === 'topRated' &&
+                            topRatedFlat
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
+                        {value === 'mostCommented' &&
+                            items
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
+                    </Box>
                 </Box>
-            </Box>
+            ) : (
+                <Loader />
+            )}
         </>
     );
 };
