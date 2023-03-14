@@ -40,8 +40,13 @@ const LastItemList = () => {
     };
 
     console.log(itemsLoading, 'itemsLoading');
-    console.log('items', items);
-    console.log('toprated', topRatedFlat);
+    console.log('items', items, 'itemsLoading:', itemsLoading);
+    console.log(
+        'toprated',
+        topRatedFlat,
+        'topRatedLoading',
+        topRatedItemsLoading
+    );
 
     return (
         <>
