@@ -23,11 +23,11 @@ export const fetchItems = () => {
 };
 export const fetchTopRatedItems = () => {
     return async (dispatch: AppDispatch) => {
+        dispatch(itemSlice.actions.fetchingItems());
         const response = await itemService.fetchTopRatedItems();
         response
             .mapRight(({ data: data }) => {
                 dispatch(itemSlice.actions.fetchTopRatedSuccess(data));
-                dispatch(itemSlice.actions.itemsLoaded());
             })
             .mapLeft((e: any) => {
                 dispatch(itemSlice.actions.fetchError(e.response?.data));
