@@ -37,6 +37,9 @@ const LastItemList = () => {
         dispatch(fetchTopRatedItems());
     }, []);
     console.log(itemsLoading, 'itemsLoading');
+    console.log('items', items);
+    console.log('toprated', topRatedFlat);
+
     return (
         <>
             {items && topRatedFlat ? (
@@ -54,7 +57,7 @@ const LastItemList = () => {
                             sx: { display: isNonMobile ? 'block' : 'none' },
                         }}
                         sx={{
-                            mb: '25px',
+                            m: '15px',
                             '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                         }}>
                         <Tab label='NEW' value='newItems' />
@@ -69,17 +72,32 @@ const LastItemList = () => {
                         rowGap='20px'
                         columnGap='1.33%'>
                         {value === 'newItems' &&
-                            items.map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
+                            items
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
                         {value === 'topRated' &&
-                            topRatedFlat.map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
+                            topRatedFlat
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
                         {value === 'mostCommented' &&
-                            items.map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
+                            items
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
                     </Box>
                 </Box>
             ) : (
