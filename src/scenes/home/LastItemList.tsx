@@ -22,15 +22,15 @@ const LastItemList = () => {
     );
     const items = useAppSelector((state) => state.items.items);
     const topRated = useAppSelector((state) => state.items.topRated);
-    const topRatedFlat = topRated.map((element) => {
-        return {
-            id: element.id,
-            count: element.count,
-            image: element.item?.image,
-            name: element.item?.name,
-            created: element.item?.created,
-        };
-    });
+    // const topRatedFlat = topRated.map((element) => {
+    //     return {
+    //         id: element.id,
+    //         count: element.count,
+    //         image: element.item?.image,
+    //         name: element.item?.name,
+    //         created: element.item?.created,
+    //     };
+    // });
     // const mostCommented = items.slice(items.length - 3, items.length);
 
     const [value, setValue] = useState('newItems');
@@ -38,15 +38,6 @@ const LastItemList = () => {
     const handleChange = (event: any, newValue: any) => {
         setValue(newValue);
     };
-
-    console.log(itemsLoading, 'itemsLoading');
-    console.log('items', items, 'itemsLoading:', itemsLoading);
-    console.log(
-        'toprated',
-        topRatedFlat,
-        'topRatedLoading',
-        topRatedItemsLoading
-    );
 
     return (
         <>
@@ -70,7 +61,7 @@ const LastItemList = () => {
                             '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                         }}>
                         <Tab label='NEW' value='newItems' />
-                        <Tab label='TOP RATED' value='topRated' />
+                        {/* <Tab label='TOP RATED' value='topRated' /> */}
                         <Tab label='MOST COMMENTED' value='mostCommented' />
                     </Tabs>
                     <Box
@@ -89,7 +80,7 @@ const LastItemList = () => {
                                         key={Number(item.created)}
                                     />
                                 ))}
-                        {value === 'topRated' &&
+                        {/* {value === 'topRated' &&
                             topRatedFlat
                                 .slice(0, 3)
                                 .map((item: IItem) => (
@@ -97,7 +88,7 @@ const LastItemList = () => {
                                         item={item}
                                         key={Number(item.created)}
                                     />
-                                ))}
+                                ))} */}
                         {value === 'mostCommented' &&
                             items
                                 .slice(0, 3)
