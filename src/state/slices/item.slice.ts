@@ -22,12 +22,14 @@ export const itemSlice = createSlice({
             state.itemsLoading = true;
         },
         fetchSuccess: (state, action: PayloadAction<IItemResponse>) => {
-            state.itemsLoading = false;
             state.items = action.payload;
         },
         fetchTopRatedSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.itemsLoading = false;
             state.topRated = action.payload;
+        },
+        itemsLoaded: (state) => {
+            state.itemsLoading = false;
         },
         fetchError: (state, action: PayloadAction<Error>) => {
             state.itemsLoading = false;
