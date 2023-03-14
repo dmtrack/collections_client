@@ -46,7 +46,7 @@ const LastItemList = () => {
     return (
         <>
             {' '}
-            {!itemsLoading && !topRatedItemsLoading ? (
+            {!itemsLoading && !topRatedItemsLoading && (
                 <Box width='90%' margin='80px auto'>
                     <Typography variant='h5' textAlign='center'>
                         discover items
@@ -104,8 +104,6 @@ const LastItemList = () => {
                                 ))}
                     </Box>
                 </Box>
-            ) : (
-                <Loader />
             )}
         </>
     );
