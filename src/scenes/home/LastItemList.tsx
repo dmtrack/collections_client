@@ -11,8 +11,14 @@ import Loader from '../../utils/loader';
 
 const LastItemList = () => {
     const dispatch = useAppDispatch();
-    const items = useAppSelector((state) => state.items.items);
-    const topRated = useAppSelector((state) => state.items.topRated);
+    useEffect(() => {
+        dispatch(fetchTopRatedItems());
+        dispatch(fetchItems());
+    }, []);
+    const { itemsLoading } = useAppSelector((state) => state.items);
+    const { topRatedItemsLoading } = useAppSelector((state) => state.items);
+    const { items } = useAppSelector((state) => state.items);
+    const { topRated } = useAppSelector((state) => state.items);
     const topRatedFlat = topRated?.map((element) => {
         return {
             id: element.id,
@@ -22,15 +28,6 @@ const LastItemList = () => {
             created: element.item?.created,
         };
     });
-    const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
-    const topRatedItemsLoading = useAppSelector(
-        (state) => state.items.topRatedItemsLoading
-    );
-
-    useEffect(() => {
-        dispatch(fetchTopRatedItems());
-        dispatch(fetchItems());
-    }, []);
 
     console.log(items, 'items!');
     console.log(topRatedFlat, 'topRatedFlatitems!');
