@@ -22,6 +22,8 @@ const LastItemList = () => {
             created: element.item?.created,
         };
     });
+    // const mostCommented = items.slice(items.length - 3, items.length);
+
     const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
 
     const [value, setValue] = useState('newItems');
@@ -35,7 +37,6 @@ const LastItemList = () => {
         dispatch(fetchTopRatedItems());
     }, []);
     console.log(itemsLoading, 'itemsLoading');
-    const mostCommented = items.slice(items.length - 3, items.length);
     return (
         <>
             {items && topRatedFlat ? (
@@ -86,9 +87,14 @@ const LastItemList = () => {
                                     />
                                 ))}
                         {value === 'mostCommented' &&
-                            mostCommented.map((item: IItem) => (
-                                <Item item={item} key={Number(item.created)} />
-                            ))}
+                            items
+                                .slice(0, 3)
+                                .map((item: IItem) => (
+                                    <Item
+                                        item={item}
+                                        key={Number(item.created)}
+                                    />
+                                ))}
                     </Box>
                 </Box>
             ) : (
