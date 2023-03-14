@@ -13,7 +13,7 @@ const LastItemList = () => {
     const dispatch = useAppDispatch();
     const items = useAppSelector((state) => state.items.items);
     const topRated = useAppSelector((state) => state.items.topRated);
-    const topRatedFlat = topRated.map((element) => {
+    const topRatedFlat = topRated?.map((element) => {
         return {
             id: element.id,
             count: element.count,
@@ -33,15 +33,12 @@ const LastItemList = () => {
     useEffect(() => {
         dispatch(fetchItems());
         dispatch(fetchTopRatedItems());
-        console.log('test');
     }, []);
     console.log(itemsLoading, 'itemsLoading');
     const mostCommented = items.slice(items.length - 3, items.length);
     return (
         <>
-            {itemsLoading ? (
-                <Loader />
-            ) : (
+            {items && topRatedFlat ? (
                 <Box width='90%' margin='80px auto'>
                     <Typography variant='h5' textAlign='center'>
                         discover items
@@ -56,7 +53,7 @@ const LastItemList = () => {
                             sx: { display: isNonMobile ? 'block' : 'none' },
                         }}
                         sx={{
-                            m: '25px',
+                            mb: '25px',
                             '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                         }}>
                         <Tab label='NEW' value='newItems' />
@@ -94,6 +91,8 @@ const LastItemList = () => {
                             ))}
                     </Box>
                 </Box>
+            ) : (
+                <Loader />
             )}
         </>
     );

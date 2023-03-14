@@ -23,12 +23,10 @@ export const itemSlice = createSlice({
         },
         fetchSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.items = action.payload;
+            state.itemsLoading = false;
         },
         fetchTopRatedSuccess: (state, action: PayloadAction<IItemResponse>) => {
-            state.itemsLoading = false;
             state.topRated = action.payload;
-        },
-        itemsLoaded: (state) => {
             state.itemsLoading = false;
         },
         fetchError: (state, action: PayloadAction<Error>) => {
