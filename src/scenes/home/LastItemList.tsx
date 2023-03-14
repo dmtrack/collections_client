@@ -7,6 +7,7 @@ import {
     fetchTopRatedItems,
 } from '../../state/actions/items.actions';
 import { IItem } from '../../models/IItem';
+import Loader from '../../utils/loader';
 
 const LastItemList = () => {
     const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const LastItemList = () => {
             created: element.item?.created,
         };
     });
+    const itemsLoading = useAppSelector((state) => state.items.itemsLoading);
 
     const [value, setValue] = useState('newItems');
     const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -32,15 +34,17 @@ const LastItemList = () => {
         dispatch(fetchItems());
         dispatch(fetchTopRatedItems());
     }, [dispatch]);
-
+    console.log(itemsLoading, 'itemsLoading');
     const mostCommented = items.slice(items.length - 3, items.length);
     return (
         <>
-            {items && topRatedFlat && mostCommented && (
+            {itemsLoading ? (
+                <Loader />
+            ) : (
                 <Box width='80%' margin='80px auto'>
-                    <Typography variant='h4' textAlign='center'>
-                        Discover <b>items</b>
-                    </Typography>
+                    {/* <Typography variant='h4' textAlign='center'>
+                        discover <b>items</b>
+                    </Typography> */}
                     <Tabs
                         textColor='primary'
                         indicatorColor='primary'
