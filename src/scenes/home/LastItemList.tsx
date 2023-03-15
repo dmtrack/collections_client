@@ -8,6 +8,7 @@ import {
 } from '../../state/actions/items.actions';
 import { IItem } from '../../models/IItem';
 import Loader from '../../utils/loader';
+import { shades } from '../../theme';
 
 const LastItemList = () => {
     const dispatch = useAppDispatch();
@@ -29,9 +30,6 @@ const LastItemList = () => {
         };
     });
 
-    console.log(items, 'items!');
-    console.log(topRatedFlat, 'topRatedFlatitems!');
-
     // const mostCommented = items.slice(items.length - 3, items.length);
 
     const [value, setValue] = useState('newItems');
@@ -45,7 +43,10 @@ const LastItemList = () => {
             {' '}
             {!itemsLoading && !topRatedItemsLoading ? (
                 <Box width='90%' margin='80px auto'>
-                    <Typography variant='h5' textAlign='center'>
+                    <Typography
+                        variant='h5'
+                        textAlign='center'
+                        color={shades.secondary[800]}>
                         discover items
                     </Typography>
                     <Tabs
