@@ -30,7 +30,6 @@ const MainCarousel = () => {
                 marginBottom: isNonMobile ? '0px' : '80px',
                 // width: isNonMobile ? '80%' : '100%',
                 width: '80%',
-                // flexWrap: 'wrap',
                 flexDirection: isNonMobile ? 'row' : 'column',
             }}>
             <Box
@@ -48,8 +47,6 @@ const MainCarousel = () => {
                         lineHeight: '1.1',
                         letterSpacing: '-1px',
                         marginTop: isNonMobile ? '0px' : '32px',
-                        marginBottom: '32px',
-                        paddingLeft: isNonMobile ? '0px' : '16px',
                     }}>
                     The Collections save your the most valuable
                 </Typography>
