@@ -44,15 +44,15 @@ const LastItemList = () => {
             {!itemsLoading && !topRatedItemsLoading ? (
                 <Box width={isNonMobile ? '80%' : '100%'} margin='0px auto'>
                     <Typography
-                        variant='h3'
+                        variant='h4'
                         textAlign='left'
                         color={shades.secondary[800]}
                         sx={{
                             letterSpacing: '-0.5px',
                             fontWeight: '600',
-                            paddingLeft: isNonMobile ? '0px' : '80px',
+                            paddingLeft: isNonMobile ? '0px' : '64px',
                         }}>
-                        discover items
+                        Discover items
                     </Typography>
                     <Tabs
                         textColor='primary'
