@@ -28,8 +28,8 @@ const MainCarousel = () => {
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 marginBottom: isNonMobile ? '0px' : '80px',
-
-                width: isNonMobile ? '80%' : '100%',
+                // width: isNonMobile ? '80%' : '100%',
+                width: '80%',
                 // flexWrap: 'wrap',
                 flexDirection: isNonMobile ? 'row' : 'column',
             }}>
