@@ -48,6 +48,7 @@ const MainCarousel = () => {
                         lineHeight: '1.1',
                         letterSpacing: '-1px',
                         marginTop: isNonMobile ? '0px' : '32px',
+                        marginBottom: '32px',
                         paddingLeft: isNonMobile ? '0px' : '16px',
                     }}>
                     The Collections save your the most valuable
@@ -95,7 +96,8 @@ const MainCarousel = () => {
                                     height: '350px',
                                     objectFit: 'cover',
                                     backgroundAttachment: 'fixed',
-                                    borderRadius: isNonMobile ? '5px' : '0px',
+                                    // borderRadius: isNonMobile ? '5px' : '0px',
+                                    borderRadius: '5px',
                                 }}
                             />
                             <Box
