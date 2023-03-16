@@ -42,11 +42,16 @@ const LastItemList = () => {
         <>
             {' '}
             {!itemsLoading && !topRatedItemsLoading ? (
-                <Box width='90%' margin='80px auto'>
+                <Box width={isNonMobile ? '80%' : '100%'} margin='0px auto'>
                     <Typography
-                        variant='h5'
-                        textAlign='center'
-                        color={shades.secondary[800]}>
+                        variant='h3'
+                        textAlign='left'
+                        color={shades.secondary[800]}
+                        sx={{
+                            letterSpacing: '-0.5px',
+                            fontWeight: '600',
+                            paddingLeft: isNonMobile ? '0px' : '16px',
+                        }}>
                         discover items
                     </Typography>
                     <Tabs

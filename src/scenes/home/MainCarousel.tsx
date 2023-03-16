@@ -24,9 +24,13 @@ const MainCarousel = () => {
         <Box
             sx={{
                 display: 'flex',
-                margin: '64px auto',
-                width: '80%',
-                flexWrap: 'wrap',
+                marginTop: isNonMobile ? '128px' : '80px',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginBottom: isNonMobile ? '0px' : '80px',
+
+                width: isNonMobile ? '80%' : '100%',
+                // flexWrap: 'wrap',
                 flexDirection: isNonMobile ? 'row' : 'column',
             }}>
             <Box
@@ -43,7 +47,8 @@ const MainCarousel = () => {
                         textAlign: 'left',
                         lineHeight: '1.1',
                         letterSpacing: '-1px',
-                        paddingBottom: isNonMobile ? '0px' : '32px',
+                        marginTop: isNonMobile ? '0px' : '32px',
+                        paddingLeft: isNonMobile ? '0px' : '16px',
                     }}>
                     The Collections save your the most valuable
                 </Typography>
@@ -90,7 +95,7 @@ const MainCarousel = () => {
                                     height: '350px',
                                     objectFit: 'cover',
                                     backgroundAttachment: 'fixed',
-                                    borderRadius: '5px',
+                                    borderRadius: isNonMobile ? '5px' : '0px',
                                 }}
                             />
                             <Box
@@ -98,7 +103,7 @@ const MainCarousel = () => {
                                     color: 'white',
                                     backgroundColor: 'rgb(0,0,0,0.4)',
                                 }}
-                                padding='20px'
+                                // padding='20px'
                                 borderRadius='2px'
                                 textAlign='left'
                                 position='absolute'
