@@ -50,7 +50,7 @@ const LastItemList = () => {
                         sx={{
                             letterSpacing: '-0.5px',
                             fontWeight: '600',
-                            paddingLeft: isNonMobile ? '0px' : '16px',
+                            paddingLeft: isNonMobile ? '0px' : '80px',
                         }}>
                         discover items
                     </Typography>
