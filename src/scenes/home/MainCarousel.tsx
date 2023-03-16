@@ -24,7 +24,7 @@ const MainCarousel = () => {
         <Box
             sx={{
                 display: 'flex',
-                marginTop: isNonMobile ? '128px' : '80px',
+                marginTop: isNonMobile ? '128px' : '48px',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 marginBottom: isNonMobile ? '0px' : '80px',
@@ -46,7 +46,9 @@ const MainCarousel = () => {
                         textAlign: 'left',
                         lineHeight: '1.1',
                         letterSpacing: '-1px',
+                        marginRight: '16px',
                         marginTop: isNonMobile ? '0px' : '32px',
+                        marginBottom: isNonMobile ? '32px' : '16px',
                     }}>
                     The Collections save your the most valuable
                 </Typography>
