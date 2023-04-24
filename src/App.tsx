@@ -37,22 +37,22 @@ const App: React.FC = () => {
     }, [isAuth]);
 
     return (
-        <div className="app">
+        <div className='app'>
             <Suspense fallback={null}>
                 <BrowserRouter>
                     <ScrollToTop />
                     <Navbar />
                     <Routes>
-                        <Route path="/" element={<Home />} />
+                        <Route path='/' element={<Home />} />
                         <Route
-                            path="collection/:collectionId"
+                            path='collection/:collectionId'
                             element={<Collection />}
                         />
-                        <Route path="item/:itemId/" element={<ItemPage />} />
-                        <Route path="user/:userId" element={<UserPage />} />
-                        <Route path="login/:type?" element={<Login />} />
-                        <Route path="admin" element={<AdminPanel />} />
-                        <Route path="logout" element={<LogOut />} />
+                        <Route path='item/:itemId/' element={<ItemPage />} />
+                        <Route path='user/:userId' element={<UserPage />} />
+                        <Route path='login/:type?' element={<Login />} />
+                        <Route path='admin' element={<AdminPanel />} />
+                        <Route path='logout' element={<LogOut />} />
                     </Routes>
                     <Footer />
                 </BrowserRouter>
