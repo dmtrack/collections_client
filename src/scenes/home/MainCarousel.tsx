@@ -35,7 +35,7 @@ const MainCarousel = () => {
             <Box
                 sx={{
                     backgroundColor: 'white',
-                    flex: 1,
+                    flex: isNonMobile ? 1 : 0,
                     marginRight: '16px',
                 }}>
                 <Typography
