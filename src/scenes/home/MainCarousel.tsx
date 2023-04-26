@@ -7,8 +7,6 @@ import { shades } from '../../theme';
 
 const importAll = (r: any) =>
     r.keys().reduce((acc: any, item: any) => {
-        console.log(r, 'r');
-
         acc[item.replace('./', '')] = r(item);
         return acc;
     }, {});

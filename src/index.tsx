@@ -8,6 +8,7 @@ import './i18n';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { theme } from './theme';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = setupStore();
 
@@ -17,11 +18,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <App />
-            </ThemeProvider>
-        </Provider>
+        <BrowserRouter>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <App />
+                </ThemeProvider>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>
 );

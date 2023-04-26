@@ -15,9 +15,9 @@ export function AdminPanel() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isAuth) {
-            dispatch(fetchUsers());
-        }
+        // if (isAuth) {
+        dispatch(fetchUsers());
+        // }
     }, []);
 
     useEffect(() => {
@@ -28,14 +28,14 @@ export function AdminPanel() {
 
     return (
         <>
-            {usersLoading && <p className="text-center text-lg">Loading...</p>}
+            {usersLoading && <p className='text-center text-lg'>Loading...</p>}
             {error && (
-                <p className="pt-10 text-center text-lg text-red-500">
+                <p className='pt-10 text-center text-lg text-red-500'>
                     {error}
                 </p>
             )}
             {isAuth ? (
-                <div className="container mx-auto  pt-5">
+                <div className='container mx-auto  pt-5'>
                     <UsersList usersProps={users} />
                 </div>
             ) : (

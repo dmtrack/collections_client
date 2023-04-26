@@ -12,7 +12,6 @@ export const fetchUsers = () => {
     return async (dispatch: AppDispatch) => {
         dispatch(userSlice.actions.fetchingUsers());
         const response = await AuthService.getAllUsers();
-
         response
             .mapRight(({ data: users }) => {
                 dispatch(userSlice.actions.fetchSuccess(users));

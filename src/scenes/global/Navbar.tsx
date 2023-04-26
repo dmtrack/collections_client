@@ -7,14 +7,20 @@ import {
     SearchOutlined,
     NightlightOutlined,
     LanguageOutlined,
+    Person,
+    LoginOutlined,
+    GroupTwoTone,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { shades } from '../../theme';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     const { t } = useTranslation(['navbar']);
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
+    const { isAuth } = useAppSelector((state) => state.auth);
+    const { access } = useAppSelector((state) => state.auth.access);
+    const { userId } = useAppSelector((state) => state.auth);
 
     return (
         <Box
@@ -55,13 +61,38 @@ const Navbar = () => {
                     <IconButton sx={{ color: 'black' }}>
                         <NightlightOutlined />
                     </IconButton>
-
                     <IconButton sx={{ color: 'black' }}>
                         <LanguageOutlined />
                     </IconButton>
-                    <IconButton sx={{ color: 'black' }}>
-                        <PersonOutline />
-                    </IconButton>
+                    {access === 'admin' && isAuth ? (
+                        <NavLink to='admin'>
+                            <IconButton sx={{ color: 'black' }}>
+                                <GroupTwoTone />
+                            </IconButton>
+                        </NavLink>
+                    ) : null}
+                    {!isAuth ? (
+                        <NavLink to='login'>
+                            <IconButton sx={{ color: 'black' }}>
+                                <PersonOutline />
+                            </IconButton>
+                        </NavLink>
+                    ) : (
+                        <NavLink to='user/:userId'>
+                            <IconButton sx={{ color: 'black' }}>
+                                <Person />
+                            </IconButton>
+                        </NavLink>
+                    )}
+
+                    {isAuth ? (
+                        <NavLink to='logout'>
+                            <IconButton sx={{ color: 'black' }}>
+                                <LoginOutlined />
+                            </IconButton>
+                        </NavLink>
+                    ) : null}
+
                     <IconButton sx={{ color: 'black' }}>
                         <MenuOutlined />
                     </IconButton>
