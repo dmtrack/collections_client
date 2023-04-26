@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { Badge, Box, IconButton } from '@mui/material';
+import { Badge, Box, IconButton, useMediaQuery } from '@mui/material';
 import {
     PersonOutline,
     MenuOutlined,
@@ -20,7 +20,7 @@ const Navbar = () => {
     const navigate = useNavigate();
     const { isAuth } = useAppSelector((state) => state.auth);
     const { access } = useAppSelector((state) => state.auth.access);
-    const { userId } = useAppSelector((state) => state.auth);
+    const isNonMobile = useMediaQuery('(min-width:600px)');
 
     return (
         <Box
@@ -40,16 +40,19 @@ const Navbar = () => {
                 display='flex'
                 justifyContent='space-between'
                 alignItems='center'>
-                <Box
-                    onClick={() => navigate('/')}
-                    sx={{
-                        '&:hover': { cursor: 'pointer' },
-                        fontSize: '16px',
-                        fontWeight: 'bold',
-                    }}
-                    color={shades.secondary[500]}>
-                    Collections
-                </Box>
+                {isNonMobile ? (
+                    <Box
+                        onClick={() => navigate('/')}
+                        sx={{
+                            '&:hover': { cursor: 'pointer' },
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                        }}
+                        color={shades.secondary[500]}>
+                        Collections
+                    </Box>
+                ) : null}
+
                 <Box
                     display='flex'
                     justifyContent='space-between'
