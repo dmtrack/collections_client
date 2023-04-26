@@ -22,10 +22,9 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
 
     const [dataId, setDataId] = useState<Array<any>>([]);
     const [checked, setChecked] = useState(false);
-    console.log(checked);
-
     const { users } = useAppSelector((state) => state.users);
     const { userId } = useAppSelector((state) => state.auth);
+    console.log(users);
 
     // проверить чек боксы
 
@@ -45,61 +44,58 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
         <>
             {users.length > 0 ? (
                 <div>
-                    <div className="flex justify-end">
+                    <div className='flex justify-end'>
                         <Button
                             onClick={() =>
                                 dispatch(toggleBlock(dataId, userId))
                             }
-                            variant="warning"
-                            size="sm"
-                        >
+                            variant='warning'
+                            size='sm'>
                             {t('blockb')}
                         </Button>
                         <Button
                             onClick={() =>
                                 dispatch(toggleUnBlock(dataId, userId))
                             }
-                            variant="info"
-                            size="sm"
-                        >
-                            {t('unblockb')}
+                            variant='info'
+                            size='sm'>
+                            {t('unblock')}
                         </Button>
                         <Button
                             onClick={() => dispatch(deleteUser(dataId, userId))}
-                            variant="danger"
-                            size="sm"
-                        >
-                            {t('deleteb')}
+                            variant='danger'
+                            size='sm'>
+                            {t('delete')}
                         </Button>
                     </div>
-                    <div className="relative overflow-x-auto">
-                        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <div className='relative overflow-x-auto'>
+                        <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
+                            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                                 <tr>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         <input
-                                            type="checkbox"
-                                            className="checkbox"
+                                            type='checkbox'
+                                            className='checkbox'
                                             checked={checked}
                                             onChange={(e) => handleChange(e)}
                                         />
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         id
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         {t('auth:username')}
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         {t('auth:email')}
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         {t('access')}
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         {t('activated')}
                                     </th>
-                                    <th scope="col" className="px-6 py-3">
+                                    <th scope='col' className='px-6 py-3'>
                                         {t('status')}
                                     </th>
                                 </tr>

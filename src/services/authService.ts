@@ -31,6 +31,6 @@ export default class AuthService {
         return axiosGet<
             AuthorizationError | DataBaseError,
             IGetUsersResponse[]
-        >('/users/getusers');
+        >('/user/getusers');
     }
 }
