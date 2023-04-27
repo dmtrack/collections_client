@@ -24,13 +24,12 @@ const Login = () => {
             {formType === 'register' ? (
                 <>
                     <RegistrationPage />
-                    <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
+                    <p className='text-sm text-center text-gray-500 dark:text-gray-400 mx-auto'>
                         {t('auth:haveAccount')}
                         <a
-                            role="button"
+                            role='button'
                             onClick={toggleFormType}
-                            className="text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]"
-                        >
+                            className='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]'>
                             {' '}
                             {t('auth:loginlink')}
                         </a>
@@ -39,13 +38,12 @@ const Login = () => {
             ) : (
                 <>
                     <LoginPage />
-                    <p className="container text-sm text-center text-gray-500 dark:text-gray-400 mx-auto">
+                    <p className='text-sm text-center text-gray-500 dark:text-gray-400 mx-auto'>
                         {t('auth:dontHaveAccount')}
                         <a
-                            role="button"
+                            role='button'
                             onClick={toggleFormType}
-                            className="text-sm text-left text-gray-500 dark:text-gray-400 mx-auto"
-                        >
+                            className='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto'>
                             {' '}
                             {t('auth:registrationlink')}
                         </a>

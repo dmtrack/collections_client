@@ -30,6 +30,11 @@ body {
     color: #e2e1e1;
 }
 
+.active {
+    color: purple;
+    cursor: default;
+}
+
 @layer components {
     .btn {
         @apply py-1 px-4 mr-2 mb-3 rounded text-sm;

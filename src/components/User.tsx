@@ -1,5 +1,6 @@
 import React from 'react';
 import { IUser } from '../models/IUser';
+import { Link } from 'react-router-dom';
 
 interface IUserProps {
     user: IUser;
@@ -25,22 +26,24 @@ function User({ user, dataId, setDataId }: IUserProps) {
 
     return (
         <>
-            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <td className="px-6 py-3">
+            <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+                <td className='px-6 py-3'>
                     <input
-                        type="checkbox"
+                        type='checkbox'
                         value={id}
                         id={String(id)}
                         checked={dataId.includes(id) ? true : false}
                         onChange={chooseCheckbox}
                     />
                 </td>
-                <td className="px-5 py-4">{id}</td>
-                <td className="px-5 py-4">{name}</td>
-                <td className="px-5 py-4">{email}</td>
-                <td className="px-5 py-4">{access}</td>
-                <td className="px-5 py-4">{isActivated ? 'yes' : 'no'}</td>
-                <td className="px-5 py-4">{blocked ? 'blocked' : 'active'}</td>
+                <td className='px-5 py-4'>{id}</td>
+                <td className='px-5 py-4'>
+                    <Link to={`/user/${id}`}>{name}</Link>
+                </td>
+                <td className='px-5 py-4'>{email}</td>
+                <td className='px-5 py-4'>{access}</td>
+                <td className='px-5 py-4'>{isActivated ? 'yes' : 'no'}</td>
+                <td className='px-5 py-4'>{blocked ? 'blocked' : 'active'}</td>
             </tr>
         </>
     );
