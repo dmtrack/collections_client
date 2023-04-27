@@ -1,9 +1,4 @@
-import {
-    ChangeEvent,
-    ChangeEventHandler,
-    ReactEventHandler,
-    useState,
-} from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../hook/redux';
 import { IUsersListProps } from '../models/IUser';
@@ -21,20 +16,18 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
     const { t } = useTranslation(['admin', 'auth']);
 
     const [dataId, setDataId] = useState<Array<any>>([]);
+
     const [checked, setChecked] = useState(false);
     const { users } = useAppSelector((state) => state.users);
     const { userId } = useAppSelector((state) => state.auth);
-    console.log(users);
 
-    // проверить чек боксы
-
-    function handleChange(e: ChangeEvent<HTMLInputElement>): void {
-        console.log(e.target);
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setChecked((prevState) => !prevState);
         if (dataId.length !== users.length) {
             const idCollection: number[] = [];
             users.forEach((u) => {
-                idCollection.push(u.id);
+                const id = Number(u.id);
+                idCollection.push(id);
             });
             setDataId(idCollection);
         } else setDataId([]);
@@ -54,9 +47,7 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                             {t('blockb')}
                         </Button>
                         <Button
-                            onClick={() =>
-                                dispatch(toggleUnBlock(dataId, userId))
-                            }
+                            onClick={() => dispatch(toggleUnBlock(dataId))}
                             variant='info'
                             size='sm'>
                             {t('unblock')}

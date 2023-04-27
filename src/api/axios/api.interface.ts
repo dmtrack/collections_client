@@ -22,9 +22,11 @@ export interface IAxiosPost {
     ): Promise<EitherResponse<Error, T>>;
 }
 export interface IAxiosDelete {
-    <Error = any, T = any>(url: string, config?: AxiosRequestConfig): Promise<
-        EitherResponse<Error, T>
-    >;
+    <Error = any, T = any>(
+        url: string,
+
+        config?: AxiosRequestConfig
+    ): Promise<EitherResponse<Error, T>>;
 }
 
 export interface IAxiosUpdate {

@@ -4,6 +4,8 @@ import { UsersList } from '../../components/Userslist';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 
 import { fetchUsers } from '../../state/actions/userActions';
+import Loader from '../../utils/loader';
+import { Box } from '@mui/material';
 
 export function AdminPanel() {
     const dispatch = useAppDispatch();
@@ -15,32 +17,33 @@ export function AdminPanel() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // if (isAuth) {
-        dispatch(fetchUsers());
-        // }
+        if (isAuth) {
+            dispatch(fetchUsers());
+        }
     }, []);
 
     useEffect(() => {
         if (!isAuth) {
-            navigate('/login');
+            navigate('/');
         }
     }, [isAuth]);
 
     return (
         <>
-            {usersLoading && <p className='text-center text-lg'>Loading...</p>}
-            {error && (
-                <p className='pt-10 text-center text-lg text-red-500'>
-                    {error}
-                </p>
-            )}
-            {isAuth ? (
-                <div className='container mx-auto  pt-5'>
-                    <UsersList usersProps={users} />
-                </div>
-            ) : (
-                navigate('/login')
-            )}
+            {usersLoading && <Loader />}
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                    marginTop: '128px',
+                    // width: isNonMobile ? '80%' : '100%',
+                    width: '80%',
+                }}>
+                <UsersList usersProps={users} />
+            </Box>
         </>
     );
 }

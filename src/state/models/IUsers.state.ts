@@ -11,4 +11,7 @@ export type UsersListProps = {
     loading: boolean;
 };
 
-export type DeleteUserProp = string[];
+export type DeleteUserProp = {
+    message: string;
+    userId: number[];
+};

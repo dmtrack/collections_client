@@ -6,12 +6,12 @@ import { IUserState } from '../models/IUsers.state';
 import localStorageService from '../../services/localStorageService';
 import api from '../../api/axios/apiClient';
 import { logOut } from './auth.actions';
-import AuthService from '../../services/authService';
+import UserService from '../../services/userService';
 
 export const fetchUsers = () => {
     return async (dispatch: AppDispatch) => {
         dispatch(userSlice.actions.fetchingUsers());
-        const response = await AuthService.getAllUsers();
+        const response = await UserService.getAllUsers();
         response
             .mapRight(({ data: users }) => {
                 dispatch(userSlice.actions.fetchSuccess(users));
@@ -29,47 +29,68 @@ export const fetchUsers = () => {
 
 export const toggleBlock = (dataId: number[], userId: number) => {
     return async (dispatch: AppDispatch) => {
-        try {
-            const response = await api
-                .put('/user/block', { dataId })
-                .then((data) => {
-                    console.log('block data', data);
+        const response = await UserService.blockUser(dataId);
+        console.log('block response', response);
 
-                    dispatch(
-                        userSlice.actions.toggleBlockState(data.data.userId)
-                    );
-                })
-
-                .then(() => {
-                    if (dataId.includes(Number(userId))) {
-                        dispatch(logOut());
-                    }
+        response
+            .mapRight(({ data: ids }) => {
+                dispatch(userSlice.actions.toggleBlockState(ids));
+            })
+            .mapLeft((e: any) => {
+                dispatch(userSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
                 });
-            console.log('response', response);
-        } catch (e) {}
+            });
     };
 };
 
-export const toggleUnBlock = (dataId: number[], userId: number) => {
+export const toggleUnBlock = (dataId: number[]) => {
     return async (dispatch: AppDispatch) => {
-        try {
-            const response = await api
-                .put('/user/unblock', { dataId })
-                .then((data) =>
-                    dispatch(
-                        userSlice.actions.toggleUnBlockState(data.data.userId)
-                    )
-                )
-                .then(() => {
-                    if (dataId.includes(Number(userId))) {
-                        dispatch(logOut());
-                    }
+        const response = await UserService.unblockUser(dataId);
+        console.log('block response', response);
+
+        response
+            .mapRight(({ data: ids }) => {
+                dispatch(userSlice.actions.toggleUnBlockState(ids));
+            })
+            .mapLeft((e: any) => {
+                dispatch(userSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
                 });
-        } catch (e) {}
+            });
     };
 };
 
 export const deleteUser = (dataId: number[], userId: number) => {
+    return async (dispatch: AppDispatch) => {
+        const response = await UserService.deleteUser(dataId);
+        console.log('delete response', response);
+
+        response
+            .mapRight(({ data: ids }) => {
+                dispatch(userSlice.actions.deleteUser(ids));
+            })
+            .mapLeft((e: any) => {
+                dispatch(userSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+        if (dataId.includes(Number(userId))) {
+            dispatch(logOut());
+        }
+    };
+};
+
+export const deleteUser1 = (dataId: number[], userId: number) => {
     return async (dispatch: AppDispatch) => {
         try {
             const response = await api

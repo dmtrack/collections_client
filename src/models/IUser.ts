@@ -31,7 +31,7 @@ export interface IServerResponce {
     statusText: string;
 }
 
-export interface IGetUsersResponse extends AxiosResponse {
+export interface IGetUserResponse extends AxiosResponse {
     id: number;
     name: string;
     email: string;

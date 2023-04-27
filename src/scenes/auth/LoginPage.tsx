@@ -5,6 +5,7 @@ import { useInput } from '../../hook/input';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { login } from '../../state/actions/auth.actions';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const LoginPage: FC = () => {
     const { t } = useTranslation(['auth', 'common']);
@@ -19,15 +20,19 @@ const LoginPage: FC = () => {
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         if (isFormValid()) {
-            dispatch(
-                login({
-                    email: email.value,
-                    password: password.value,
-                })
-            )
-                .then(() => navigate('/'))
-                .catch((e) => console.error(e.message));
-        } else console.error('Please, fill up all fields');
+            try {
+                dispatch(
+                    login({
+                        email: email.value,
+                        password: password.value,
+                    })
+                );
+
+                if (!!error) navigate('/');
+            } catch (e: any) {
+                toast(e);
+            }
+        } else toast('Please, fill up all fields');
     };
 
     return (

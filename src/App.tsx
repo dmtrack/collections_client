@@ -15,6 +15,11 @@ import { ScrollToTop } from './utils/scrollToTop';
 import ItemPage from './scenes/itemDetailsPage/Itempage';
 import NotfoundPage from './components/NotfoundPage';
 import { Layout } from './components/Layout';
+import UserEdit from './scenes/userPage/UserEdit';
+import CreateCollection from './scenes/collection/CreateCollection';
+import EditCollection from './scenes/collection/EditCollection';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -43,12 +48,33 @@ const App: React.FC = () => {
                     />
                     <Route path='item/:itemId/' element={<ItemPage />} />
                     <Route path='user/:userId' element={<UserPage />} />
+                    <Route path='user/:userId/edit' element={<UserEdit />} />
+                    <Route
+                        path='collection/create'
+                        element={<CreateCollection />}
+                    />{' '}
+                    <Route
+                        path='collection/:collectionId/edit'
+                        element={<EditCollection />}
+                    />
                     <Route path='login/:type?' element={<Login />} />
                     <Route path='admin' element={<AdminPanel />} />
                     <Route path='logout' element={<LogOut />} />
                     <Route path='*' element={<NotfoundPage />} />
                 </Route>
             </Routes>
+            <ToastContainer
+                position='bottom-right'
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='dark'
+            />
         </Suspense>
     );
 };

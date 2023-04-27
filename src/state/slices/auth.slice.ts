@@ -41,6 +41,9 @@ export const authSlice = createSlice({
         userLoggedOut(state) {
             state.isAuth = false;
             state.userId = 0;
+            state.access.access = 'user';
+            state.avatarUrl = '';
+            state.error = '';
         },
     },
 });
