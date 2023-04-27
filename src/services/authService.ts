@@ -1,8 +1,8 @@
 import { AuthorizationError } from './../models/errors/AuthorizationError';
 import { IAuthData, ILoginData } from '../models/response/authResponse';
-import { axiosGet, axiosPost } from '../api/axios/apiClient';
+import { axiosGet, axiosPost, axiosUpdate } from '../api/axios/apiClient';
 import { DataBaseError } from '../models/errors/DataBaseError';
-import { IGetUsersResponse } from '../models/IUser';
+import { IGetUserResponse } from '../models/IUser';
 import { IUserAuthResponse } from '../models/response/authResponse';
 
 export default class AuthService {
@@ -25,12 +25,5 @@ export default class AuthService {
             '/user/reconnect',
             { id }
         );
-    }
-
-    static async getAllUsers() {
-        return axiosGet<
-            AuthorizationError | DataBaseError,
-            IGetUsersResponse[]
-        >('/user/getusers');
     }
 }

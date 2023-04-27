@@ -21,6 +21,7 @@ const Navbar = () => {
     const { isAuth } = useAppSelector((state) => state.auth);
     const { access } = useAppSelector((state) => state.auth.access);
     const isNonMobile = useMediaQuery('(min-width:600px)');
+    const { userId } = useAppSelector((state) => state.auth);
 
     return (
         <Box
@@ -81,7 +82,7 @@ const Navbar = () => {
                             </IconButton>
                         </NavLink>
                     ) : (
-                        <NavLink to='user/:userId'>
+                        <NavLink to={`user/${userId}`}>
                             <IconButton sx={{ color: 'black' }}>
                                 <Person />
                             </IconButton>

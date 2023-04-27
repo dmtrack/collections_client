@@ -19,30 +19,34 @@ export const userSlice = createSlice({
             state.usersLoading = false;
             state.users = action.payload;
         },
+        // fetchUserSuccess(state, action: PayloadAction<IUser> ){
+        //     state.usersLoading = false
+        // },
         fetchError(state, action: PayloadAction<Error>) {
             state.usersLoading = false;
             state.error = action.payload.message + ': ' + action.payload?.cause;
         },
         deleteUser(state, action: PayloadAction<DeleteUserProp>) {
-            action.payload.forEach((id) => {
+            action.payload.userId.forEach((id: number) => {
                 state.users = state.users.filter(
-                    (user) => user.id !== Number(id)
+                    (user) => Number(user.id) !== id
                 );
             });
         },
         toggleBlockState(state, action: PayloadAction<DeleteUserProp>) {
-            action.payload.forEach((id) => {
+            action.payload.userId.forEach((id: number) => {
                 state.users.forEach((user) => {
-                    if (user.id === Number(id)) {
+                    if (Number(user.id) === id) {
                         user.blocked = true;
                     }
                 });
             });
+            state.error = action.payload.message;
         },
         toggleUnBlockState(state, action: PayloadAction<DeleteUserProp>) {
-            action.payload.forEach((id) => {
+            action.payload.userId.forEach((id) => {
                 state.users.forEach((user) => {
-                    if (user.id === Number(id)) {
+                    if (Number(user.id) === id) {
                         user.blocked = false;
                     }
                 });

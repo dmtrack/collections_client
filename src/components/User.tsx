@@ -19,6 +19,7 @@ function User({ user, dataId, setDataId }: IUserProps) {
             setDataId(idCollection);
         } else {
             const idCollection = [...dataId];
+
             idCollection.push(id);
             setDataId(idCollection);
         }
@@ -32,7 +33,7 @@ function User({ user, dataId, setDataId }: IUserProps) {
                         type='checkbox'
                         value={id}
                         id={String(id)}
-                        checked={dataId.includes(id) ? true : false}
+                        checked={dataId.includes(Number(id)) ? true : false}
                         onChange={chooseCheckbox}
                     />
                 </td>

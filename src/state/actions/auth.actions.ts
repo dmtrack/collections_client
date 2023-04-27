@@ -1,8 +1,11 @@
+import { IUserAuthResponse } from './../../models/response/authResponse';
 import { authSlice } from '../slices/auth.slice';
 import { AppDispatch } from '..';
 import { IAuthData, ILoginData } from '../../models/response/authResponse';
 import localStorageService from '../../services/localStorageService';
 import AuthService from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 
 export const register = (data: IAuthData) => {
     return async (dispatch: AppDispatch) => {

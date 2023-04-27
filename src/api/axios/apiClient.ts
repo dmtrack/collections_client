@@ -49,7 +49,7 @@ export const axiosDelete: IAxiosDelete = async (url, config: any) => {
 
 export const axiosUpdate: IAxiosUpdate = async (url, data, config: any) => {
     try {
-        return right(await api.patch(url, data, config));
+        return right(await api.put(url, data, config));
     } catch (e) {
         return left(e as AxiosError<any>);
     }

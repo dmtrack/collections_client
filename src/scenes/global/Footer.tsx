@@ -7,7 +7,7 @@ const Footer = () => {
         palette: { neutral },
     } = useTheme();
     return (
-        <Box mt='70px' p='40px 0' sx={{ backgroundColor: neutral.light }}>
+        <Box mt='64px' p='24px 0' sx={{ backgroundColor: neutral.light }}>
             <Box
                 width='80%'
                 margin='auto'
@@ -15,12 +15,12 @@ const Footer = () => {
                 justifyContent='space-between'
                 flexWrap='wrap'
                 rowGap='20px'
-                columnGap='clamp(20px, 30px, 40px)'>
+                columnGap='clamp(16px, 32px, 48px)'>
                 <Box width='clamp(20%, 30%, 40%)'>
                     <Typography
                         variant='h6'
                         fontWeight='bold'
-                        mb='10px'
+                        mb='12px'
                         color={shades.secondary[500]}>
                         Collections
                     </Typography>
@@ -42,10 +42,10 @@ const Footer = () => {
                     <Typography mb='30px'>Returns & refunds</Typography>
                 </Box> */}
                 <Box width='clamp(20%, 25%, 40%)'>
-                    <Typography variant='h6' fontWeight='bold' mb='10px'>
+                    <Typography variant='h6' fontWeight='bold' mb='12px'>
                         Contacts
                     </Typography>
-                    <Typography mb='10px'>
+                    <Typography mb='12px'>
                         <a href='https://t.me/dmtrack'>@dmtrack</a>
                     </Typography>
                     {/* <Typography mb='10px'>
@@ -53,7 +53,7 @@ const Footer = () => {
                             dmtrack.dev@gmail.com
                         </a>
                     </Typography> */}
-                    <Typography mb='10px'>
+                    <Typography mb='12px'>
                         {' '}
                         <a href='https://github.com/dmtrack'>GitHub</a>
                     </Typography>
