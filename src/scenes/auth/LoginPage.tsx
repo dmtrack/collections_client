@@ -32,45 +32,42 @@ const LoginPage: FC = () => {
 
     return (
         <form
-            className="container pt-10 mt-40
-             text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]"
-            onSubmit={submitHandler}
-        >
-            <div className="">
-                <label className="block" htmlFor="email">
+            className='container pt-10 mt-40
+             text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]'
+            onSubmit={submitHandler}>
+            <div className=''>
+                <label className='block' htmlFor='email'>
                     {t('auth:email')}
                 </label>
                 <input
-                    className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                    type="text"
+                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
+                    type='text'
                     {...email}
-                    id="email"
+                    id='email'
                 />
-                <label className="block" htmlFor="password">
+                <label className='block' htmlFor='password'>
                     {t('auth:password')}
                 </label>
                 <input
-                    className="border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                    type="password"
+                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
+                    type='password'
                     {...password}
-                    id="password"
+                    id='password'
                 />
                 {error && (
                     <p
-                        className="pt-5
-             text-sm text-left text-red-500 dark:text-red-400 mx-auto"
-                    >
+                        className='pt-5
+             text-sm text-left text-red-500 dark:text-red-400 mx-auto'>
                         {error}
                     </p>
                 )}
 
-                <div className="py-4">
+                <div className='py-4'>
                     <Button
                         onClick={() => submitHandler}
-                        variant="info"
-                        size="sm"
-                        type="submit"
-                    >
+                        variant='info'
+                        size='sm'
+                        type='submit'>
                         {t('buttonsubmit')}
                     </Button>
                 </div>
