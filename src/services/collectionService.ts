@@ -1,25 +1,38 @@
 import { IUserAuthResponse } from '../models/response/authResponse';
 import { Axios, AxiosResponse } from 'axios';
-import api from '../api/axios/apiClient';
-import { ICollection, ICreateCollection } from '../models/ICollection';
+import api, { axiosGet } from '../api/axios/apiClient';
+import {
+    ICollection,
+    ICreateCollection,
+    IGetCollectionResponse,
+} from '../models/ICollection';
+import { AuthorizationError } from '../models/errors/AuthorizationError';
+import { DataBaseError } from '../models/errors/DataBaseError';
 
 export default class collectionService {
-    static fetchCollections(): Promise<AxiosResponse> {
-        return api.get<ICollection[]>('collection/getcollections');
+    static async getCollections() {
+        return axiosGet<
+            AuthorizationError | DataBaseError,
+            IGetCollectionResponse[]
+        >(`collection/getcollections/`);
     }
 
-    static fetchTopAmountOfItemsCollections(): Promise<AxiosResponse> {
-        return api.get<ICollection[]>('collection/topamountofitems');
+    static async getUserCollections(userId: number) {
+        return axiosGet<
+            AuthorizationError | DataBaseError,
+            IGetCollectionResponse[]
+        >(`collection/getusercollections/${userId}`);
+    }
+
+    static async getTopAmountCollections() {
+        return axiosGet<
+            AuthorizationError | DataBaseError,
+            IGetCollectionResponse[]
+        >(`collection/topamountofitems/`);
     }
 
     static createCollection(): Promise<AxiosResponse> {
         return api.post<ICreateCollection>('collection/create');
-    }
-
-    static getUserCollections(userId: number): Promise<AxiosResponse> {
-        return api.get<ICollection[]>(
-            `collection/getusercollections/:${userId}`
-        );
     }
 
     static getOneCollection(id: number): Promise<AxiosResponse> {

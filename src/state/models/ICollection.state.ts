@@ -2,8 +2,11 @@ import { ICollection } from '../../models/ICollection';
 
 export interface ICollectionState {
     collectionsLoading: boolean;
+    collectionsUserLoading: boolean;
+    collectionsTopAmountLoading: boolean;
     collections: ICollection[];
-    topAmount: ICollection[];
+    topAmountCollections: ICollection[];
+    userCollections: ICollection[];
     error: string;
 }
 

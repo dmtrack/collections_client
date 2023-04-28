@@ -20,6 +20,10 @@ import { AdminPanel } from './scenes/adminPanel/AdminPanel';
 import Login from './scenes/auth/Login';
 import LogOut from './components/LogOut';
 import 'react-toastify/dist/ReactToastify.css';
+import {
+    fetchCollections,
+    fetchTopAmountCollections,
+} from './state/actions/collections.actions';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -45,6 +49,11 @@ const App: React.FC = () => {
     useEffect(() => {
         if (isAuth && userId) dispatch(reconnect(userId));
     }, [isAuth]);
+
+    useEffect(() => {
+        dispatch(fetchCollections());
+        dispatch(fetchTopAmountCollections());
+    }, []);
 
     return (
         <div className='app'>
