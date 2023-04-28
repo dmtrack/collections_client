@@ -5,11 +5,11 @@ import Footer from '../scenes/global/Footer';
 const Layout = () => {
     return (
         <>
-            <Navbar />
             <div className='app'>
+                <Navbar />
                 <Outlet />
+                <Footer />
             </div>
-            <Footer />
         </>
     );
 };

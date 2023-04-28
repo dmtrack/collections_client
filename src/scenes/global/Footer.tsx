@@ -7,7 +7,15 @@ const Footer = () => {
         palette: { neutral },
     } = useTheme();
     return (
-        <Box mt='64px' p='24px 0' sx={{ backgroundColor: neutral.light }}>
+        <Box
+            mt='64px'
+            p='24px 0'
+            sx={{
+                backgroundColor: neutral.light,
+                position: 'fixed',
+                bottom: '0',
+                width: '100%',
+            }}>
             <Box
                 width='80%'
                 margin='auto'
