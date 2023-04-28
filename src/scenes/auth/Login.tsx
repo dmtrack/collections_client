@@ -5,6 +5,7 @@ import { LoginPage } from './LoginPage';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box } from '@mui/material';
 
 const Login = () => {
     const { t, i18n } = useTranslation(['common', 'auth']);
@@ -20,7 +21,7 @@ const Login = () => {
     };
 
     return (
-        <div>
+        <Box>
             {formType === 'register' ? (
                 <>
                     <RegistrationPage />
@@ -50,7 +51,7 @@ const Login = () => {
                     </p>
                 </>
             )}
-        </div>
+        </Box>
     );
 };
 
