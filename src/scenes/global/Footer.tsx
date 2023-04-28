@@ -7,7 +7,15 @@ const Footer = () => {
         palette: { neutral },
     } = useTheme();
     return (
-        <Box mt='64px' p='24px 0' sx={{ backgroundColor: neutral.light }}>
+        <Box
+            mt='64px'
+            p='24px 0'
+            sx={{
+                backgroundColor: neutral.light,
+                position: 'fixed',
+                bottom: '0',
+                width: '100%',
+            }}>
             <Box
                 width='80%'
                 margin='auto'
@@ -17,11 +25,7 @@ const Footer = () => {
                 rowGap='20px'
                 columnGap='clamp(16px, 32px, 48px)'>
                 <Box width='clamp(20%, 30%, 40%)'>
-                    <Typography
-                        variant='h6'
-                        fontWeight='bold'
-                        mb='12px'
-                        color={shades.secondary[500]}>
+                    <Typography variant='h6' fontWeight='bold' mb='12px'>
                         Collections
                     </Typography>
                 </Box>
