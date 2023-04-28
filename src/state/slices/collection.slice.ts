@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICollection } from '../../models/ICollection';
+import { ICollection, IGetCollectionResponse } from '../../models/ICollection';
 import {
     DeleteCollection,
     ICollectionState,
@@ -7,9 +7,12 @@ import {
 
 const initialState: ICollectionState = {
     collectionsLoading: false,
+    collectionsUserLoading: false,
+    collectionsTopAmountLoading: false,
     error: '',
     collections: [],
-    topAmount: [],
+    topAmountCollections: [],
+    userCollections: [],
 };
 
 export const collectionSlice = createSlice({
@@ -19,16 +22,32 @@ export const collectionSlice = createSlice({
         fetchingCollections: (state) => {
             state.collectionsLoading = true;
         },
-        fetchSuccess: (state, action: PayloadAction<ICollection[]>) => {
+        fetchingUsersCollections: (state) => {
+            state.collectionsUserLoading = true;
+        },
+        fetchingTopAmountCollections: (state) => {
+            state.collectionsTopAmountLoading = true;
+        },
+        fetchCollectionsSuccess: (
+            state,
+            action: PayloadAction<IGetCollectionResponse[]>
+        ) => {
             state.collectionsLoading = false;
             state.collections = action.payload;
+        },
+        fetchCollectionsUserSuccess: (
+            state,
+            action: PayloadAction<IGetCollectionResponse[]>
+        ) => {
+            state.collectionsUserLoading = false;
+            state.userCollections = action.payload;
         },
         fetchTopAmountSuccess: (
             state,
             action: PayloadAction<ICollection[]>
         ) => {
-            state.collectionsLoading = false;
-            state.topAmount = action.payload;
+            state.collectionsTopAmountLoading = false;
+            state.topAmountCollections = action.payload;
         },
         fetchError: (state, action: PayloadAction<Error>) => {
             state.collectionsLoading = false;
