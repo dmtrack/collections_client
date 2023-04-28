@@ -25,11 +25,7 @@ const Footer = () => {
                 rowGap='20px'
                 columnGap='clamp(16px, 32px, 48px)'>
                 <Box width='clamp(20%, 30%, 40%)'>
-                    <Typography
-                        variant='h6'
-                        fontWeight='bold'
-                        mb='12px'
-                        color={shades.secondary[500]}>
+                    <Typography variant='h6' fontWeight='bold' mb='12px'>
                         Collections
                     </Typography>
                 </Box>
