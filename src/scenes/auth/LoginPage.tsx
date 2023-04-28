@@ -28,7 +28,9 @@ const LoginPage: FC = () => {
                     })
                 );
 
-                if (!!error) navigate('/');
+                if (!!error) {
+                    navigate('/');
+                }
             } catch (e: any) {
                 toast(e);
             }

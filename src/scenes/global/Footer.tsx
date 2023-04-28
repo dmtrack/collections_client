@@ -5,12 +5,13 @@ import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
     const { pathname } = useLocation();
+    console.log(pathname);
     const {
         palette: { neutral },
     } = useTheme();
     return (
         <>
-            {pathname === '/admin' || '/login' ? null : (
+            {pathname === '/admin' || pathname === '/login' ? null : (
                 <Box
                     mt='64px'
                     p='24px 0'
