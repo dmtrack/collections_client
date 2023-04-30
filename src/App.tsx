@@ -6,7 +6,7 @@ import { reconnect } from './state/actions/auth.actions';
 import localStorageService from './services/localStorageService';
 import { useTranslation } from 'react-i18next';
 import Home from './scenes/home/Home';
-import UserPage from './scenes/userPage/userPage';
+import UserPage from './scenes/userPage/UserPage';
 import ItemPage from './scenes/itemDetailsPage/Itempage';
 import NotfoundPage from './components/NotfoundPage';
 import UserEdit from './scenes/userPage/UserEdit';
@@ -23,7 +23,7 @@ import {
     fetchCollections,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
-import CollectionPage from './scenes/collection/collectionPage';
+import CollectionPage from './scenes/collection/CollectionPage';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();

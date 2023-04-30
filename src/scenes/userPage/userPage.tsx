@@ -20,9 +20,10 @@ import IconButton from '@mui/material/IconButton';
 import ModeIcon from '@mui/icons-material/Mode';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import CollectionCard from '../collection/CollectionCard';
+import EmptyContainer from './EmptyContainer';
 
 const UserPage = () => {
-    const { t } = useTranslation(['user_page']);
+    const { t } = useTranslation('translation');
     const dispatch = useAppDispatch();
     const { userId } = useParams();
     const [value, setValue] = useState('collections');
@@ -37,6 +38,7 @@ const UserPage = () => {
 
     useEffect(() => {
         getOneUser(Number(userId), setUser);
+        // dispatch(setCollectionsEmpty);
         dispatch(fetchUserCollections(Number(userId)));
     }, [userId]);
 
@@ -120,37 +122,32 @@ const UserPage = () => {
                 </Box>
 
                 {/* RELATED ITEMS */}
-                {value === 'collections' && (
-                    <Box mt='48px' width='100%'>
-                        {/* <Typography
-                            variant='h4'
-                            textAlign='left'
-                            color={shades.secondary[800]}
-                            sx={{
-                                letterSpacing: '-0.5px',
-                                fontWeight: '600',
-                                paddingLeft: isNonMobile ? '0px' : '64px',
-                            }}>
-                            My collections
-                        </Typography> */}
-                        <Box
-                            margin='0 auto'
-                            display='grid'
-                            gridTemplateColumns='repeat(auto-fill, 300px)'
-                            justifyContent='space-around'
-                            rowGap='16px'
-                            columnGap='1.33%'>
-                            {userCollections
-                                .slice(0, 4)
-                                .map((collection, i) => (
-                                    <CollectionCard
-                                        key={`${collection.name}-${i}`}
-                                        collection={collection}
-                                    />
-                                ))}
+                {value === 'collections' &&
+                    (userCollections && userCollections.length > 0 ? (
+                        <Box mt='48px' width='100%'>
+                            <Box
+                                margin='0 auto'
+                                display='grid'
+                                gridTemplateColumns='repeat(auto-fill, 300px)'
+                                justifyContent='space-around'
+                                rowGap='16px'
+                                columnGap='1.33%'>
+                                {userCollections
+                                    .slice(0, 4)
+                                    .map((collection, i) => (
+                                        <CollectionCard
+                                            key={`${collection.name}-${i}`}
+                                            collection={collection}
+                                        />
+                                    ))}
+                            </Box>
                         </Box>
-                    </Box>
-                )}
+                    ) : (
+                        <EmptyContainer
+                            title={t('collections.empty')}
+                            text={t('collections.emptyAndLoggedIn')}
+                        />
+                    ))}
 
                 {value === 'stats' && (
                     <Box mt='48px' width='100%' height='calc(100vh - 755px)'>

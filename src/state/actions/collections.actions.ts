@@ -69,3 +69,9 @@ export const fetchTopAmountCollections = () => {
             });
     };
 };
+
+// export const setCollectionsEmpty = () => {
+//     return async (dispatch: AppDispatch) => {
+//         dispatch(collectionSlice.actions.setUserCollectionsEmpty([]));
+//     };
+// };
