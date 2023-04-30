@@ -22,7 +22,7 @@ import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import CollectionCard from '../collection/CollectionCard';
 import EmptyContainer from './EmptyContainer';
 
-const UserPage = () => {
+const UserProfile = () => {
     const { t } = useTranslation('translation');
     const dispatch = useAppDispatch();
     const { userId } = useParams();
@@ -75,19 +75,27 @@ const UserPage = () => {
                         justifyContent='start'
                         display='flex'
                         gap='16px'
-                        ml={isNonMobile ? '32px' : '4px'}>
-                        <IconButton
-                            sx={{ color: `${shades.secondary[800]}` }}
-                            onClick={goBack}>
-                            <Tooltip title='Go back'>
-                                <FastRewindSharp />
-                            </Tooltip>
-                        </IconButton>{' '}
+                        ml={isNonMobile ? '32px' : '16px'}>
+                        {isNonMobile ? (
+                            <IconButton
+                                sx={{ color: `${shades.secondary[800]}` }}
+                                onClick={goBack}>
+                                <Tooltip title='Go back'>
+                                    <FastRewindSharp
+                                        fontSize={
+                                            isNonMobile ? 'medium' : 'large'
+                                        }
+                                    />
+                                </Tooltip>
+                            </IconButton>
+                        ) : null}
                         <IconButton
                             sx={{ color: `${shades.secondary[800]}` }}
                             onClick={goHome}>
                             <Tooltip title='Home'>
-                                <HomeSharpIcon />
+                                <HomeSharpIcon
+                                    fontSize={isNonMobile ? 'medium' : 'large'}
+                                />
                             </Tooltip>
                         </IconButton>{' '}
                         <Tooltip title='Edit user'>
@@ -96,7 +104,11 @@ const UserPage = () => {
                                 <IconButton
                                     sx={{ color: `${shades.secondary[800]}` }}
                                     onClick={goBack}>
-                                    <ModeIcon />
+                                    <ModeIcon
+                                        fontSize={
+                                            isNonMobile ? 'medium' : 'large'
+                                        }
+                                    />
                                 </IconButton>
                             </Link>
                         </Tooltip>
@@ -128,7 +140,7 @@ const UserPage = () => {
                 {/* RELATED ITEMS */}
                 {value === 'collections' &&
                     (userCollections && userCollections.length > 0 ? (
-                        <Box mt='24px' width='100%'>
+                        <Box mt={isNonMobile ? '8px' : '16px'} width='100%'>
                             <Box
                                 margin='0 auto'
                                 display='grid'
@@ -154,7 +166,10 @@ const UserPage = () => {
                     ))}
 
                 {value === 'stats' && (
-                    <Box mt='24px' width='100%' height='100%'>
+                    <Box
+                        mt={isNonMobile ? '8px' : '16px'}
+                        width='100%'
+                        height='100%'>
                         Stats
                     </Box>
                 )}
@@ -163,4 +178,4 @@ const UserPage = () => {
     );
 };
 
-export default UserPage;
+export default UserProfile;
