@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router-dom';
 
-const CollectionPage = () => {
+const Collection = () => {
     const { collectionId } = useParams();
     const { t } = useTranslation(['collection_page']);
 
@@ -13,4 +13,4 @@ const CollectionPage = () => {
     );
 };
 
-export default CollectionPage;
+export default Collection;
