@@ -11,6 +11,8 @@ import {
     LoginOutlined,
     GroupTwoTone,
 } from '@mui/icons-material';
+import Tooltip from '@mui/material/Tooltip';
+import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
 import { shades } from '../../theme';
 import { NavLink } from 'react-router-dom';
@@ -59,45 +61,61 @@ const Navbar = () => {
                     justifyContent='space-between'
                     columnGap='20px'
                     zIndex='2'>
-                    <IconButton sx={{ color: 'black' }}>
+                    <IconButton sx={{ color: `${shades.secondary[800]}` }}>
                         <SearchOutlined />
                     </IconButton>
-                    <IconButton sx={{ color: 'black' }}>
-                        <NightlightOutlined />
-                    </IconButton>
-                    <IconButton sx={{ color: 'black' }}>
-                        <LanguageOutlined />
-                    </IconButton>
+                    <Tooltip title='Light mode'>
+                        <IconButton sx={{ color: `${shades.secondary[800]}` }}>
+                            <NightlightOutlined />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title='Switch to EN'>
+                        <IconButton sx={{ color: `${shades.secondary[800]}` }}>
+                            <LanguageOutlined />
+                        </IconButton>
+                    </Tooltip>
                     {access === 'admin' && isAuth ? (
                         <NavLink to='admin'>
-                            <IconButton sx={{ color: 'black' }}>
-                                <GroupTwoTone />
-                            </IconButton>
+                            <Tooltip title='Admin panel'>
+                                <IconButton
+                                    sx={{ color: `${shades.secondary[800]}` }}>
+                                    <GroupTwoTone />
+                                </IconButton>
+                            </Tooltip>
                         </NavLink>
                     ) : null}
                     {!isAuth ? (
                         <NavLink to='login'>
-                            <IconButton sx={{ color: 'black' }}>
-                                <PersonOutline />
-                            </IconButton>
+                            <Tooltip title='Login'>
+                                <IconButton
+                                    sx={{ color: `${shades.secondary[800]}` }}>
+                                    <PersonOutline />
+                                </IconButton>
+                            </Tooltip>
                         </NavLink>
                     ) : (
                         <NavLink to={`user/${userId}`}>
-                            <IconButton sx={{ color: 'black' }}>
-                                <Person />
-                            </IconButton>
+                            <Tooltip title='Profile'>
+                                <IconButton
+                                    sx={{ color: `${shades.secondary[800]}` }}>
+                                    <Person />
+                                </IconButton>
+                            </Tooltip>
                         </NavLink>
                     )}
 
                     {isAuth ? (
                         <NavLink to='logout'>
-                            <IconButton sx={{ color: 'black' }}>
-                                <LoginOutlined />
-                            </IconButton>
+                            <Tooltip title='Logout'>
+                                <IconButton
+                                    sx={{ color: `${shades.secondary[800]}` }}>
+                                    <LoginOutlined />
+                                </IconButton>
+                            </Tooltip>
                         </NavLink>
                     ) : null}
 
-                    <IconButton sx={{ color: 'black' }}>
+                    <IconButton sx={{ color: `${shades.secondary[800]}` }}>
                         <MenuOutlined />
                     </IconButton>
                 </Box>
