@@ -35,6 +35,10 @@ export const collectionSlice = createSlice({
             state.collectionsLoading = false;
             state.collections = action.payload;
         },
+        // setUserCollectionsEmpty: (state, action) => {
+        //     state.userCollections = action.payload;
+        // },
+
         fetchCollectionsUserSuccess: (
             state,
             action: PayloadAction<IGetCollectionResponse[]>
