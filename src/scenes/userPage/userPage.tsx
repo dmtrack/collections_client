@@ -49,35 +49,9 @@ const UserPage = () => {
     return (
         <>
             <Box width='80%' m='80px auto'>
-                <Box justifyContent='start' display='flex' gap='16px' mb='32px'>
-                    <IconButton
-                        sx={{ color: `${shades.secondary[800]}` }}
-                        onClick={goBack}>
-                        <Tooltip TransitionComponent={Zoom} title='Go back'>
-                            <FastRewindSharp />
-                        </Tooltip>
-                    </IconButton>{' '}
-                    <IconButton
-                        sx={{ color: `${shades.secondary[800]}` }}
-                        onClick={goHome}>
-                        <Tooltip TransitionComponent={Zoom} title='Home'>
-                            <HomeSharpIcon />
-                        </Tooltip>
-                    </IconButton>{' '}
-                    <Tooltip TransitionComponent={Zoom} title='Edit user'>
-                        <Link to={`/user/${userId}/edit`}>
-                            {' '}
-                            <IconButton
-                                sx={{ color: `${shades.secondary[800]}` }}
-                                onClick={goBack}>
-                                <ModeIcon />
-                            </IconButton>
-                        </Link>
-                    </Tooltip>
-                </Box>
                 <Box display='flex' flexWrap='wrap' columnGap='16px'>
                     {/* IMAGES */}
-                    <Box flex='1 1 40%' mb='48px' borderRadius='15px'>
+                    <Box flex='1 1 40%' mb='24px' borderRadius='15px'>
                         <img
                             alt={user?.name}
                             src={user?.avatarUrl}
@@ -94,8 +68,38 @@ const UserPage = () => {
                     <Box flex='5 1 50%' mb='32px'>
                         <Box m='0px 0 24px 0'>
                             <Typography variant='h3'>{user?.name}</Typography>
-                            <Typography>${user?.email}</Typography>
+                            <Typography>{user?.email}</Typography>
                         </Box>
+                    </Box>
+                    <Box
+                        justifyContent='start'
+                        display='flex'
+                        gap='16px'
+                        ml='32px'>
+                        <IconButton
+                            sx={{ color: `${shades.secondary[800]}` }}
+                            onClick={goBack}>
+                            <Tooltip title='Go back'>
+                                <FastRewindSharp />
+                            </Tooltip>
+                        </IconButton>{' '}
+                        <IconButton
+                            sx={{ color: `${shades.secondary[800]}` }}
+                            onClick={goHome}>
+                            <Tooltip title='Home'>
+                                <HomeSharpIcon />
+                            </Tooltip>
+                        </IconButton>{' '}
+                        <Tooltip title='Edit user'>
+                            <Link to={`/user/${userId}/edit`}>
+                                {' '}
+                                <IconButton
+                                    sx={{ color: `${shades.secondary[800]}` }}
+                                    onClick={goBack}>
+                                    <ModeIcon />
+                                </IconButton>
+                            </Link>
+                        </Tooltip>
                     </Box>
                 </Box>
 

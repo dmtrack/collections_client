@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from '../i18nOLD';
+import i18n from '../languages/i18n';
 
 const Language = (): JSX.Element => {
     const language = localStorage.getItem('i18nextLng') || 'en';

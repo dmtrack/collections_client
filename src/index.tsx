@@ -4,7 +4,7 @@ import './tailwind.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import { setupStore } from './state';
-import './i18nOLD';
+import './languages/i18n';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { theme } from './theme';
