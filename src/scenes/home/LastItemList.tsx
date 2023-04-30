@@ -76,7 +76,7 @@ const LastItemList = () => {
                         display='grid'
                         gridTemplateColumns='repeat(auto-fill, 300px)'
                         justifyContent='space-around'
-                        rowGap='20px'
+                        rowGap='16px'
                         columnGap='1.33%'>
                         {value === 'newItems' &&
                             items

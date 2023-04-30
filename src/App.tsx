@@ -6,7 +6,7 @@ import { reconnect } from './state/actions/auth.actions';
 import localStorageService from './services/localStorageService';
 import { useTranslation } from 'react-i18next';
 import Home from './scenes/home/Home';
-import Collection from './scenes/collection/collectionPage';
+import Collection from './scenes/collection/CollectionPage';
 import UserPage from './scenes/userPage/userPage';
 import ItemPage from './scenes/itemDetailsPage/Itempage';
 import NotfoundPage from './components/NotfoundPage';
