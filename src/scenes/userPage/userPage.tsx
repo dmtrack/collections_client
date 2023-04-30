@@ -77,9 +77,9 @@ const UserPage = () => {
                         </Link>
                     </Tooltip>
                 </Box>
-                <Box display='flex' flexWrap='wrap' columnGap='32px'>
+                <Box display='flex' flexWrap='wrap' columnGap='16px'>
                     {/* IMAGES */}
-                    <Box flex='1 1 40%' mb='32px' borderRadius='15px'>
+                    <Box flex='1 1 40%' mb='48px' borderRadius='15px'>
                         <img
                             alt={user?.name}
                             src={user?.avatarUrl}
@@ -93,8 +93,8 @@ const UserPage = () => {
                     </Box>
 
                     {/* ACTIONS */}
-                    <Box flex='1 1 50%' mb='32px'>
-                        <Box m='64px 0 24px 0'>
+                    <Box flex='5 1 50%' mb='32px'>
+                        <Box m='0px 0 24px 0'>
                             <Typography variant='h3'>{user?.name}</Typography>
                             <Typography>${user?.email}</Typography>
                         </Box>
