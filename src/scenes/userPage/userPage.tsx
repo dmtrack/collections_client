@@ -1,14 +1,11 @@
 import {
     Box,
-    useTheme,
-    Button,
     useMediaQuery,
     Tab,
     Tabs,
     Typography,
     Tooltip,
     Zoom,
-    Fade,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +14,6 @@ import { shades } from '../../theme';
 import { IUser } from '../../models/IUser';
 import getOneUser from '../../utils/getOneUser';
 import { FastRewindSharp } from '@mui/icons-material';
-
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { fetchUserCollections } from '../../state/actions/collections.actions';
 import IconButton from '@mui/material/IconButton';
