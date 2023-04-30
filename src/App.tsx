@@ -22,8 +22,8 @@ import {
     fetchCollections,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
-import UserPage from './scenes/userPage/UserPage';
 import CollectionPage from './scenes/collection/CollectionPage';
+import UserProfile from './scenes/userPage/UserProfile';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -68,7 +68,7 @@ const App: React.FC = () => {
                             element={<CollectionPage />}
                         />
                         <Route path='item/:itemId/' element={<ItemPage />} />
-                        <Route path='user/:userId' element={<UserPage />} />
+                        <Route path='user/:userId' element={<UserProfile />} />
                         <Route
                             path='user/:userId/edit'
                             element={<UserEdit />}
