@@ -6,7 +6,6 @@ import { reconnect } from './state/actions/auth.actions';
 import localStorageService from './services/localStorageService';
 import { useTranslation } from 'react-i18next';
 import Home from './scenes/home/Home';
-import Collection from './scenes/collection/CollectionPage';
 import UserPage from './scenes/userPage/userPage';
 import ItemPage from './scenes/itemDetailsPage/Itempage';
 import NotfoundPage from './components/NotfoundPage';
@@ -24,6 +23,7 @@ import {
     fetchCollections,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
+import CollectionPage from './scenes/collection/collectionPage';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -65,7 +65,7 @@ const App: React.FC = () => {
                         <Route path='/' element={<Home />} />
                         <Route
                             path='collection/:collectionId'
-                            element={<Collection />}
+                            element={<CollectionPage />}
                         />
                         <Route path='item/:itemId/' element={<ItemPage />} />
                         <Route path='user/:userId' element={<UserPage />} />
