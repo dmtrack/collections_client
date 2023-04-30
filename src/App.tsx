@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import './i18n';
+import '../src/languages/i18n';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './hook/redux';
 import { reconnect } from './state/actions/auth.actions';

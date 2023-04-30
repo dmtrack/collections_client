@@ -1,5 +1,5 @@
 import React from 'react';
-import i18n from '../i18n';
+import i18n from '../i18nOLD';
 
 const Language = (): JSX.Element => {
     const language = localStorage.getItem('i18nextLng') || 'en';
@@ -9,8 +9,8 @@ const Language = (): JSX.Element => {
 
     return (
         <select value={language} onChange={handleLanguageChange}>
-            <option value="en">en</option>
-            <option value="ru">ru</option>
+            <option value='en'>en</option>
+            <option value='ru'>ru</option>
         </select>
     );
 };
