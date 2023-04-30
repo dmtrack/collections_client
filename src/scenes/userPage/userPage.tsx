@@ -150,7 +150,7 @@ const UserPage = () => {
                     ))}
 
                 {value === 'stats' && (
-                    <Box mt='48px' width='100%' height='calc(100vh - 755px)'>
+                    <Box mt='48px' width='100%' height='100%'>
                         Stats
                     </Box>
                 )}
