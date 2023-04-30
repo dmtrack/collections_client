@@ -75,7 +75,7 @@ const UserPage = () => {
                         justifyContent='start'
                         display='flex'
                         gap='16px'
-                        ml='32px'>
+                        ml={isNonMobile ? '32px' : '4px'}>
                         <IconButton
                             sx={{ color: `${shades.secondary[800]}` }}
                             onClick={goBack}>
@@ -128,7 +128,7 @@ const UserPage = () => {
                 {/* RELATED ITEMS */}
                 {value === 'collections' &&
                     (userCollections && userCollections.length > 0 ? (
-                        <Box mt='48px' width='100%'>
+                        <Box mt='24px' width='100%'>
                             <Box
                                 margin='0 auto'
                                 display='grid'
@@ -154,7 +154,7 @@ const UserPage = () => {
                     ))}
 
                 {value === 'stats' && (
-                    <Box mt='48px' width='100%' height='100%'>
+                    <Box mt='24px' width='100%' height='100%'>
                         Stats
                     </Box>
                 )}

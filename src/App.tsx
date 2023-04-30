@@ -22,8 +22,8 @@ import {
     fetchCollections,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
-import CollectionPage from './scenes/collection/CollectionPage';
 import UserPage from './scenes/userPage/UserPage';
+import CollectionPage from './scenes/collection/CollectionPage';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
