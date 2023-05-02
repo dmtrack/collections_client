@@ -85,7 +85,7 @@ const UserProfile = () => {
                         justifyContent='start'
                         display='flex'
                         gap='0px'
-                        ml={isNonMobile ? '32px' : '16px'}>
+                        ml={isNonMobile ? '32px' : '8px'}>
                         <Tooltip title='Add collection'>
                             <IconButton
                                 sx={{ color: `${shades.secondary[800]}` }}>
