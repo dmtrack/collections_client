@@ -108,7 +108,11 @@ const LastItemList = () => {
                     </Box>
                 </Box>
             ) : (
-                <Loader />
+                <>
+                    <Box display='flex' justifyContent='center'>
+                        <Loader />
+                    </Box>{' '}
+                </>
             )}
         </>
     );
