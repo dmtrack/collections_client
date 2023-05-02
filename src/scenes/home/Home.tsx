@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hook/redux';
 import MainCarousel from './MainCarousel';
 import LastItemList from './LastItemList';
+import { Box } from '@mui/material';
 
 const Home = () => {
     const { t } = useTranslation(['home']);
@@ -10,7 +11,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     return (
-        <div className='home'>
+        <Box className='home'>
             <MainCarousel />
             <LastItemList />
 
@@ -21,7 +22,7 @@ const Home = () => {
             ) : (
                 navigate('login')
             )} */}
-        </div>
+        </Box>
     );
 };
 
