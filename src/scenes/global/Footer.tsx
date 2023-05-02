@@ -1,10 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material';
 import { shades } from '../../theme';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+
     const {
         palette: { neutral },
     } = useTheme();
@@ -28,12 +30,18 @@ const Footer = () => {
                         rowGap='20px'
                         columnGap='clamp(16px, 32px, 48px)'>
                         <Box width='clamp(20%, 30%, 40%)'>
-                            <Typography
-                                variant='h6'
-                                fontWeight='bold'
-                                mb='12px'>
-                                Collections
-                            </Typography>
+                            <Box
+                                onClick={() => navigate('/')}
+                                sx={{
+                                    '&:hover': { cursor: 'pointer' },
+                                    variant: 'h6',
+                                    letterSpacing: '-0.5px',
+                                    fontWeight: '800',
+                                    fontSize: '20px',
+                                }}
+                                color={shades.secondary[800]}>
+                                The Collections
+                            </Box>
                         </Box>
                         {/* <Box>
                     <Typography variant='h5' fontWeight='bold' mb='30px'>
@@ -53,9 +61,12 @@ const Footer = () => {
                 </Box> */}
                         <Box width='clamp(20%, 25%, 40%)'>
                             <Typography
-                                variant='h6'
                                 fontWeight='bold'
-                                mb='12px'>
+                                mb='12px'
+                                sx={{
+                                    letterSpacing: '-0.5px',
+                                    fontWeight: '600',
+                                }}>
                                 Contacts
                             </Typography>
                             <Typography mb='12px'>
