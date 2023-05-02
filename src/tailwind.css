@@ -33,6 +33,11 @@ body {
     text-align: center;
 }
 
+.user-profile {
+    display: flex;
+    flex-direction: column;
+}
+
 .loading-spinner {
     margin-top: 36px;
     color: #e2e1e1;

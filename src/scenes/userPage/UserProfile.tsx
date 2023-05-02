@@ -48,7 +48,7 @@ const UserProfile = () => {
 
     return (
         <>
-            <Box width='80%' m='80px auto'>
+            <Box width='80%' m='80px auto' className='user-profile'>
                 <Box display='flex' flexWrap='wrap' columnGap='16px'>
                     {/* IMAGES */}
                     <Box flex='1 1 40%' mb='24px' borderRadius='15px'>
@@ -65,7 +65,7 @@ const UserProfile = () => {
                     </Box>
 
                     {/* ACTIONS */}
-                    <Box flex='5 1 50%' mb='32px'>
+                    <Box flex='5 1 50%' mb='16px'>
                         <Box m='0px 0 24px 0'>
                             <Typography variant='h3'>{user?.name}</Typography>
                             <Typography>{user?.email}</Typography>
@@ -74,20 +74,20 @@ const UserProfile = () => {
                     <Box
                         justifyContent='start'
                         display='flex'
-                        gap='16px'
-                        ml={isNonMobile ? '32px' : '16px'}>
+                        gap='0px'
+                        ml={isNonMobile ? '48px' : '16px'}>
                         {isNonMobile ? (
-                            <IconButton
-                                sx={{ color: `${shades.secondary[800]}` }}
-                                onClick={goBack}>
-                                <Tooltip title='Go back'>
+                            <Tooltip title='Go back'>
+                                <IconButton
+                                    sx={{ color: `${shades.secondary[800]}` }}
+                                    onClick={goBack}>
                                     <FastRewindSharp
                                         fontSize={
                                             isNonMobile ? 'medium' : 'large'
                                         }
                                     />
-                                </Tooltip>
-                            </IconButton>
+                                </IconButton>
+                            </Tooltip>
                         ) : null}
                         <IconButton
                             sx={{ color: `${shades.secondary[800]}` }}
@@ -99,80 +99,84 @@ const UserProfile = () => {
                             </Tooltip>
                         </IconButton>{' '}
                         <Tooltip title='Edit user'>
-                            <Link to={`/user/${userId}/edit`}>
-                                {' '}
-                                <IconButton
-                                    sx={{ color: `${shades.secondary[800]}` }}
-                                    onClick={goBack}>
+                            <IconButton
+                                sx={{ color: `${shades.secondary[800]}` }}>
+                                <Link to={`/user/${userId}/edit`}>
+                                    {' '}
                                     <ModeIcon
                                         fontSize={
                                             isNonMobile ? 'medium' : 'large'
                                         }
                                     />
-                                </IconButton>
-                            </Link>
+                                </Link>
+                            </IconButton>
                         </Tooltip>
                     </Box>
                 </Box>
-
-                {/* INFORMATION */}
-                <Box m='20px 0'>
-                    <Tabs
-                        value={value}
-                        onChange={handleChange}
-                        centered
-                        TabIndicatorProps={{
-                            sx: { display: isNonMobile ? 'block' : 'none' },
-                        }}
-                        sx={{
-                            m: '15px',
-                            '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
-                        }}>
-                        <Tab label='MY COLLECTIONS' value='collections' />
-                        <Tab label='STATS' value='stats' />
-                    </Tabs>
-                </Box>
-                <Box display='flex' flexWrap='wrap' gap='16px'>
-                    {value === 'description' && <div>description</div>}
-                    {value === 'reviews' && <div>reviews</div>}
-                </Box>
-
-                {/* RELATED ITEMS */}
-                {value === 'collections' &&
-                    (userCollections && userCollections.length > 0 ? (
-                        <Box mt={isNonMobile ? '8px' : '16px'} width='100%'>
-                            <Box
-                                margin='0 auto'
-                                display='grid'
-                                gridTemplateColumns='repeat(auto-fill, 300px)'
-                                justifyContent='space-around'
-                                rowGap='16px'
-                                columnGap='1.33%'>
-                                {userCollections
-                                    .slice(0, 4)
-                                    .map((collection, i) => (
-                                        <CollectionCard
-                                            key={`${collection.name}-${i}`}
-                                            collection={collection}
-                                        />
-                                    ))}
-                            </Box>
-                        </Box>
-                    ) : (
-                        <EmptyContainer
-                            title={t('collections.empty')}
-                            text={t('collections.emptyAndLoggedIn')}
-                        />
-                    ))}
-
-                {value === 'stats' && (
-                    <Box
-                        mt={isNonMobile ? '8px' : '16px'}
-                        width='100%'
-                        height='100%'>
-                        Stats
+                <Box>
+                    {/* INFORMATION */}
+                    <Box marginTop='32px'>
+                        <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            centered
+                            TabIndicatorProps={{
+                                sx: { display: isNonMobile ? 'block' : 'none' },
+                            }}
+                            sx={{
+                                m: '0px',
+                                '& .MuiTabs-flexContainer': {
+                                    flexWrap: 'wrap',
+                                },
+                            }}>
+                            <Tab label='MY COLLECTIONS' value='collections' />
+                            <Tab label='STATS' value='stats' />
+                        </Tabs>
                     </Box>
-                )}
+                    <Box display='flex' flexWrap='wrap' gap='16px'>
+                        {value === 'description' && <div>description</div>}
+                        {value === 'reviews' && <div>reviews</div>}
+                    </Box>
+
+                    {/* RELATED ITEMS */}
+                    {value === 'collections' &&
+                        (userCollections && userCollections.length > 0 ? (
+                            <Box
+                                mt={isNonMobile ? '32px' : '16px'}
+                                width='100%'>
+                                <Box
+                                    margin='0 auto'
+                                    display='grid'
+                                    gridTemplateColumns='repeat(auto-fill, 300px)'
+                                    justifyContent='space-around'
+                                    rowGap='16px'
+                                    columnGap='1.33%'>
+                                    {userCollections
+                                        .slice(0, 4)
+                                        .map((collection, i) => (
+                                            <CollectionCard
+                                                key={`${collection.name}-${i}`}
+                                                collection={collection}
+                                            />
+                                        ))}
+                                </Box>
+                            </Box>
+                        ) : (
+                            <EmptyContainer
+                                title={t('collections.empty')}
+                                text={t('collections.emptyAndLoggedIn')}
+                            />
+                        ))}
+
+                    {value === 'stats' && (
+                        <Box
+                            mt={isNonMobile ? '32px' : '16px'}
+                            width='100%'
+                            height='100%'>
+                            Stats
+                        </Box>
+                    )}
+                </Box>
             </Box>
         </>
     );
