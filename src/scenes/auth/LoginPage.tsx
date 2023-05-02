@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
 const LoginPage: FC = () => {
-    const { t } = useTranslation(['auth', 'common']);
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
     const { error } = useAppSelector((state: any) => state.auth);
     const navigate = useNavigate();
     const email = useInput('');
@@ -44,7 +44,7 @@ const LoginPage: FC = () => {
             onSubmit={submitHandler}>
             <div className=''>
                 <label className='block' htmlFor='email'>
-                    {t('auth:email')}
+                    {t('email')}
                 </label>
                 <input
                     className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
@@ -53,7 +53,7 @@ const LoginPage: FC = () => {
                     id='email'
                 />
                 <label className='block' htmlFor='password'>
-                    {t('auth:password')}
+                    {t('username')}
                 </label>
                 <input
                     className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
@@ -75,7 +75,7 @@ const LoginPage: FC = () => {
                         variant='info'
                         size='sm'
                         type='submit'>
-                        {t('buttonsubmit')}
+                        {t('submitButton')}
                     </Button>
                 </div>
             </div>

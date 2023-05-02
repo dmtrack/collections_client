@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 
 const Login = () => {
-    const { t, i18n } = useTranslation(['common', 'auth']);
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const { type } = useParams();
     const [formType, setFormType] = useState(
@@ -26,13 +26,13 @@ const Login = () => {
                 <>
                     <RegistrationPage />
                     <p className='text-sm text-center text-gray-500 dark:text-gray-400 mx-auto'>
-                        {t('auth:haveAccount')}
+                        {t('haveAccount')}
                         <a
                             role='button'
                             onClick={toggleFormType}
                             className='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]'>
                             {' '}
-                            {t('auth:loginlink')}
+                            {t('loginlink')}
                         </a>
                     </p>
                 </>
@@ -40,13 +40,13 @@ const Login = () => {
                 <>
                     <LoginPage />
                     <p className='text-sm text-center text-gray-500 dark:text-gray-400 mx-auto'>
-                        {t('auth:dontHaveAccount')}
+                        {t('dontHaveAccount')}
                         <a
                             role='button'
                             onClick={toggleFormType}
                             className='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto'>
                             {' '}
-                            {t('auth:registrationlink')}
+                            {t('registrationlink')}
                         </a>
                     </p>
                 </>

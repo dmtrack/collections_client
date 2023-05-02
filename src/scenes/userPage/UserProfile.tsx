@@ -19,6 +19,7 @@ import { fetchUserCollections } from '../../state/actions/collections.actions';
 import IconButton from '@mui/material/IconButton';
 import ModeIcon from '@mui/icons-material/Mode';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import CollectionCard from '../collection/CollectionCard';
 import EmptyContainer from './EmptyContainer';
 
@@ -48,7 +49,7 @@ const UserProfile = () => {
 
     return (
         <>
-            <Box width='80%' m='80px auto' className='user-profile'>
+            <Box width='80%' m='120px auto 80px auto' className='user-profile'>
                 <Box display='flex' flexWrap='wrap' columnGap='16px'>
                     {/* IMAGES */}
                     <Box flex='1 1 40%' mb='24px' borderRadius='15px'>
@@ -67,7 +68,16 @@ const UserProfile = () => {
                     {/* ACTIONS */}
                     <Box flex='5 1 50%' mb='16px'>
                         <Box m='0px 0 24px 0'>
-                            <Typography variant='h3'>{user?.name}</Typography>
+                            <Typography
+                                variant='h4'
+                                textAlign='left'
+                                color={shades.secondary[800]}
+                                sx={{
+                                    letterSpacing: '-0.5px',
+                                    fontWeight: '600',
+                                }}>
+                                {user?.name}
+                            </Typography>
                             <Typography>{user?.email}</Typography>
                         </Box>
                     </Box>
@@ -75,7 +85,20 @@ const UserProfile = () => {
                         justifyContent='start'
                         display='flex'
                         gap='0px'
-                        ml={isNonMobile ? '48px' : '16px'}>
+                        ml={isNonMobile ? '32px' : '16px'}>
+                        <Tooltip title='Add collection'>
+                            <IconButton
+                                sx={{ color: `${shades.secondary[800]}` }}>
+                                <Link to={`/collection/create`}>
+                                    {' '}
+                                    <ControlPointIcon
+                                        fontSize={
+                                            isNonMobile ? 'medium' : 'large'
+                                        }
+                                    />
+                                </Link>
+                            </IconButton>
+                        </Tooltip>
                         {isNonMobile ? (
                             <Tooltip title='Go back'>
                                 <IconButton
@@ -115,7 +138,7 @@ const UserProfile = () => {
                 </Box>
                 <Box>
                     {/* INFORMATION */}
-                    <Box marginTop='32px'>
+                    <Box marginTop={isNonMobile ? '32px' : '64px'}>
                         <Tabs
                             value={value}
                             onChange={handleChange}
@@ -149,7 +172,7 @@ const UserProfile = () => {
                                     display='grid'
                                     gridTemplateColumns='repeat(auto-fill, 300px)'
                                     justifyContent='space-around'
-                                    rowGap='16px'
+                                    rowGap='32px'
                                     columnGap='1.33%'>
                                     {userCollections
                                         .slice(0, 4)

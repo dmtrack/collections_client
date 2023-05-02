@@ -1,6 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { Badge, Box, IconButton, useMediaQuery } from '@mui/material';
+import {
+    Badge,
+    Box,
+    IconButton,
+    Typography,
+    useMediaQuery,
+} from '@mui/material';
 import {
     PersonOutline,
     MenuOutlined,
@@ -48,11 +54,12 @@ const Navbar = () => {
                         onClick={() => navigate('/')}
                         sx={{
                             '&:hover': { cursor: 'pointer' },
-                            fontSize: '16px',
-                            fontWeight: 'bold',
+                            fontSize: '24px',
+                            letterSpacing: '-0.5px',
+                            fontWeight: '800',
                         }}
-                        color={shades.secondary[500]}>
-                        Collections
+                        color={shades.secondary[800]}>
+                        The Collections
                     </Box>
                 ) : null}
 

@@ -8,7 +8,7 @@ import { register } from '../../state/actions/auth.actions';
 import getRandomAvatar from '../../utils/avatar';
 
 const RegistrationPage: React.FC = () => {
-    const { t } = useTranslation(['auth', 'common']);
+    const { t } = useTranslation('translation', { keyPrefix: 'auth' });
 
     const { error } = useAppSelector((state) => state.auth);
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const RegistrationPage: React.FC = () => {
             onSubmit={submitHandler}>
             <div className=''>
                 <label className='block' htmlFor='username'>
-                    {t('auth:username')}
+                    {t('username')}
                 </label>
                 <input
                     className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
@@ -51,7 +51,7 @@ const RegistrationPage: React.FC = () => {
                     id='username'
                 />
                 <label className='block' htmlFor='email'>
-                    {t('auth:email')}
+                    {t('email')}
                 </label>
                 <input
                     className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
@@ -60,7 +60,7 @@ const RegistrationPage: React.FC = () => {
                     id='email'
                 />
                 <label className='block' htmlFor='password'>
-                    {t('auth:password')}
+                    {t('password')}
                 </label>
                 <input
                     className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
@@ -82,7 +82,7 @@ const RegistrationPage: React.FC = () => {
                         variant='info'
                         size='sm'
                         type='submit'>
-                        {t('buttonsubmit')}
+                        {t('submitButton')}
                     </Button>
                 </div>
             </div>
