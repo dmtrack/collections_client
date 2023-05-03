@@ -44,4 +44,4 @@ The app supports 2 languages: English and Russian and two visual themes - dark a
 
 ### Preview
 
-![Preview](public/preview.png)
+![Preview](public/preview1.png)
