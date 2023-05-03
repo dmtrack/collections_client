@@ -20,6 +20,7 @@ import LogOut from './components/LogOut';
 import 'react-toastify/dist/ReactToastify.css';
 import {
     fetchCollections,
+    fetchThemes,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
 import UserProfile from './scenes/userPage/UserProfile';
@@ -37,6 +38,7 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
+    const themes = useAppSelector((state) => state.collections.themes);
 
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
@@ -53,8 +55,14 @@ const App: React.FC = () => {
     useEffect(() => {
         dispatch(fetchCollections());
         dispatch(fetchTopAmountCollections());
+        dispatch(fetchThemes());
     }, []);
 
+    useEffect(() => {
+        if (themes.length === 0) {
+            dispatch(fetchThemes());
+        }
+    }, [themes.length]);
     return (
         <div className='app'>
             <BrowserRouter>

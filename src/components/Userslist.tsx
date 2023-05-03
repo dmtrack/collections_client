@@ -8,8 +8,10 @@ import {
     deleteUser,
 } from '../state/actions/userActions';
 
-import Button from './button';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import { User } from './User';
+import { shades } from '../theme';
 
 const UsersList = ({ usersProps }: IUsersListProps) => {
     const dispatch = useAppDispatch();
@@ -37,31 +39,40 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
         <>
             {users.length > 0 ? (
                 <div>
-                    <div className='flex justify-end'>
+                    <Stack spacing={2} direction='row' mb='24px'>
                         <Button
+                            color='primary'
+                            variant='contained'
                             onClick={() =>
                                 dispatch(toggleBlock(dataId, userId))
                             }
-                            variant='warning'
-                            size='sm'>
-                            {t('blockb')}
-                        </Button>
+                            sx={{
+                                backgroundColor: `${shades.secondary[800]}`,
+                            }}>
+                            {t('block')}
+                        </Button>{' '}
                         <Button
-                            onClick={() => dispatch(toggleUnBlock(dataId))}
-                            variant='info'
-                            size='sm'>
+                            sx={{
+                                backgroundColor: `${shades.secondary[800]}`,
+                            }}
+                            variant='contained'
+                            onClick={() => dispatch(toggleUnBlock(dataId))}>
                             {t('unblock')}
-                        </Button>
+                        </Button>{' '}
                         <Button
-                            onClick={() => dispatch(deleteUser(dataId, userId))}
-                            variant='danger'
-                            size='sm'>
+                            sx={{
+                                backgroundColor: `${shades.secondary[800]}`,
+                            }}
+                            variant='contained'
+                            onClick={() =>
+                                dispatch(deleteUser(dataId, userId))
+                            }>
                             {t('delete')}
                         </Button>
-                    </div>
+                    </Stack>
                     <div className='relative overflow-x-auto'>
                         <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-                            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
+                            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400'>
                                 <tr>
                                     <th scope='col' className='px-6 py-3'>
                                         <input
