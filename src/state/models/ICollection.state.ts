@@ -1,5 +1,4 @@
-import { ITheme } from './../../../../server/src/interfaces/models/theme';
-import { ICollection } from '../../models/ICollection';
+import { ICollection, ITheme } from '../../models/ICollection';
 
 export interface ICollectionState {
     collectionsLoading: boolean;
