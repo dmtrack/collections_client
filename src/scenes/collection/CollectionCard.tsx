@@ -40,15 +40,24 @@ function CollectionCard({ collection }: ICollectionThumb) {
                     color={shades.secondary[800]}>
                     {collection.name}
                 </Typography>{' '}
-                <Typography
-                    gutterBottom
-                    variant='h6'
-                    component='div'
-                    color={shades.secondary[800]}>
-                    {collection.themeId}
-                </Typography>
                 <Typography variant='body2' color='text.secondary'>
                     {collection.description}
+                </Typography>
+                <Typography
+                    gutterBottom
+                    fontSize='12px'
+                    fontWeight='600'
+                    component='div'
+                    color='text.secondary'>
+                    {t('Theme')}: {collection.themeName}
+                </Typography>
+                <Typography
+                    gutterBottom
+                    fontSize='12px'
+                    fontWeight='600'
+                    component='div'
+                    color='text.secondary'>
+                    Tags
                 </Typography>
             </CardContent>
             <CardActions>

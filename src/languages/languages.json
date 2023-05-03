@@ -78,7 +78,8 @@
                 "blocked": "blocked",
                 "adminDeleteError": "User is the only administrator and can't be deleted",
                 "myCollections": "My collections",
-                "newCollection": "New collection"
+                "newCollection": "New collection",
+                "theme": "Theme"
             },
             "usersPage": {
                 "#": "#",
@@ -314,7 +315,8 @@
                 "blocked": "заблокирован",
                 "adminDeleteError": "Удаление невозможно, т.к. пользователь - единственный администратор",
                 "myCollections": "Мои коллекции",
-                "newCollection": "Новая коллекция"
+                "newCollection": "Новая коллекция",
+                "theme": "Тема"
             },
             "usersPage": {
                 "#": "#",
