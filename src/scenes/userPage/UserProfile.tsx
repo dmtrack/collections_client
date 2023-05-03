@@ -6,6 +6,7 @@ import {
     Typography,
     Tooltip,
     Zoom,
+    Fab,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,9 +18,9 @@ import { FastRewindSharp } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { fetchUserCollections } from '../../state/actions/collections.actions';
 import IconButton from '@mui/material/IconButton';
-import ModeIcon from '@mui/icons-material/Mode';
+import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
-import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import EditIcon from '@mui/icons-material/Edit';
 import CollectionCard from '../collection/CollectionCard';
 import EmptyContainer from './EmptyContainer';
 
@@ -51,23 +52,65 @@ const UserProfile = () => {
     return (
         <>
             <Box width='80%' m='120px auto 80px auto' className='user-profile'>
-                <Box display='flex' flexWrap='wrap' columnGap='16px'>
+                <Box display='flex' columnGap='16px'>
                     {/* IMAGES */}
-                    <Box flex='1 1 40%' mb='24px' borderRadius='15px'>
-                        <img
-                            alt={user?.name}
-                            src={user?.avatarUrl}
-                            style={{
-                                objectFit: 'contain',
-                                borderRadius: '5px',
-                            }}
-                            width='200px'
-                            height='200px'
-                        />
+                    <Box>
+                        <Box flex='1 1 30%' mb='24px' borderRadius='15px'>
+                            <img
+                                alt={user?.name}
+                                src={user?.avatarUrl}
+                                style={{
+                                    objectFit: 'contain',
+                                    borderRadius: '5px',
+                                }}
+                                width='200px'
+                                height='200px'
+                            />
+                        </Box>
+
+                        <Box justifyContent='center' display='flex' gap='12px'>
+                            <Tooltip title='Add collection'>
+                                <Link to={`/collection/create`}>
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='primary'>
+                                            <AddIcon />
+                                        </Fab>
+                                    ) : (
+                                        <AddIcon fontSize='large' />
+                                    )}
+                                </Link>
+                            </Tooltip>
+
+                            <Tooltip title='Home'>
+                                {isNonMobile ? (
+                                    <Fab size='small' color='primary'>
+                                        <HomeSharpIcon onClick={goHome} />
+                                    </Fab>
+                                ) : (
+                                    <HomeSharpIcon
+                                        fontSize='large'
+                                        onClick={goHome}
+                                    />
+                                )}
+                            </Tooltip>
+
+                            <Tooltip title='Edit user'>
+                                <Link to={`/user/${userId}/edit`}>
+                                    {' '}
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='primary'>
+                                            <EditIcon />
+                                        </Fab>
+                                    ) : (
+                                        <EditIcon fontSize='large' />
+                                    )}
+                                </Link>
+                            </Tooltip>
+                        </Box>
                     </Box>
 
                     {/* ACTIONS */}
-                    <Box flex='5 1 50%' mb='16px'>
+                    <Box flex='5 1 60%' mb='16px'>
                         <Box m='0px 0 24px 0'>
                             <Typography
                                 variant='h4'
@@ -81,60 +124,6 @@ const UserProfile = () => {
                             </Typography>
                             <Typography>{user?.email}</Typography>
                         </Box>
-                    </Box>
-                    <Box
-                        justifyContent='start'
-                        display='flex'
-                        gap='0px'
-                        ml={isNonMobile ? '32px' : '8px'}>
-                        <Tooltip title='Add collection'>
-                            <IconButton
-                                sx={{ color: `${shades.secondary[800]}` }}>
-                                <Link to={`/collection/create`}>
-                                    {' '}
-                                    <ControlPointIcon
-                                        fontSize={
-                                            isNonMobile ? 'medium' : 'large'
-                                        }
-                                    />
-                                </Link>
-                            </IconButton>
-                        </Tooltip>
-                        {isNonMobile ? (
-                            <Tooltip title='Go back'>
-                                <IconButton
-                                    sx={{ color: `${shades.secondary[800]}` }}
-                                    onClick={goBack}>
-                                    <FastRewindSharp
-                                        fontSize={
-                                            isNonMobile ? 'medium' : 'large'
-                                        }
-                                    />
-                                </IconButton>
-                            </Tooltip>
-                        ) : null}
-                        <IconButton
-                            sx={{ color: `${shades.secondary[800]}` }}
-                            onClick={goHome}>
-                            <Tooltip title='Home'>
-                                <HomeSharpIcon
-                                    fontSize={isNonMobile ? 'medium' : 'large'}
-                                />
-                            </Tooltip>
-                        </IconButton>{' '}
-                        <Tooltip title='Edit user'>
-                            <IconButton
-                                sx={{ color: `${shades.secondary[800]}` }}>
-                                <Link to={`/user/${userId}/edit`}>
-                                    {' '}
-                                    <ModeIcon
-                                        fontSize={
-                                            isNonMobile ? 'medium' : 'large'
-                                        }
-                                    />
-                                </Link>
-                            </IconButton>
-                        </Tooltip>
                     </Box>
                 </Box>
                 <Box>

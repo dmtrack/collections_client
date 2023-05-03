@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ICollection, IGetCollectionResponse } from '../../models/ICollection';
+import {
+    ICollection,
+    IGetCollectionResponse,
+    IGetThemesResponse,
+} from '../../models/ICollection';
 import {
     DeleteCollection,
     ICollectionState,
@@ -9,16 +13,21 @@ const initialState: ICollectionState = {
     collectionsLoading: false,
     collectionsUserLoading: false,
     collectionsTopAmountLoading: false,
+    themesLoading: false,
     error: '',
     collections: [],
     topAmountCollections: [],
     userCollections: [],
+    themes: [],
 };
 
 export const collectionSlice = createSlice({
     name: 'collections',
     initialState,
     reducers: {
+        fetchingThemes: (state) => {
+            state.themesLoading = true;
+        },
         fetchingCollections: (state) => {
             state.collectionsLoading = true;
         },
@@ -28,6 +37,14 @@ export const collectionSlice = createSlice({
         fetchingTopAmountCollections: (state) => {
             state.collectionsTopAmountLoading = true;
         },
+
+        fetchThemesSuccess: (
+            state,
+            action: PayloadAction<IGetThemesResponse[]>
+        ) => {
+            state.themesLoading = false;
+            state.themes = action.payload;
+        },
         fetchCollectionsSuccess: (
             state,
             action: PayloadAction<IGetCollectionResponse[]>
@@ -35,9 +52,6 @@ export const collectionSlice = createSlice({
             state.collectionsLoading = false;
             state.collections = action.payload;
         },
-        // setUserCollectionsEmpty: (state, action) => {
-        //     state.userCollections = action.payload;
-        // },
 
         fetchCollectionsUserSuccess: (
             state,

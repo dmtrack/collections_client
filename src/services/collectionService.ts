@@ -5,6 +5,7 @@ import {
     ICollection,
     ICreateCollection,
     IGetCollectionResponse,
+    IGetThemesResponse,
 } from '../models/ICollection';
 import { AuthorizationError } from '../models/errors/AuthorizationError';
 import { DataBaseError } from '../models/errors/DataBaseError';
@@ -22,6 +23,12 @@ export default class collectionService {
             AuthorizationError | DataBaseError,
             IGetCollectionResponse[]
         >(`collection/getusercollections/${userId}`);
+    }
+    static async getThemes() {
+        return axiosGet<
+            AuthorizationError | DataBaseError,
+            IGetThemesResponse[]
+        >(`collection/getthemes`);
     }
 
     static async getTopAmountCollections() {

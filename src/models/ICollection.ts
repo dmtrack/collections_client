@@ -30,3 +30,18 @@ export interface IGetCollectionResponse extends AxiosResponse {
     themeId: number;
     themeName: string;
 }
+
+export interface IGetThemesResponse extends AxiosResponse {
+    id: number;
+    name: string;
+}
+
+export interface ITheme {
+    id: number;
+    name: string;
+}
+
+export interface IGetThemesResponse extends AxiosResponse {
+    id: number;
+    name: string;
+}

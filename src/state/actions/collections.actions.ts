@@ -70,8 +70,21 @@ export const fetchTopAmountCollections = () => {
     };
 };
 
-// export const setCollectionsEmpty = () => {
-//     return async (dispatch: AppDispatch) => {
-//         dispatch(collectionSlice.actions.setUserCollectionsEmpty([]));
-//     };
-// };
+export const fetchThemes = () => {
+    return async (dispatch: AppDispatch) => {
+        dispatch(collectionSlice.actions.fetchingThemes());
+        const response = await collectionService.getThemes();
+        response
+            .mapRight(({ data: themes }) =>
+                dispatch(collectionSlice.actions.fetchThemesSuccess(themes))
+            )
+            .mapLeft((e: any) => {
+                dispatch(collectionSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+    };
+};
