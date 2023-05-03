@@ -24,7 +24,8 @@ import CollectionCard from '../collection/CollectionCard';
 import EmptyContainer from './EmptyContainer';
 
 const UserProfile = () => {
-    const { t } = useTranslation('translation');
+    const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
+
     const dispatch = useAppDispatch();
     const { userId } = useParams();
     const [value, setValue] = useState('collections');

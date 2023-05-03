@@ -17,6 +17,7 @@ export interface ICollection {
     created: string;
     userId: number;
     themeId: number;
+    themeName: string;
 }
 
 export interface IGetCollectionResponse extends AxiosResponse {
@@ -27,4 +28,5 @@ export interface IGetCollectionResponse extends AxiosResponse {
     created: string;
     userId: number;
     themeId: number;
+    themeName: string;
 }

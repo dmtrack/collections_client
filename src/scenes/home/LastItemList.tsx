@@ -76,7 +76,7 @@ const LastItemList = () => {
                         display='grid'
                         gridTemplateColumns='repeat(auto-fill, 300px)'
                         justifyContent='space-around'
-                        rowGap='16px'
+                        rowGap='32px'
                         columnGap='1.33%'>
                         {value === 'newItems' &&
                             items
@@ -109,9 +109,7 @@ const LastItemList = () => {
                 </Box>
             ) : (
                 <>
-                    <Box display='flex' justifyContent='center'>
-                        <Loader />
-                    </Box>{' '}
+                    <Loader />
                 </>
             )}
         </>
