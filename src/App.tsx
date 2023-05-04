@@ -19,13 +19,13 @@ import Login from './scenes/auth/Login';
 import LogOut from './components/LogOut';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-    fetchCollections,
     fetchThemes,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
 import UserProfile from './scenes/userPage/UserProfile';
 import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
+import { useApp } from './hook/appState';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -38,31 +38,30 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
-    const themes = useAppSelector((state) => state.collections.themes);
-
+    // const themes = useAppSelector((state) => state.collections.themes);
+    // const topAmountCollections = useAppSelector(
+    //     (state) => state.collections.topAmountCollections
+    // );
+    const { isAuth } = useAppSelector((state) => state.auth);
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
     };
 
+    const lang = useApp().lang;
+
     const dispatch = useAppDispatch();
     const userId = Number(localStorageService.getUserId());
-    const { isAuth } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
-        if (isAuth && userId) dispatch(reconnect(userId));
-    }, [isAuth, userId, dispatch]);
-
-    useEffect(() => {
-        dispatch(fetchCollections());
+        // dispatch(fetchCollections());
         dispatch(fetchTopAmountCollections());
         dispatch(fetchThemes());
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (themes.length === 0) {
-            dispatch(fetchThemes());
+        i18n.changeLanguage(lang);
+        if (isAuth && userId) {
+            dispatch(reconnect(userId));
         }
-    }, [themes.length, dispatch]);
+    }, [dispatch, lang]);
+
     return (
         <div className='app'>
             <BrowserRouter>

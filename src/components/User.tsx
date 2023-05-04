@@ -39,7 +39,7 @@ function User({ user, dataId, setDataId }: IUserProps) {
                 </td>
                 <td className='px-5 py-4'>{id}</td>
                 <td className='px-5 py-4'>
-                    <Link to={`/user/${id}`}>{name}</Link>
+                    <Link to={`/users/${id}`}>{name}</Link>
                 </td>
                 <td className='px-5 py-4'>{email}</td>
                 <td className='px-5 py-4'>{access}</td>

@@ -28,6 +28,7 @@ const CreateCollection = () => {
         name: string;
         description: string;
         themeId: string;
+        image: FileList;
     };
 
     useEffect(() => {
@@ -164,6 +165,7 @@ const CreateCollection = () => {
                             color='primary'
                             variant='contained'
                             onClick={() => console.log('confirm')}
+                            type='submit'
                             sx={{
                                 backgroundColor: `${shades.secondary[800]}`,
                             }}>

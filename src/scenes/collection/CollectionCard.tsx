@@ -7,8 +7,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { shades } from '../../theme';
+import { ThemeChip } from '../../components/ThemeChip';
 
 interface ICollectionThumb {
     collection: ICollection;
@@ -33,32 +34,35 @@ function CollectionCard({ collection }: ICollectionThumb) {
                 title={collection.name}
             />
             <CardContent>
-                <Typography
-                    gutterBottom
-                    variant='h5'
-                    component='div'
-                    color={shades.secondary[800]}>
-                    {collection.name}
-                </Typography>{' '}
+                <Box display='flex' justifyContent='space-between'>
+                    <Typography
+                        gutterBottom
+                        variant='h5'
+                        component='div'
+                        color={shades.secondary[800]}>
+                        {collection.name}
+                    </Typography>{' '}
+                    <ThemeChip themeId={collection.themeId} />
+                </Box>
                 <Typography variant='body2' color='text.secondary'>
                     {collection.description}
                 </Typography>
-                <Typography
+                {/* <Typography
                     gutterBottom
                     fontSize='12px'
                     fontWeight='600'
                     component='div'
                     color='text.secondary'>
                     {t('Theme')}: {collection.themeName}
-                </Typography>
-                <Typography
+                </Typography> */}
+                {/* <Typography
                     gutterBottom
                     fontSize='12px'
                     fontWeight='600'
                     component='div'
                     color='text.secondary'>
                     Tags
-                </Typography>
+                </Typography> */}
             </CardContent>
             <CardActions>
                 <Button size='small'>
