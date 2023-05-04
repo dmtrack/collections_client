@@ -51,7 +51,7 @@ const UserProfile = () => {
 
     return (
         <>
-            <Box width='80%' m='120px auto 80px auto' className='user-profile'>
+            <Box width='80%' m='36px auto 80px auto' className='user-profile'>
                 <Box display='flex' columnGap='16px'>
                     {/* IMAGES */}
                     <Box>
@@ -70,7 +70,7 @@ const UserProfile = () => {
 
                         <Box justifyContent='center' display='flex' gap='12px'>
                             <Tooltip title='Add collection'>
-                                <Link to={`/collection/create`}>
+                                <Link to={`/users/${userId}/create`}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
                                             <AddIcon />
