@@ -11,6 +11,15 @@
                 "logout": "Log out",
                 "confirmLogOut": "Are you sure you want to log out?"
             },
+            "breadcrumb": {
+                "home": "home",
+                "collection": "collection",
+                "item": "item",
+                "users": "users",
+                "create": "create collection",
+                "admin": "admin",
+                "edit": "edit"
+            },
             "footer": {
                 "copyright": "Anastasiya Sachko © 2023"
             },
@@ -102,6 +111,7 @@
                 "moreLessLikes": "from more likes to less",
                 "lessMoreLikes": "from less likes to more"
             },
+
             "filter": {
                 "admins": "show admins",
                 "blocked": "show blocked users",
@@ -120,7 +130,7 @@
                 "createdAt": "at",
                 "itemsQuantity": "Items quantity: ",
                 "return": "Return to the previous page",
-                "create": "Create a new collection",
+                "create": "Create collection",
                 "update": "Edit the collection",
                 "title": "Title",
                 "titlePlaceholder": "Enter collection title",
@@ -251,6 +261,15 @@
                 "profile": "Мой профиль",
                 "logout": "Выход",
                 "confirmLogOut": "Вы уверены, что хотите выйти?"
+            },
+            "breadcrumb": {
+                "home": "Главная",
+                "collection": "Коллекция",
+                "item": "Элемент",
+                "users": "Пользователи",
+                "create": "Создать коллекцию",
+                "admin": "Админ-панель",
+                "edit": "Редактирование"
             },
             "footer": {
                 "copyright": "Анастасия Сачко © 2023"

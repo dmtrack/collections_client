@@ -101,7 +101,7 @@ const Navbar = () => {
                             </Tooltip>
                         </NavLink>
                     ) : (
-                        <NavLink to={`user/${userId}`}>
+                        <NavLink to={`users/${userId}`}>
                             <Tooltip title='Profile'>
                                 <IconButton
                                     sx={{ color: `${shades.secondary[800]}` }}>

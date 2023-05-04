@@ -25,7 +25,7 @@ import {
 } from './state/actions/collections.actions';
 import UserProfile from './scenes/userPage/UserProfile';
 import Collection from './scenes/collection/Collection';
-
+import Breadcrumbs from './components/Breadcrumbs';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -50,24 +50,25 @@ const App: React.FC = () => {
 
     useEffect(() => {
         if (isAuth && userId) dispatch(reconnect(userId));
-    }, [isAuth]);
+    }, [isAuth, userId, dispatch]);
 
     useEffect(() => {
         dispatch(fetchCollections());
         dispatch(fetchTopAmountCollections());
         dispatch(fetchThemes());
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (themes.length === 0) {
             dispatch(fetchThemes());
         }
-    }, [themes.length]);
+    }, [themes.length, dispatch]);
     return (
         <div className='app'>
             <BrowserRouter>
                 <Suspense fallback={null}>
                     <Navbar />
+                    <Breadcrumbs />
                     <ScrollToTop />
                     <Routes>
                         <Route path='/' element={<Home />} />
@@ -76,13 +77,13 @@ const App: React.FC = () => {
                             element={<Collection />}
                         />
                         <Route path='item/:itemId/' element={<ItemPage />} />
-                        <Route path='user/:userId' element={<UserProfile />} />
+                        <Route path='users/:userId' element={<UserProfile />} />
                         <Route
-                            path='user/:userId/edit'
+                            path='users/:userId/edit'
                             element={<UserEdit />}
                         />
                         <Route
-                            path='collection/create'
+                            path='users/:userId/create'
                             element={<CreateCollection />}
                         />{' '}
                         <Route

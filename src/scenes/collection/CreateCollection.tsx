@@ -1,20 +1,47 @@
-import { Box, TextField } from '@mui/material';
+import {
+    Box,
+    TextField,
+    MenuItem,
+    Typography,
+    useMediaQuery,
+} from '@mui/material';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hook/redux';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import Loader from '../../utils/loader';
+import v4 from 'uuid';
+import { useTranslation } from 'react-i18next';
+import { shades } from '../../theme';
 
 const CreateCollection = () => {
+    const { t } = useTranslation('translation', { keyPrefix: 'collections' });
+
     const navigate = useNavigate();
     const { isAuth } = useAppSelector((state) => state.auth);
+    const { collectionsLoading } = useAppSelector((state) => state.collections);
+    const isNonMobile = useMediaQuery('(min-width:600px)');
+
+    type Inputs = {
+        name: string;
+        description: string;
+        themeId: string;
+    };
 
     useEffect(() => {
         if (!isAuth) navigate('/');
     }, [isAuth, navigate]);
     const themes = useAppSelector((state) => state.collections.themes);
 
-    const handleSubmit = () => {
-        console.log('submit');
-    };
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm<Inputs>();
+    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
     // const onSubmit: SubmitHandler<Inputs> = (data) => {
     //     const itemConfigs = configInputs.filter(
@@ -50,24 +77,35 @@ const CreateCollection = () => {
     // };
 
     return (
-        <Box width='80%' m='120px auto 80px auto' className='create-collection'>
-            {/* <Box
+        <Box width='80%' m='0px auto 80px auto' className='create-collection'>
+            {/* <Typography
+                variant='h4'
+                textAlign='left'
+                color={shades.primary[400]}
+                sx={{
+                    letterSpacing: '-0.5px',
+                    fontWeight: '600',
+                    paddingLeft: isNonMobile ? '0px' : '64px',
+                }}>
+                Create collection
+            </Typography> */}
+            <Box
                 component='form'
                 display='flex'
                 flexDirection='column'
-                mx='auto'
                 px={1}
-                onSubmit={handleSubmit}> */}
-            {/* <TextField
-                    label={t('Title')}
+                mt='32px'
+                onSubmit={handleSubmit(onSubmit)}>
+                <TextField
+                    label={t('title')}
                     margin='normal'
-                    {...register('title', { required: true })}
-                    error={!!errors.title}
+                    {...register('name', { required: true })}
+                    error={!!errors.name}
                 />
                 <TextField
                     select
-                    label={t('Theme')}
-                    defaultValue={editable?.collection.themeId || ''}
+                    label={t('theme')}
+                    defaultValue={1}
                     margin='normal'
                     {...register('themeId', { required: true })}
                     error={!!errors.themeId}>
@@ -76,8 +114,8 @@ const CreateCollection = () => {
                             {theme.name}
                         </MenuItem>
                     ))}
-                </TextField> */}
-            {/* <Text variant='h6'>
+                </TextField>
+                {/* <Text variant='h6'>
                     If you want, add a picture of the collection
                 </Text>
                 <Box mx='auto'>
@@ -88,14 +126,14 @@ const CreateCollection = () => {
                         existingImageUrl={getValues().existingImage}
                     />
                 </Box> */}
-            {/* <Box mb={2}>
+                {/* <Box mb={2}>
                     <MarkdownFormControl
                         control={control}
                         controlName='description'
                         label='Enter a description'
                     />
                 </Box> */}
-            {/* /* <FixedConfigInputs />
+                {/* /* <FixedConfigInputs />
                 <ConfigInputs
                     configInputs={configInputs}
                     setConfigInputs={setConfigInputs}
@@ -117,8 +155,32 @@ const CreateCollection = () => {
                             Save
                         </TransButton>
                     </Box>
+                )} */}
+                {collectionsLoading ? (
+                    <Loader />
+                ) : (
+                    <Stack spacing={2} direction='row'>
+                        <Button
+                            color='primary'
+                            variant='contained'
+                            onClick={() => console.log('confirm')}
+                            sx={{
+                                backgroundColor: `${shades.secondary[800]}`,
+                            }}>
+                            {t('create')}
+                        </Button>{' '}
+                        <Button
+                            color='primary'
+                            variant='contained'
+                            onClick={() => console.log('cancel')}
+                            sx={{
+                                backgroundColor: `${shades.secondary[800]}`,
+                            }}>
+                            {t('cancel')}
+                        </Button>{' '}
+                    </Stack>
                 )}
-            </Box> */}
+            </Box>
         </Box>
     );
 };

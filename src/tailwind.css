@@ -41,6 +41,7 @@ body {
 .create-collection {
     display: flex;
     flex-direction: column;
+    align-items: start;
 }
 
 .loading-spinner {
