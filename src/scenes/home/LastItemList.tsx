@@ -9,6 +9,7 @@ import {
 import { IItem } from '../../models/IItem';
 import Loader from '../../utils/loader';
 import { shades } from '../../theme';
+import { v4 } from 'uuid';
 
 const LastItemList = () => {
     const dispatch = useAppDispatch();
@@ -82,28 +83,19 @@ const LastItemList = () => {
                             items
                                 .slice(0, 3)
                                 .map((item: IItem) => (
-                                    <Item
-                                        item={item}
-                                        key={Number(item.created)}
-                                    />
+                                    <Item item={item} key={v4()} />
                                 ))}
                         {value === 'topRated' &&
                             topRatedFlat
                                 .slice(0, 3)
                                 .map((item: IItem) => (
-                                    <Item
-                                        item={item}
-                                        key={Number(item.created)}
-                                    />
+                                    <Item item={item} key={v4()} />
                                 ))}
                         {value === 'mostCommented' &&
                             items
                                 .slice(0, 3)
                                 .map((item: IItem) => (
-                                    <Item
-                                        item={item}
-                                        key={Number(item.created)}
-                                    />
+                                    <Item item={item} key={v4()} />
                                 ))}
                     </Box>
                 </Box>

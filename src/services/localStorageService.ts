@@ -3,6 +3,8 @@ const TOKEN = 'TOKEN';
 const ACCESS = 'ACCESS';
 const SELECTED_LANGUAGE = 'SELECTED_LANGUAGE';
 const LANGUAGE_OBJECT = 'LANGUAGE_OBJECT';
+const THEME = 'APP_THEME';
+const LANG = 'APP_LANGUAGE';
 
 export function setToken(token: string) {
     localStorage.setItem(TOKEN, token);
@@ -11,6 +13,13 @@ export function setToken(token: string) {
 export function setUser(userId: number, access: string) {
     localStorage.setItem(USERID_KEY, String(userId));
     localStorage.setItem(ACCESS, access);
+}
+
+export function setTheme(theme: string) {
+    localStorage.setItem(THEME, theme);
+}
+export function setLanguage(language: string) {
+    localStorage.setItem(LANG, language);
 }
 
 export function setSelectedLanguage(language: string) {
@@ -22,7 +31,10 @@ export function setSelectedLanguageObject(langObj: any) {
 }
 
 export function getSelectedLanguage() {
-    return localStorage.getItem(SELECTED_LANGUAGE);
+    return localStorage.getItem(LANG);
+}
+export function getSelectedTheme() {
+    return localStorage.getItem(THEME);
 }
 
 export function getSelectedLanguageObject() {
@@ -45,6 +57,8 @@ export function getUserAccess() {
 
 const localStorageService = {
     setToken,
+    setTheme,
+    setLanguage,
     getUserId,
     removeAuthData,
     setUser,
@@ -52,6 +66,7 @@ const localStorageService = {
     setSelectedLanguage,
     setSelectedLanguageObject,
     getSelectedLanguage,
+    getSelectedTheme,
     getSelectedLanguageObject,
 };
 export default localStorageService;

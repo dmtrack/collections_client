@@ -19,7 +19,6 @@ const BreadCrumbs = (props: WithRouterProps) => {
     } = props;
     const regular = new RegExp('^[0-9]+$');
     const pathnames = pathname.split('/').filter((x) => x);
-
     return (
         <>
             {pathname !== '/login' ? (

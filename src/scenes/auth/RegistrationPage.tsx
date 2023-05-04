@@ -5,7 +5,6 @@ import Button from '../../components/button';
 import { useInput } from '../../hook/input';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { register } from '../../state/actions/auth.actions';
-import getRandomAvatar from '../../utils/avatar';
 
 const RegistrationPage: React.FC = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
