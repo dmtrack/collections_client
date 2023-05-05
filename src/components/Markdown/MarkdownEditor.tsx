@@ -1,4 +1,4 @@
-import '../../styles/markdown-styles.css';
+import './markdown-styles.css';
 import { FC } from 'react';
 import MDEditor, { commands } from '@uiw/react-md-editor';
 import { ControllerRenderProps } from 'react-hook-form';

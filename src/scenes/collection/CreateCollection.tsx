@@ -14,6 +14,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Loader from '../../utils/loader';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../../theme';
+import { MarkdownFormControl } from '../../components/Markdown/MarkdownFormControl';
 
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -39,6 +40,7 @@ const CreateCollection = () => {
         register,
         handleSubmit,
         watch,
+        control,
         formState: { errors },
     } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
@@ -77,18 +79,11 @@ const CreateCollection = () => {
     // };
 
     return (
-        <Box width='80%' m='0px auto 80px auto' className='create-collection'>
-            {/* <Typography
-                variant='h4'
-                textAlign='left'
-                color={shades.primary[400]}
-                sx={{
-                    letterSpacing: '-0.5px',
-                    fontWeight: '600',
-                    paddingLeft: isNonMobile ? '0px' : '64px',
-                }}>
-                Create collection
-            </Typography> */}
+        <Box
+            width='80%'
+            m='0px auto 80px auto'
+            className='create-collection'
+            alignItems={isNonMobile ? 'start' : 'center'}>
             <Box
                 component='form'
                 display='flex'
@@ -97,15 +92,9 @@ const CreateCollection = () => {
                 mt='32px'
                 onSubmit={handleSubmit(onSubmit)}>
                 <TextField
-                    label={t('title')}
-                    margin='normal'
-                    {...register('name', { required: true })}
-                    error={!!errors.name}
-                />
-                <TextField
                     select
                     label={t('theme')}
-                    defaultValue={1}
+                    defaultValue={''}
                     margin='normal'
                     {...register('themeId', { required: true })}
                     error={!!errors.themeId}>
@@ -115,6 +104,12 @@ const CreateCollection = () => {
                         </MenuItem>
                     ))}
                 </TextField>
+                <TextField
+                    label={t('title')}
+                    margin='normal'
+                    {...register('name', { required: true })}
+                    error={!!errors.name}
+                />
                 {/* <Text variant='h6'>
                     If you want, add a picture of the collection
                 </Text>
@@ -126,13 +121,13 @@ const CreateCollection = () => {
                         existingImageUrl={getValues().existingImage}
                     />
                 </Box> */}
-                {/* <Box mb={2}>
+                <Box mb={2}>
                     <MarkdownFormControl
                         control={control}
                         controlName='description'
-                        label='Enter a description'
+                        label=''
                     />
-                </Box> */}
+                </Box>
                 {/* /* <FixedConfigInputs />
                 <ConfigInputs
                     configInputs={configInputs}
