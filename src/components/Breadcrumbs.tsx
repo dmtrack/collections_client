@@ -26,7 +26,9 @@ const BreadCrumbs = (props: WithRouterProps) => {
                     <MUIBreadCrumbs
                         aria-label='breadcrumb'
                         separator={<NavigateNextIcon />}>
-                        <Link onClick={() => navigate('/')}>{t('home')}</Link>
+                        <Link underline='none' onClick={() => navigate('/')}>
+                            {t('home')}
+                        </Link>
                         {pathnames
                             .slice(0, pathnames.length - 1)
                             .map((name, index) => {
@@ -36,12 +38,14 @@ const BreadCrumbs = (props: WithRouterProps) => {
                                 let reg = regular.test(name);
                                 return !reg ? (
                                     <Link
+                                        underline='none'
                                         onClick={() => navigate(routeTo)}
                                         key={v4()}>
                                         {`${t(`${name}`)}`}
                                     </Link>
                                 ) : (
                                     <Link
+                                        underline='none'
                                         onClick={() => navigate(routeTo)}
                                         key={v4()}>
                                         {`${name}`}
