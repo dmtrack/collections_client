@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hook/redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Loader from '../../utils/loader';
-import v4 from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../../theme';
 

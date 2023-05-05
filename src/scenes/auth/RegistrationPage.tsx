@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/button';
+import Button from '@mui/material/Button';
 import { useInput } from '../../hook/input';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { register } from '../../state/actions/auth.actions';
+import { Box, TextField } from '@mui/material';
+import { shades } from '../../theme';
 
 const RegistrationPage: React.FC = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
@@ -35,58 +37,67 @@ const RegistrationPage: React.FC = () => {
     };
 
     return (
-        <form
-            className='container pt-10 mt-40
-             text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]'
-            onSubmit={submitHandler}>
-            <div className=''>
-                <label className='block' htmlFor='username'>
-                    {t('username')}
-                </label>
-                <input
-                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
-                    type='text'
-                    {...username}
-                    id='username'
-                />
-                <label className='block' htmlFor='email'>
-                    {t('email')}
-                </label>
-                <input
-                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
-                    type='text'
-                    {...email}
-                    id='email'
-                />
-                <label className='block' htmlFor='password'>
-                    {t('password')}
-                </label>
-                <input
-                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
-                    type='password'
-                    {...password}
-                    id='password'
-                />
-                {error && (
-                    <p
-                        className='pt-5
+        <>
+            <>
+                <Box
+                    width='80%'
+                    height='100%'
+                    m='128px auto 80px auto'
+                    className='login'>
+                    <Box
+                        component='form'
+                        display='flex'
+                        flexDirection='column'
+                        px={1}
+                        mt='32px'
+                        onSubmit={submitHandler}>
+                        <TextField
+                            label={t('username')}
+                            margin='normal'
+                            type='text'
+                            {...username}
+                            id='email'
+                        />{' '}
+                        <TextField
+                            label={t('email')}
+                            margin='normal'
+                            type='text'
+                            {...email}
+                            id='email'
+                        />{' '}
+                        <TextField
+                            label={t('password')}
+                            margin='normal'
+                            type='text'
+                            {...password}
+                            id='password'
+                        />
+                        {error && (
+                            <p
+                                className='pt-5
              text-sm text-left text-red-500 dark:text-red-400 mx-auto'>
-                        {error}
-                    </p>
-                )}
-
-                <div className='py-4'>
-                    <Button
-                        onClick={() => submitHandler}
-                        variant='info'
-                        size='sm'
-                        type='submit'>
-                        {t('submitButton')}
-                    </Button>
-                </div>
-            </div>
-        </form>
+                                {error}
+                            </p>
+                        )}
+                        <Button
+                            color='primary'
+                            variant='contained'
+                            onClick={() => submitHandler}
+                            type='submit'
+                            sx={{
+                                mt: '12px',
+                                backgroundColor: `${shades.secondary[800]}`,
+                            }}>
+                            {t('submitButton')}
+                        </Button>{' '}
+                    </Box>
+                </Box>
+            </>
+        </>
     );
 };
 
 export { RegistrationPage };
+function onSubmit(event: FormEvent<HTMLFormElement>): void {
+    throw new Error('Function not implemented.');
+}

@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import '../src/languages/i18n';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from './hook/redux';
-import { reconnect } from './state/actions/auth.actions';
+import { logOut, reconnect } from './state/actions/auth.actions';
 import localStorageService from './services/localStorageService';
 import { useTranslation } from 'react-i18next';
 import Home from './scenes/home/Home';
@@ -57,10 +57,18 @@ const App: React.FC = () => {
         dispatch(fetchTopAmountCollections());
         dispatch(fetchThemes());
         i18n.changeLanguage(lang);
+    }, []);
+
+    useEffect(() => {
         if (isAuth && userId) {
             dispatch(reconnect(userId));
+            console.log('reconnect');
         }
-    }, [dispatch, lang]);
+    }, [isAuth]);
+
+    useEffect(() => {
+        if (userId === 0) dispatch(logOut());
+    }, [userId]);
 
     return (
         <div className='app'>

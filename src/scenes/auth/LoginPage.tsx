@@ -1,11 +1,13 @@
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/button';
+import Button from '@mui/material/Button';
 import { useInput } from '../../hook/input';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { login } from '../../state/actions/auth.actions';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { Box, TextField } from '@mui/material';
+import { shades } from '../../theme';
 
 const LoginPage: FC = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'auth' });
@@ -15,7 +17,9 @@ const LoginPage: FC = () => {
     const password = useInput('');
     const dispatch = useAppDispatch();
 
+    const { isAuth } = useAppSelector((state) => state.auth);
     const isFormValid = () => email.value && password.value;
+    if (isAuth) navigate('/');
 
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
@@ -27,10 +31,6 @@ const LoginPage: FC = () => {
                         password: password.value,
                     })
                 );
-
-                if (!!error) {
-                    navigate('/');
-                }
             } catch (e: any) {
                 toast(e);
             }
@@ -38,48 +38,54 @@ const LoginPage: FC = () => {
     };
 
     return (
-        <form
-            className='pt-10 mt-40 
-             text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]'
-            onSubmit={submitHandler}>
-            <div className=''>
-                <label className='block' htmlFor='email'>
-                    {t('email')}
-                </label>
-                <input
-                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
-                    type='text'
-                    {...email}
-                    id='email'
-                />
-                <label className='block' htmlFor='password'>
-                    {t('username')}
-                </label>
-                <input
-                    className='border py-1 px-2 w-full  text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'
-                    type='password'
-                    {...password}
-                    id='password'
-                />
-                {error && (
-                    <p
-                        className='pt-5
+        <>
+            <Box
+                width='80%'
+                height='100%'
+                m='128px auto 80px auto'
+                className='login'>
+                <Box
+                    component='form'
+                    display='flex'
+                    flexDirection='column'
+                    px={1}
+                    mt='32px'
+                    onSubmit={submitHandler}>
+                    <TextField
+                        label={t('email')}
+                        margin='normal'
+                        type='text'
+                        {...email}
+                        id='email'
+                    />{' '}
+                    <TextField
+                        label={t('password')}
+                        margin='normal'
+                        type='text'
+                        {...password}
+                        id='password'
+                    />
+                    {error && (
+                        <p
+                            className='pt-5
              text-sm text-left text-red-500 dark:text-red-400 mx-auto'>
-                        {error}
-                    </p>
-                )}
-
-                <div className='py-4'>
+                            {error}
+                        </p>
+                    )}
                     <Button
+                        color='primary'
+                        variant='contained'
                         onClick={() => submitHandler}
-                        variant='info'
-                        size='sm'
-                        type='submit'>
+                        type='submit'
+                        sx={{
+                            mt: '12px',
+                            backgroundColor: `${shades.secondary[800]}`,
+                        }}>
                         {t('submitButton')}
-                    </Button>
-                </div>
-            </div>
-        </form>
+                    </Button>{' '}
+                </Box>
+            </Box>
+        </>
     );
 };
 
