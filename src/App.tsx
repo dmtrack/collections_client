@@ -19,6 +19,7 @@ import Login from './scenes/auth/Login';
 import LogOut from './components/LogOut';
 import 'react-toastify/dist/ReactToastify.css';
 import {
+    fetchCollections,
     fetchThemes,
     fetchTopAmountCollections,
 } from './state/actions/collections.actions';
@@ -26,6 +27,7 @@ import UserProfile from './scenes/userPage/UserProfile';
 import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
+import Loader from './utils/loader';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -38,10 +40,17 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
-    // const themes = useAppSelector((state) => state.collections.themes);
-    // const topAmountCollections = useAppSelector(
-    //     (state) => state.collections.topAmountCollections
-    // );
+    const themes = useAppSelector((state) => state.collections.themes);
+    const topAmountCollections = useAppSelector(
+        (state) => state.collections.topAmountCollections
+    );
+    const { itemsLoading } = useAppSelector((state) => state.items);
+    const { topRatedItemsLoading } = useAppSelector((state) => state.items);
+    const { themesLoading } = useAppSelector((state) => state.collections);
+    const { collectionsTopAmountLoading } = useAppSelector(
+        (state) => state.collections
+    );
+
     const { isAuth } = useAppSelector((state) => state.auth);
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
@@ -53,7 +62,7 @@ const App: React.FC = () => {
     const userId = Number(localStorageService.getUserId());
 
     useEffect(() => {
-        // dispatch(fetchCollections());
+        dispatch(fetchCollections());
         dispatch(fetchTopAmountCollections());
         dispatch(fetchThemes());
         i18n.changeLanguage(lang);
@@ -72,51 +81,69 @@ const App: React.FC = () => {
 
     return (
         <div className='app'>
-            <BrowserRouter>
-                <Suspense fallback={null}>
-                    <Navbar />
-                    <Breadcrumbs />
-                    <ScrollToTop />
-                    <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route
-                            path='collection/:collectionId'
-                            element={<Collection />}
-                        />
-                        <Route path='item/:itemId/' element={<ItemPage />} />
-                        <Route path='users/:userId' element={<UserProfile />} />
-                        <Route
-                            path='users/:userId/edit'
-                            element={<UserEdit />}
-                        />
-                        <Route
-                            path='users/:userId/create'
-                            element={<CreateCollection />}
-                        />{' '}
-                        <Route
-                            path='collection/:collectionId/edit'
-                            element={<EditCollection />}
-                        />
-                        <Route path='login/:type?' element={<Login />} />
-                        <Route path='admin' element={<AdminPanel />} />
-                        <Route path='logout' element={<LogOut />} />
-                        <Route path='*' element={<NotfoundPage />} />
-                    </Routes>
-                    <ToastContainer
-                        position='bottom-right'
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme='dark'
-                    />
-                    <Footer />
-                </Suspense>
-            </BrowserRouter>
+            {itemsLoading &&
+            topRatedItemsLoading &&
+            collectionsTopAmountLoading &&
+            themesLoading ? (
+                <Loader />
+            ) : (
+                <>
+                    <BrowserRouter>
+                        <Suspense fallback={null}>
+                            <Navbar />
+                            <Breadcrumbs />
+                            <ScrollToTop />
+                            <Routes>
+                                <Route path='/' element={<Home />} />
+                                <Route
+                                    path='collection/:collectionId'
+                                    element={<Collection />}
+                                />
+                                <Route
+                                    path='item/:itemId/'
+                                    element={<ItemPage />}
+                                />
+                                <Route
+                                    path='users/:userId'
+                                    element={<UserProfile />}
+                                />
+                                <Route
+                                    path='users/:userId/edit'
+                                    element={<UserEdit />}
+                                />
+                                <Route
+                                    path='users/:userId/create'
+                                    element={<CreateCollection />}
+                                />{' '}
+                                <Route
+                                    path='collection/:collectionId/edit'
+                                    element={<EditCollection />}
+                                />
+                                <Route
+                                    path='login/:type?'
+                                    element={<Login />}
+                                />
+                                <Route path='admin' element={<AdminPanel />} />
+                                <Route path='logout' element={<LogOut />} />
+                                <Route path='*' element={<NotfoundPage />} />
+                            </Routes>
+                            <ToastContainer
+                                position='bottom-right'
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover
+                                theme='dark'
+                            />
+                            <Footer />
+                        </Suspense>
+                    </BrowserRouter>
+                </>
+            )}
         </div>
     );
 };
