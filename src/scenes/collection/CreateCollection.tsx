@@ -15,6 +15,7 @@ import Loader from '../../utils/loader';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../../theme';
 import { MarkdownFormControl } from '../../components/Markdown/MarkdownFormControl';
+import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -128,29 +129,7 @@ const CreateCollection = () => {
                         label=''
                     />
                 </Box>
-                {/* /* <FixedConfigInputs />
-                <ConfigInputs
-                    configInputs={configInputs}
-                    setConfigInputs={setConfigInputs}
-                    editable={editable}
-                />
-                {loading ? (
-                    <Box ml='auto'>
-                        <Spinner />
-                    </Box>
-                ) : (
-                    <Box display='flex' justifyContent='space-between'>
-                        <TransButton
-                            variant='outlined'
-                            color='inherit'
-                            onClick={() => navigate(-1)}>
-                            Cancel
-                        </TransButton>
-                        <TransButton type='submit' variant='outlined'>
-                            Save
-                        </TransButton>
-                    </Box>
-                )} */}
+                <DragAndDrop />
                 {collectionsLoading ? (
                     <Loader />
                 ) : (

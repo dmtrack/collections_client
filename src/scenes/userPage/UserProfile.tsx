@@ -109,7 +109,6 @@ const UserProfile = () => {
                         </Box>
                     </Box>
 
-                    {/* ACTIONS */}
                     <Box flex='5 1 60%' mb='16px'>
                         <Box m='0px 0 24px 0'>
                             <Typography
