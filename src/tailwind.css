@@ -39,6 +39,7 @@ body {
 }
 
 .create-collection {
+    mt: 32px;
     display: flex;
     flex-direction: column;
 }

@@ -22,7 +22,7 @@ const MainCarousel = () => {
         <Box
             sx={{
                 display: 'flex',
-                marginTop: isNonMobile ? '128px' : '48px',
+                marginTop: isNonMobile ? '64px' : '24px',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 marginBottom: isNonMobile ? '0px' : '80px',

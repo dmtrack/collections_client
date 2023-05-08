@@ -79,12 +79,11 @@ const App: React.FC = () => {
         if (userId === 0) dispatch(logOut());
     }, [userId]);
 
+    const isLoading = itemsLoading && topRatedItemsLoading && themesLoading;
+
     return (
         <div className='app'>
-            {itemsLoading &&
-            topRatedItemsLoading &&
-            collectionsTopAmountLoading &&
-            themesLoading ? (
+            {isLoading ? (
                 <Loader />
             ) : (
                 <>
