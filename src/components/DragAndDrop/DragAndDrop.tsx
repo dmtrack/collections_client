@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
-import { fileTypes } from '../../utils/constants';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
-function DragDrop() {
-    const [file, setFile] = useState<File | null>(null);
-    const handleChange = (file: File) => {
-        setFile(file);
-        console.log(file);
-    };
+interface IDragAndDrop {
+    chooseFile: (file: File) => void;
+    fileTypes: string[];
+    hoverTitle: string;
+    caption?: string;
+    name: string;
+    isDisabled: boolean;
+}
+
+function DragDrop({
+    chooseFile,
+    fileTypes,
+    hoverTitle,
+    name,
+    isDisabled,
+}: IDragAndDrop) {
+    const { t } = useTranslation('translation');
+
     return (
-        <FileUploader
-            handleChange={handleChange}
-            name='file'
-            types={fileTypes}
-            hoverTitle={t('Drop here')}
-        />
+        <>
+            <FileUploader
+                handleChange={chooseFile}
+                name={name}
+                types={fileTypes}
+                hoverTitle={hoverTitle}
+                isDisabled={isDisabled}
+            />
+        </>
     );
 }
 
