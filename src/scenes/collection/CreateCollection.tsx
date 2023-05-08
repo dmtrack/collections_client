@@ -13,6 +13,7 @@ import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import { fileTypes } from '../../utils/constants';
 import { ICollection, ICollectionFormValues } from '../../models/ICollection';
 import { SelectOption } from '../../models/global';
+import CustomFieldForm from '../../components/CustomFieldForm';
 
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -133,6 +134,9 @@ const CreateCollection = () => {
                         />
                     </Box>
                 </Box>
+                {/* <Box>
+                    <CustomFieldForm />
+                </Box> */}
             </Box>
             {collectionsLoading ? (
                 <Loader />

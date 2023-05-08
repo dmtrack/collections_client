@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Box, useMediaQuery } from '@mui/material';
 import { shades } from '../../theme';
 import { ThemeChip } from '../../components/ThemeChip';
+import { useState } from 'react';
 
 interface ICollectionThumb {
     collection: ICollection;
@@ -19,9 +20,13 @@ function CollectionCard({ collection }: ICollectionThumb) {
     const { collectionId } = useParams();
     const { t } = useTranslation(['collection_page']);
     const isNonMobile = useMediaQuery('(min-width:600px)');
+    const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card
+            sx={{ maxWidth: 345 }}
+            onMouseOver={() => setIsHovered(true)}
+            onMouseOut={() => setIsHovered(false)}>
             <CardMedia
                 sx={{
                     height: 140,
@@ -42,31 +47,19 @@ function CollectionCard({ collection }: ICollectionThumb) {
                         color={shades.secondary[800]}>
                         {collection.name}
                     </Typography>{' '}
-                    <ThemeChip themeId={collection.themeId} />
+                    <ThemeChip themeId={Number(collection.themeId)} />
                 </Box>
                 <Typography variant='body2' color='text.secondary'>
                     {collection.description}
                 </Typography>
-                {/* <Typography
-                    gutterBottom
-                    fontSize='12px'
-                    fontWeight='600'
-                    component='div'
-                    color='text.secondary'>
-                    {t('Theme')}: {collection.themeName}
-                </Typography> */}
-                {/* <Typography
-                    gutterBottom
-                    fontSize='12px'
-                    fontWeight='600'
-                    component='div'
-                    color='text.secondary'>
-                    Tags
-                </Typography> */}
             </CardContent>
-            <CardActions>
+            <CardActions sx={{ display: 'flex', justifyContent: 'end' }}>
                 <Button size='small'>
-                    <Link to={`/collection/${collectionId}`}>GO</Link>
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/collection/${collection.id}`}>
+                        GO
+                    </Link>
                 </Button>
             </CardActions>
         </Card>

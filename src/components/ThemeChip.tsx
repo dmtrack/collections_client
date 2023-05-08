@@ -6,10 +6,20 @@ import { useAppDispatch } from '../hook/redux';
 import { useTranslation } from 'react-i18next';
 // import { setSearchTheme } from "../store/slices/mainSlice"
 
-export const ThemeChip: FC<{ themeId: number }> = ({ themeId }) => {
-    const { t } = useTranslation(['collection_page']);
+type TypeColor =
+    | 'primary'
+    | 'secondary'
+    | 'default'
+    | 'success'
+    | 'warning'
+    | 'error';
 
-    const dispatch = useAppDispatch;
+export const ThemeChip: FC<{
+    themeId: number;
+    color?: TypeColor;
+    backgroundColor?: string;
+}> = ({ themeId, color, backgroundColor }) => {
+    const { t } = useTranslation(['collection_page']);
     const navigate = useNavigate();
     const { getTheme } = useCollection();
     const theme = getTheme(themeId);
@@ -22,10 +32,11 @@ export const ThemeChip: FC<{ themeId: number }> = ({ themeId }) => {
         <Box m={0.5} display='inline-block'>
             <Chip
                 label={t(`${theme?.name}`)}
-                color='primary'
+                color={color}
                 size='small'
                 variant='outlined'
                 onClick={handleClick}
+                sx={{ backgroundColor: `${backgroundColor}` }}
             />
         </Box>
     );

@@ -21,6 +21,7 @@ const LastItemList = () => {
     const { topRatedItemsLoading } = useAppSelector((state) => state.items);
     const { items } = useAppSelector((state) => state.items);
     const { topRated } = useAppSelector((state) => state.items);
+
     const topRatedFlat = topRated?.map((element) => {
         return {
             id: element.id,
@@ -28,6 +29,7 @@ const LastItemList = () => {
             image: element.item?.image,
             name: element.item?.name,
             created: element.item?.created,
+            collectionId: Number(element.item?.collectionId),
         };
     });
 

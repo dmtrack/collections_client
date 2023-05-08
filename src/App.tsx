@@ -40,16 +40,12 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
     const { t, i18n } = useTranslation();
-    const themes = useAppSelector((state) => state.collections.themes);
-    const topAmountCollections = useAppSelector(
-        (state) => state.collections.topAmountCollections
+
+    const { itemsLoading, topRatedItemsLoading } = useAppSelector(
+        (state) => state.items
     );
-    const { itemsLoading } = useAppSelector((state) => state.items);
-    const { topRatedItemsLoading } = useAppSelector((state) => state.items);
-    const { themesLoading } = useAppSelector((state) => state.collections);
-    const { collectionsTopAmountLoading } = useAppSelector(
-        (state) => state.collections
-    );
+    const { themesLoading, collectionsTopAmountLoading, topAmountCollections } =
+        useAppSelector((state) => state.collections);
 
     const { isAuth } = useAppSelector((state) => state.auth);
     const changeLanguage = (language: string) => {

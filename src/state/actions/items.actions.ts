@@ -1,7 +1,7 @@
 import { AppDispatch } from '..';
 import { itemSlice } from '../slices/item.slice';
 import itemService from '../../services/itemService';
-import { ICreateItem, IItem, IUpdateItem } from '../../models/IItem';
+import { ICreateItem, IUpdateItem } from '../../models/IItem';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {

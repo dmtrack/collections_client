@@ -1,7 +1,3 @@
-import { AxiosResponse } from 'axios';
-import { EitherResponse } from '../api/axios/api.interface';
-import { AuthorizationError } from './errors/AuthorizationError';
-import { DataBaseError } from './errors/DataBaseError';
 import { IComment } from './IComment';
 import { ILike } from './ILike';
 import { ITag } from './ITag';
@@ -10,10 +6,15 @@ export interface IItem {
     id: number;
     name?: string;
     created?: string;
-    collectionId?: string;
+    collectionId?: number;
     image?: string;
     comments?: IComment[];
-    item?: { image: string; name: string; created: string };
+    item?: {
+        image: string;
+        name: string;
+        created: string;
+        collectionId: number;
+    };
     count?: string;
     tags?: ITag[];
     likes?: ILike[];

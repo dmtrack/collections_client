@@ -9,10 +9,15 @@ export interface IItemCreateResponse {
     id: number;
     name?: string;
     created?: string;
-    collectionId?: string;
+    collectionId?: number;
     image?: string;
     comments?: IComment[];
-    item?: { image: string; name: string; created: string };
+    item?: {
+        image: string;
+        name: string;
+        created: string;
+        collectionId: number;
+    };
     count?: string;
     tags?: ITag[];
     likes?: ILike[];

@@ -14,8 +14,12 @@ export const useCollection = () => {
         userId &&
         (collectionState.collections.find((user) => user.id === userId) ||
             isAdmin);
-    const getTheme = (themeId: number) => {
-        return collectionState.themes.find((theme) => theme.id === themeId);
+    const getTheme = (id: number) => {
+        const theme = collectionState.themes.find(
+            (theme) => Number(theme.id) === id
+        );
+        return theme;
     };
+
     return { getTheme, isAuthor, ...collectionState };
 };
