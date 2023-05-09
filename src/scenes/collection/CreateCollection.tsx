@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '../../hook/redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import Loader from '../../utils/loader';
+import Loader from '../../components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../../theme';
 import { MarkdownFormControl } from '../../components/Markdown/MarkdownFormControl';
