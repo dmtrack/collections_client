@@ -23,6 +23,7 @@ import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import EditIcon from '@mui/icons-material/Edit';
 import CollectionCard from '../collection/CollectionCard';
 import EmptyContainer from './EmptyContainer';
+import Loader from '../../components/Loader/Loader';
 
 const UserProfile = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
@@ -45,12 +46,18 @@ const UserProfile = () => {
         dispatch(fetchUserCollections(Number(userId)));
     }, [userId]);
 
+    const { collectionsUserLoading } = useAppSelector(
+        (state) => state.collections
+    );
+
     const handleChange = (e: any, newValue: string) => {
         setValue(newValue);
     };
 
+    const isLoading = collectionsUserLoading;
     return (
         <>
+            {isLoading && <Loader />}
             <Box width='80%' m='36px auto 80px auto' className='user-profile'>
                 <Box display='flex' columnGap='16px'>
                     {/* IMAGES */}
