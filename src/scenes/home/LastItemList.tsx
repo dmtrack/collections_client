@@ -7,7 +7,6 @@ import {
     fetchTopRatedItems,
 } from '../../state/actions/items.actions';
 import { IItem } from '../../models/IItem';
-import Loader from '../../components/Loader/Loader';
 import { shades } from '../../theme';
 import { v4 } from 'uuid';
 
@@ -43,69 +42,62 @@ const LastItemList = () => {
 
     return (
         <>
-            {' '}
-            {!itemsLoading && !topRatedItemsLoading ? (
-                <Box width={isNonMobile ? '80%' : '100%'} margin='0px auto'>
-                    <Typography
-                        variant='h4'
-                        textAlign='left'
-                        color={shades.secondary[800]}
-                        sx={{
-                            letterSpacing: '-0.5px',
-                            fontWeight: '600',
-                            paddingLeft: isNonMobile ? '0px' : '64px',
-                        }}>
-                        Discover items
-                    </Typography>
-                    <Tabs
-                        textColor='primary'
-                        indicatorColor='primary'
-                        value={value}
-                        onChange={handleChange}
-                        centered
-                        TabIndicatorProps={{
-                            sx: { display: isNonMobile ? 'block' : 'none' },
-                        }}
-                        sx={{
-                            m: '15px',
-                            '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
-                        }}>
-                        <Tab label='NEW' value='newItems' />
-                        <Tab label='TOP RATED' value='topRated' />
-                        <Tab label='MOST COMMENTED' value='mostCommented' />
-                    </Tabs>
-                    <Box
-                        margin='0 auto'
-                        display='grid'
-                        gridTemplateColumns='repeat(auto-fill, 300px)'
-                        justifyContent='space-around'
-                        rowGap='32px'
-                        columnGap='1.33%'>
-                        {value === 'newItems' &&
-                            items
-                                .slice(0, 3)
-                                .map((item: IItem) => (
-                                    <Item item={item} key={v4()} />
-                                ))}
-                        {value === 'topRated' &&
-                            topRatedFlat
-                                .slice(0, 3)
-                                .map((item: IItem) => (
-                                    <Item item={item} key={v4()} />
-                                ))}
-                        {value === 'mostCommented' &&
-                            items
-                                .slice(0, 3)
-                                .map((item: IItem) => (
-                                    <Item item={item} key={v4()} />
-                                ))}
-                    </Box>
+            <Box width={isNonMobile ? '80%' : '100%'} margin='0px auto'>
+                <Typography
+                    variant='h4'
+                    textAlign='left'
+                    color={shades.secondary[800]}
+                    sx={{
+                        letterSpacing: '-0.5px',
+                        fontWeight: '600',
+                        paddingLeft: isNonMobile ? '0px' : '64px',
+                    }}>
+                    Discover items
+                </Typography>
+                <Tabs
+                    textColor='primary'
+                    indicatorColor='primary'
+                    value={value}
+                    onChange={handleChange}
+                    centered
+                    TabIndicatorProps={{
+                        sx: { display: isNonMobile ? 'block' : 'none' },
+                    }}
+                    sx={{
+                        m: '15px',
+                        '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
+                    }}>
+                    <Tab label='NEW' value='newItems' />
+                    <Tab label='TOP RATED' value='topRated' />
+                    <Tab label='MOST COMMENTED' value='mostCommented' />
+                </Tabs>
+                <Box
+                    margin='0 auto'
+                    display='grid'
+                    gridTemplateColumns='repeat(auto-fill, 300px)'
+                    justifyContent='space-around'
+                    rowGap='32px'
+                    columnGap='1.33%'>
+                    {value === 'newItems' &&
+                        items
+                            .slice(0, 3)
+                            .map((item: IItem) => (
+                                <Item item={item} key={v4()} />
+                            ))}
+                    {value === 'topRated' &&
+                        topRatedFlat
+                            .slice(0, 3)
+                            .map((item: IItem) => (
+                                <Item item={item} key={v4()} />
+                            ))}
+                    {value === 'mostCommented' &&
+                        items
+                            .slice(0, 3)
+                            .map((item: IItem) => (
+                                <Item item={item} key={v4()} />
+                            ))}
                 </Box>
-            ) : (
-                <>
-                    <Loader />
-                </>
-            )}
+            </Box>
         </>
     );
 };

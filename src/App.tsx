@@ -28,6 +28,7 @@ import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
 import Loader from './components/Loader/Loader';
+
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
