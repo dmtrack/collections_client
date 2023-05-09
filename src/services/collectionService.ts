@@ -1,14 +1,15 @@
 import { IUserAuthResponse } from '../models/response/authResponse';
 import { Axios, AxiosResponse } from 'axios';
-import api, { axiosGet } from '../api/axios/apiClient';
+import api, { axiosGet, axiosPost } from '../api/axios/apiClient';
 import {
     ICollection,
-    ICreateCollection,
     IGetCollectionResponse,
     IGetThemesResponse,
 } from '../models/ICollection';
 import { AuthorizationError } from '../models/errors/AuthorizationError';
 import { DataBaseError } from '../models/errors/DataBaseError';
+import { ICreateCollectionBody } from '../models/request/collection-body';
+import { Collection } from 'typescript';
 
 export default class collectionService {
     static async getCollections() {
@@ -38,8 +39,11 @@ export default class collectionService {
         >(`collection/topamountofitems/`);
     }
 
-    static createCollection(): Promise<AxiosResponse> {
-        return api.post<ICreateCollection>('collection/create');
+    static createCollection(data: ICreateCollectionBody) {
+        return axiosPost<
+            AuthorizationError | DataBaseError,
+            ICreateCollectionBody
+        >('collection/create', data);
     }
 
     static getOneCollection(id: number): Promise<AxiosResponse> {

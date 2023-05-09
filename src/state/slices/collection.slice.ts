@@ -8,6 +8,7 @@ import {
     DeleteCollection,
     ICollectionState,
 } from '../models/ICollection.state';
+import { boolean } from 'yup';
 
 const initialState: ICollectionState = {
     collectionsLoading: false,
@@ -19,6 +20,7 @@ const initialState: ICollectionState = {
     topAmountCollections: [],
     userCollections: [],
     themes: [],
+    collectionIsBusy: false,
 };
 
 export const collectionSlice = createSlice({
@@ -79,7 +81,9 @@ export const collectionSlice = createSlice({
                 return col.id !== action.payload.id;
             });
         },
-
+        setCollectionsBusy: (state, { payload }: PayloadAction<boolean>) => {
+            state.collectionIsBusy = payload;
+        },
         editCollection: (state, action: PayloadAction<DeleteCollection>) => {},
     },
 });

@@ -1,8 +1,11 @@
 import { AuthorizationError } from './../models/errors/AuthorizationError';
-import { IAuthData, ILoginData } from '../models/response/authResponse';
-import { axiosGet, axiosPost, axiosUpdate } from '../api/axios/apiClient';
+import {
+    IAuthData,
+    ILoginData,
+    IUserLogout,
+} from '../models/response/authResponse';
+import { axiosGet, axiosPost } from '../api/axios/apiClient';
 import { DataBaseError } from '../models/errors/DataBaseError';
-import { IGetUserResponse } from '../models/IUser';
 import { IUserAuthResponse } from '../models/response/authResponse';
 
 export default class AuthService {
@@ -18,6 +21,10 @@ export default class AuthService {
             '/user/login',
             data
         );
+    }
+
+    static async logout() {
+        return axiosGet<AuthorizationError, IUserLogout>('/user/logout');
     }
 
     static async reconnect(id: number) {

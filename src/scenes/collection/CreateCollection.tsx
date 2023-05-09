@@ -2,28 +2,42 @@ import { Box, TextField, MenuItem, useMediaQuery } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useAppSelector } from '../../hook/redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Loader from '../../components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../../theme';
 import { MarkdownFormControl } from '../../components/Markdown/MarkdownFormControl';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
-import { fileTypes } from '../../utils/constants';
+import { MAX_IMAGE_SIZE, fileTypes } from '../../utils/constants';
 import { ICollection, ICollectionFormValues } from '../../models/ICollection';
 import { SelectOption } from '../../models/global';
 import CustomFieldForm from '../../components/CustomFieldForm';
 
+import { toast } from 'react-toastify';
+import { createCollection } from '../../state/actions/collections.actions';
+
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
-
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { isAuth } = useAppSelector((state) => state.auth);
-    const { collectionsLoading } = useAppSelector((state) => state.collections);
+    const { isAuth, userId } = useAppSelector((state) => state.auth);
+    const { collectionsLoading, collectionIsBusy } = useAppSelector(
+        (state) => state.collections
+    );
+    const isLoading = collectionIsBusy || collectionsLoading;
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const { collectionId } = useParams();
-    const [file, setFile] = useState<File | null>(null);
+    const location = useLocation();
+    const editing = location.pathname.includes('edit');
+    const [image, setImage] = useState<File | null>(null);
+
+    useEffect(() => {
+        if (image) {
+            setValue('image', image);
+        }
+    }, [image]);
 
     useEffect(() => {
         if (!isAuth) navigate('/');
@@ -31,7 +45,7 @@ const CreateCollection = () => {
     const themes = useAppSelector((state) => state.collections.themes);
     const collectionThemes = themes.map((theme) => theme.name);
     useEffect(() => {
-        setFocus('title');
+        setFocus('name');
     }, []);
 
     const selectedCollection = useAppSelector((state) =>
@@ -50,7 +64,7 @@ const CreateCollection = () => {
     };
 
     const collectionThemeOptions: SelectOption[] = collectionThemes.map(
-        (value) => ({
+        (value: string) => ({
             value,
             label: `${t(value)}`,
         })
@@ -59,21 +73,45 @@ const CreateCollection = () => {
     const {
         register,
         handleSubmit,
-        watch,
         control,
         setFocus,
-        clearErrors,
         setValue,
         formState: { errors },
     } = useForm<ICollectionFormValues>();
 
-    const onSubmit: SubmitHandler<ICollectionFormValues> = (data) =>
-        console.log(data);
+    useEffect(() => {
+        if (!isAuth) navigate('/');
+    }, [isAuth, navigate]);
 
-    const handleChange = (file: File) => {
-        setFile(file);
-        console.log(file);
+    const handleSetImage = (image: File) => {
+        setImage(image);
     };
+
+    const onSubmit: SubmitHandler<ICollectionFormValues> = (data) => {
+        if (image && image?.size > MAX_IMAGE_SIZE)
+            return toast('The maximum image size is 10MB');
+        if (editing) {
+            // const removedConfigs = editable.itemConfigs.filter((config) => {
+            //     return !configInputs.find(
+            //         (newConfig) => newConfig.id === config.id
+            //     );
+            // });
+            // const sendData: EditCollectionPayload = {
+            //     ...editable.collection,
+            //     ...data,
+            //     image: data.image[0],
+            //     itemConfigs,
+            //     removedConfigs,
+            // };
+            // if (editable.collection.imageUrl && !data.existingImage) {
+            //     sendData.deletedImage = editable.collection.imageUrl;
+            // }
+            // dispatch(editCollection(sendData, navigate));
+        } else {
+            dispatch(createCollection({ ...data, userId }, navigate));
+        }
+    };
+
     const [description, setDescription] = useState(
         defaultFormValues.description
     );
@@ -83,89 +121,98 @@ const CreateCollection = () => {
     }, [description]);
 
     return (
-        <Box
-            width='80%'
-            m='36px auto 80px auto'
-            className='create-collection'
-            alignItems={isNonMobile ? 'start' : 'center'}>
-            <Box width='100%' display='flex' flexWrap='wrap' gap='48px'>
-                <Box
-                    component='form'
-                    display='flex'
-                    flexDirection='column'
-                    gap='12px'
-                    px={1}
-                    onSubmit={handleSubmit(onSubmit)}>
-                    <TextField
-                        select
-                        label={t('theme')}
-                        defaultValue={''}
-                        margin='normal'
-                        {...register('theme', { required: true })}
-                        error={!!errors.theme}
-                        sx={{ mb: '0px' }}>
-                        {themes.map((theme) => (
-                            <MenuItem key={theme.id} value={theme.id}>
-                                {theme.name}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <TextField
-                        label={t('title')}
-                        margin='normal'
-                        {...register('title', { required: true })}
-                        error={!!errors.title}
-                    />
+        <>
+            {isLoading && <Loader />}
+            <Box
+                width='80%'
+                m='36px auto 80px auto'
+                className='create-collection'
+                alignItems={isNonMobile ? 'start' : 'center'}>
+                <Box width='100%' display='flex' flexWrap='wrap' gap='48px'>
+                    <Box
+                        component='form'
+                        display='flex'
+                        flexDirection='column'
+                        gap='12px'
+                        px={1}
+                        onSubmit={handleSubmit(onSubmit)}>
+                        <TextField
+                            select
+                            label={t('theme')}
+                            defaultValue={''}
+                            margin='normal'
+                            {...register('themeId', { required: true })}
+                            error={!!errors.themeId}
+                            sx={{ mb: '0px' }}>
+                            {themes.map((theme) => (
+                                <MenuItem
+                                    key={theme.id}
+                                    value={Number(theme.id)}>
+                                    {theme.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField
+                            label={t('name')}
+                            margin='normal'
+                            {...register('name', { required: true })}
+                            error={!!errors.name}
+                        />
 
-                    <Box mb='8px'>
-                        <MarkdownFormControl
-                            control={control}
-                            controlName='description'
-                            label=''
-                        />
-                    </Box>
-                    <Box>
-                        <DragAndDrop
-                            chooseFile={handleChange}
-                            fileTypes={fileTypes}
-                            hoverTitle={t('Drop here')}
-                            name='test name'
-                            isDisabled={false}
-                        />
-                    </Box>
-                </Box>
-                {/* <Box>
+                        <Box mb='8px'>
+                            <MarkdownFormControl
+                                control={control}
+                                controlName='description'
+                                label=''
+                            />
+                        </Box>
+                        <Box>
+                            <DragAndDrop
+                                chooseFile={(file: File) =>
+                                    handleSetImage(file)
+                                }
+                                fileTypes={fileTypes}
+                                isDisabled
+                                hoverTitle={t('Drop here')}
+                                name='image'
+                                caption={
+                                    image
+                                        ? 'collections.file'
+                                        : 'collections.noFile'
+                                }
+                            />
+                        </Box>
+
+                        {/* <Box>
                     <CustomFieldForm />
                 </Box> */}
-            </Box>
-            {collectionsLoading ? (
-                <Loader />
-            ) : (
-                <Box alignSelf='start' marginLeft='8px' marginTop='24px'>
-                    <Stack spacing={2} direction='row'>
-                        <Button
-                            color='primary'
-                            variant='contained'
-                            onClick={() => console.log('confirm')}
-                            type='submit'
-                            sx={{
-                                backgroundColor: `${shades.secondary[800]}`,
-                            }}>
-                            {t('create')}
-                        </Button>{' '}
-                        <Button
-                            color='primary'
-                            variant='contained'
-                            onClick={() => console.log('cancel')}
-                            sx={{
-                                backgroundColor: `${shades.secondary[800]}`,
-                            }}>
-                            {t('cancel')}
-                        </Button>{' '}
-                    </Stack>
+
+                        <Box alignSelf='start'>
+                            <Stack spacing={2} direction='row'>
+                                <Button
+                                    color='primary'
+                                    variant='contained'
+                                    type='submit'
+                                    sx={{
+                                        backgroundColor: `${shades.secondary[800]}`,
+                                    }}>
+                                    {t('create')}
+                                </Button>{' '}
+                                <Button
+                                    color='primary'
+                                    variant='contained'
+                                    onClick={() => navigate(-1)}
+                                    sx={{
+                                        backgroundColor: `${shades.secondary[800]}`,
+                                    }}>
+                                    {t('cancel')}
+                                </Button>{' '}
+                            </Stack>
+                        </Box>
+                    </Box>
                 </Box>
-            )}
-        </Box>
+            </Box>
+        </>
     );
 };
 
