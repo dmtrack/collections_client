@@ -49,6 +49,7 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                                 themeId={Number(themeId)}
                                 color='default'
                                 backgroundColor='white'
+                                border='none'
                             />
                         </Box>
                         <Box display='flex' justifyContent='space-between'>

@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Chip } from '@mui/material';
 import { useCollection } from '../hook/collectionStateHook';
-import { useAppDispatch } from '../hook/redux';
 import { useTranslation } from 'react-i18next';
 // import { setSearchTheme } from "../store/slices/mainSlice"
 
@@ -15,10 +14,11 @@ type TypeColor =
     | 'error';
 
 export const ThemeChip: FC<{
+    border?: string;
     themeId: number;
     color?: TypeColor;
     backgroundColor?: string;
-}> = ({ themeId, color, backgroundColor }) => {
+}> = ({ themeId, color, backgroundColor, border }) => {
     const { t } = useTranslation(['collection_page']);
     const navigate = useNavigate();
     const { getTheme } = useCollection();
@@ -36,7 +36,10 @@ export const ThemeChip: FC<{
                 size='small'
                 variant='outlined'
                 onClick={handleClick}
-                sx={{ backgroundColor: `${backgroundColor}`, border: 'none' }}
+                sx={{
+                    backgroundColor: `${backgroundColor}`,
+                    border: `${border}`,
+                }}
             />
         </Box>
     );
