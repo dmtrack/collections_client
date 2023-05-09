@@ -4,7 +4,7 @@ import { UsersList } from '../../components/Userslist';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 
 import { fetchUsers } from '../../state/actions/userActions';
-import Loader from '../../utils/loader';
+import Loader from '../../components/Loader/Loader';
 import { Box, Grow } from '@mui/material';
 
 export function AdminPanel() {

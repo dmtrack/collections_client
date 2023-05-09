@@ -7,7 +7,7 @@ import {
     fetchTopRatedItems,
 } from '../../state/actions/items.actions';
 import { IItem } from '../../models/IItem';
-import Loader from '../../utils/loader';
+import Loader from '../../components/Loader/Loader';
 import { shades } from '../../theme';
 import { v4 } from 'uuid';
 

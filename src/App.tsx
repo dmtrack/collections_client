@@ -27,7 +27,7 @@ import UserProfile from './scenes/userPage/UserProfile';
 import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
-import Loader from './utils/loader';
+import Loader from './components/Loader/Loader';
 const ScrollToTop = () => {
     const { pathname } = useLocation();
 
@@ -75,70 +75,65 @@ const App: React.FC = () => {
         if (userId === 0) dispatch(logOut());
     }, [userId]);
 
-    const isLoading = itemsLoading && topRatedItemsLoading && themesLoading;
+    const isLoading = itemsLoading || topRatedItemsLoading || themesLoading;
 
     return (
         <div className='app'>
-            {isLoading ? (
-                <Loader />
-            ) : (
-                <>
-                    <BrowserRouter>
-                        <Suspense fallback={null}>
-                            <Navbar />
-                            <Breadcrumbs />
-                            <ScrollToTop />
-                            <Routes>
-                                <Route path='/' element={<Home />} />
-                                <Route
-                                    path='collection/:collectionId'
-                                    element={<Collection />}
-                                />
-                                <Route
-                                    path='item/:itemId/'
-                                    element={<ItemPage />}
-                                />
-                                <Route
-                                    path='users/:userId'
-                                    element={<UserProfile />}
-                                />
-                                <Route
-                                    path='users/:userId/edit'
-                                    element={<UserEdit />}
-                                />
-                                <Route
-                                    path='users/:userId/create'
-                                    element={<CreateCollection />}
-                                />{' '}
-                                <Route
-                                    path='collection/:collectionId/edit'
-                                    element={<EditCollection />}
-                                />
-                                <Route
-                                    path='login/:type?'
-                                    element={<Login />}
-                                />
-                                <Route path='admin' element={<AdminPanel />} />
-                                <Route path='logout' element={<LogOut />} />
-                                <Route path='*' element={<NotfoundPage />} />
-                            </Routes>
-                            <ToastContainer
-                                position='bottom-right'
-                                autoClose={5000}
-                                hideProgressBar={false}
-                                newestOnTop={false}
-                                closeOnClick
-                                rtl={false}
-                                pauseOnFocusLoss
-                                draggable
-                                pauseOnHover
-                                theme='dark'
+            {isLoading && <Loader />}
+
+            <>
+                <BrowserRouter>
+                    <Suspense fallback={null}>
+                        <Navbar />
+                        <Breadcrumbs />
+                        <ScrollToTop />
+                        <Routes>
+                            <Route path='/' element={<Home />} />
+                            <Route
+                                path='collection/:collectionId'
+                                element={<Collection />}
                             />
-                            <Footer />
-                        </Suspense>
-                    </BrowserRouter>
-                </>
-            )}
+                            <Route
+                                path='item/:itemId/'
+                                element={<ItemPage />}
+                            />
+                            <Route
+                                path='users/:userId'
+                                element={<UserProfile />}
+                            />
+                            <Route
+                                path='users/:userId/edit'
+                                element={<UserEdit />}
+                            />
+                            <Route
+                                path='users/:userId/create'
+                                element={<CreateCollection />}
+                            />{' '}
+                            <Route
+                                path='collection/:collectionId/edit'
+                                element={<EditCollection />}
+                            />
+                            <Route path='login/:type?' element={<Login />} />
+                            <Route path='admin' element={<AdminPanel />} />
+                            <Route path='logout' element={<LogOut />} />
+                            <Route path='*' element={<NotfoundPage />} />
+                        </Routes>
+                        <ToastContainer
+                            position='bottom-right'
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme='dark'
+                        />
+                        <Footer />
+                    </Suspense>
+                </BrowserRouter>
+            </>
         </div>
     );
 };
