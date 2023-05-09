@@ -68,7 +68,6 @@ const App: React.FC = () => {
     useEffect(() => {
         if (isAuth && userId) {
             dispatch(reconnect(userId));
-            console.log('reconnect');
         }
     }, [isAuth]);
 

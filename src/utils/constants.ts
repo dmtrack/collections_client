@@ -9,7 +9,7 @@ export const customFieldsTypes: CustomFieldTypes[] = [
     'checkbox',
 ];
 
-const collectionThemes = [
+export const collectionThemes = [
     'books',
     'vinyl',
     'movies',
@@ -26,3 +26,5 @@ const collectionThemes = [
     'pictures',
     'other',
 ];
+
+export const MAX_IMAGE_SIZE = 10 * 1024 * 1024;

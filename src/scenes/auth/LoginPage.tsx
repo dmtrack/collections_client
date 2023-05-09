@@ -19,17 +19,20 @@ const LoginPage: FC = () => {
 
     const { isAuth } = useAppSelector((state) => state.auth);
     const isFormValid = () => email.value && password.value;
-    if (isAuth) navigate('/');
+    // if (isAuth) navigate('/');
 
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
         if (isFormValid()) {
             try {
                 dispatch(
-                    login({
-                        email: email.value,
-                        password: password.value,
-                    })
+                    login(
+                        {
+                            email: email.value,
+                            password: password.value,
+                        },
+                        navigate
+                    )
                 );
             } catch (e: any) {
                 toast(e);

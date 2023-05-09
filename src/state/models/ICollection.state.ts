@@ -10,6 +10,7 @@ export interface ICollectionState {
     userCollections: ICollection[];
     themes: ITheme[];
     error: string;
+    collectionIsBusy: boolean;
 }
 
 export type DeleteCollection = {

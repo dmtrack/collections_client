@@ -7,6 +7,10 @@ export interface IUserAuthResponse extends AxiosResponse {
     user: IUser;
 }
 
+export interface IUserLogout {
+    message: string;
+}
+
 export interface IError extends Error {
     response: { data: { message: string; error: number } };
 }

@@ -3,7 +3,9 @@ import { AppDispatch } from '..';
 import { IAuthData, ILoginData } from '../../models/response/authResponse';
 import localStorageService from '../../services/localStorageService';
 import AuthService from '../../services/authService';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 export const register = (data: IAuthData) => {
     return async (dispatch: AppDispatch) => {
@@ -28,13 +30,14 @@ export const register = (data: IAuthData) => {
     };
 };
 
-export const login = (data: ILoginData) => {
+export const login = (data: ILoginData, navigate: NavigateFunction) => {
     return async (dispatch: AppDispatch) => {
         const response = await AuthService.login(data);
         response
             .mapRight(({ data: data }) => {
                 localStorageService.setToken(data.accessToken);
                 dispatch(authSlice.actions.login(data));
+                navigate('/');
             })
             .mapLeft((e: any) => {
                 dispatch(authSlice.actions.fetchError(e.response?.data));
@@ -70,7 +73,10 @@ export const reconnect = (id: number) => {
     };
 };
 
-export const logOut = () => (dispatch: AppDispatch) => {
-    localStorageService.removeAuthData();
-    dispatch(authSlice.actions.userLoggedOut());
+export const logOut = () => {
+    return async (dispatch: AppDispatch) => {
+        const response = await AuthService.logout();
+        localStorageService.removeAuthData();
+        dispatch(authSlice.actions.userLoggedOut());
+    };
 };

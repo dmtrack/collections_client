@@ -170,14 +170,12 @@ const UserProfile = () => {
                                     justifyContent='space-around'
                                     rowGap='32px'
                                     columnGap='1.33%'>
-                                    {userCollections
-                                        .slice(0, 4)
-                                        .map((collection, i) => (
-                                            <CollectionCard
-                                                key={`${collection.name}-${i}`}
-                                                collection={collection}
-                                            />
-                                        ))}
+                                    {userCollections.map((collection, i) => (
+                                        <CollectionCard
+                                            key={`${collection.name}-${i}`}
+                                            collection={collection}
+                                        />
+                                    ))}
                                 </Box>
                             </Box>
                         ) : (
