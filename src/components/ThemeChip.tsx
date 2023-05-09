@@ -36,7 +36,7 @@ export const ThemeChip: FC<{
                 size='small'
                 variant='outlined'
                 onClick={handleClick}
-                sx={{ backgroundColor: `${backgroundColor}` }}
+                sx={{ backgroundColor: `${backgroundColor}`, border: 'none' }}
             />
         </Box>
     );

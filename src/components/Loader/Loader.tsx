@@ -1,11 +1,13 @@
-import { Box } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 import styles from './Loader.module.scss';
 
 const Loader = () => {
     return (
         <>
             <Box className={styles.background}>
-                <div className={styles.loader} role='status'></div>
+                <Box sx={{ width: '100%', position: 'fixed' }}>
+                    <LinearProgress color='secondary' />
+                </Box>
             </Box>
         </>
     );
