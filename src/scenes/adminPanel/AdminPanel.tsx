@@ -18,15 +18,10 @@ export function AdminPanel() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isAuth) {
-            dispatch(fetchUsers());
-        }
-    }, []);
-
-    useEffect(() => {
         if (!isAuth) {
             navigate('/');
         }
+        dispatch(fetchUsers());
     }, [isAuth]);
 
     return (
