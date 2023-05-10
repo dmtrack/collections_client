@@ -63,11 +63,7 @@ const Navbar = () => {
                     </Box>
                 ) : null}
 
-                <Box
-                    display='flex'
-                    justifyContent='space-between'
-                    columnGap='20px'
-                    zIndex='2'>
+                <Box display='flex' columnGap='20px' zIndex='2'>
                     <IconButton sx={{ color: `${shades.secondary[800]}` }}>
                         <SearchOutlined />
                     </IconButton>
