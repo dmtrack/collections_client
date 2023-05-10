@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme, Button } from '@mui/material';
 import { shades } from '../theme';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IItemProps } from '../models/IItem';
 import { ThemeChip } from './ThemeChip';
 import { useAppSelector } from '../hook/redux';
@@ -9,7 +9,7 @@ import { ICollection } from '../models/ICollection';
 const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
     const navigate = useNavigate();
     const { collections } = useAppSelector((state) => state.collections);
-
+    const { pathname } = useLocation();
     const currentItemCollection: ICollection | undefined = collections.find(
         (c) => Number(c.id) === Number(item.collectionId)
     );
@@ -22,13 +22,12 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
 
     return (
         <Box width={width}>
-            <Box position='relative'>
+            <Box position='relative' onClick={() => navigate(`item/${id}`)}>
                 <img
                     alt={item.name}
                     width='300px'
                     height='400px'
                     src={image}
-                    onClick={() => navigate(`item/${id}`)}
                     style={{ cursor: 'pointer', borderRadius: '5px' }}
                 />
                 <Box
@@ -44,14 +43,16 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                         justifyContent='space-between'
                         height='100%'>
                         <Box display='flex'>
-                            {' '}
-                            <ThemeChip
-                                themeId={Number(themeId)}
-                                color='default'
-                                backgroundColor='white'
-                                border='none'
-                            />
+                            {pathname === '/' && (
+                                <ThemeChip
+                                    themeId={Number(themeId)}
+                                    color='default'
+                                    backgroundColor='white'
+                                    border='none'
+                                />
+                            )}
                         </Box>
+
                         <Box display='flex' justifyContent='space-between'>
                             <Box
                                 display='flex'
@@ -63,15 +64,16 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                                     {item.name}
                                 </Typography>
                             </Box>
-
-                            <Button
-                                onClick={() => navigate(`item/${id}`)}
-                                sx={{
-                                    backgroundColor: shades.primary[100],
-                                    color: shades.secondary[800],
-                                }}>
-                                GO
-                            </Button>
+                            {pathname === '/' && (
+                                <Button
+                                    onClick={() => navigate(`item/${id}`)}
+                                    sx={{
+                                        backgroundColor: shades.primary[100],
+                                        color: shades.secondary[800],
+                                    }}>
+                                    GO
+                                </Button>
+                            )}
                         </Box>
                     </Box>
                 </Box>

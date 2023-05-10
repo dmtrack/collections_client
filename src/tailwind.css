@@ -43,6 +43,14 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.collection-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 3fr;
+    row-gap: 64px;
+    text-align: center;
+}
 .login {
     display: flex;
     flex-direction: column;

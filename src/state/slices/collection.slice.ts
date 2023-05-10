@@ -8,7 +8,6 @@ import {
     DeleteCollection,
     ICollectionState,
 } from '../models/ICollection.state';
-import { boolean } from 'yup';
 
 const initialState: ICollectionState = {
     collectionsLoading: false,
