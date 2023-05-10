@@ -122,9 +122,9 @@ const Navbar = () => {
                         </NavLink>
                     ) : null}
 
-                    <IconButton sx={{ color: `${shades.secondary[800]}` }}>
+                    {/* <IconButton sx={{ color: `${shades.secondary[800]}` }}>
                         <MenuOutlined />
-                    </IconButton>
+                    </IconButton> */}
                 </Box>
             </Box>
         </Box>
