@@ -13,7 +13,8 @@ export const useCollection = (collectionId: number) => {
         (state: RootState) => state.auth.access.access
     );
     const isAdmin = access === 'admin' ? true : false;
-    const isAuthor = currentUserId && collection?.userId === currentUserId;
+    const hasFullAccess =
+        (currentUserId && collection?.userId === currentUserId) || isAdmin;
 
-    return { isAuthor, collection, isAdmin };
+    return { hasFullAccess, collection, isAdmin };
 };

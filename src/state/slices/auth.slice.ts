@@ -10,6 +10,7 @@ interface IAuthState {
     name: string;
     avatarUrl: string;
     error: string;
+    isBlocked: boolean;
 }
 
 const initialState: IAuthState = {
@@ -19,6 +20,7 @@ const initialState: IAuthState = {
     access: { id: 0, access: '', userId: 0 },
     avatarUrl: '',
     error: '',
+    isBlocked: false,
 };
 
 export const authSlice = createSlice({
@@ -30,6 +32,7 @@ export const authSlice = createSlice({
             state.access = action.payload.user.access;
             state.avatarUrl = action.payload.user.avatarUrl;
             state.isAuth = true;
+            state.isBlocked = action.payload.user.blocked;
             localStorageService.setUser(
                 action.payload.user.id,
                 action.payload.user.access.access

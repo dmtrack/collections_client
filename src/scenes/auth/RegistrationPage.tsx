@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
@@ -72,13 +72,7 @@ const RegistrationPage: React.FC = () => {
                             {...password}
                             id='password'
                         />
-                        {error && (
-                            <p
-                                className='pt-5
-             text-sm text-left text-red-500 dark:text-red-400 mx-auto'>
-                                {error}
-                            </p>
-                        )}
+                        {error && <Box color='red'>{error}</Box>}
                         <Button
                             color='primary'
                             variant='contained'
@@ -98,6 +92,3 @@ const RegistrationPage: React.FC = () => {
 };
 
 export { RegistrationPage };
-function onSubmit(event: FormEvent<HTMLFormElement>): void {
-    throw new Error('Function not implemented.');
-}

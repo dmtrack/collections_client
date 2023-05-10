@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { Box, Typography, Tab, Tabs, useMediaQuery } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../hook/redux';
+import { Box, Tab, Tabs, useMediaQuery } from '@mui/material';
 import Item from '../../components/Item';
 import { fetchItems } from '../../state/actions/items.actions';
 import { IItem } from '../../models/IItem';
-import { shades } from '../../theme';
+
 import { v4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '../../state';

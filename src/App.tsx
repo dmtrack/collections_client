@@ -41,7 +41,7 @@ const ScrollToTop = () => {
 };
 
 const App: React.FC = () => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
 
     const { itemsLoading, topRatedItemsLoading } = useAppSelector(
         (state) => state.items
@@ -49,14 +49,17 @@ const App: React.FC = () => {
     const { themesLoading, collectionsTopAmountLoading, topAmountCollections } =
         useAppSelector((state) => state.collections);
 
-    const { isAuth } = useAppSelector((state) => state.auth);
+    const { isAuth, isBlocked } = useAppSelector((state) => state.auth);
+    const dispatch = useAppDispatch();
     const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
     };
 
+    useEffect(() => {
+        if (isBlocked) dispatch(logOut());
+    }, [isBlocked, dispatch]);
     const lang = useApp().lang;
 
-    const dispatch = useAppDispatch();
     const userId = Number(localStorageService.getUserId());
 
     useEffect(() => {
@@ -64,19 +67,23 @@ const App: React.FC = () => {
         dispatch(fetchTopAmountCollections());
         dispatch(fetchThemes());
         i18n.changeLanguage(lang);
-    }, []);
+    }, [dispatch, lang, i18n]);
 
     useEffect(() => {
-        if (isAuth && userId) {
+        if (isAuth && userId && !isBlocked) {
             dispatch(reconnect(userId));
         }
-    }, [isAuth]);
+    }, [isAuth, dispatch, isBlocked, userId]);
 
     useEffect(() => {
         if (userId === 0) dispatch(logOut());
-    }, [userId]);
+    }, [userId, dispatch]);
 
-    const isLoading = itemsLoading || topRatedItemsLoading || themesLoading;
+    const isLoading =
+        itemsLoading ||
+        topRatedItemsLoading ||
+        themesLoading ||
+        collectionsTopAmountLoading;
 
     return (
         <div className='app'>

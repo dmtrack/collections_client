@@ -17,9 +17,7 @@ const LoginPage: FC = () => {
     const password = useInput('');
     const dispatch = useAppDispatch();
 
-    const { isAuth } = useAppSelector((state) => state.auth);
     const isFormValid = () => email.value && password.value;
-    // if (isAuth) navigate('/');
 
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
@@ -37,7 +35,7 @@ const LoginPage: FC = () => {
             } catch (e: any) {
                 toast(e);
             }
-        } else toast('Please, fill up all fields');
+        } else toast(t('fillAllFields'));
     };
 
     return (
@@ -68,13 +66,7 @@ const LoginPage: FC = () => {
                         {...password}
                         id='password'
                     />
-                    {error && (
-                        <p
-                            className='pt-5
-             text-sm text-left text-red-500 dark:text-red-400 mx-auto'>
-                            {error}
-                        </p>
-                    )}
+                    {error && <Box color='red'>{error}</Box>}
                     <Button
                         color='primary'
                         variant='contained'
