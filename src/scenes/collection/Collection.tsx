@@ -14,7 +14,8 @@ import Loader from '../../components/Loader/Loader';
 import CollectionItems from './CollectionItems';
 import { ThemeChip } from '../../components/ThemeChip';
 import { IItem } from '../../models/IItem';
-import { collectionThemes } from '../../utils/constants';
+
+import { fetchItems } from '../../state/actions/items.actions';
 
 const CollectionPage = () => {
     const { t } = useTranslation('translation', {
@@ -22,14 +23,22 @@ const CollectionPage = () => {
     });
     const navigate = useNavigate();
     const { collectionId } = useParams();
-    const { isAuth } = useAppSelector((state) => state.auth);
+
     const { itemsLoading } = useAppSelector((state) => state.items);
     const dispatch = useAppDispatch();
-    const { collection, isAuthor } = useCollection(Number(collectionId));
+    const { collection, hasFullAccess } = useCollection(Number(collectionId));
     const isNonMobile = useMediaQuery('(min-width:600px)');
-    const collectionItems: IItem[] = [];
 
-    const goBack = () => navigate(-1);
+    useEffect(() => {
+        dispatch(fetchItems());
+    }, [dispatch]);
+
+    const collectionItems: IItem[] = useAppSelector((state) =>
+        state.items.items.filter(
+            (i) => Number(i.collectionId) === Number(collectionId)
+        )
+    );
+
     const goHome = () => navigate('/');
 
     return (
@@ -67,49 +76,55 @@ const CollectionPage = () => {
                                 />
                             </Box>
                         </Box>
+                        {hasFullAccess && (
+                            <Box
+                                justifyContent='center'
+                                display='flex'
+                                gap='12px'>
+                                <Tooltip title='Add item'>
+                                    <Link
+                                        to={`/collection/${collectionId}/create`}>
+                                        {isNonMobile ? (
+                                            <Fab size='small' color='secondary'>
+                                                <AddIcon />
+                                            </Fab>
+                                        ) : (
+                                            <AddIcon
+                                                fontSize='large'
+                                                color='secondary'
+                                            />
+                                        )}
+                                    </Link>
+                                </Tooltip>
 
-                        <Box justifyContent='center' display='flex' gap='12px'>
-                            <Tooltip title='Add item'>
-                                <Link to={`/collection/${collectionId}/create`}>
-                                    {isNonMobile ? (
-                                        <Fab size='small' color='secondary'>
-                                            <AddIcon />
-                                        </Fab>
-                                    ) : (
-                                        <AddIcon
-                                            fontSize='large'
-                                            color='secondary'
-                                        />
-                                    )}
-                                </Link>
-                            </Tooltip>
-
-                            <Tooltip title='Home'>
-                                {isNonMobile ? (
-                                    <Fab size='small' color='primary'>
-                                        <HomeSharpIcon onClick={goHome} />
-                                    </Fab>
-                                ) : (
-                                    <HomeSharpIcon
-                                        fontSize='large'
-                                        onClick={goHome}
-                                    />
-                                )}
-                            </Tooltip>
-
-                            <Tooltip title='Edit collection'>
-                                <Link to={`/collection/${collectionId}/edit`}>
-                                    {' '}
+                                <Tooltip title='Home'>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
-                                            <EditIcon />
+                                            <HomeSharpIcon onClick={goHome} />
                                         </Fab>
                                     ) : (
-                                        <EditIcon fontSize='large' />
+                                        <HomeSharpIcon
+                                            fontSize='large'
+                                            onClick={goHome}
+                                        />
                                     )}
-                                </Link>
-                            </Tooltip>
-                        </Box>
+                                </Tooltip>
+
+                                <Tooltip title='Edit collection'>
+                                    <Link
+                                        to={`/collection/${collectionId}/edit`}>
+                                        {' '}
+                                        {isNonMobile ? (
+                                            <Fab size='small' color='primary'>
+                                                <EditIcon />
+                                            </Fab>
+                                        ) : (
+                                            <EditIcon fontSize='large' />
+                                        )}
+                                    </Link>
+                                </Tooltip>
+                            </Box>
+                        )}
                     </Box>
 
                     <Box
@@ -133,12 +148,20 @@ const CollectionPage = () => {
                         </Box>
                     </Box>
                 </Box>
-                <Box>
+                {collectionItems && collectionItems.length > 0 ? (
                     <CollectionItems
                         collectionId={Number(collectionId)}
                         collectionThemeId={Number(collection?.themeId)}
                     />
-                </Box>
+                ) : (
+                    <>
+                        {' '}
+                        <EmptyContainer
+                            title={t('empty')}
+                            text={t('emptyAndLoggedIn')}
+                        />
+                    </>
+                )}
             </Box>
         </>
     );

@@ -5,19 +5,16 @@ import {
     Tabs,
     Typography,
     Tooltip,
-    Zoom,
     Fab,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { shades } from '../../theme';
 import { IUser } from '../../models/IUser';
 import getOneUser from '../../utils/getOneUser';
-import { FastRewindSharp } from '@mui/icons-material';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { fetchUserCollections } from '../../state/actions/collections.actions';
-import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import EditIcon from '@mui/icons-material/Edit';
@@ -31,15 +28,17 @@ const UserProfile = () => {
     const dispatch = useAppDispatch();
     const { userId } = useParams();
     const [value, setValue] = useState('collections');
-
+    const { auth: currentUser } = useAppSelector((state) => state);
     const navigate = useNavigate();
     const isNonMobile = useMediaQuery('(min-width:600px)');
-
     const [user, setUser] = useState<IUser>();
     const { userCollections } = useAppSelector((state) => state.collections);
-    const goBack = () => navigate(-1);
+
     const goHome = () => navigate('/');
 
+    const hasFullAccess =
+        Number(userId) === Number(currentUser.userId) ||
+        currentUser.access.access === 'admin';
     useEffect(() => {
         getOneUser(Number(userId), setUser);
         // dispatch(setCollectionsEmpty);
@@ -49,7 +48,6 @@ const UserProfile = () => {
     const { collectionsUserLoading } = useAppSelector(
         (state) => state.collections
     );
-
     const handleChange = (e: any, newValue: string) => {
         setValue(newValue);
     };
@@ -74,46 +72,50 @@ const UserProfile = () => {
                                 height='200px'
                             />
                         </Box>
+                        {hasFullAccess && (
+                            <Box
+                                justifyContent='center'
+                                display='flex'
+                                gap='12px'>
+                                <Tooltip title='Add collection'>
+                                    <Link to={`/users/${userId}/create`}>
+                                        {isNonMobile ? (
+                                            <Fab size='small' color='primary'>
+                                                <AddIcon />
+                                            </Fab>
+                                        ) : (
+                                            <AddIcon fontSize='large' />
+                                        )}
+                                    </Link>
+                                </Tooltip>
 
-                        <Box justifyContent='center' display='flex' gap='12px'>
-                            <Tooltip title='Add collection'>
-                                <Link to={`/users/${userId}/create`}>
+                                <Tooltip title='Home'>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
-                                            <AddIcon />
+                                            <HomeSharpIcon onClick={goHome} />
                                         </Fab>
                                     ) : (
-                                        <AddIcon fontSize='large' />
+                                        <HomeSharpIcon
+                                            fontSize='large'
+                                            onClick={goHome}
+                                        />
                                     )}
-                                </Link>
-                            </Tooltip>
+                                </Tooltip>
 
-                            <Tooltip title='Home'>
-                                {isNonMobile ? (
-                                    <Fab size='small' color='primary'>
-                                        <HomeSharpIcon onClick={goHome} />
-                                    </Fab>
-                                ) : (
-                                    <HomeSharpIcon
-                                        fontSize='large'
-                                        onClick={goHome}
-                                    />
-                                )}
-                            </Tooltip>
-
-                            <Tooltip title='Edit user'>
-                                <Link to={`/user/${userId}/edit`}>
-                                    {' '}
-                                    {isNonMobile ? (
-                                        <Fab size='small' color='primary'>
-                                            <EditIcon />
-                                        </Fab>
-                                    ) : (
-                                        <EditIcon fontSize='large' />
-                                    )}
-                                </Link>
-                            </Tooltip>
-                        </Box>
+                                <Tooltip title='Edit user'>
+                                    <Link to={`/user/${userId}/edit`}>
+                                        {' '}
+                                        {isNonMobile ? (
+                                            <Fab size='small' color='primary'>
+                                                <EditIcon />
+                                            </Fab>
+                                        ) : (
+                                            <EditIcon fontSize='large' />
+                                        )}
+                                    </Link>
+                                </Tooltip>
+                            </Box>
+                        )}
                     </Box>
 
                     <Box flex='5 1 60%' mb='16px'>
@@ -128,7 +130,16 @@ const UserProfile = () => {
                                 }}>
                                 {user?.name}
                             </Typography>
-                            <Typography mt='16px'>{user?.email}</Typography>
+                            <Typography mt='16px'>
+                                {t('email')}: {user?.email}
+                            </Typography>{' '}
+                            <Typography mt='4px'>
+                                {t('status')}:{' '}
+                                {user?.blocked ? t('blocked') : t('active')}
+                            </Typography>{' '}
+                            {/* <Typography mt='16px'>
+                                {t('access')}: {user?.access.access}
+                            </Typography> */}
                         </Box>
                     </Box>
                 </Box>
@@ -180,10 +191,13 @@ const UserProfile = () => {
                                 </Box>
                             </Box>
                         ) : (
-                            <EmptyContainer
-                                title={t('collections.empty')}
-                                text={t('collections.emptyAndLoggedIn')}
-                            />
+                            <>
+                                {' '}
+                                <EmptyContainer
+                                    title={t('empty')}
+                                    text={t('emptyAndLoggedIn')}
+                                />
+                            </>
                         ))}
 
                     {value === 'stats' && (

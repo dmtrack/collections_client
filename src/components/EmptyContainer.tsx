@@ -1,6 +1,3 @@
-import React from 'react';
-
-import styles from './EmptyContainer.module.scss';
 import { Box, Typography } from '@mui/material';
 import { shades } from '../theme';
 
@@ -11,7 +8,7 @@ interface EmptyContainerProps {
 
 function EmptyContainer({ title, text }: EmptyContainerProps) {
     return (
-        <Box className='content text-center mt-4 mb-5'>
+        <Box mt='48px' textAlign='center' height='115px'>
             <Typography gutterBottom color={shades.secondary[800]}>
                 {title}{' '}
             </Typography>{' '}
