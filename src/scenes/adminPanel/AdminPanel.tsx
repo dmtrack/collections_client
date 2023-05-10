@@ -14,15 +14,16 @@ export function AdminPanel() {
         (state) => state.users
     );
 
-    const { isAuth } = useAppSelector((state) => state.auth);
+    const { auth: auth } = useAppSelector((state) => state);
     const navigate = useNavigate();
+    const isAdmin = auth.access.access === 'admin';
 
     useEffect(() => {
-        if (!isAuth) {
+        if (!isAdmin) {
             navigate('/');
         }
         dispatch(fetchUsers());
-    }, [isAuth]);
+    }, [isAdmin, dispatch]);
 
     return (
         <>

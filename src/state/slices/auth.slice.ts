@@ -43,7 +43,7 @@ export const authSlice = createSlice({
         },
         userLoggedOut(state) {
             state.isAuth = false;
-            state.userId = 0;
+            state.userId = NaN;
             state.access.access = 'user';
             state.avatarUrl = '';
             state.error = '';
