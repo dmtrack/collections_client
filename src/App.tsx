@@ -6,7 +6,7 @@ import { logOut, reconnect } from './state/actions/auth.actions';
 import localStorageService from './services/localStorageService';
 import { useTranslation } from 'react-i18next';
 import Home from './scenes/home/Home';
-import ItemPage from './scenes/itemDetailsPage/Itempage';
+import ItemPage from './scenes/item/Itempage';
 import NotfoundPage from './components/NotfoundPage';
 import UserEdit from './scenes/userPage/UserEdit';
 import CreateCollection from './scenes/collection/CreateCollection';
@@ -28,6 +28,7 @@ import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
 import Loader from './components/Loader/Loader';
+import CreateItem from './scenes/item/CreateItem';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -90,12 +91,16 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path='/' element={<Home />} />
                             <Route
-                                path='collection/:collectionId'
+                                path='users/:userId/collection/:collectionId'
                                 element={<Collection />}
                             />
                             <Route
                                 path='item/:itemId/'
                                 element={<ItemPage />}
+                            />{' '}
+                            <Route
+                                path='collection/:collectionId/create/'
+                                element={<CreateItem />}
                             />
                             <Route
                                 path='users/:userId'

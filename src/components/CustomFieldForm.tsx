@@ -16,7 +16,7 @@ import { SelectOption, SetState } from '../models/global';
 import ReactSelect from 'react-select';
 import RemoveCircleSharpIcon from '@mui/icons-material/RemoveCircleSharp';
 import ControlPointSharpIcon from '@mui/icons-material/ControlPointSharp';
-import EmptyContainer from '../scenes/userPage/EmptyContainer';
+import EmptyContainer from './EmptyContainer';
 
 export interface IField {
     name: string;

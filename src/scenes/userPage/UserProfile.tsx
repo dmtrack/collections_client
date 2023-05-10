@@ -22,7 +22,7 @@ import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import EditIcon from '@mui/icons-material/Edit';
 import CollectionCard from '../collection/CollectionCard';
-import EmptyContainer from './EmptyContainer';
+import EmptyContainer from '../../components/EmptyContainer';
 import Loader from '../../components/Loader/Loader';
 
 const UserProfile = () => {
@@ -128,7 +128,7 @@ const UserProfile = () => {
                                 }}>
                                 {user?.name}
                             </Typography>
-                            <Typography>{user?.email}</Typography>
+                            <Typography mt='16px'>{user?.email}</Typography>
                         </Box>
                     </Box>
                 </Box>
@@ -174,6 +174,7 @@ const UserProfile = () => {
                                         <CollectionCard
                                             key={`${collection.name}-${i}`}
                                             collection={collection}
+                                            userId={Number(userId)}
                                         />
                                     ))}
                                 </Box>

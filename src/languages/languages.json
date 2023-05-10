@@ -184,6 +184,7 @@
                 "newDefaultImage": "new default image"
             },
             "collectionPage": {
+                "collectionItems": "Collection items",
                 "return": "Return to the previous page",
                 "collectionEdit": "Edit collection",
                 "collectionDelete": "Delete collection",
@@ -194,6 +195,9 @@
                 "#": "#",
                 "image": "Image",
                 "name": "Item name",
+                "collectionName": "Name",
+                "theme": "Theme",
+                "description": "Description",
                 "date": "Creation date & time",
                 "likes": "Likes",
                 "empty": "There're no items yet",
@@ -430,6 +434,7 @@
                 "newDefaultImage": "новое стандартное изображение"
             },
             "collectionPage": {
+                "collectionItems": "Элементы коллекции",
                 "return": "Вернуться на предыдущую страницу",
                 "collectionEdit": "Редактировать",
                 "collectionDelete": "Удалить",
@@ -440,6 +445,8 @@
                 "#": "#",
                 "image": "Изображение",
                 "name": "Название",
+                "theme": "Тема",
+                "description": "Описание",
                 "date": "Дата и время создания",
                 "likes": "Лайки",
                 "empty": "В коллекции пока ничего нет",

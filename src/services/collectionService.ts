@@ -46,8 +46,15 @@ export default class collectionService {
         >('collection/create', data);
     }
 
-    static getOneCollection(id: number): Promise<AxiosResponse> {
-        return api.get<ICollection>(`collection/getone/:${id}`);
+    // static getOneCollection(id: number): Promise<AxiosResponse> {
+    //     return api.get<ICollection>(`collection/getone/:${id}`);
+    // }
+
+    static async getOneCollection(collectionId: number) {
+        return axiosGet<
+            AuthorizationError | DataBaseError,
+            IGetCollectionResponse
+        >(`collection/getone/${collectionId}`);
     }
 
     static updateCollection(): Promise<AxiosResponse> {

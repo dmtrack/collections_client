@@ -16,3 +16,7 @@ export interface ICollectionState {
 export type DeleteCollection = {
     id: number;
 };
+
+export type FilterCollection = {
+    id: number;
+};

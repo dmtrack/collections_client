@@ -52,6 +52,39 @@ export const fetchUserCollections = (userId: number) => {
     };
 };
 
+// export const filterCollectionById = (collectionId: number) => {
+//     return async (dispatch: AppDispatch) => {
+//         dispatch(collectionSlice.actions.fetchingCollections);
+//         dispatch(
+//             collectionSlice.actions.filterOneCollectionSuccess(collectionId)
+//         );
+//     };
+// };
+
+// export const fetchCollectionById = (collectionId: number) => {
+//     return async (dispatch: AppDispatch) => {
+//         dispatch(collectionSlice.actions.fetchingCollections);
+//         const response = await collectionService.getOneCollection(collectionId);
+
+//         response
+//             .mapRight(({ data: collections }) => {
+//                 dispatch(
+//                     collectionSlice.actions.fetchCollectionsUserSuccess(
+//                         collections
+//                     )
+//                 );
+//             })
+//             .mapLeft((e: any) => {
+//                 dispatch(collectionSlice.actions.fetchError(e.response?.data));
+//                 console.error({
+//                     type: e.response.statusText,
+//                     code: e.response.status,
+//                     message: e.response.data,
+//                 });
+//             });
+//     };
+// };
+
 export const fetchTopAmountCollections = () => {
     return async (dispatch: AppDispatch) => {
         dispatch(collectionSlice.actions.fetchingTopAmountCollections());
