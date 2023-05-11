@@ -98,15 +98,15 @@ const App: React.FC = () => {
                         <Routes>
                             <Route path='/' element={<Home />} />
                             <Route
-                                path='users/:userId/collection/:collectionId'
+                                path='collections/:collectionId'
                                 element={<Collection />}
                             />
                             <Route
-                                path='item/:itemId/'
+                                path='items/:itemId/'
                                 element={<ItemPage />}
                             />{' '}
                             <Route
-                                path='collection/:collectionId/create/'
+                                path='collections/:collectionId/create/'
                                 element={<CreateItem />}
                             />
                             <Route
@@ -122,7 +122,7 @@ const App: React.FC = () => {
                                 element={<CreateCollection />}
                             />{' '}
                             <Route
-                                path='collection/:collectionId/edit'
+                                path='collections/:collectionId/edit'
                                 element={<EditCollection />}
                             />
                             <Route path='login/:type?' element={<Login />} />

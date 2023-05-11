@@ -11,7 +11,7 @@ export const SearchCollectionCard = connectHighlight(({ highlight, hit }) => {
     const dispatch = useAppDispatch();
     const highlightTitle = highlight({
         highlightProperty: '_highlightResult',
-        attribute: 'title',
+        attribute: 'name',
         hit,
     });
     const highlightDescription = highlight({
@@ -23,7 +23,7 @@ export const SearchCollectionCard = connectHighlight(({ highlight, hit }) => {
     return (
         <Box className='search-card'>
             <Link
-                to={`/collection/${hit.id}`}
+                to={`/collections/${hit.id}`}
                 onClick={() => dispatch(setSearchOpen(false))}>
                 <HighlightText highlight={highlightTitle} />
                 {highlightDescription.find((h) => h.isHighlighted) && (

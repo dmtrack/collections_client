@@ -13,8 +13,8 @@
             },
             "breadcrumb": {
                 "home": "home",
-                "collection": "collection",
-                "item": "item",
+                "collections": "collections",
+                "items": "items",
                 "users": "users",
                 "create": "create collection",
                 "admin": "admin",
@@ -277,12 +277,12 @@
             },
             "breadcrumb": {
                 "home": "Главная",
-                "collection": "Коллекция",
-                "item": "Элемент",
-                "users": "Пользователи",
+                "collections": "коллекции",
+                "items": "элементы",
+                "users": "пользователи",
                 "create": "Создать коллекцию",
                 "admin": "Админ-панель",
-                "edit": "Редактирование"
+                "edit": "редактирование"
             },
             "footer": {
                 "copyright": "Анастасия Сачко © 2023"

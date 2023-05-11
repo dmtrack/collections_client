@@ -32,6 +32,7 @@ const Navbar = () => {
     const { access } = useAppSelector((state) => state.auth.access);
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const { userId } = useAppSelector((state) => state.auth);
+    const dispatch = useAppDispatch();
 
     return (
         <Box
@@ -66,8 +67,10 @@ const Navbar = () => {
                 ) : null}
 
                 <Box display='flex' columnGap='20px' zIndex='2'>
-                    <Box>
-                        <SearchButton onClick={() => setSearchOpen(true)} />
+                    <Box onClick={() => setSearchOpen(true)}>
+                        <SearchButton
+                            onClick={() => dispatch(setSearchOpen(true))}
+                        />
 
                         <SearchDialog />
                     </Box>

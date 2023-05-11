@@ -22,7 +22,7 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
 
     return (
         <Box width={width}>
-            <Box position='relative' onClick={() => navigate(`item/${id}`)}>
+            <Box position='relative' onClick={() => navigate(`/items/${id}`)}>
                 <img
                     alt={item.name}
                     width='300px'
@@ -66,7 +66,7 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                             </Box>
                             {pathname === '/' && (
                                 <Button
-                                    onClick={() => navigate(`item/${id}`)}
+                                    onClick={() => navigate(`/items/${id}`)}
                                     sx={{
                                         backgroundColor: shades.primary[100],
                                         color: shades.secondary[800],
