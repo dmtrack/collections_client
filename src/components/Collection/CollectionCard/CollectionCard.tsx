@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ICollection } from '../../models/ICollection';
+import { ICollection } from '../../../models/ICollection';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,8 +8,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box, useMediaQuery } from '@mui/material';
-import { shades } from '../../theme';
-import { ThemeChip } from '../../components/ThemeChip';
+import { shades } from '../../../theme';
+import { ThemeChip } from '../../ThemeChip';
 import { useState } from 'react';
 
 interface ICollectionThumb {

@@ -11,12 +11,15 @@ import React, { MouseEventHandler, useState } from 'react';
 import { v4 } from 'uuid';
 import { customFieldsTypes } from '../utils/constants';
 import { useTranslation } from 'react-i18next';
-import { ICustomFieldFormValuesWithId } from '../models/ICollection';
-import { SelectOption, SetState } from '../models/global';
+import {
+    ICustomFieldFormValuesWithId,
+    SelectOption,
+} from '../models/ICollection';
+import { SetState } from '../models/global';
 import ReactSelect from 'react-select';
 import RemoveCircleSharpIcon from '@mui/icons-material/RemoveCircleSharp';
 import ControlPointSharpIcon from '@mui/icons-material/ControlPointSharp';
-import EmptyContainer from './EmptyContainer';
+import EmptyContainer from './Common/EmptyContainer/EmptyContainer';
 
 export interface IField {
     name: string;

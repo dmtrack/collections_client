@@ -10,7 +10,6 @@ import {
 import {
     PersonOutline,
     MenuOutlined,
-    SearchOutlined,
     NightlightOutlined,
     LanguageOutlined,
     Person,
@@ -22,6 +21,9 @@ import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
 import { shades } from '../../theme';
 import { NavLink } from 'react-router-dom';
+import { SearchButton } from '../../components/SearchButton/SearchButton';
+import { setSearchOpen } from '../../state/slices/app.slice';
+import { SearchDialog } from '../../search/SearchDialog';
 
 const Navbar = () => {
     const { t } = useTranslation(['navbar']);
@@ -64,9 +66,11 @@ const Navbar = () => {
                 ) : null}
 
                 <Box display='flex' columnGap='20px' zIndex='2'>
-                    <IconButton sx={{ color: `${shades.secondary[800]}` }}>
-                        <SearchOutlined />
-                    </IconButton>
+                    <Box>
+                        <SearchButton onClick={() => setSearchOpen(true)} />
+
+                        <SearchDialog />
+                    </Box>
                     <Tooltip title='Light mode'>
                         <IconButton sx={{ color: `${shades.secondary[800]}` }}>
                             <NightlightOutlined />

@@ -14,7 +14,7 @@ export interface IUser {
     isActivated: boolean;
     access: IAccess;
     avatarUrl: string;
-    created: number;
+    created: string;
 }
 
 export interface IUsersListProps {
@@ -39,5 +39,13 @@ export interface IGetUserResponse extends AxiosResponse {
     isActivated: boolean;
     access: IAccess;
     avatarUrl: string;
-    created: number;
+    created: string;
+}
+
+export interface IParsedToken {
+    id: string;
+    roles: string[];
+    isBlocked: boolean;
+    iat: number;
+    exp: number;
 }

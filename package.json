@@ -5,6 +5,7 @@
     "dependencies": {
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.5",
+        "@meilisearch/instant-meilisearch": "^0.13.0",
         "@mui/icons-material": "^5.11.0",
         "@mui/material": "^5.11.8",
         "@reduxjs/toolkit": "^1.9.1",
@@ -33,6 +34,8 @@
         "react-drag-drop-files": "^2.3.10",
         "react-hook-form": "^7.43.9",
         "react-i18next": "^12.1.5",
+        "react-icons": "^4.8.0",
+        "react-instantsearch-dom": "^6.39.1",
         "react-redux": "^8.0.5",
         "react-responsive-carousel": "^3.2.23",
         "react-router-dom": "^6.7.0",
@@ -71,6 +74,7 @@
     },
     "devDependencies": {
         "@renderilnik/core": "^0.0.2",
+        "@types/react-instantsearch-dom": "^6.12.3",
         "@types/uuid": "^9.0.1",
         "autoprefixer": "^10.4.13",
         "postcss-cli": "^10.1.0",

@@ -20,6 +20,24 @@ export interface IItem {
     likes?: ILike[];
 }
 
+export interface IItemForSorting {
+    id: number;
+    name?: string;
+    created?: string;
+    collectionId?: number;
+    image?: string;
+    comments?: IComment[];
+    item?: {
+        image: string;
+        name: string;
+        created: string;
+        collectionId: number;
+    };
+    count?: string;
+    tags?: ITag[];
+    likes: ILike[];
+}
+
 export interface ICreateItem {
     name: string;
     description: string;

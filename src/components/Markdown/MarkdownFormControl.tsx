@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import { MarkdownEditor } from './MarkdownEditor';
-import { Text } from '../Text';
+import { Text } from '../Common/Text';
 
 interface MarkdownFormControlProps {
     control: Control<any>;

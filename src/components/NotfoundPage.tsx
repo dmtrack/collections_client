@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useApp } from '../hook/appState';
 import { Box, Button, Typography, useMediaQuery } from '@mui/material';
-import { Text } from '../components/Text';
+import { Text } from './Common/Text';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../theme';
 

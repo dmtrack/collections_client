@@ -18,9 +18,9 @@ import { fetchUserCollections } from '../../state/actions/collections.actions';
 import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import EditIcon from '@mui/icons-material/Edit';
-import CollectionCard from '../collection/CollectionCard';
-import EmptyContainer from '../../components/EmptyContainer';
+import EmptyContainer from '../../components/Common/EmptyContainer/EmptyContainer';
 import Loader from '../../components/Loader/Loader';
+import CollectionCardsContainer from '../../components/Collection/CollectionCardContainer/CollectionCardContainer';
 
 const UserProfile = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
@@ -171,25 +171,9 @@ const UserProfile = () => {
                     {/* RELATED ITEMS */}
                     {value === 'collections' &&
                         (userCollections && userCollections.length > 0 ? (
-                            <Box
-                                mt={isNonMobile ? '32px' : '16px'}
-                                width='100%'>
-                                <Box
-                                    margin='0 auto'
-                                    display='grid'
-                                    gridTemplateColumns='repeat(auto-fill, 300px)'
-                                    justifyContent='space-around'
-                                    rowGap='32px'
-                                    columnGap='1.33%'>
-                                    {userCollections.map((collection, i) => (
-                                        <CollectionCard
-                                            key={`${collection.name}-${i}`}
-                                            collection={collection}
-                                            userId={Number(userId)}
-                                        />
-                                    ))}
-                                </Box>
-                            </Box>
+                            <CollectionCardsContainer
+                                collections={userCollections}
+                            />
                         ) : (
                             <>
                                 {' '}

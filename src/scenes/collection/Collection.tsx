@@ -7,7 +7,7 @@ import { useCollection } from '../../hook/useCollection';
 import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import EditIcon from '@mui/icons-material/Edit';
-import EmptyContainer from '../../components/EmptyContainer';
+import EmptyContainer from '../../components/Common/EmptyContainer/EmptyContainer';
 import { shades } from '../../theme';
 
 import Loader from '../../components/Loader/Loader';
