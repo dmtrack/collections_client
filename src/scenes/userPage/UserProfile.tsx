@@ -43,7 +43,7 @@ const UserProfile = () => {
         getOneUser(Number(userId), setUser);
         // dispatch(setCollectionsEmpty);
         dispatch(fetchUserCollections(Number(userId)));
-    }, [userId]);
+    }, [userId, dispatch]);
 
     const { collectionsUserLoading } = useAppSelector(
         (state) => state.collections

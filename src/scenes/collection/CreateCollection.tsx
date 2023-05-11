@@ -14,9 +14,9 @@ import { MAX_IMAGE_SIZE, fileTypes } from '../../utils/constants';
 import {
     ICollection,
     ICollectionFormValues,
+    ItemConfigType,
     SelectOption,
 } from '../../models/ICollection';
-import CustomFieldForm from '../../components/CustomFieldForm';
 
 import { toast } from 'react-toastify';
 import { createCollection } from '../../state/actions/collections.actions';
@@ -35,6 +35,9 @@ const CreateCollection = () => {
     const location = useLocation();
     const editing = location.pathname.includes('edit');
     const [image, setImage] = useState<File | null>(null);
+    const [configInputs, setConfigInputs] = useState<ItemConfigType[]>([
+        { type: '', label: '' },
+    ]);
 
     useEffect(() => {
         if (image) {

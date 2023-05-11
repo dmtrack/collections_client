@@ -1,7 +1,4 @@
-import { IComment } from '../IComment';
-import { IItem } from '../IItem';
-import { ILike } from '../ILike';
-import { ITag } from '../ITag';
+import { IComment, IItem, ILike, TagType } from '../IItem';
 
 export type IItemResponse = IItem[];
 
@@ -19,7 +16,7 @@ export interface IItemCreateResponse {
         collectionId: number;
     };
     count?: string;
-    tags?: ITag[];
+    tags?: TagType[];
     likes?: ILike[];
 }
 

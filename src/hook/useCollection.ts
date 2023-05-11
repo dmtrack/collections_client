@@ -2,10 +2,18 @@ import { RootState } from '../state';
 import { useAppSelector } from './redux';
 
 export const useCollection = (collectionId: number) => {
-    const collection = useAppSelector((state: RootState) =>
-        state.collections.collections.find((c) => Number(c.id) === collectionId)
+    let collection;
+    const collectionSearch = useAppSelector((state: RootState) =>
+        state.collections.collections.find(
+            (c) => Number(c.id) === Number(collectionId)
+        )
     );
-
+    const userCollectionSearch = useAppSelector((state: RootState) =>
+        state.collections.userCollections.find(
+            (c) => Number(c.id) === Number(collectionId)
+        )
+    );
+    collection = !!collectionSearch ? collectionSearch : userCollectionSearch;
     const { userId: currentUserId } = useAppSelector(
         (state: RootState) => state.auth
     );
