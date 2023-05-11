@@ -259,7 +259,10 @@
                 "foundInCollection": "Here are the items from the collections in descriptions of which the text was found:",
                 "foundInComments": "Here are the items in comments of which the text was found:",
                 "noResults": "No items found",
-                "searchedQuantity": "Total items found:"
+                "searchedQuantity": "Total items found:",
+                "collections": "collections",
+                "items": "items",
+                "comments": "comments"
             }
         }
     },
@@ -512,7 +515,10 @@
                 "foundInCollection": "Элементы из коллекций, в описаниях которых был найден текст:",
                 "foundInComments": "Элементы, у которых текст был найден в комментариях:",
                 "noResults": "Элементы не найдены",
-                "searchedQuantity": "Найдено элементов:"
+                "searchedQuantity": "Найдено элементов:",
+                "collections": "Коллекции пользователя",
+                "items": "Элементы",
+                "comments": "Комментарии"
             }
         }
     }

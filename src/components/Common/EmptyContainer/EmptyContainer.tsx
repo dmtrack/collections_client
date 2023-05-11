@@ -8,7 +8,7 @@ interface EmptyContainerProps {
 
 function EmptyContainer({ title, text }: EmptyContainerProps) {
     return (
-        <Box mt='48px' textAlign='center' height='115px'>
+        <Box mt='96px' textAlign='center' height='115px'>
             <Typography gutterBottom color={shades.secondary[800]}>
                 {title}{' '}
             </Typography>{' '}

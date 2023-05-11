@@ -28,7 +28,6 @@ const CollectionPage = () => {
     const dispatch = useAppDispatch();
     const { collection, hasFullAccess } = useCollection(Number(collectionId));
     const isNonMobile = useMediaQuery('(min-width:600px)');
-
     useEffect(() => {
         dispatch(fetchItems());
     }, [dispatch]);

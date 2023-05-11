@@ -23,7 +23,6 @@ function CollectionCard({ collection, userId }: ICollectionThumb) {
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
-
     return (
         <Box onClick={() => navigate(`/collections/${collection.id}`)}>
             <Card

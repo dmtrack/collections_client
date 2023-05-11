@@ -1,7 +1,3 @@
-import { IComment } from './IComment';
-import { ILike } from './ILike';
-import { ITag } from './ITag';
-
 export interface IItem {
     id: number;
     name?: string;
@@ -16,7 +12,7 @@ export interface IItem {
         collectionId: number;
     };
     count?: string;
-    tags?: ITag[];
+    tags?: TagType[];
     likes?: ILike[];
 }
 
@@ -34,7 +30,7 @@ export interface IItemForSorting {
         collectionId: number;
     };
     count?: string;
-    tags?: ITag[];
+    tags?: TagType[];
     likes: ILike[];
 }
 
@@ -57,4 +53,35 @@ export interface IUpdateItem {
 export interface IItemProps {
     item: IItem;
     width?: string;
+}
+
+export interface IFields {
+    name: string;
+    [type: string]: string | number | boolean;
+}
+
+export type TagType = {
+    id?: number;
+    name: string;
+};
+
+export interface ITagCount {
+    tagId: number;
+    count: number;
+}
+
+export interface IComment {
+    id: number;
+    userId: number;
+    itemId: number;
+    text: string;
+    nickname: string;
+    timestamp: string;
+}
+
+export interface ILike {
+    id: number;
+    userId: number;
+    itemId: number;
+    nickname: string;
 }
