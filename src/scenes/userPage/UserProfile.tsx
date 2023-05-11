@@ -103,7 +103,7 @@ const UserProfile = () => {
                                 </Tooltip>
 
                                 <Tooltip title='Edit user'>
-                                    <Link to={`/user/${userId}/edit`}>
+                                    <Link to={`/users/${userId}/edit`}>
                                         {' '}
                                         {isNonMobile ? (
                                             <Fab size='small' color='primary'>
