@@ -25,7 +25,7 @@ function CollectionCard({ collection, userId }: ICollectionThumb) {
     const navigate = useNavigate();
 
     return (
-        <Box onClick={() => navigate(`collection/${collection.id}`)}>
+        <Box onClick={() => navigate(`/collections/${collection.id}`)}>
             <Card
                 sx={{ maxWidth: 345 }}
                 onMouseOver={() => setIsHovered(true)}

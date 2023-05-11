@@ -30,7 +30,7 @@ export const SearchItemCard = connectHighlight(({ highlight, hit }) => {
     return (
         <Box className='search-card'>
             <Link
-                to={`/item/${hit.id}`}
+                to={`/items/${hit.id}`}
                 onClick={() => dispatch(setSearchOpen(false))}>
                 <HighlightText highlight={highlightName} />
                 {highlightFields.map((highlight, index) => (
