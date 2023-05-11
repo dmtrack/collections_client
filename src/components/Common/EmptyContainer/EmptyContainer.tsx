@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { shades } from '../theme';
+import { shades } from '../../../theme';
 
 interface EmptyContainerProps {
     title: string;

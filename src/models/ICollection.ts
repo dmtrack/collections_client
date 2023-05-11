@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios';
+import { SortTypes } from './global';
 
 export interface ICollection {
     id: number;
@@ -60,4 +61,19 @@ export interface ICustomFieldFormValues {
 
 export interface ICustomFieldFormValuesWithId extends ICustomFieldFormValues {
     id: string;
+}
+
+export interface ICollectionWithQuantity extends IGetCollectionResponse {
+    itemsQuantity: number;
+}
+
+export interface SortButton {
+    id: SortTypes;
+    icon: JSX.Element;
+    tooltip: string;
+}
+
+export interface SelectOption {
+    value: string;
+    label: string;
 }

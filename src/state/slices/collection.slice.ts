@@ -72,6 +72,10 @@ export const collectionSlice = createSlice({
             state.collectionsLoading = false;
             state.error = action.payload.message + ': ' + action.payload?.cause;
         },
+        setCollections: (state, { payload }: PayloadAction<ICollection[]>) => {
+            state.collections = payload;
+        },
+
         addCollection: (state, action: PayloadAction<ICollection>) => {
             state.collections = [...state.collections, action.payload];
         },

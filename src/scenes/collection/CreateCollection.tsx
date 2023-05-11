@@ -11,8 +11,11 @@ import { shades } from '../../theme';
 import { MarkdownFormControl } from '../../components/Markdown/MarkdownFormControl';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import { MAX_IMAGE_SIZE, fileTypes } from '../../utils/constants';
-import { ICollection, ICollectionFormValues } from '../../models/ICollection';
-import { SelectOption } from '../../models/global';
+import {
+    ICollection,
+    ICollectionFormValues,
+    SelectOption,
+} from '../../models/ICollection';
 import CustomFieldForm from '../../components/CustomFieldForm';
 
 import { toast } from 'react-toastify';
