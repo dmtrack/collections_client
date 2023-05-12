@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
 import { Autocomplete, TextField, UseAutocompleteProps } from '@mui/material';
-import { matchSorter } from 'match-sorter';
 import { useTranslation } from 'react-i18next';
 import { TagType } from '../../models/IItem';
 import { useAppSelector } from '../../hook/redux';
 import { RootState } from '../../state';
 import { toast } from 'react-toastify';
+import { matchSorter } from 'match-sorter';
 
 interface TagsAreaProps {
     value: TagType[];
