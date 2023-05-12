@@ -1,11 +1,11 @@
 import { FC, useState } from 'react';
 import { Autocomplete, TextField, UseAutocompleteProps } from '@mui/material';
-import { matchSorter } from 'match-sorter';
 import { useTranslation } from 'react-i18next';
 import { TagType } from '../../models/IItem';
 import { useAppSelector } from '../../hook/redux';
 import { RootState } from '../../state';
 import { toast } from 'react-toastify';
+import { matchSorter } from 'match-sorter';
 
 interface TagsAreaProps {
     value: TagType[];
@@ -20,7 +20,9 @@ export const TagsArea: FC<TagsAreaProps> = ({
     freeSolo = true,
     placeholder = 'tags',
 }) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'items',
+    });
     const tags = useAppSelector((state: RootState) => state.items.tags);
     const [inputValue, setInputValue] = useState('');
     type AutocompleteProps = UseAutocompleteProps<TagType, true, false, true>;
@@ -75,7 +77,7 @@ export const TagsArea: FC<TagsAreaProps> = ({
             autoComplete
             multiple
             options={tags}
-            size='small'
+            size='medium'
             value={value}
             onChange={tagsHandler}
             inputValue={inputValue}
@@ -85,7 +87,7 @@ export const TagsArea: FC<TagsAreaProps> = ({
             filterOptions={filterOptions}
             filterSelectedOptions
             renderInput={(params) => (
-                <TextField {...params} size='small' label={t(placeholder)} />
+                <TextField {...params} size='medium' label={t(placeholder)} />
             )}
         />
     );

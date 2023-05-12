@@ -213,13 +213,15 @@
             },
             "items": {
                 "return": "Return to the previous page",
-                "create": "Create a new item",
+                "create": "Create item",
                 "update": "Edit the item",
                 "cancel": "Cancel",
                 "confirm": "Confirm",
-                "itemName": "Item name",
+                "itemName": "name",
+                "itemDescription": "description",
                 "itemNamePlaceholder": "Enter item name",
                 "itemImage": "Item image",
+
                 "file": "File name: ",
                 "noFile": "No file uploaded yet",
                 "defaultImage": "set default image",
@@ -237,7 +239,7 @@
                 "text": "markdown-enabled text",
                 "date": "date",
                 "checkbox": "boolean",
-                "tags": "Tags",
+                "tags": "tags",
                 "tagsPlaceholder": "Select tags to the item",
                 "newDefaultImage": "new default image"
             },
@@ -474,6 +476,8 @@
                 "cancel": "Отмена",
                 "confirm": "Подтвердить",
                 "itemName": "Название",
+
+                "itemDescription": "Описание",
                 "itemNamePlaceholder": "Введите название элемента",
                 "itemImage": "Изображение",
                 "file": "Имя файла: ",
