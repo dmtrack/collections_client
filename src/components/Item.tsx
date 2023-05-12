@@ -2,7 +2,7 @@ import { Box, Typography, useTheme, Button } from '@mui/material';
 import { shades } from '../theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { IItemProps } from '../models/IItem';
-import { ThemeChip } from './ThemeChip';
+import { ThemeChip } from './Common/ThemeChip';
 import { useAppSelector } from '../hook/redux';
 import { ICollection } from '../models/ICollection';
 

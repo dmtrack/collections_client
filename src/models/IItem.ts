@@ -3,6 +3,7 @@ export interface IItem {
     name?: string;
     created?: string;
     collectionId?: number;
+    userId?: number;
     image?: string;
     comments?: IComment[];
     item?: {
@@ -40,6 +41,14 @@ export interface ICreateItem {
     collectionId: number;
     userId: number;
     image: string;
+}
+
+export interface IItemFormValues {
+    name: string;
+    description: string;
+    themeId: number;
+    image: File;
+    userId: number;
 }
 
 export interface IUpdateItem {

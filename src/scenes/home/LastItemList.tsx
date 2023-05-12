@@ -13,7 +13,7 @@ import { v4 } from 'uuid';
 const LastItemList = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        dispatch(fetchTopRatedItems());
+        // dispatch(fetchTopRatedItems());
         dispatch(fetchItems());
     }, []);
     const { itemsLoading } = useAppSelector((state) => state.items);
@@ -85,7 +85,7 @@ const LastItemList = () => {
                                 <Item item={item} key={v4()} />
                             ))}
                     {value === 'topRated' &&
-                        topRatedFlat
+                        items
                             .slice(0, 3)
                             .map((item: IItem) => (
                                 <Item item={item} key={v4()} />

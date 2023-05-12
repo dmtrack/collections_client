@@ -28,7 +28,6 @@ import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
 import Loader from './components/Loader/Loader';
-import CreateItem from './scenes/item/CreateItem';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -105,10 +104,10 @@ const App: React.FC = () => {
                                 path='items/:itemId/'
                                 element={<ItemPage />}
                             />{' '}
-                            <Route
+                            {/* <Route
                                 path='collections/:collectionId/create/'
                                 element={<CreateItem />}
-                            />
+                            /> */}
                             <Route
                                 path='users/:userId'
                                 element={<UserProfile />}

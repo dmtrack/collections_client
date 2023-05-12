@@ -2,8 +2,8 @@ import { FC } from 'react';
 import Chip from '@mui/material/Chip';
 import { Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../hook/redux';
-import { TagType } from '../models/IItem';
+import { useAppDispatch } from '../../hook/redux';
+import { TagType } from '../../models/IItem';
 
 export const TagChip: FC<{ tag: TagType }> = ({ tag }) => {
     const dispatch = useAppDispatch();

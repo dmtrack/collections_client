@@ -12,7 +12,7 @@ import { shades } from '../../theme';
 
 import Loader from '../../components/Loader/Loader';
 import CollectionItems from './CollectionItems';
-import { ThemeChip } from '../../components/ThemeChip';
+import { ThemeChip } from '../../components/Common/ThemeChip';
 import { IItem } from '../../models/IItem';
 
 import { fetchItems } from '../../state/actions/items.actions';
