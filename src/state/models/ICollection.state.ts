@@ -9,6 +9,7 @@ export interface ICollectionState {
     topAmountCollections: ICollection[];
     userCollections: ICollection[];
     themes: ITheme[];
+    allConfigs: AllConfigs;
     error: string;
     collectionIsBusy: boolean;
 }
@@ -20,3 +21,13 @@ export type DeleteCollection = {
 export type FilterCollection = {
     id: number;
 };
+
+export type ItemConfigType = {
+    id?: number;
+    collectionId?: number;
+    hidden?: boolean;
+    type: string;
+    label: string;
+};
+
+export type AllConfigs = ItemConfigType[];

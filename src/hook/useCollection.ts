@@ -1,11 +1,20 @@
+import { ICollection } from '../models/ICollection';
 import { RootState } from '../state';
 import { useAppSelector } from './redux';
 
 export const useCollection = (collectionId: number) => {
     let collection;
+    const collectionState = useAppSelector(
+        (state: RootState) => state.collections
+    );
+    const collectionConfig = useAppSelector((state: RootState) =>
+        state.collections.allConfigs.find(
+            (config) => Number(config.collectionId) === collectionId
+        )
+    );
     const collectionSearch = useAppSelector((state: RootState) =>
         state.collections.collections.find(
-            (c) => Number(c.id) === Number(collectionId)
+            (c: ICollection) => Number(c.id) === Number(collectionId)
         )
     );
     const userCollectionSearch = useAppSelector((state: RootState) =>
@@ -24,5 +33,5 @@ export const useCollection = (collectionId: number) => {
     const hasFullAccess =
         (currentUserId && collection?.userId === currentUserId) || isAdmin;
 
-    return { hasFullAccess, collection, isAdmin };
+    return { hasFullAccess, collection, isAdmin, collectionConfig };
 };

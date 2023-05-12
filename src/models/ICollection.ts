@@ -77,11 +77,3 @@ export interface SelectOption {
     value: string;
     label: string;
 }
-
-export type ItemConfigType = {
-    id?: number;
-    collectionId?: number;
-    hidden?: boolean;
-    type: string;
-    label: string;
-};

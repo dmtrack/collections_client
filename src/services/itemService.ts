@@ -1,5 +1,8 @@
-import { IItemDeleteResponse } from './../models/response/itemResponce';
-import { ICreateItem } from './../models/IItem';
+import {
+    IItemDeleteResponse,
+    IItemEditResponse,
+} from './../models/response/itemResponce';
+import { ICreateItem, IItem } from './../models/IItem';
 import { AuthorizationError } from '../models/errors/AuthorizationError';
 
 import { axiosDelete, axiosGet, axiosPost } from '../api/axios/apiClient';
@@ -8,6 +11,7 @@ import {
     IItemCreateResponse,
     IItemResponse,
 } from '../models/response/itemResponce';
+import { ICreateItemBody } from '../models/request/item-body-request';
 
 export default class ItemService {
     static async fetchItems() {
@@ -22,11 +26,18 @@ export default class ItemService {
         );
     }
 
-    static async createItem(data: ICreateItem) {
+    static async createItem(data: ICreateItemBody) {
         return axiosPost<
             AuthorizationError | DataBaseError,
             IItemCreateResponse
         >('/item/create', data);
+    }
+
+    static async editItem(item: IItem) {
+        return axiosPost<AuthorizationError | DataBaseError, IItemEditResponse>(
+            '/item/edit',
+            { item }
+        );
     }
 
     static async deleteItem(id: number) {
@@ -35,18 +46,4 @@ export default class ItemService {
             IItemDeleteResponse
         >(`item/deleteone/:${id}`);
     }
-
-    // static async login(data: ILoginData) {
-    //     return axiosPost<AuthorizationError | DataBaseError, IUserAuthResponse>(
-    //         '/user/login',
-    //         data
-    //     );
-    // }
-
-    // static async getAllUsers() {
-    //     return axiosGet<
-    //         AuthorizationError | DataBaseError,
-    //         IGetUsersResponse[]
-    //     >('/users/getusers');
-    // }
 }

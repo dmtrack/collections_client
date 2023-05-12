@@ -1,7 +1,15 @@
-import { AppDispatch } from '..';
+import { AppDispatch, GetState } from '..';
 import { itemSlice } from '../slices/item.slice';
 import itemService from '../../services/itemService';
-import { ICreateItem, IUpdateItem } from '../../models/IItem';
+import {
+    ICreateItem,
+    ICreateItemPayload,
+    IFields,
+    IItem,
+    TagType,
+} from '../../models/IItem';
+import { ICreateItemBody } from '../../models/request/item-body-request';
+import { saveImageToCloud } from '../../api/firebase/actions';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {
@@ -40,12 +48,41 @@ export const fetchTopRatedItems = () => {
     };
 };
 
-export const createItem = (data: ICreateItem) => {
-    return async (dispatch: AppDispatch) => {
-        const response = await itemService.createItem(data);
+export const createItem = (data: ICreateItemPayload) => {
+    return async (dispatch: AppDispatch, getState: GetState) => {
+        const { userId } = getState().auth;
+        const { image: imageFile, collectionId, fields, tags } = data;
+        const image = await saveImageToCloud(imageFile, 'items');
+        const sendData: ICreateItemBody = {
+            userId,
+            image,
+            collectionId,
+            tags,
+            fields,
+        };
+
+        const response = await itemService.createItem(sendData);
         response
             .mapRight(({ data: data }) => {
                 dispatch(itemSlice.actions.addItem(data));
+            })
+            .mapLeft((e: any) => {
+                dispatch(itemSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+    };
+};
+
+export const editItem = (item: IItem) => {
+    return async (dispatch: AppDispatch) => {
+        const response = await itemService.editItem(item);
+        response
+            .mapRight(({ data: item }) => {
+                dispatch(itemSlice.actions.setItem(item));
             })
             .mapLeft((e: any) => {
                 dispatch(itemSlice.actions.fetchError(e.response?.data));
@@ -74,10 +111,6 @@ export const deleteItem = (id: number) => {
                 });
             });
     };
-};
-
-export const updateItem = (data: IUpdateItem) => {
-    return async (dispatch: AppDispatch) => {};
 };
 
 // static getUserItems(collectionId: number): Promise<AxiosResponse> {

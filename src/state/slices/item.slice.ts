@@ -66,6 +66,11 @@ export const itemSlice = createSlice({
         // setSocket: (state, { payload }: PayloadAction<AppSocket | null>) => {
         //     return { ...state, socket: payload };
         // },
+        setItem: (state, { payload }: PayloadAction<IItem>) => {
+            state.items = state.items.map((item) =>
+                item.id === payload.id ? payload : item
+            );
+        },
         setComments: (state, { payload }: PayloadAction<IComment[]>) => {
             state.comments = payload;
         },

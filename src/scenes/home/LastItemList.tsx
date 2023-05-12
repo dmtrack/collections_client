@@ -18,7 +18,6 @@ const LastItemList = () => {
     }, []);
     const { items } = useAppSelector((state) => state.items);
     const { topRated } = useAppSelector((state) => state.items);
-    console.log(topRated);
 
     const topRatedFlat = topRated?.map((element) => {
         return {
@@ -28,6 +27,7 @@ const LastItemList = () => {
             name: element.item?.name,
             created: element.item?.created,
             collectionId: Number(element.item?.collectionId),
+            tags: element.tags,
         };
     });
 

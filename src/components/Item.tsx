@@ -18,7 +18,7 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
     const {
         palette: { neutral },
     } = useTheme();
-    const { name, image, id, collectionId } = item;
+    const { name, image, id, collectionId, tags } = item;
 
     return (
         <Box width={width}>

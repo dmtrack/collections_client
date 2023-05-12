@@ -14,12 +14,13 @@ import { MAX_IMAGE_SIZE, fileTypes } from '../../utils/constants';
 import {
     ICollection,
     ICollectionFormValues,
-    ItemConfigType,
+    ITheme,
     SelectOption,
 } from '../../models/ICollection';
 
 import { toast } from 'react-toastify';
 import { createCollection } from '../../state/actions/collections.actions';
+import { ItemConfigType } from '../../state/models/ICollection.state';
 
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -150,7 +151,7 @@ const CreateCollection = () => {
                             {...register('themeId', { required: true })}
                             error={!!errors.themeId}
                             sx={{ mb: '0px' }}>
-                            {themes.map((theme) => (
+                            {themes.map((theme: ITheme) => (
                                 <MenuItem
                                     key={theme.id}
                                     value={Number(theme.id)}>

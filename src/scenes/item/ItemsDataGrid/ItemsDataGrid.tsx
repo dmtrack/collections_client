@@ -10,7 +10,7 @@ import { DateCell } from './DateCell';
 import { useTranslation } from 'react-i18next';
 import { ToolBar } from './ToolBar';
 import { IItem } from '../../../models/IItem';
-import { ItemConfigType } from '../../../models/ICollection';
+import { ItemConfigType } from '../../../state/models/ICollection.state';
 
 interface ItemsDataGridProps {
     itemConfigs: ItemConfigType[];
