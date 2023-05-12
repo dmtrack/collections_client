@@ -19,6 +19,7 @@ const initialState: ICollectionState = {
     topAmountCollections: [],
     userCollections: [],
     themes: [],
+    allConfigs: [],
     collectionIsBusy: false,
 };
 

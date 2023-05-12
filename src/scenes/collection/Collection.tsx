@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { Box, useMediaQuery, Typography, Tooltip, Fab } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useCollection } from '../../hook/useCollection';
 import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
@@ -16,6 +16,7 @@ import { ThemeChip } from '../../components/Common/ThemeChip';
 import { IItem } from '../../models/IItem';
 
 import { fetchItems } from '../../state/actions/items.actions';
+import { EditItemDialog } from '../item/EditItemDialog';
 
 const CollectionPage = () => {
     const { t } = useTranslation('translation', {
@@ -31,6 +32,7 @@ const CollectionPage = () => {
     useEffect(() => {
         dispatch(fetchItems());
     }, [dispatch]);
+    const [editItemDialogOpen, setEditItemDialogOpen] = useState(false);
 
     const collectionItems: IItem[] = useAppSelector((state) =>
         state.items.items.filter(
@@ -39,6 +41,10 @@ const CollectionPage = () => {
     );
 
     const goHome = () => navigate('/');
+
+    const handleOpenCreateItemOpen = (): void => {
+        setEditItemDialogOpen(true);
+    };
 
     return (
         <>
@@ -81,19 +87,20 @@ const CollectionPage = () => {
                                 display='flex'
                                 gap='12px'>
                                 <Tooltip title='Add item'>
-                                    <Link
-                                        to={`/collection/${collectionId}/create`}>
-                                        {isNonMobile ? (
-                                            <Fab size='small' color='secondary'>
-                                                <AddIcon />
-                                            </Fab>
-                                        ) : (
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='secondary'>
                                             <AddIcon
-                                                fontSize='large'
-                                                color='secondary'
+                                                onClick={
+                                                    handleOpenCreateItemOpen
+                                                }
                                             />
-                                        )}
-                                    </Link>
+                                        </Fab>
+                                    ) : (
+                                        <AddIcon
+                                            fontSize='large'
+                                            color='secondary'
+                                        />
+                                    )}
                                 </Tooltip>
 
                                 <Tooltip title='Home'>
@@ -125,7 +132,11 @@ const CollectionPage = () => {
                             </Box>
                         )}
                     </Box>
-
+                    <EditItemDialog
+                        open={editItemDialogOpen}
+                        onClose={() => setEditItemDialogOpen(false)}
+                        collectionId={Number(collection?.id)}
+                    />
                     <Box
                         flex='5 1 60%'
                         mb={isNonMobile ? '0px' : '0px'}

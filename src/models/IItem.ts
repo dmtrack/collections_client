@@ -1,3 +1,5 @@
+import { ItemConfigType } from '../state/models/ICollection.state';
+
 export interface IItem {
     id: number;
     name?: string;
@@ -13,7 +15,7 @@ export interface IItem {
         collectionId: number;
     };
     count?: string;
-    tags?: TagType[];
+    tags: TagType[];
     likes?: ILike[];
 }
 
@@ -43,20 +45,33 @@ export interface ICreateItem {
     image: string;
 }
 
-export interface IItemFormValues {
+export interface ICreateCollectionPayload {
+    userId: number;
     name: string;
     description: string;
     themeId: number;
-    image: File;
+    image?: File;
+    itemConfigs?: ItemConfigType[];
+}
+
+export interface IEditCollectionPayload {
+    description: string;
+    existingImage?: string;
+    image?: File;
+    deletedImage?: string;
+    id: number;
+    itemConfigs: ItemConfigType[];
+    removedConfigs: ItemConfigType[];
+    themeId: number;
+    title: string;
     userId: number;
 }
 
-export interface IUpdateItem {
-    name: string;
-    description: string;
+export interface ICreateItemPayload {
     collectionId: number;
-    userId: number;
-    image: string;
+    fields: IFields;
+    image: File | undefined;
+    tags: TagType[];
 }
 
 export interface IItemProps {

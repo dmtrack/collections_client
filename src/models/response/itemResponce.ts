@@ -16,7 +16,25 @@ export interface IItemCreateResponse {
         collectionId: number;
     };
     count?: string;
-    tags?: TagType[];
+    tags: TagType[];
+    likes?: ILike[];
+}
+
+export interface IItemEditResponse {
+    id: number;
+    name?: string;
+    created?: string;
+    collectionId?: number;
+    image?: string;
+    comments?: IComment[];
+    item?: {
+        image: string;
+        name: string;
+        created: string;
+        collectionId: number;
+    };
+    count?: string;
+    tags: TagType[];
     likes?: ILike[];
 }
 

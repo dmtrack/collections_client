@@ -1,5 +1,5 @@
 import Collection from '../../scenes/collection/Collection';
-import { ItemConfigType } from '../ICollection';
+import { ItemConfigType } from '../../state/models/ICollection.state';
 import { IFields, TagType } from '../IItem';
 
 export interface ICreateCollectionBody {
