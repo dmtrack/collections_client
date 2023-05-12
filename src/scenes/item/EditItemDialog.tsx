@@ -30,7 +30,9 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
     collectionId,
     item,
 }) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'items',
+    });
     const dispatch = useAppDispatch();
     const {
         register,
@@ -112,18 +114,18 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
                         color={shades.secondary[800]}
                         letterSpacing='-0.5px'
                         fontWeight='600'>
-                        {item ? 'Edit' : 'Create'} item
+                        {item ? `${t('edit')}` : `${t('create')}`}
                     </Text>
                     <TextField
-                        label={t('name')}
-                        size='small'
+                        label={t('itemName')}
+                        size='medium'
                         margin='dense'
                         fullWidth
                         {...register('name', { required: true })}
                         error={!!errors.name}
                     />
                     <TextField
-                        label={t('description')}
+                        label={t('itemDescription')}
                         size='medium'
                         margin='dense'
                         fullWidth
