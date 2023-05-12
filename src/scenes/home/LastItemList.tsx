@@ -13,13 +13,12 @@ import { v4 } from 'uuid';
 const LastItemList = () => {
     const dispatch = useAppDispatch();
     useEffect(() => {
-        // dispatch(fetchTopRatedItems());
+        dispatch(fetchTopRatedItems());
         dispatch(fetchItems());
     }, []);
-    const { itemsLoading } = useAppSelector((state) => state.items);
-    const { topRatedItemsLoading } = useAppSelector((state) => state.items);
     const { items } = useAppSelector((state) => state.items);
     const { topRated } = useAppSelector((state) => state.items);
+    console.log(topRated);
 
     const topRatedFlat = topRated?.map((element) => {
         return {
@@ -85,7 +84,7 @@ const LastItemList = () => {
                                 <Item item={item} key={v4()} />
                             ))}
                     {value === 'topRated' &&
-                        items
+                        topRatedFlat
                             .slice(0, 3)
                             .map((item: IItem) => (
                                 <Item item={item} key={v4()} />
