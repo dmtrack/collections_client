@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box, useMediaQuery } from '@mui/material';
 import { shades } from '../../../theme';
-import { ThemeChip } from '../../ThemeChip';
+import { ThemeChip } from '../../Common/ThemeChip';
 import { useState } from 'react';
 
 interface ICollectionThumb {

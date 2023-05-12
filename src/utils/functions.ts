@@ -1,10 +1,35 @@
-import { TFunction } from 'i18next';
-
-import { ImageType, SortTypes } from '../models/global';
+import dayjs from 'dayjs';
+import { SortTypes } from '../models/global';
 import { IParsedToken, IUser } from '../models/IUser';
-import { IComment } from '../models/IComment';
 import { ICollection, ICollectionWithQuantity } from '../models/ICollection';
 import { IItem, IItemForSorting } from '../models/IItem';
+
+const timestampToDate = (timestamp?: string) => {
+    if (!timestamp) return '';
+    return dayjs(+timestamp).format('DD-MM-YYYY');
+};
+
+const timestampToDateTime = (timestamp?: string) => {
+    if (!timestamp) return '';
+    return dayjs(+timestamp).format('HH:mm DD-MM-YY');
+};
+
+const dateFormat = (date: string) => {
+    return dayjs(date).format('DD-MM-YYYY');
+};
+
+const formatFileSize = (bytes: number) => {
+    let postfix = 'B';
+    if (bytes > 1024) {
+        bytes = bytes / 1024;
+        postfix = 'KB';
+    }
+    if (bytes > 1024) {
+        bytes = bytes / 1024;
+        postfix = 'MB';
+    }
+    return `${Math.round(bytes)}${postfix}`;
+};
 
 const parseJwt = (tokenToParse: string) => {
     const base64Url = tokenToParse.split('.')[1];
@@ -31,33 +56,6 @@ const checkToken = (userToken: string) => {
     } catch (error) {
         return false;
     }
-};
-
-const createImage = (
-    type: ImageType,
-    value1: string | undefined,
-    value2: string | undefined
-) =>
-    `https://source.boringavatars.com/${type}/120/${value1}%20${value2}?colors=F97D58,CDDCEB,F9DBCF,33B99,5D70C5&square`;
-
-const formatDate = (stringDate: string) => {
-    const timestamp = Date.parse(stringDate);
-    const date = new Date(timestamp);
-    return date.toLocaleString('ru-RU');
-};
-
-const formatDateAndTime = (
-    elem: IItem | ICollection | IComment | null,
-    t: TFunction,
-    text: string
-) => {
-    if (elem) {
-        const formattedDate = formatDate(`${elem.created}`);
-        return `${formattedDate.slice(0, 10)} ${t(text)} ${formattedDate.slice(
-            12
-        )}`;
-    }
-    return '';
 };
 
 const sortData = (
@@ -151,9 +149,10 @@ const filterUsersByStatus = (filteringList: IUser[] | null) =>
 
 export {
     checkToken,
-    createImage,
-    formatDate,
-    formatDateAndTime,
+    timestampToDate,
+    timestampToDateTime,
+    dateFormat,
+    formatFileSize,
     sortData,
     filterUsersByRole,
     filterUsersByStatus,

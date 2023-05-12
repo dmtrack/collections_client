@@ -6,6 +6,7 @@ import { IItemResponse } from '../../models/response/itemResponce';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DeleteItem, IItemState } from '../models/IItem.state';
+import { IComment, IItem, ILike, TagType } from '../../models/IItem';
 
 const initialState: IItemState = {
     itemsLoading: false,
@@ -13,6 +14,12 @@ const initialState: IItemState = {
     error: '',
     items: [],
     topRated: [],
+    tags: [],
+    likes: [],
+    comments: [],
+    itemIsBusy: false,
+    commentLoading: false,
+    likesLoading: false,
 };
 
 export const itemSlice = createSlice({
@@ -37,8 +44,17 @@ export const itemSlice = createSlice({
             state.itemsLoading = false;
             state.error = action.payload.message + ': ' + action.payload?.cause;
         },
-        addItem: (state, action: PayloadAction<IItemCreateResponse>) => {
-            state.items = [...state.items, action.payload];
+        setItemsBusy: (state, { payload }: PayloadAction<boolean>) => {
+            state.itemIsBusy = payload;
+        },
+        addItem: (state, { payload }: PayloadAction<IItem>) => {
+            if (!state.items.find((item) => item.id === payload.id)) {
+                state.items.push(payload);
+            } else {
+                state.items = state.items.map((item) =>
+                    item.id === payload.id ? payload : item
+                );
+            }
         },
         deleteItem: (state, action: PayloadAction<IItemDeleteResponse>) => {
             state.items = state.items.filter((item) => {
@@ -47,6 +63,43 @@ export const itemSlice = createSlice({
         },
 
         editItem: (state, action: PayloadAction<DeleteItem>) => {},
+        // setSocket: (state, { payload }: PayloadAction<AppSocket | null>) => {
+        //     return { ...state, socket: payload };
+        // },
+        setComments: (state, { payload }: PayloadAction<IComment[]>) => {
+            state.comments = payload;
+        },
+        addComment: (state, { payload }: PayloadAction<IComment>) => {
+            if (!state.comments.find((comment) => comment.id === payload.id)) {
+                state.comments.push(payload);
+            }
+        },
+        clearComments: (state) => {
+            state.comments = [];
+        },
+        setLikes: (state, { payload }: PayloadAction<ILike[]>) => {
+            state.likes = payload;
+        },
+        addLike: (state, { payload }: PayloadAction<ILike>) => {
+            if (!state.likes.find((like) => like.id === payload.id)) {
+                state.likes.push(payload);
+            }
+        },
+        removeLike: (state, { payload }: PayloadAction<{ userId: number }>) => {
+            state.likes = state.likes.filter(
+                (like) => like.userId !== payload.userId
+            );
+        },
+        setTags: (state, { payload }: PayloadAction<TagType[]>) => {
+            state.tags = payload;
+        },
+
+        setCommentLoading: (state, { payload }: PayloadAction<boolean>) => {
+            state.commentLoading = payload;
+        },
+        setLikesLoading: (state, { payload }: PayloadAction<boolean>) => {
+            state.likesLoading = payload;
+        },
     },
 });
 

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Chip } from '@mui/material';
-import { useCollection } from '../hook/collectionStateHook';
+import { useCollection } from '../../hook/collectionStateHook';
 import { useTranslation } from 'react-i18next';
 // import { setSearchTheme } from "../store/slices/mainSlice"
 
