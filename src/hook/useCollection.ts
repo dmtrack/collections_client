@@ -8,7 +8,7 @@ export const useCollection = (collectionId: number) => {
         (state: RootState) => state.collections
     );
     const collectionConfig = useAppSelector((state: RootState) =>
-        state.collections.allConfigs.find(
+        state.collections.itemConfigs.find(
             (config) => Number(config.collectionId) === collectionId
         )
     );

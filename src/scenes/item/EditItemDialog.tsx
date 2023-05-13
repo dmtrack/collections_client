@@ -53,7 +53,7 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
             setAddedTags(item.tags);
         }
     }, [item, setValue]);
-    const itemConfigs = useCollection().allConfigs.filter(
+    const itemConfigs = useCollection().itemConfigs.filter(
         (config: ItemConfigType) => !config.hidden
     );
     const [addedTags, setAddedTags] = useState<TagType[]>([]);

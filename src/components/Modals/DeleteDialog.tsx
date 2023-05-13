@@ -7,10 +7,11 @@ import { BlurDialog } from '../Common/BlurDialog';
 import { useAppDispatch } from '../../hook/redux';
 import { TransButton } from '../Common/TransButton';
 import { shades } from '../../theme';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ICollection } from '../../models/ICollection';
 import { deleteCollection } from '../../state/actions/collections.actions';
 import { IItem } from '../../models/IItem';
+import { deleteItem } from '../../state/actions/items.actions';
 
 interface DeleteDialogProps {
     open: boolean;
@@ -18,6 +19,7 @@ interface DeleteDialogProps {
     userId: number;
     entity?: IItem | ICollection;
     entityId: number;
+    link?: number;
 }
 
 export const DeleteDialog: FC<DeleteDialogProps> = ({
@@ -25,21 +27,30 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
     onClose,
     entityId,
     userId,
+    entity,
+    link,
 }) => {
     const { t } = useTranslation('translation', {
         keyPrefix: 'modal',
     });
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const location = useLocation().pathname;
     const { handleSubmit } = useForm<FieldValues>({});
 
     const closeHandler = () => {
         onClose();
     };
 
-    const submitHandler: SubmitHandler<FieldValues> = () => {
-        dispatch(deleteCollection(entityId, navigate, userId));
-        closeHandler();
+    const deleteHandler: SubmitHandler<FieldValues> = () => {
+        if (location.includes('collections')) {
+            dispatch(deleteCollection(entityId, navigate, userId));
+            closeHandler();
+        }
+        if (location.includes('items')) {
+            dispatch(deleteItem(entityId, navigate, userId, Number(link)));
+            closeHandler();
+        }
     };
 
     return (
@@ -49,7 +60,7 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
                 px={3}
                 py={1}
                 mt={1}
-                onSubmit={handleSubmit(submitHandler)}
+                onSubmit={handleSubmit(deleteHandler)}
                 maxHeight={200}
                 display='flex'
                 flexDirection='column'

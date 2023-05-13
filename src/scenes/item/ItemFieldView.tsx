@@ -1,46 +1,52 @@
-// import { FC } from "react"
-// import MDEditor from "@uiw/react-md-editor"
-// import { Box, Typography } from "@mui/material"
-// import dayjs from "dayjs"
-// import { useApp } from "../../hooks/appStateHook"
-// import { CheckIcon, CloseIcon } from "../../common/icons"
-// import { Item } from "../../../../common/types/item"
-// import { ItemConfigType } from "../../../../common/types/collection"
+import { FC } from 'react';
+import MDEditor from '@uiw/react-md-editor';
+import { Box, Typography } from '@mui/material';
+import dayjs from 'dayjs';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
-// interface ItemFieldViewProps {
-//   item?: Item
-//   config: ItemConfigType
-// }
+import { IItem } from '../../models/IItem';
+import { ItemConfigType } from '../../state/models/ICollection.state';
+import { useApp } from '../../hook/appState';
 
-// export const ItemFieldView: FC<ItemFieldViewProps> = ({ config, item }) => {
-//   const sliceType = config.type.slice(0, -1)
-//   const theme = useApp().theme
-//   const getView = () => {
-//     if (item) {
-//       const value = item[config.type]
-//       switch (sliceType) {
-//         case 'date':
-//           return <Typography>{value ? dayjs(value as string).format('MM-DD-YYYY') : "-"}</Typography>
-//         case 'str':
-//           return <Typography>{value}</Typography>
-//         case 'txt':
-//           return <MDEditor.Markdown source={value as string}/>
-//         case 'numb':
-//           return <Typography>{value}</Typography>
-//         case 'bool':
-//           return value ? <CheckIcon/> : <CloseIcon/>
-//         default:
-//           return <></>
-//       }
-//     }
-//   }
+interface ItemFieldViewProps {
+    item?: IItem;
+    config: ItemConfigType;
+}
 
-//   return (
-//     <Box my={1} p={1} className="border rounded" data-color-mode={theme}>
-//       <Typography variant="h6">{config.label}</Typography>
-//       {getView()}
-//     </Box>
-//   )
-// }
+export const ItemFieldView: FC<ItemFieldViewProps> = ({ config, item }) => {
+    const sliceType = config.type.slice(0, -1);
+    const theme = useApp().theme;
+    const getView = () => {
+        if (item) {
+            const value = item[config.type];
+            switch (sliceType) {
+                case 'date':
+                    return (
+                        <Typography>
+                            {value
+                                ? dayjs(value as string).format('MM-DD-YYYY')
+                                : '-'}
+                        </Typography>
+                    );
+                case 'str':
+                    return <Typography>{value}</Typography>;
+                case 'txt':
+                    return <MDEditor.Markdown source={value as string} />;
+                case 'numb':
+                    return <Typography>{value}</Typography>;
+                case 'bool':
+                    return value ? <CheckIcon /> : <CloseIcon />;
+                default:
+                    return <></>;
+            }
+        }
+    };
 
-export {};
+    return (
+        <Box my={1} p={1} className='border rounded' data-color-mode={theme}>
+            <Typography variant='h6'>{config.label}</Typography>
+            {getView()}
+        </Box>
+    );
+};

@@ -17,6 +17,7 @@ export interface IItem {
     count?: string;
     tags: TagType[];
     likes?: ILike[];
+    [type: string]: any;
 }
 
 export interface IItemForSorting {
@@ -35,6 +36,7 @@ export interface IItemForSorting {
     count?: string;
     tags?: TagType[];
     likes: ILike[];
+    [type: string]: any;
 }
 
 export interface ICreateItem {
@@ -99,7 +101,7 @@ export interface IComment {
     userId: number;
     itemId: number;
     text: string;
-    nickname: string;
+    name: string;
     timestamp: string;
 }
 
@@ -107,5 +109,5 @@ export interface ILike {
     id: number;
     userId: number;
     itemId: number;
-    nickname: string;
+    name: string;
 }

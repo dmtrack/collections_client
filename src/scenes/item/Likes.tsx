@@ -1,41 +1,49 @@
-// import { FC, useEffect } from "react"
-// import { useAuth } from "../../hooks/authHook"
-// import { RootState, useAppDispatch, useAppSelector } from "../../store/store"
-// import { IconButton, Typography } from "@mui/material"
-// import { toggleLike } from "../../store/socket/item/itemSocketAcions"
-// import { FavoriteBorderIcon, FavoriteIcon } from "../../common/icons"
-// import { Spinner } from "../../common/Loader/Spinner"
-// import { setLikes } from "../../store/slices/itemSlice"
+import { FC, useEffect } from 'react';
+import { IconButton, Typography } from '@mui/material';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-// export const Likes: FC<{ itemId: number }> = ({ itemId }) => {
-//   const dispatch = useAppDispatch()
-//   const { currentUser, isAuth } = useAuth()
-//   const { likes, likesLoading } = useAppSelector((state: RootState) => state.item)
-//   const isLiked = !!likes.find(like => like.userId === currentUser.id)
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
+import { RootState } from '../../state';
+import { setLikes } from '../../state/slices/item.slice';
+import { toggleLike } from '../../state/socket/item/itemSocketActions';
+import LittleLoader from '../../components/Loader/LittleLoader';
 
-//   useEffect(() => {
-//     if (likes.length > 0 && likes[0].itemId !== itemId) {
-//       dispatch(setLikes([]))
-//       console.log('clear like')
-//     }
-//   }, [likes])
+export const Likes: FC<{ itemId: number }> = ({ itemId }) => {
+    const dispatch = useAppDispatch();
+    const { isAuth, userId } = useAppSelector((state: RootState) => state.auth);
+    const { likes, likesLoading } = useAppSelector(
+        (state: RootState) => state.items
+    );
+    const isLiked = !!likes.find((like) => like.userId === userId);
 
-//   const likeHandler = () => {
-//     dispatch(toggleLike(itemId))
-//   }
+    useEffect(() => {
+        if (likes.length > 0 && likes[0].itemId !== itemId) {
+            dispatch(setLikes([]));
+            console.log('clear like');
+        }
+    }, [likes]);
 
-//   return (
-//     <>
-//       <IconButton onClick={likeHandler} disabled={!isAuth || likesLoading}>
-//         {isLiked ? <FavoriteIcon className="red"/> : <FavoriteBorderIcon/>}
-//         {
-//           likesLoading
-//             ? <Spinner variant="small" className="self-center"/>
-//             : <Typography>{likes.length}</Typography>
-//         }
-//       </IconButton>
-//     </>
-//   )
-// }
+    const likeHandler = () => {
+        dispatch(toggleLike(itemId));
+    };
 
-export {};
+    return (
+        <>
+            <IconButton
+                onClick={likeHandler}
+                disabled={!isAuth || likesLoading}>
+                {isLiked ? (
+                    <FavoriteIcon className='red' />
+                ) : (
+                    <FavoriteBorderIcon />
+                )}
+                {likesLoading ? (
+                    <LittleLoader />
+                ) : (
+                    <Typography>{likes.length}</Typography>
+                )}
+            </IconButton>
+        </>
+    );
+};

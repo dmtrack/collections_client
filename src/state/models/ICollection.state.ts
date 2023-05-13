@@ -9,7 +9,7 @@ export interface ICollectionState {
     topAmountCollections: ICollection[];
     userCollections: ICollection[];
     themes: ITheme[];
-    allConfigs: AllConfigs;
+    itemConfigs: ItemConfigType[];
     error: string;
     collectionIsBusy: boolean;
 }
