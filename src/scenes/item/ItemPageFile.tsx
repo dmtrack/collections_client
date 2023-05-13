@@ -17,7 +17,7 @@ import { TagChip } from '../../components/Common/TagChip';
 import { Likes } from './Likes';
 import { ItemFieldView } from './ItemFieldView';
 
-const ItemPage: FC = () => {
+const ItemPageFile: FC = () => {
     const { t } = useTranslation('translation', {
         keyPrefix: 'itemPage',
     });
@@ -130,4 +130,4 @@ const ItemPage: FC = () => {
     );
 };
 
-export default ItemPage;
+export default ItemPageFile;
