@@ -44,6 +44,6 @@ export default class ItemService {
         return axiosDelete<
             AuthorizationError | DataBaseError,
             IItemDeleteResponse
-        >(`item/deleteone/:${id}`);
+        >(`item/deleteone/${id}`);
     }
 }

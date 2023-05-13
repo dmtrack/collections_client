@@ -1,4 +1,5 @@
 import { IComment, IItem, ILike, TagType } from '../../models/IItem';
+import { AppSocket } from '../../models/socket/socket';
 
 export interface IItemState {
     itemsLoading: boolean;
@@ -12,6 +13,7 @@ export interface IItemState {
     comments: IComment[];
     likes: ILike[];
     tags: TagType[];
+    socket: AppSocket | null;
 }
 
 export type DeleteItem = {

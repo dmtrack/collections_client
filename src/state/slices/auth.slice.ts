@@ -31,6 +31,7 @@ export const authSlice = createSlice({
             state.userId = action.payload.user.id;
             state.access = action.payload.user.access;
             state.avatarUrl = action.payload.user.avatarUrl;
+            state.name = action.payload.user.name;
             state.isAuth = true;
             state.isBlocked = action.payload.user.blocked;
             localStorageService.setUser(

@@ -18,7 +18,10 @@ export function setupStore() {
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
-                serializableCheck: false,
+                serializableCheck: {
+                    ignoredActions: ['item/setSocket'],
+                    ignoredPaths: ['item.socket'],
+                },
             }),
     });
 }

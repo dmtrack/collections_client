@@ -7,8 +7,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { DeleteItem, IItemState } from '../models/IItem.state';
 import { IComment, IItem, ILike, TagType } from '../../models/IItem';
+import { AppSocket } from '../../models/socket/socket';
 
 const initialState: IItemState = {
+    socket: null,
     itemsLoading: false,
     topRatedItemsLoading: false,
     error: '',
@@ -67,9 +69,7 @@ export const itemSlice = createSlice({
         },
 
         editItem: (state, action: PayloadAction<DeleteItem>) => {},
-        // setSocket: (state, { payload }: PayloadAction<AppSocket | null>) => {
-        //     return { ...state, socket: payload };
-        // },
+
         setItem: (state, { payload }: PayloadAction<IItem>) => {
             state.items = state.items.map((item) =>
                 item.id === payload.id ? payload : item
@@ -109,7 +109,25 @@ export const itemSlice = createSlice({
         setLikesLoading: (state, { payload }: PayloadAction<boolean>) => {
             state.likesLoading = payload;
         },
+        setSocket: (state, { payload }: PayloadAction<AppSocket | null>) => {
+            return { ...state, socket: payload };
+        },
     },
 });
+
+export const {
+    addItem,
+    setItem,
+    addComment,
+    clearComments,
+    setComments,
+    setSocket,
+    addLike,
+    setLikes,
+    removeLike,
+    setTags,
+    setLikesLoading,
+    setCommentLoading,
+} = itemSlice.actions;
 
 export default itemSlice.reducer;

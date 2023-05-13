@@ -259,8 +259,12 @@
                 "commentsOn": "comments on ",
                 "noComments": "There're no comments yet",
                 "commentDeleteConfirm": "Are you sure you want to delete the comment?",
-                "commentPlaceholder": "Leave a comment..."
+                "commentPlaceholder": "Leave a comment...",
+                "edit": "Edit",
+                "delete": "Destroy",
+                "backToCollection": "Back to collection"
             },
+
             "searchPage": {
                 "foundInCollection": "Here are the items from the collections in descriptions of which the text was found:",
                 "foundInComments": "Here are the items in comments of which the text was found:",
@@ -528,7 +532,10 @@
                 "commentsOn": "комментирует ",
                 "noComments": "Комментариев пока что нет",
                 "commentDeleteConfirm": "Вы уверены, что хотите удалить комментарий?",
-                "commentPlaceholder": "Оставьте комментарий..."
+                "commentPlaceholder": "Оставьте комментарий...",
+                "edit": "Редактировать",
+                "delete": "Удалить",
+                "backToCollection": "Вернуться к коллеции"
             },
             "searchPage": {
                 "foundInCollection": "Элементы из коллекций, в описаниях которых был найден текст:",

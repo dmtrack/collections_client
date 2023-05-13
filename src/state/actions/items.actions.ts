@@ -4,6 +4,8 @@ import itemService from '../../services/itemService';
 import { ICreateItemPayload, IItem } from '../../models/IItem';
 import { ICreateItemBody } from '../../models/request/item-body-request';
 import { saveImageToCloud } from '../../api/firebase/actions';
+import { NavigateFunction } from 'react-router-dom';
+import { ICollection } from '../../models/ICollection';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {
@@ -94,13 +96,16 @@ export const editItem = (item: IItem) => {
     };
 };
 
-export const deleteItem = (id: number) => {
+export const deleteItem = (
+    id: number,
+    navigate: NavigateFunction,
+    userId: number,
+    link: Number
+) => {
     return async (dispatch: AppDispatch) => {
         const response = await itemService.deleteItem(id);
         response
-            .mapRight(({ data: data }) => {
-                console.log(data);
-            })
+            .mapRight(() => navigate(`/collections/${link}`))
             .mapLeft((e: any) => {
                 dispatch(itemSlice.actions.fetchError(e.response?.data));
                 console.error({
