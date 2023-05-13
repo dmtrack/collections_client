@@ -47,12 +47,16 @@ export const itemSlice = createSlice({
         setItemsBusy: (state, { payload }: PayloadAction<boolean>) => {
             state.itemIsBusy = payload;
         },
-        addItem: (state, { payload }: PayloadAction<IItem>) => {
-            if (!state.items.find((item) => item.id === payload.id)) {
-                state.items.push(payload);
+        addItem: (state, { payload }: PayloadAction<IItemCreateResponse>) => {
+            if (
+                !state.items.find(
+                    (item) => Number(item.id) === Number(payload.value.id)
+                )
+            ) {
+                state.items = [payload.value, ...state.items];
             } else {
                 state.items = state.items.map((item) =>
-                    item.id === payload.id ? payload : item
+                    item.id === payload.value.id ? payload.value : item
                 );
             }
         },

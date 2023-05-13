@@ -34,7 +34,6 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
     const { t } = useTranslation('translation', {
         keyPrefix: 'items',
     });
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const {
         register,
@@ -61,11 +60,6 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
     const [image, setImage] = useState<File | undefined>(undefined);
 
     useEffect(() => {
-        if (image) {
-            setValue('image', image);
-        }
-    }, [image]);
-    useEffect(() => {
         setFocus('name');
     }, []);
     const handleSetImage = (image: File) => {
@@ -85,15 +79,12 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
             dispatch(editItem({ ...data, tags: addedTags } as IItem));
         } else {
             dispatch(
-                createItem(
-                    {
-                        collectionId,
-                        fields: { ...data } as IFields,
-                        tags: addedTags,
-                        image,
-                    },
-                    navigate
-                )
+                createItem({
+                    collectionId,
+                    fields: { ...data } as IFields,
+                    tags: addedTags,
+                    image,
+                })
             );
         }
         closeHandler();

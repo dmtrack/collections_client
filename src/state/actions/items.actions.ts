@@ -1,16 +1,9 @@
 import { AppDispatch, GetState } from '..';
 import { itemSlice } from '../slices/item.slice';
 import itemService from '../../services/itemService';
-import {
-    ICreateItem,
-    ICreateItemPayload,
-    IFields,
-    IItem,
-    TagType,
-} from '../../models/IItem';
+import { ICreateItemPayload, IItem } from '../../models/IItem';
 import { ICreateItemBody } from '../../models/request/item-body-request';
 import { saveImageToCloud } from '../../api/firebase/actions';
-import { NavigateFunction } from 'react-router-dom';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {
@@ -49,10 +42,7 @@ export const fetchTopRatedItems = () => {
     };
 };
 
-export const createItem = (
-    data: ICreateItemPayload,
-    navigate: NavigateFunction
-) => {
+export const createItem = (data: ICreateItemPayload) => {
     return async (dispatch: AppDispatch, getState: GetState) => {
         dispatch(itemSlice.actions.setItemsBusy(true));
         const { userId } = getState().auth;
@@ -65,12 +55,14 @@ export const createItem = (
             tags,
             fields,
         };
+        console.log(sendData);
 
         const response = await itemService.createItem(sendData);
         response
-            .mapRight(({ data: data }) => {
-                dispatch(itemSlice.actions.addItem(data));
-                navigate(`collection/${data.collectionId}`);
+            .mapRight(({ data: item }) => {
+                console.log(data);
+
+                dispatch(itemSlice.actions.addItem(item));
             })
             .mapLeft((e: any) => {
                 dispatch(itemSlice.actions.fetchError(e.response?.data));

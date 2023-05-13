@@ -44,7 +44,7 @@ const CollectionPage = () => {
         )
     );
     const goHome = () => navigate('/');
-    const isLoading = itemsLoading && itemIsBusy;
+    const isLoading = itemsLoading || itemIsBusy;
     const handleOpenCreateItemOpen = (): void => {
         setEditItemDialogOpen(true);
     };
