@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { MAX_IMAGE_SIZE, fileTypes } from '../../utils/constants';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import { shades } from '../../theme';
+import { useNavigate } from 'react-router-dom';
 
 interface EditItemDialogProps {
     open: boolean;
@@ -40,19 +41,9 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
         formState: { errors },
         control,
         setValue,
+        setFocus,
         reset,
     } = useForm<FieldValues>({});
-    const itemConfigs = useCollection().allConfigs.filter(
-        (config: ItemConfigType) => !config.hidden
-    );
-    const [addedTags, setAddedTags] = useState<TagType[]>([]);
-    const [image, setImage] = useState<File | undefined>(undefined);
-
-    useEffect(() => {
-        if (image) {
-            setValue('image', image);
-        }
-    }, [image]);
 
     useEffect(() => {
         if (item) {
@@ -62,7 +53,15 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
             setAddedTags(item.tags);
         }
     }, [item, setValue]);
+    const itemConfigs = useCollection().allConfigs.filter(
+        (config: ItemConfigType) => !config.hidden
+    );
+    const [addedTags, setAddedTags] = useState<TagType[]>([]);
+    const [image, setImage] = useState<File | undefined>(undefined);
 
+    useEffect(() => {
+        setFocus('name');
+    }, []);
     const handleSetImage = (image: File) => {
         setImage(image);
     };

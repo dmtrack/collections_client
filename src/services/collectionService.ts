@@ -1,8 +1,9 @@
 import { IUserAuthResponse } from '../models/response/authResponse';
 import { Axios, AxiosResponse } from 'axios';
-import api, { axiosGet, axiosPost } from '../api/axios/apiClient';
+import api, { axiosDelete, axiosGet, axiosPost } from '../api/axios/apiClient';
 import {
     ICollection,
+    IDeleteCollectionResponse,
     IGetCollectionResponse,
     IGetThemesResponse,
 } from '../models/ICollection';
@@ -61,7 +62,10 @@ export default class collectionService {
         return api.put<ICollection>('collection/update');
     }
 
-    static deleteCollection(id: number): Promise<AxiosResponse> {
-        return api.delete<ICollection>(`collection/deleteone/:${id}`);
+    static async deleteCollection(collectionId: number) {
+        return axiosDelete<
+            AuthorizationError | DataBaseError,
+            IDeleteCollectionResponse
+        >(`collection/delete/${collectionId}`);
     }
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useCollection } from '../../hook/useCollection';
 import AddIcon from '@mui/icons-material/Add';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
+import BackspaceSharpIcon from '@mui/icons-material/BackspaceSharp';
 import EditIcon from '@mui/icons-material/Edit';
 import EmptyContainer from '../../components/Common/EmptyContainer/EmptyContainer';
 import { shades } from '../../theme';
@@ -17,6 +18,7 @@ import { IItem } from '../../models/IItem';
 
 import { fetchItems } from '../../state/actions/items.actions';
 import { EditItemDialog } from '../item/EditItemDialog';
+import { DeleteDialog } from '../../components/Modals/DeleteDialog';
 
 const CollectionPage = () => {
     const { t } = useTranslation('translation', {
@@ -25,7 +27,8 @@ const CollectionPage = () => {
     const navigate = useNavigate();
     const { collectionId } = useParams();
 
-    const { itemsLoading } = useAppSelector((state) => state.items);
+    const { itemsLoading, itemIsBusy } = useAppSelector((state) => state.items);
+    const { userId } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
     const { collection, hasFullAccess } = useCollection(Number(collectionId));
     const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -33,22 +36,25 @@ const CollectionPage = () => {
         dispatch(fetchItems());
     }, [dispatch]);
     const [editItemDialogOpen, setEditItemDialogOpen] = useState(false);
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     const collectionItems: IItem[] = useAppSelector((state) =>
         state.items.items.filter(
             (i) => Number(i.collectionId) === Number(collectionId)
         )
     );
-
     const goHome = () => navigate('/');
-
+    const isLoading = itemsLoading || itemIsBusy;
     const handleOpenCreateItemOpen = (): void => {
         setEditItemDialogOpen(true);
+    };
+    const handleOpenDeleteDialogOpen = (): void => {
+        setDeleteDialogOpen(true);
     };
 
     return (
         <>
-            {itemsLoading && <Loader />}
+            {isLoading && <Loader />}
             <Box width='80%' m='36px auto 80px auto' className='user-profile'>
                 <Box display='flex' columnGap='16px' flexWrap='wrap'>
                     {/* IMAGES */}
@@ -86,7 +92,7 @@ const CollectionPage = () => {
                                 justifyContent='center'
                                 display='flex'
                                 gap='12px'>
-                                <Tooltip title='Add item'>
+                                <Tooltip title={`${t('add')}`}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='secondary'>
                                             <AddIcon
@@ -104,7 +110,7 @@ const CollectionPage = () => {
                                     )}
                                 </Tooltip>
 
-                                <Tooltip title='Home'>
+                                <Tooltip title={`${t('home')}`}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
                                             <HomeSharpIcon onClick={goHome} />
@@ -117,7 +123,7 @@ const CollectionPage = () => {
                                     )}
                                 </Tooltip>
 
-                                <Tooltip title='Edit collection'>
+                                <Tooltip title={`${t('edit')}`}>
                                     <Link
                                         to={`/collection/${collectionId}/edit`}>
                                         {' '}
@@ -130,6 +136,24 @@ const CollectionPage = () => {
                                         )}
                                     </Link>
                                 </Tooltip>
+
+                                <Tooltip title={`${t('delete')}`}>
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='primary'>
+                                            <BackspaceSharpIcon
+                                                onClick={
+                                                    handleOpenDeleteDialogOpen
+                                                }
+                                            />
+                                        </Fab>
+                                    ) : (
+                                        <BackspaceSharpIcon
+                                            fontSize='large'
+                                            color='primary'
+                                            onClick={handleOpenDeleteDialogOpen}
+                                        />
+                                    )}
+                                </Tooltip>
                             </Box>
                         )}
                     </Box>
@@ -137,6 +161,13 @@ const CollectionPage = () => {
                         open={editItemDialogOpen}
                         onClose={() => setEditItemDialogOpen(false)}
                         collectionId={Number(collection?.id)}
+                    />{' '}
+                    <DeleteDialog
+                        open={deleteDialogOpen}
+                        onClose={() => setDeleteDialogOpen(false)}
+                        entityId={Number(collection?.id)}
+                        entity={collection}
+                        userId={userId}
                     />
                     <Box
                         flex='5 1 60%'

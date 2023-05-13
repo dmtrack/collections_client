@@ -1,13 +1,7 @@
 import { AppDispatch, GetState } from '..';
 import { itemSlice } from '../slices/item.slice';
 import itemService from '../../services/itemService';
-import {
-    ICreateItem,
-    ICreateItemPayload,
-    IFields,
-    IItem,
-    TagType,
-} from '../../models/IItem';
+import { ICreateItemPayload, IItem } from '../../models/IItem';
 import { ICreateItemBody } from '../../models/request/item-body-request';
 import { saveImageToCloud } from '../../api/firebase/actions';
 
@@ -50,6 +44,7 @@ export const fetchTopRatedItems = () => {
 
 export const createItem = (data: ICreateItemPayload) => {
     return async (dispatch: AppDispatch, getState: GetState) => {
+        dispatch(itemSlice.actions.setItemsBusy(true));
         const { userId } = getState().auth;
         const { image: imageFile, collectionId, fields, tags } = data;
         const image = await saveImageToCloud(imageFile, 'items');
@@ -60,11 +55,14 @@ export const createItem = (data: ICreateItemPayload) => {
             tags,
             fields,
         };
+        console.log(sendData);
 
         const response = await itemService.createItem(sendData);
         response
-            .mapRight(({ data: data }) => {
-                dispatch(itemSlice.actions.addItem(data));
+            .mapRight(({ data: item }) => {
+                console.log(data);
+
+                dispatch(itemSlice.actions.addItem(item));
             })
             .mapLeft((e: any) => {
                 dispatch(itemSlice.actions.fetchError(e.response?.data));
@@ -74,6 +72,7 @@ export const createItem = (data: ICreateItemPayload) => {
                     message: e.response.data,
                 });
             });
+        dispatch(itemSlice.actions.setItemsBusy(false));
     };
 };
 
