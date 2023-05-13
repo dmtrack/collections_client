@@ -27,7 +27,7 @@ import Collection from './scenes/collection/Collection';
 import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
 import Loader from './components/Loader/Loader';
-import ItemPage from './scenes/item/ItemPage';
+import ItemPageFile from './scenes/item/ItemPageFile';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -102,7 +102,7 @@ const App: React.FC = () => {
                             />
                             <Route
                                 path='items/:itemId/'
-                                element={<ItemPage />}
+                                element={<ItemPageFile />}
                             />{' '}
                             {/* <Route
                                 path='collections/:collectionId/create/'
