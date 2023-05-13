@@ -10,6 +10,7 @@ import {
 } from '../../models/IItem';
 import { ICreateItemBody } from '../../models/request/item-body-request';
 import { saveImageToCloud } from '../../api/firebase/actions';
+import { NavigateFunction } from 'react-router-dom';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {
@@ -48,8 +49,12 @@ export const fetchTopRatedItems = () => {
     };
 };
 
-export const createItem = (data: ICreateItemPayload) => {
+export const createItem = (
+    data: ICreateItemPayload,
+    navigate: NavigateFunction
+) => {
     return async (dispatch: AppDispatch, getState: GetState) => {
+        dispatch(itemSlice.actions.setItemsBusy(true));
         const { userId } = getState().auth;
         const { image: imageFile, collectionId, fields, tags } = data;
         const image = await saveImageToCloud(imageFile, 'items');
@@ -65,6 +70,7 @@ export const createItem = (data: ICreateItemPayload) => {
         response
             .mapRight(({ data: data }) => {
                 dispatch(itemSlice.actions.addItem(data));
+                navigate(`collection/${data.collectionId}`);
             })
             .mapLeft((e: any) => {
                 dispatch(itemSlice.actions.fetchError(e.response?.data));
@@ -74,6 +80,7 @@ export const createItem = (data: ICreateItemPayload) => {
                     message: e.response.data,
                 });
             });
+        dispatch(itemSlice.actions.setItemsBusy(false));
     };
 };
 

@@ -23,6 +23,10 @@ export interface IGetCollectionResponse extends AxiosResponse {
     themeName: string;
 }
 
+export interface IDeleteCollectionResponse extends AxiosResponse {
+    id: number;
+}
+
 export interface IGetThemesResponse extends AxiosResponse {
     id: number;
     name: string;

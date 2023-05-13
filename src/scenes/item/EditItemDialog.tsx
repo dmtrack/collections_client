@@ -16,6 +16,7 @@ import { toast } from 'react-toastify';
 import { MAX_IMAGE_SIZE, fileTypes } from '../../utils/constants';
 import DragAndDrop from '../../components/DragAndDrop/DragAndDrop';
 import { shades } from '../../theme';
+import { useNavigate } from 'react-router-dom';
 
 interface EditItemDialogProps {
     open: boolean;
@@ -33,6 +34,7 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
     const { t } = useTranslation('translation', {
         keyPrefix: 'items',
     });
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const {
         register,
@@ -40,8 +42,18 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
         formState: { errors },
         control,
         setValue,
+        setFocus,
         reset,
     } = useForm<FieldValues>({});
+
+    useEffect(() => {
+        if (item) {
+            Object.entries(item).forEach(([key, value]) =>
+                setValue(key, value)
+            );
+            setAddedTags(item.tags);
+        }
+    }, [item, setValue]);
     const itemConfigs = useCollection().allConfigs.filter(
         (config: ItemConfigType) => !config.hidden
     );
@@ -53,16 +65,9 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
             setValue('image', image);
         }
     }, [image]);
-
     useEffect(() => {
-        if (item) {
-            Object.entries(item).forEach(([key, value]) =>
-                setValue(key, value)
-            );
-            setAddedTags(item.tags);
-        }
-    }, [item, setValue]);
-
+        setFocus('name');
+    }, []);
     const handleSetImage = (image: File) => {
         setImage(image);
     };
@@ -80,12 +85,15 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
             dispatch(editItem({ ...data, tags: addedTags } as IItem));
         } else {
             dispatch(
-                createItem({
-                    collectionId,
-                    fields: { ...data } as IFields,
-                    tags: addedTags,
-                    image,
-                })
+                createItem(
+                    {
+                        collectionId,
+                        fields: { ...data } as IFields,
+                        tags: addedTags,
+                        image,
+                    },
+                    navigate
+                )
             );
         }
         closeHandler();

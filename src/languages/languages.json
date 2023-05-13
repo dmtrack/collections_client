@@ -209,7 +209,11 @@
                 "csv": "Export to CSV",
                 "empty": "There is no items yet. Create first!",
                 "emptyAndLoggedIn": "Create first items!",
-                "emptyAndLoggedOut": "Get sign up and create first items!"
+                "emptyAndLoggedOut": "Get sign up and create first items!",
+                "add": "Add",
+                "home": "Home",
+                "edit": "Edit",
+                "delete": "Destroy"
             },
             "items": {
                 "return": "Return to the previous page",
@@ -266,6 +270,12 @@
                 "items": "items",
                 "comments": "comments",
                 "search": "Search"
+            },
+            "modal": {
+                "destroyTitle": "Destroy",
+                "destroyText": "Are you sure to completely delete this element?",
+                "yep": "Yep",
+                "nope": "Change my mind"
             }
         }
     },
@@ -468,7 +478,11 @@
                 "likes": "Лайки",
                 "empty": "В коллекции пока ничего нет",
                 "newItem": "Новый элемент",
-                "csv": "Экспорт в CSV"
+                "csv": "Экспорт в CSV",
+                "add": "Добавить",
+                "home": "На главную",
+                "edit": "Редактировать",
+                "delete": "Удалить"
             },
             "items": {
                 "return": "Вернуться на предыдущую страницу",
@@ -525,6 +539,12 @@
                 "1Items": "Элементы",
                 "1Comments": "Комментарии",
                 "search": "Поиск"
+            },
+            "modal": {
+                "destroyTitle": "Удаление",
+                "destroyText": "Вы действительно решились на удаление?",
+                "yep": "Да",
+                "nope": "Нет, передумал"
             }
         }
     }

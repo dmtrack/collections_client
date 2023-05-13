@@ -159,3 +159,29 @@ export const createCollection = (
         dispatch(collectionSlice.actions.setCollectionsBusy(false));
     };
 };
+
+export const deleteCollection = (
+    collectionId: number,
+    navigate: NavigateFunction,
+    userId: number
+) => {
+    return async (dispatch: AppDispatch) => {
+        dispatch(collectionSlice.actions.setCollectionsBusy(true));
+        const response = await collectionService.deleteCollection(collectionId);
+
+        response
+            .mapRight(({ data: dataId }) => {
+                dispatch(collectionSlice.actions.deleteCollection(dataId));
+                navigate(`/users/${userId}`);
+            })
+            .mapLeft((e: any) => {
+                dispatch(collectionSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+        dispatch(collectionSlice.actions.setCollectionsBusy(false));
+    };
+};

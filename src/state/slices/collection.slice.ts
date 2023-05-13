@@ -80,7 +80,7 @@ export const collectionSlice = createSlice({
         addCollection: (state, action: PayloadAction<ICollection>) => {
             state.collections = [...state.collections, action.payload];
         },
-        deleteColection: (state, action: PayloadAction<DeleteCollection>) => {
+        deleteCollection: (state, action: PayloadAction<DeleteCollection>) => {
             state.collections = state.collections.filter((col) => {
                 return col.id !== action.payload.id;
             });
