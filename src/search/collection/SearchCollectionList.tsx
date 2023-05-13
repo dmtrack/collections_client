@@ -7,11 +7,16 @@ import { t } from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 export const SearchCollectionList = connectHits(({ hits }) => {
-    const { t } = useTranslation(['searchPage']);
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'searchPage',
+    });
 
     return (
         <Box>
-            <Text className='search-title' hidden={hits.length === 0}>
+            <Text
+                className='search-title'
+                hidden={hits.length === 0}
+                prefix='searchPage'>
                 {t('collections')}
             </Text>
             <Box>

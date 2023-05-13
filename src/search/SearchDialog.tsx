@@ -14,8 +14,13 @@ import { BlurDialog } from '../components/Common/BlurDialog';
 import { useAppDispatch } from '../hook/redux';
 import { useApp } from '../hook/appState';
 import { setSearchOpen } from '../state/slices/app.slice';
+import { shades } from '../theme';
+import { useTranslation } from 'react-i18next';
 
 export const SearchDialog: FC = () => {
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'searchPage',
+    });
     const dispatch = useAppDispatch();
     const { searchOpen } = useApp();
     const searchClient = instantMeiliSearch(
@@ -45,7 +50,14 @@ export const SearchDialog: FC = () => {
             disableEscapeKeyDown>
             <Box px={2} py={1} height='70vh'>
                 <Box display='flex' justifyContent='space-between' mb={1}>
-                    <Text fontSize='x-large'>Site search</Text>
+                    <Text
+                        fontSize='x-large'
+                        variant='h5'
+                        color={shades.secondary[800]}
+                        letterSpacing='-0.5px'
+                        fontWeight='600'>
+                        {t('search')}
+                    </Text>
                     <Typography
                         className='esc-bth'
                         onClick={searchCloseHandler}>

@@ -264,7 +264,8 @@
                 "searchedQuantity": "Total items found:",
                 "collections": "collections",
                 "items": "items",
-                "comments": "comments"
+                "comments": "comments",
+                "search": "Search"
             }
         }
     },
@@ -520,9 +521,10 @@
                 "foundInComments": "Элементы, у которых текст был найден в комментариях:",
                 "noResults": "Элементы не найдены",
                 "searchedQuantity": "Найдено элементов:",
-                "collections": "Коллекции пользователя",
-                "items": "Элементы",
-                "comments": "Комментарии"
+                "1Collections": "Коллекции пользователя",
+                "1Items": "Элементы",
+                "1Comments": "Комментарии",
+                "search": "Поиск"
             }
         }
     }
