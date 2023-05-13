@@ -6,11 +6,16 @@ import { Text } from '../../components/Common/Text';
 import { useTranslation } from 'react-i18next';
 
 export const SearchItemsList = connectHits(({ hits }) => {
-    const { t } = useTranslation(['searchPage']);
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'searchPage',
+    });
 
     return (
         <Box>
-            <Text className='search-title' hidden={hits.length === 0}>
+            <Text
+                className='search-title'
+                hidden={hits.length === 0}
+                prefix='searchPage'>
                 {t('items')}
             </Text>
             <Box>

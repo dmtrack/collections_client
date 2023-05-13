@@ -99,6 +99,7 @@ const CollectionPage = () => {
                                         <AddIcon
                                             fontSize='large'
                                             color='secondary'
+                                            onClick={handleOpenCreateItemOpen}
                                         />
                                     )}
                                 </Tooltip>
