@@ -28,6 +28,7 @@ const MainCarousel = () => {
                 marginBottom: isNonMobile ? '0px' : '80px',
                 // width: isNonMobile ? '80%' : '100%',
                 width: '80%',
+                flexWrap: 'wrap',
                 flexDirection: isNonMobile ? 'row' : 'column',
             }}>
             <Box
