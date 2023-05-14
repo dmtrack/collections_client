@@ -161,9 +161,11 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
                 </Box>
                 <Box display='flex' justifyContent='space-between'>
                     <TransButton onClick={closeHandler} color='inherit'>
-                        Cancel
+                        {t('cancel')}
                     </TransButton>
-                    <TransButton type='submit'>Save</TransButton>
+                    <TransButton type='submit'>
+                        {!!item ? t('update') : t('create')}
+                    </TransButton>
                 </Box>
             </Box>
         </BlurDialog>

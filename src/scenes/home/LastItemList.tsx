@@ -10,6 +10,7 @@ import { IItem } from '../../models/IItem';
 import { shades } from '../../theme';
 import { v4 } from 'uuid';
 import { useTranslation } from 'react-i18next';
+import { PopularTagCloud } from '../../components/TagCloud/PopularTagCloud';
 
 const LastItemList = () => {
     const { t } = useTranslation('translation', {
@@ -103,6 +104,9 @@ const LastItemList = () => {
                             .map((item: IItem) => (
                                 <Item item={item} key={v4()} />
                             ))}
+                </Box>
+                <Box mt={10}>
+                    <PopularTagCloud />
                 </Box>
             </Box>
         </>

@@ -8,6 +8,7 @@ import { TagType } from '../../models/IItem';
 export const TagChip: FC<{ tag: TagType }> = ({ tag }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    console.log(tag);
 
     const handleClick = () => {
         navigate('/');
@@ -15,7 +16,7 @@ export const TagChip: FC<{ tag: TagType }> = ({ tag }) => {
     };
     return (
         <Box mx={0.5}>
-            <Chip label={tag.name} size='small' onClick={handleClick} />
+            <Chip label={tag.name} size='medium' onClick={handleClick} />
         </Box>
     );
 };

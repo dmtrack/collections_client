@@ -11,7 +11,10 @@ import { useEffect } from 'react';
 import { ICollection } from '../../models/ICollection';
 import { RootState } from '../../state';
 import { ThemeChip } from '../../components/Common/ThemeChip';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { PopularTagCloud } from '../../components/TagCloud/PopularTagCloud';
+import { TagsArea } from '../item/TagsArea';
+import { setSearchTags } from '../../state/slices/main.slice';
 
 const importAll = (r: any) =>
     r.keys().reduce((acc: any, item: any) => {
@@ -19,17 +22,19 @@ const importAll = (r: any) =>
         return acc;
     }, {});
 
-const heroTextureImports = importAll(
-    require.context('../../assets/images/', false, /\.(jpe?g|png|svg)$/)
-);
+// const heroTextureImports = importAll(
+//     require.context('../../assets/images/', false, /\.(jpe?g|png|svg)$/)
+// );
 
 const MainCarousel = () => {
+    const { searchTags } = useAppSelector((state: RootState) => state.main);
+
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const { t } = useTranslation('translation', {
         keyPrefix: 'home',
     });
     const { pathname } = useLocation();
-
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchTopAmountCollections());
@@ -37,7 +42,6 @@ const MainCarousel = () => {
     const { topAmountCollections } = useAppSelector(
         (state: RootState) => state.collections
     );
-    console.log(topAmountCollections);
     const topAmountCollectionsFlat = topAmountCollections?.map((element) => {
         return {
             id: element.collectionId,
@@ -48,7 +52,6 @@ const MainCarousel = () => {
             created: element.collection.created,
         };
     });
-    console.log(topAmountCollectionsFlat);
 
     return (
         <Box
@@ -83,6 +86,16 @@ const MainCarousel = () => {
                     }}>
                     {t('mainTitle')}
                 </Typography>
+                {/* <Box display='flex'>
+                    <Box width='100%'>
+                        <TagsArea
+                            value={searchTags}
+                            setValue={(tags) => dispatch(setSearchTags(tags))}
+                            freeSolo={false}
+                            placeholder='tags search'
+                        />
+                    </Box>
+                </Box> */}
             </Box>
             <Box sx={{ flex: '1' }}>
                 <Carousel
@@ -120,6 +133,9 @@ const MainCarousel = () => {
                         .slice(0, 5)
                         .map((collection, index) => (
                             <Box
+                                onClick={() =>
+                                    navigate(`/collections/${collection.id}`)
+                                }
                                 key={`carousel-image-${index}`}
                                 position='relative'>
                                 <img
@@ -151,24 +167,12 @@ const MainCarousel = () => {
                                         isNonMobile ? undefined : '240px'
                                     }>
                                     <Box display='flex' flexDirection='column'>
-                                        <Typography
-                                            color={
-                                                shades.secondary[200]
-                                            }></Typography>
                                         <Typography variant='h4'>
                                             {collection.name}
                                         </Typography>
                                         <Typography variant='h6'>
                                             {t('items')}: {collection.count}
                                         </Typography>
-
-                                        {/* <Typography
-                                            fontWeight='bold'
-                                            color={shades.secondary[300]}
-                                            // sx={{ textDecoration: 'underline' }}
-                                        >
-                                            Owner
-                                        </Typography> */}
                                     </Box>
                                 </Box>
                                 <Box

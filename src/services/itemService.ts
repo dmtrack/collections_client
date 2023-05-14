@@ -2,7 +2,7 @@ import {
     IItemDeleteResponse,
     IItemEditResponse,
 } from './../models/response/itemResponce';
-import { ICreateItem, IItem } from './../models/IItem';
+import { ICreateItem, IItem, TagType } from './../models/IItem';
 import { AuthorizationError } from '../models/errors/AuthorizationError';
 
 import { axiosDelete, axiosGet, axiosPost } from '../api/axios/apiClient';
@@ -45,5 +45,11 @@ export default class ItemService {
             AuthorizationError | DataBaseError,
             IItemDeleteResponse
         >(`item/deleteone/${id}`);
+    }
+
+    static async fetchTags() {
+        return axiosGet<AuthorizationError | DataBaseError, TagType[]>(
+            '/item/tags'
+        );
     }
 }
