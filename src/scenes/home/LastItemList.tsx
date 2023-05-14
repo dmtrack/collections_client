@@ -41,7 +41,11 @@ const LastItemList = () => {
 
     return (
         <>
-            <Box width={isNonMobile ? '80%' : '100%'} margin='0px auto'>
+            <Box
+                width={isNonMobile ? '80%' : '100%'}
+                marginLeft='auto'
+                marginRight='auto'
+                marginTop={isNonMobile ? '24px' : '0px'}>
                 <Typography
                     variant='h4'
                     textAlign='left'
