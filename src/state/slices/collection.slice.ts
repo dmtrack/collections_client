@@ -8,6 +8,7 @@ import {
     DeleteCollection,
     ICollectionState,
 } from '../models/ICollection.state';
+import { ICollectionTopAmountResponce } from '../../models/response/collectionResponse';
 
 const initialState: ICollectionState = {
     collectionsLoading: false,
@@ -64,7 +65,7 @@ export const collectionSlice = createSlice({
         },
         fetchTopAmountSuccess: (
             state,
-            action: PayloadAction<ICollection[]>
+            action: PayloadAction<ICollectionTopAmountResponce[]>
         ) => {
             state.collectionsTopAmountLoading = false;
             state.topAmountCollections = action.payload;

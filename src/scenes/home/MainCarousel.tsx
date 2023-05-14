@@ -4,6 +4,14 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { shades } from '../../theme';
+import { useTranslation } from 'react-i18next';
+import { fetchTopAmountCollections } from '../../state/actions/collections.actions';
+import { useAppDispatch, useAppSelector } from '../../hook/redux';
+import { useEffect } from 'react';
+import { ICollection } from '../../models/ICollection';
+import { RootState } from '../../state';
+import { ThemeChip } from '../../components/Common/ThemeChip';
+import { useLocation } from 'react-router-dom';
 
 const importAll = (r: any) =>
     r.keys().reduce((acc: any, item: any) => {
@@ -17,6 +25,30 @@ const heroTextureImports = importAll(
 
 const MainCarousel = () => {
     const isNonMobile = useMediaQuery('(min-width:600px)');
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'home',
+    });
+    const { pathname } = useLocation();
+
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchTopAmountCollections());
+    }, [dispatch]);
+    const { topAmountCollections } = useAppSelector(
+        (state: RootState) => state.collections
+    );
+    console.log(topAmountCollections);
+    const topAmountCollectionsFlat = topAmountCollections?.map((element) => {
+        return {
+            id: element.collectionId,
+            count: element.count,
+            image: element.collection.image,
+            name: element.collection.name,
+            theme: element.collection.themeId,
+            created: element.collection.created,
+        };
+    });
+    console.log(topAmountCollectionsFlat);
 
     return (
         <Box
@@ -49,7 +81,7 @@ const MainCarousel = () => {
                         marginTop: isNonMobile ? '0px' : '32px',
                         marginBottom: isNonMobile ? '32px' : '16px',
                     }}>
-                    The Collections save your the most valuable
+                    {t('mainTitle')}
                 </Typography>
             </Box>
             <Box sx={{ flex: '1' }}>
@@ -84,49 +116,77 @@ const MainCarousel = () => {
                             <NavigateNextIcon sx={{ fontSize: 40 }} />
                         </IconButton>
                     )}>
-                    {Object.values(heroTextureImports).map((texture, index) => (
-                        <Box key={`carousel-image-${index}`}>
-                            <img
-                                src={texture as string}
-                                alt={`carousel-${index}`}
-                                style={{
-                                    width: '100%',
-                                    height: '350px',
-                                    objectFit: 'cover',
-                                    backgroundAttachment: 'fixed',
-                                    // borderRadius: isNonMobile ? '5px' : '0px',
-                                    borderRadius: '5px',
-                                }}
-                            />
+                    {topAmountCollectionsFlat
+                        .slice(0, 5)
+                        .map((collection, index) => (
                             <Box
-                                sx={{
-                                    color: 'white',
-                                    backgroundColor: 'rgb(0,0,0,0.4)',
-                                }}
-                                // padding='20px'
-                                borderRadius='2px'
-                                textAlign='left'
-                                position='absolute'
-                                top='70%'
-                                left={isNonMobile ? '10%' : '0'}
-                                right={isNonMobile ? undefined : '0'}
-                                margin={isNonMobile ? undefined : '0 auto'}
-                                maxWidth={isNonMobile ? undefined : '240px'}>
-                                <Typography
-                                    color={shades.secondary[200]}></Typography>
-                                <Typography variant='h4'>Theme</Typography>
-                                <Typography variant='h6'>items: 5</Typography>
+                                key={`carousel-image-${index}`}
+                                position='relative'>
+                                <img
+                                    src={collection.image as string}
+                                    alt={`carousel-${index}`}
+                                    style={{
+                                        width: '100%',
+                                        height: '350px',
+                                        objectFit: 'cover',
+                                        backgroundAttachment: 'fixed',
+                                        // borderRadius: isNonMobile ? '5px' : '0px',
+                                        borderRadius: '5px',
+                                    }}
+                                />
 
-                                <Typography
-                                    fontWeight='bold'
-                                    color={shades.secondary[300]}
-                                    // sx={{ textDecoration: 'underline' }}
-                                >
-                                    Owner
-                                </Typography>
+                                <Box
+                                    sx={{
+                                        color: `${shades.primary[100]}`,
+                                        backgroundColor: 'rgb(0,0,0,0.4)',
+                                    }}
+                                    // padding='20px'
+                                    borderRadius='2px'
+                                    textAlign='left'
+                                    position='absolute'
+                                    bottom='7%'
+                                    left={isNonMobile ? '10%' : '5%'}
+                                    margin={isNonMobile ? undefined : '0 auto'}
+                                    maxWidth={
+                                        isNonMobile ? undefined : '240px'
+                                    }>
+                                    <Box display='flex' flexDirection='column'>
+                                        <Typography
+                                            color={
+                                                shades.secondary[200]
+                                            }></Typography>
+                                        <Typography variant='h4'>
+                                            {collection.name}
+                                        </Typography>
+                                        <Typography variant='h6'>
+                                            {t('items')}: {collection.count}
+                                        </Typography>
+
+                                        {/* <Typography
+                                            fontWeight='bold'
+                                            color={shades.secondary[300]}
+                                            // sx={{ textDecoration: 'underline' }}
+                                        >
+                                            Owner
+                                        </Typography> */}
+                                    </Box>
+                                </Box>
+                                <Box
+                                    display='flex'
+                                    position='absolute'
+                                    bottom='5%'
+                                    right='5%'>
+                                    {pathname === '/' && (
+                                        <ThemeChip
+                                            themeId={Number(collection.theme)}
+                                            color='default'
+                                            backgroundColor='white'
+                                            border='none'
+                                        />
+                                    )}
+                                </Box>
                             </Box>
-                        </Box>
-                    ))}
+                        ))}
                 </Carousel>
             </Box>
         </Box>
