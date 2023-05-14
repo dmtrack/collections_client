@@ -4,6 +4,7 @@ import authReducer from './slices/auth.slice';
 import collectionReducer from './slices/collection.slice';
 import itemReducer from './slices/item.slice';
 import appReducer from './slices/app.slice';
+import mainReducer from './slices/main.slice';
 
 const rootReducer = combineReducers({
     users: userReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     collections: collectionReducer,
     items: itemReducer,
     app: appReducer,
+    main: mainReducer,
 });
 
 export function setupStore() {

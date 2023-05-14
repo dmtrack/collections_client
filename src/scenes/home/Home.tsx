@@ -4,6 +4,7 @@ import { useAppSelector } from '../../hook/redux';
 import MainCarousel from './MainCarousel';
 import LastItemList from './LastItemList';
 import { Box } from '@mui/material';
+import { PopularTagCloud } from '../../components/TagCloud/PopularTagCloud';
 
 const Home = () => {
     const { t } = useTranslation(['home']);

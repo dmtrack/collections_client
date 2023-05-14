@@ -1,11 +1,12 @@
 import { AppDispatch, GetState } from '..';
-import { itemSlice } from '../slices/item.slice';
+import { itemSlice, setTags } from '../slices/item.slice';
 import itemService from '../../services/itemService';
-import { ICreateItemPayload, IItem } from '../../models/IItem';
+import { ICreateItemPayload, IItem, TagType } from '../../models/IItem';
 import { ICreateItemBody } from '../../models/request/item-body-request';
 import { saveImageToCloud } from '../../api/firebase/actions';
 import { NavigateFunction } from 'react-router-dom';
 import { ICollection } from '../../models/ICollection';
+import ItemService from '../../services/itemService';
 
 export const fetchItems = () => {
     return async (dispatch: AppDispatch) => {
@@ -115,6 +116,13 @@ export const deleteItem = (
                 });
             });
     };
+};
+
+export const getTags = () => async (dispatch: AppDispatch) => {
+    const response = await ItemService.fetchTags();
+    response
+        .mapRight(({ data: tags }) => dispatch(setTags(tags)))
+        .mapLeft((e) => console.log(e.response?.data));
 };
 
 // static getUserItems(collectionId: number): Promise<AxiosResponse> {

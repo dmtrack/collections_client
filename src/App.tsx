@@ -28,6 +28,7 @@ import Breadcrumbs from './components/Breadcrumbs';
 import { useApp } from './hook/appState';
 import Loader from './components/Loader/Loader';
 import ItemPageFile from './scenes/item/ItemPageFile';
+import { getTags } from './state/actions/items.actions';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -65,6 +66,7 @@ const App: React.FC = () => {
         dispatch(fetchCollections());
         dispatch(fetchTopAmountCollections());
         dispatch(fetchThemes());
+        dispatch(getTags());
         i18n.changeLanguage(lang);
     }, [dispatch, lang, i18n]);
 
