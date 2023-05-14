@@ -1,4 +1,5 @@
 import { ICollection, ITheme } from '../../models/ICollection';
+import { ICollectionTopAmountResponce } from '../../models/response/collectionResponse';
 
 export interface ICollectionState {
     collectionsLoading: boolean;
@@ -6,7 +7,7 @@ export interface ICollectionState {
     collectionsTopAmountLoading: boolean;
     themesLoading: boolean;
     collections: ICollection[];
-    topAmountCollections: ICollection[];
+    topAmountCollections: ICollectionTopAmountResponce[];
     userCollections: ICollection[];
     themes: ITheme[];
     itemConfigs: ItemConfigType[];

@@ -33,14 +33,16 @@
                 "buttonText": "Return to the Home page"
             },
             "home": {
-                "mainTitle": "The most valuable things are kept in The Collection",
+                "mainTitle": "The Collections save your the most valuable",
                 "mainText": "The Collection app is a convenient way to manage your personal collections. You can create any collection you want, configure and add items in it and, of course, get inspired by other people's collections.",
                 "browseButton": "Browse all collections",
+                "discover": "Discover items",
                 "noAccount": "Still don't have an account?",
                 "signup": "Sign Up",
                 "biggestCollections": "The biggest collections",
                 "lastItems": "Recently added items",
-                "popularTags": "Popular tags"
+                "popularTags": "Popular tags",
+                "items": "Items"
             },
             "auth": {
                 "signIn": "Sign In",
@@ -321,10 +323,12 @@
                 "mainText": "Приложение The Collection - это удобный способ управления личными коллекциями. Вы можете создавать коллекции, настраивать и добавлять в них элементы и, конечно же, вдохновляться коллекциями других.",
                 "browseButton": "Посмотреть коллекции",
                 "noAccount": "У вас всё ещё нет аккаунта?",
+                "discover": "Ознакомьтесь с элементами",
                 "signup": "Регистрация",
                 "biggestCollections": "Самые большие коллекции",
                 "lastItems": "Недавно добавленные элементы",
-                "popularTags": "Популярные тэги"
+                "popularTags": "Популярные тэги",
+                "items": "Элементы"
             },
             "auth": {
                 "signIn": "Вход",

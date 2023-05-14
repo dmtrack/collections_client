@@ -9,8 +9,12 @@ import {
 import { IItem } from '../../models/IItem';
 import { shades } from '../../theme';
 import { v4 } from 'uuid';
+import { useTranslation } from 'react-i18next';
 
 const LastItemList = () => {
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'home',
+    });
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchTopRatedItems());
@@ -55,7 +59,7 @@ const LastItemList = () => {
                         fontWeight: '600',
                         paddingLeft: isNonMobile ? '0px' : '64px',
                     }}>
-                    Discover items
+                    {t('discover')}
                 </Typography>
                 <Tabs
                     textColor='primary'
