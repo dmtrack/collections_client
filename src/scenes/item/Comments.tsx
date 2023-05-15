@@ -24,11 +24,16 @@ export const Comments: FC<{ itemId: number }> = ({ itemId }) => {
     const { comments, socket, commentLoading } = useAppSelector(
         (state: RootState) => state.items
     );
+    console.log(comments, 'comments');
+
     const { isAuth } = useAppSelector((state: RootState) => state.auth);
     const [commentValue, setCommentValue] = useState('');
 
     useEffect(() => {
-        if (comments.length > 0 && comments[0].itemId !== itemId) {
+        if (
+            comments.length > 0 &&
+            Number(comments[0].itemId) !== Number(itemId)
+        ) {
             dispatch(setComments([]));
             console.log('clear comment');
         }
