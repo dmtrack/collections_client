@@ -1,4 +1,10 @@
-import { Box, Typography, IconButton, useMediaQuery } from '@mui/material';
+import {
+    Box,
+    Typography,
+    IconButton,
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
@@ -8,13 +14,9 @@ import { useTranslation } from 'react-i18next';
 import { fetchTopAmountCollections } from '../../state/actions/collections.actions';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { useEffect } from 'react';
-import { ICollection } from '../../models/ICollection';
 import { RootState } from '../../state';
 import { ThemeChip } from '../../components/Common/ThemeChip';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PopularTagCloud } from '../../components/TagCloud/PopularTagCloud';
-import { TagsArea } from '../item/TagsArea';
-import { setSearchTags } from '../../state/slices/main.slice';
 
 const importAll = (r: any) =>
     r.keys().reduce((acc: any, item: any) => {
@@ -22,13 +24,10 @@ const importAll = (r: any) =>
         return acc;
     }, {});
 
-// const heroTextureImports = importAll(
-//     require.context('../../assets/images/', false, /\.(jpe?g|png|svg)$/)
-// );
-
 const MainCarousel = () => {
     const { searchTags } = useAppSelector((state: RootState) => state.main);
-
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const { t } = useTranslation('translation', {
         keyPrefix: 'home',
@@ -68,14 +67,13 @@ const MainCarousel = () => {
             }}>
             <Box
                 sx={{
-                    backgroundColor: 'white',
                     flex: isNonMobile ? 1 : 0,
                     marginRight: '16px',
                 }}>
                 <Typography
-                    variant='h2'
+                    fontSize='36px'
                     fontWeight='bold'
-                    color={shades.secondary[800]}
+                    color={colors.secondary[800]}
                     sx={{
                         textAlign: 'left',
                         lineHeight: '1.1',
@@ -153,7 +151,7 @@ const MainCarousel = () => {
 
                                 <Box
                                     sx={{
-                                        color: `${shades.primary[100]}`,
+                                        color: `${colors.primary[100]}`,
                                         backgroundColor: 'rgb(0,0,0,0.4)',
                                     }}
                                     // padding='20px'
@@ -167,10 +165,10 @@ const MainCarousel = () => {
                                         isNonMobile ? undefined : '240px'
                                     }>
                                     <Box display='flex' flexDirection='column'>
-                                        <Typography variant='h4'>
+                                        <Typography fontSize='20px'>
                                             {collection.name}
                                         </Typography>
-                                        <Typography variant='h6'>
+                                        <Typography fontSize='16px'>
                                             {t('items')}: {collection.count}
                                         </Typography>
                                     </Box>

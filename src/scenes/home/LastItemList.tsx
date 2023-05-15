@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { Box, Typography, Tab, Tabs, useMediaQuery } from '@mui/material';
+import {
+    Box,
+    Typography,
+    Tab,
+    Tabs,
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 import Item from '../../components/Item';
 import {
     fetchItems,
@@ -23,7 +30,8 @@ const LastItemList = () => {
     }, []);
     const { items } = useAppSelector((state) => state.items);
     const { topRated } = useAppSelector((state) => state.items);
-
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const topRatedFlat = topRated?.map((element) => {
         return {
             id: element.id,
@@ -54,7 +62,7 @@ const LastItemList = () => {
                 <Typography
                     variant='h4'
                     textAlign='left'
-                    color={shades.secondary[800]}
+                    color={colors.secondary[800]}
                     sx={{
                         letterSpacing: '-0.5px',
                         fontWeight: '600',
@@ -105,7 +113,7 @@ const LastItemList = () => {
                                 <Item item={item} key={v4()} />
                             ))}
                 </Box>
-                <Box mt={10}>
+                <Box>
                     <PopularTagCloud />
                 </Box>
             </Box>

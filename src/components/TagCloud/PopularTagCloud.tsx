@@ -1,7 +1,7 @@
 import '../TagCloud/cloud-tag-styles.css';
 import { FC, useEffect } from 'react';
 import { TagCloud } from 'react-tagcloud';
-import { Box, Tab, Tabs, useMediaQuery } from '@mui/material';
+import { Box, Tab, Tabs, useMediaQuery, useTheme } from '@mui/material';
 import { Text } from '../Common/Text';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
@@ -27,6 +27,8 @@ export const PopularTagCloud: FC = () => {
     const { t } = useTranslation('translation', {
         keyPrefix: 'home',
     });
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     useEffect(() => {
         dispatch(getMostPopularTags());
     }, [dispatch]);
@@ -87,7 +89,7 @@ export const PopularTagCloud: FC = () => {
                     maxSize={24}
                     colorOptions={{
                         luminosity: 'light',
-                        hue: `${shades.secondary[100]}`,
+                        hue: `${colors.secondary[100]}`,
                     }}
                     tags={formatTagCounts}
                     onClick={onTagClick}

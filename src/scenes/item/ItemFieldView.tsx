@@ -16,7 +16,7 @@ interface ItemFieldViewProps {
 
 export const ItemFieldView: FC<ItemFieldViewProps> = ({ config, item }) => {
     const sliceType = config.type.slice(0, -1);
-    const theme = useApp().theme;
+    const theme = useApp().apptheme;
     const getView = () => {
         if (item) {
             const value = item[config.type];

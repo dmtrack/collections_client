@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Text } from '../Common/Text';
 import { useTranslation } from 'react-i18next';
@@ -37,6 +37,8 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
     const dispatch = useAppDispatch();
     const location = useLocation().pathname;
     const { handleSubmit } = useForm<FieldValues>({});
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
 
     const closeHandler = () => {
         onClose();
@@ -68,12 +70,12 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
                 <Box display='flex' flexDirection='column' gap='4px'>
                     <Text
                         variant='h5'
-                        color={shades.secondary[800]}
+                        color={colors.secondary[800]}
                         letterSpacing='-0.5px'
                         fontWeight='600'>
                         {t('destroyTitle')}
                     </Text>
-                    <Typography color={shades.secondary[800]} mt={2}>
+                    <Typography color={colors.secondary[800]} mt={2}>
                         {t('destroyText')}
                     </Typography>
 

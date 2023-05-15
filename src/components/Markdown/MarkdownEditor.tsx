@@ -9,7 +9,7 @@ export const MarkdownEditor: FC<{
     field: ControllerRenderProps;
     error?: boolean;
 }> = ({ field, error }) => {
-    const theme = useApp().theme;
+    const theme = useApp().apptheme;
     return (
         <div className={`${error && 'border-red'}`}>
             <MDEditor

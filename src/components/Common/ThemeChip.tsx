@@ -37,6 +37,7 @@ export const ThemeChip: FC<{
                 variant='outlined'
                 onClick={handleClick}
                 sx={{
+                    fontSize: '11px',
                     backgroundColor: `${backgroundColor}`,
                     border: `${border}`,
                 }}

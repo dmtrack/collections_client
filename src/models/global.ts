@@ -1,4 +1,5 @@
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+export type LangType = 'ru' | 'en';
 
 type Themes = 'light' | 'dark';
 

@@ -15,9 +15,8 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
     );
     const themeId = currentItemCollection?.themeId;
 
-    const {
-        palette: { neutral },
-    } = useTheme();
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const { name, image, id, collectionId, tags } = item;
 
     return (
@@ -68,8 +67,8 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                                 <Button
                                     onClick={() => navigate(`/items/${id}`)}
                                     sx={{
-                                        backgroundColor: shades.primary[100],
-                                        color: shades.secondary[800],
+                                        backgroundColor: colors.primary[100],
+                                        color: colors.secondary[800],
                                     }}>
                                     GO
                                 </Button>

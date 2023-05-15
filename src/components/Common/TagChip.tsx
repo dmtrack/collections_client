@@ -6,9 +6,7 @@ import { useAppDispatch } from '../../hook/redux';
 import { TagType } from '../../models/IItem';
 
 export const TagChip: FC<{ tag: TagType }> = ({ tag }) => {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    console.log(tag);
 
     const handleClick = () => {
         navigate('/');

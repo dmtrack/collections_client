@@ -11,6 +11,7 @@ import {
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { User } from './User';
+import { useTheme } from '@mui/material';
 import { shades } from '../theme';
 
 const UsersList = ({ usersProps }: IUsersListProps) => {
@@ -22,6 +23,8 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
     const [checked, setChecked] = useState(false);
     const { users } = useAppSelector((state) => state.users);
     const { userId } = useAppSelector((state) => state.auth);
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         setChecked((prevState) => !prevState);
@@ -47,13 +50,15 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                                 dispatch(toggleBlock(dataId, userId))
                             }
                             sx={{
-                                backgroundColor: `${shades.secondary[800]}`,
+                                backgroundColor: `${colors.secondary[800]}`,
+                                color: `${colors.primary[200]}`,
                             }}>
                             {t('block')}
                         </Button>{' '}
                         <Button
                             sx={{
-                                backgroundColor: `${shades.secondary[800]}`,
+                                backgroundColor: `${colors.secondary[800]}`,
+                                color: `${colors.primary[200]}`,
                             }}
                             variant='contained'
                             onClick={() => dispatch(toggleUnBlock(dataId))}>
@@ -61,7 +66,8 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                         </Button>{' '}
                         <Button
                             sx={{
-                                backgroundColor: `${shades.secondary[800]}`,
+                                backgroundColor: `${colors.secondary[800]}`,
+                                color: `${colors.primary[200]}`,
                             }}
                             variant='contained'
                             onClick={() =>

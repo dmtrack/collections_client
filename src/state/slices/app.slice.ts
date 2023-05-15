@@ -5,7 +5,7 @@ import { PaletteMode } from '@mui/material';
 import i18n from '../../languages/i18n';
 
 export interface AppState {
-    theme: PaletteMode;
+    apptheme: PaletteMode;
     lang: Language;
     loading: boolean;
     searchOpen: boolean;
@@ -13,7 +13,8 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-    theme: (localStorageService.getSelectedTheme() as PaletteMode) || 'light',
+    apptheme:
+        (localStorageService.getSelectedTheme() as PaletteMode) || 'light',
     lang: (localStorageService.getSelectedLanguage() as Language) || 'en',
     loading: false,
     searchOpen: false,
@@ -31,7 +32,7 @@ export const appSlice = createSlice({
         },
         setTheme: (state, { payload }: PayloadAction<PaletteMode>) => {
             localStorageService.setTheme(payload);
-            state.theme = payload;
+            state.apptheme = payload;
             document.documentElement.style.setProperty(
                 '--color-canvas-default',
                 '#FFFFFF14'

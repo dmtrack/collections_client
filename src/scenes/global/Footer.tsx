@@ -7,9 +7,9 @@ const Footer = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
 
-    const {
-        palette: { neutral },
-    } = useTheme();
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
+
     return (
         <>
             {pathname === '/admin' || pathname === '/login' ? null : (
@@ -17,7 +17,6 @@ const Footer = () => {
                     mt='64px'
                     p='24px 0'
                     sx={{
-                        backgroundColor: neutral.light,
                         bottom: '0',
                         width: '100%',
                     }}>
@@ -39,7 +38,7 @@ const Footer = () => {
                                     fontWeight: '800',
                                     fontSize: '20px',
                                 }}
-                                color={shades.secondary[800]}>
+                                color={colors.secondary[800]}>
                                 The Collections
                             </Box>
                         </Box>

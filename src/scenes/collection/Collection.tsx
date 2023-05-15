@@ -1,7 +1,14 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import { Box, useMediaQuery, Typography, Tooltip, Fab } from '@mui/material';
+import {
+    Box,
+    useMediaQuery,
+    Typography,
+    Tooltip,
+    Fab,
+    useTheme,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useCollection } from '../../hook/useCollection';
 import AddIcon from '@mui/icons-material/Add';
@@ -43,6 +50,8 @@ const CollectionPage = () => {
             (i) => Number(i.collectionId) === Number(collectionId)
         )
     );
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const goHome = () => navigate('/');
     const isLoading = itemsLoading || itemIsBusy;
     const handleOpenCreateItemOpen = (): void => {
@@ -177,7 +186,7 @@ const CollectionPage = () => {
                             <Typography
                                 variant='h4'
                                 textAlign='left'
-                                color={shades.secondary[800]}
+                                color={colors.secondary[800]}
                                 sx={{
                                     letterSpacing: '-0.5px',
                                     fontWeight: '600',

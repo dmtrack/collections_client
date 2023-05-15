@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { useInput } from '../../hook/input';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { register } from '../../state/actions/auth.actions';
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, useTheme } from '@mui/material';
 import { shades } from '../../theme';
 
 const RegistrationPage: React.FC = () => {
@@ -18,6 +18,8 @@ const RegistrationPage: React.FC = () => {
     const password = useInput('');
     const avatar = '';
     const dispatch = useAppDispatch();
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
 
     const isFormValid = () => username.value && email.value && password.value;
     const submitHandler = (event: React.FormEvent) => {
@@ -80,7 +82,7 @@ const RegistrationPage: React.FC = () => {
                             type='submit'
                             sx={{
                                 mt: '12px',
-                                backgroundColor: `${shades.secondary[800]}`,
+                                backgroundColor: `${colors.secondary[800]}`,
                             }}>
                             {t('submitButton')}
                         </Button>{' '}
