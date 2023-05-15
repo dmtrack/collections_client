@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import {
+    Box,
     Button,
     ButtonProps,
     Grid,
@@ -14,11 +15,12 @@ import { useApp } from '../../../hook/appState';
 import { useAppDispatch } from '../../../hook/redux';
 import { setLang, setTheme } from '../../../state/slices/app.slice';
 import { LangType } from '../../../models/global';
+import { width } from '@mui/system';
 
 export const MenuSettings: FC = () => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-    const { apptheme, lang } = useApp();
+    const { lang } = useApp();
 
     const getLangBtnProps = (currentLang: LangType): ButtonProps => {
         return {
@@ -26,56 +28,20 @@ export const MenuSettings: FC = () => {
             disabled: currentLang === lang,
             onClick: () => dispatch(setLang(currentLang)),
             size: 'small',
-            fullWidth: true,
-            sx: { mx: 0.5 },
-        };
-    };
-
-    const getThemeBtnProps = (currentTheme: PaletteMode): ButtonProps => {
-        return {
-            variant: currentTheme === apptheme ? 'outlined' : 'text',
-            disabled: currentTheme === apptheme,
-            onClick: () => dispatch(setTheme(currentTheme)),
-            size: 'small',
-            fullWidth: true,
-            sx: { mx: 0.5 },
         };
     };
 
     return (
-        <ListItem>
-            <Grid container spacing={1} width='300px'>
-                <Grid item xs={3} alignSelf='center'>
-                    <Text fontWeight='bold' fontSize='small'>
-                        theme
-                    </Text>
-                </Grid>
-                <Grid item xs={9} display='flex'>
-                    <Button {...getThemeBtnProps('dark')}>
-                        <DarkModeIcon fontSize='small' sx={{ mr: 0.5 }} />
-                        {t('Dark')}
-                    </Button>
-                    <Button {...getThemeBtnProps('light')}>
-                        <LightModeIcon fontSize='small' />
-                        {t('Light')}
-                    </Button>
-                </Grid>
-
-                <Grid
-                    item
-                    xs={3}
-                    alignSelf='center'
-                    display='flex'
-                    justifyContent='space-between'>
-                    <Text fontWeight='bold' fontSize='small'>
-                        lang
-                    </Text>
-                </Grid>
-                <Grid item xs={9} display='flex'>
-                    <Button {...getLangBtnProps('ru')}>ru</Button>
-                    <Button {...getLangBtnProps('en')}>en</Button>
-                </Grid>
-            </Grid>
-        </ListItem>
+        <Box display='flex'>
+            <Button {...getLangBtnProps('ru')} sx={{ fontSize: '12px' }}>
+                ru
+            </Button>
+            <Button
+                size='small'
+                {...getLangBtnProps('en')}
+                sx={{ fontSize: '12px' }}>
+                en
+            </Button>
+        </Box>
     );
 };

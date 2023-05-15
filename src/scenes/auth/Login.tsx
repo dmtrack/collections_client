@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { RegistrationPage } from './RegistrationPage';
 import { LoginPage } from './LoginPage';
 
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 
@@ -32,7 +31,7 @@ const Login = () => {
                             onClick={toggleFormType}
                             className='text-sm text-left text-gray-500 dark:text-gray-400 mx-auto max-w-[300px]'>
                             {' '}
-                            {t('loginlink')}
+                            {t('loginLink')}
                         </a>
                     </p>
                 </>

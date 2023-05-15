@@ -7,8 +7,12 @@ import {
     KeyboardCommandKeyOutlined,
 } from '@mui/icons-material';
 import { shades } from '../../theme';
+import { useTranslation } from 'react-i18next';
 
 export const SearchButton: FC<{ onClick: () => void }> = ({ onClick }) => {
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'searchPage',
+    });
     const isMacOs = navigator.userAgent.includes('Mac');
     const theme = useTheme();
     const colors = shades(theme.palette.mode);
@@ -18,7 +22,7 @@ export const SearchButton: FC<{ onClick: () => void }> = ({ onClick }) => {
                 sx={{ mx: 1, color: `${colors.secondary[800]}` }}
                 fontSize='small'
             />
-            <Text className='search-btn-title'>Search...</Text>
+            <Text className='search-btn-title'>{t('search')}</Text>
             <div className='shortcut'>
                 {isMacOs ? (
                     <KeyboardCommandKeyOutlined

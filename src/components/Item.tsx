@@ -5,8 +5,12 @@ import { IItemProps } from '../models/IItem';
 import { ThemeChip } from './Common/ThemeChip';
 import { useAppSelector } from '../hook/redux';
 import { ICollection } from '../models/ICollection';
+import { useTranslation } from 'react-i18next';
 
 const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'items',
+    });
     const navigate = useNavigate();
     const { collections } = useAppSelector((state) => state.collections);
     const { pathname } = useLocation();
@@ -67,10 +71,10 @@ const Item: React.FC<IItemProps> = ({ item, width }: IItemProps) => {
                                 <Button
                                     onClick={() => navigate(`/items/${id}`)}
                                     sx={{
-                                        backgroundColor: colors.primary[100],
+                                        backgroundColor: colors.primary[200],
                                         color: colors.secondary[800],
                                     }}>
-                                    GO
+                                    {t('goButton')}
                                 </Button>
                             )}
                         </Box>

@@ -83,9 +83,9 @@ const LastItemList = () => {
                         m: '15px',
                         '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                     }}>
-                    <Tab label='NEW' value='newItems' />
-                    <Tab label='TOP RATED' value='topRated' />
-                    <Tab label='MOST COMMENTED' value='mostCommented' />
+                    <Tab label={t('tabNew')} value='newItems' />
+                    <Tab label={t('tabTopRated')} value='topRated' />
+                    <Tab label={t('tabTopComments')} value='mostCommented' />
                 </Tabs>
                 <Box
                     margin='0 auto'

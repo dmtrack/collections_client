@@ -3,13 +3,21 @@
         "translation": {
             "header": {
                 "home": "Home",
-                "collections": "The Collections",
+                "collections": "Collections",
                 "users": "Users",
                 "signin": "Sign In",
                 "signup": "Sign Up",
                 "profile": "My profile",
                 "logout": "Log out",
-                "confirmLogOut": "Are you sure you want to log out?"
+                "confirmLogOut": "Are you sure you want to log out?",
+                "ttLightMode": "Switch to dark",
+                "ttDarkMode": "Switch to light",
+                "ttEnMode": "Switch to EN",
+                "ttRuMode": "Switch to RU",
+                "ttLogin": "Login",
+                "ttAdmin": "Admin",
+                "ttProfile": "Profile",
+                "ttLogout": "Logout"
             },
             "breadcrumb": {
                 "home": "home",
@@ -21,7 +29,9 @@
                 "edit": "edit"
             },
             "footer": {
-                "copyright": "Anastasiya Sachko © 2023"
+                "copyright": "Anastasiya Sachko © 2023",
+                "title": "Collections.",
+                "contacts": "Contacts"
             },
             "confirmNotification": {
                 "cancel": "Cancel",
@@ -42,7 +52,10 @@
                 "biggestCollections": "The biggest collections",
                 "lastItems": "Recently added items",
                 "popularTags": "Popular tags",
-                "items": "Items"
+                "items": "Items",
+                "tabNew": "NEW",
+                "tabTopRated": "TOP RATED",
+                "tabTopComments": "TOP COMMENTS"
             },
             "auth": {
                 "signIn": "Sign In",
@@ -57,7 +70,6 @@
                 "dontHaveAccount": "Don't have account?",
                 "haveAccount": "Have already account?",
                 "registrationlink": "Registration",
-                "loginlink": "Sign in",
                 "required": "{{value}} can't be empty",
                 "minLength": "{{value}} can't be less than 2 symbols",
                 "maxLength": "{{value}} can't be more than 50 symbols",
@@ -69,7 +81,11 @@
                 "signInError": "Unexpected authorization error",
                 "signInError404": "User doesn't exist",
                 "signInError403": "User is blocked!",
-                "signInError401": "Incorrect password!"
+                "signInError401": "Incorrect password!",
+                "dontHaveAccount": "Don't have account? Sign up >",
+                "registrationlink": "Registration",
+                "haveAccount": "Have already account?",
+                "loginLink": "Enter"
             },
             "profilePage": {
                 "user": "Collector",
@@ -227,6 +243,7 @@
                 "itemDescription": "description",
                 "itemNamePlaceholder": "Enter item name",
                 "itemImage": "Item image",
+                "goButton": "go",
 
                 "file": "File name: ",
                 "noFile": "No file uploaded yet",
@@ -295,7 +312,15 @@
                 "signup": "Регистрация",
                 "profile": "Мой профиль",
                 "logout": "Выход",
-                "confirmLogOut": "Вы уверены, что хотите выйти?"
+                "confirmLogOut": "Вы уверены, что хотите выйти?",
+                "ttLightMode": "Выбрать тёмную",
+                "ttDarkMode": "Выбрать светлую",
+                "ttEnMode": "Выбрать EN",
+                "ttRuMode": "Выбрать RU",
+                "ttLogin": "Вход",
+                "ttProfile": "Личный кабинет",
+                "ttAdmin": "Админ",
+                "ttLogout": "Выйти"
             },
             "breadcrumb": {
                 "home": "Главная",
@@ -307,7 +332,9 @@
                 "edit": "редактирование"
             },
             "footer": {
-                "copyright": "Анастасия Сачко © 2023"
+                "copyright": "Дмитрий Маслов © 2023",
+                "title": "Коллекции.",
+                "contacts": "Контакты"
             },
             "confirmNotification": {
                 "cancel": "Отмена",
@@ -319,8 +346,8 @@
                 "buttonText": "Вернуться на главную"
             },
             "home": {
-                "mainTitle": "Всё самое ценное собрано в The Collection",
-                "mainText": "Приложение The Collection - это удобный способ управления личными коллекциями. Вы можете создавать коллекции, настраивать и добавлять в них элементы и, конечно же, вдохновляться коллекциями других.",
+                "mainTitle": "Всё самое ценное собрано в Коллекции",
+                "mainText": "Приложение Коллекции - это удобный способ управления личными коллекциями. Вы можете создавать коллекции, настраивать и добавлять в них элементы и, конечно же, вдохновляться коллекциями других.",
                 "browseButton": "Посмотреть коллекции",
                 "noAccount": "У вас всё ещё нет аккаунта?",
                 "discover": "Ознакомьтесь с элементами",
@@ -328,14 +355,17 @@
                 "biggestCollections": "Самые большие коллекции",
                 "lastItems": "Недавно добавленные элементы",
                 "popularTags": "Популярные тэги",
-                "items": "Элементы"
+                "items": "Элементы",
+                "tabNew": "Новые",
+                "tabTopRated": "ТОП ЛАЙКОВ",
+                "tabTopComments": "ТОП КОММЕНТОВ"
             },
             "auth": {
                 "signIn": "Вход",
                 "signUp": "Регистрация",
                 "username": "Имя пользователя",
                 "usernamePlaceholder": "Введите ваше имя",
-                "email": "E-mail",
+                "email": "Эл-почта",
                 "emailPlaceholder": "Введите e-mail адрес",
                 "password": "Пароль",
                 "cancelButton": "Отмена",
@@ -351,7 +381,11 @@
                 "signInError": "Ошибка авторизации",
                 "signInError404": "Пользователь не существует",
                 "signInError403": "Пользователь заблокирован!",
-                "signInError401": "Неверный пароль!"
+                "signInError401": "Неверный пароль!",
+                "dontHaveAccount": "Нет аккаунта? Ждём вас >",
+                "registrationlink": "Регистрация",
+                "haveAccount": "Есть аккаунт?  >",
+                "loginLink": "Вход"
             },
             "profilePage": {
                 "user": "Коллекционер",
@@ -499,7 +533,7 @@
                 "cancel": "Отмена",
                 "confirm": "Подтвердить",
                 "itemName": "Название",
-
+                "goButton": "Вперёд",
                 "itemDescription": "Описание",
                 "itemNamePlaceholder": "Введите название элемента",
                 "itemImage": "Изображение",

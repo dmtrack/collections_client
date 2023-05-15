@@ -80,7 +80,7 @@ export const PopularTagCloud: FC = () => {
                     m: '15px',
                     '& .MuiTabs-flexContainer': { flexWrap: 'wrap' },
                 }}>
-                <Tab label='POPULAR TAGS' value='popularTags' />
+                <Tab label={t('popularTags')} value='popularTags' />
             </Tabs>
             <Box width='80%' m='0px auto'>
                 <TagCloud

@@ -1,43 +1,34 @@
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../hook/redux';
-import {
-    Badge,
-    Box,
-    IconButton,
-    Typography,
-    useMediaQuery,
-    useTheme,
-} from '@mui/material';
+import { Box, IconButton, useMediaQuery, useTheme } from '@mui/material';
 import {
     PersonOutline,
-    MenuOutlined,
-    NightlightOutlined,
     LanguageOutlined,
     Person,
     LoginOutlined,
     GroupTwoTone,
 } from '@mui/icons-material';
 import Tooltip from '@mui/material/Tooltip';
-import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
 import { ColorModeContext } from '../../../theme';
 import { NavLink } from 'react-router-dom';
 import { SearchButton } from '../../../components/SearchButton/SearchButton';
 import { setSearchOpen } from '../../../state/slices/app.slice';
 import { SearchDialog } from '../../../search/SearchDialog';
-import { useApp } from '../../../hook/appState';
-import { MenuSettings } from './MenuSettings';
+
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import { useThemeContext } from '../../../theme/src/theme/ThemeContextProvider';
 import { useContext } from 'react';
 import { shades } from '../../../theme';
+import { MenuSettings } from './MenuSettings';
 
 const Navbar = () => {
     const { t } = useTranslation('translation', {
         keyPrefix: 'header',
     });
     const navigate = useNavigate();
+
+    const { lang } = useAppSelector((state) => state.app);
     const { isAuth } = useAppSelector((state) => state.auth);
     const { access } = useAppSelector((state) => state.auth.access);
     const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -55,7 +46,6 @@ const Navbar = () => {
                 alignItems='center'
                 width='100%'
                 height='60px'
-                color='black'
                 // position='fixed'
                 top='0'
                 left='0'
@@ -79,8 +69,8 @@ const Navbar = () => {
                             {t('collections')}
                         </Box>
                     ) : null}
-                    {/* {<MenuSettings />} */}
-                    <Box display='flex' columnGap='20px' zIndex='2'>
+
+                    <Box display='flex' columnGap='10px' zIndex='2'>
                         <Box onClick={() => setSearchOpen(true)}>
                             <SearchButton
                                 onClick={() => dispatch(setSearchOpen(true))}
@@ -88,9 +78,16 @@ const Navbar = () => {
 
                             <SearchDialog />
                         </Box>
-                        <Tooltip title='Light mode'>
+
+                        {<MenuSettings />}
+                        <Tooltip
+                            title={
+                                theme.palette.mode === 'light'
+                                    ? t('ttLightMode')
+                                    : t('ttDarkMode')
+                            }>
                             <IconButton onClick={colorMode.toggleColorMode}>
-                                {theme.palette.mode === 'dark' ? (
+                                {theme.palette.mode === 'light' ? (
                                     <DarkModeOutlinedIcon
                                         sx={{
                                             color: `${colors.secondary[800]}`,
@@ -105,15 +102,10 @@ const Navbar = () => {
                                 )}
                             </IconButton>
                         </Tooltip>
-                        <Tooltip title='Switch to EN'>
-                            <IconButton
-                                sx={{ color: `${colors.secondary[800]}` }}>
-                                <LanguageOutlined />
-                            </IconButton>
-                        </Tooltip>
+
                         {access === 'admin' && isAuth ? (
                             <NavLink to='admin'>
-                                <Tooltip title='Admin panel'>
+                                <Tooltip title={t('ttAdmin')}>
                                     <IconButton
                                         sx={{
                                             color: `${colors.secondary[800]}`,
@@ -125,7 +117,10 @@ const Navbar = () => {
                         ) : null}
                         {!isAuth ? (
                             <NavLink to='login'>
-                                <Tooltip title='Login'>
+                                <Tooltip
+                                    title={
+                                        isAuth ? t('ttProfile') : t('ttLogin')
+                                    }>
                                     <IconButton
                                         sx={{
                                             color: `${colors.secondary[800]}`,
@@ -149,7 +144,10 @@ const Navbar = () => {
 
                         {isAuth ? (
                             <NavLink to='logout'>
-                                <Tooltip title='Logout'>
+                                <Tooltip
+                                    title={
+                                        isAuth ? t('ttLogout') : t('ttLogin')
+                                    }>
                                     <IconButton
                                         sx={{
                                             color: `${colors.secondary[800]}`,
