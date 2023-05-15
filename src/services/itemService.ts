@@ -25,6 +25,11 @@ export default class ItemService {
             '/item/toprated'
         );
     }
+    static async fetchTopCommentsItems() {
+        return axiosGet<AuthorizationError | DataBaseError, IItemResponse>(
+            '/item/topcomments'
+        );
+    }
 
     static async createItem(data: ICreateItemBody) {
         return axiosPost<

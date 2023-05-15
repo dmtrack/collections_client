@@ -11,6 +11,7 @@ import {
 import Item from '../../components/Item';
 import {
     fetchItems,
+    fetchTopCommentsItems,
     fetchTopRatedItems,
 } from '../../state/actions/items.actions';
 import { IItem } from '../../models/IItem';
@@ -27,12 +28,24 @@ const LastItemList = () => {
     useEffect(() => {
         dispatch(fetchTopRatedItems());
         dispatch(fetchItems());
+        dispatch(fetchTopCommentsItems());
     }, []);
     const { items } = useAppSelector((state) => state.items);
-    const { topRated } = useAppSelector((state) => state.items);
+    const { topRated, topComments } = useAppSelector((state) => state.items);
     const theme = useTheme();
     const colors = shades(theme.palette.mode);
     const topRatedFlat = topRated?.map((element) => {
+        return {
+            id: element.id,
+            count: element.count,
+            image: element.item?.image,
+            name: element.item?.name,
+            created: element.item?.created,
+            collectionId: Number(element.item?.collectionId),
+            tags: element.tags,
+        };
+    });
+    const topCommentsFlat = topComments?.map((element) => {
         return {
             id: element.id,
             count: element.count,
@@ -107,7 +120,7 @@ const LastItemList = () => {
                                 <Item item={item} key={v4()} />
                             ))}
                     {value === 'mostCommented' &&
-                        items
+                        topCommentsFlat
                             .slice(0, 3)
                             .map((item: IItem) => (
                                 <Item item={item} key={v4()} />
