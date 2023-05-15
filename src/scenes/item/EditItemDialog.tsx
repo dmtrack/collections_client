@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { ItemField } from './ItemField';
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, useTheme } from '@mui/material';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { TagsArea } from './TagsArea';
 import { Text } from '../../components/Common/Text';
@@ -34,6 +34,8 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
     const { t } = useTranslation('translation', {
         keyPrefix: 'items',
     });
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const dispatch = useAppDispatch();
     const {
         register,
@@ -110,7 +112,7 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
 
                     <Text
                         variant='h5'
-                        color={shades.secondary[800]}
+                        color={colors.secondary[800]}
                         letterSpacing='-0.5px'
                         fontWeight='600'>
                         {item ? `${t('edit')}` : `${t('create')}`}

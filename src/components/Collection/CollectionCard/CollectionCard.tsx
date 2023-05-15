@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import { shades } from '../../../theme';
 import { ThemeChip } from '../../Common/ThemeChip';
 import { useState } from 'react';
@@ -23,6 +23,8 @@ function CollectionCard({ collection, userId }: ICollectionThumb) {
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     return (
         <Box onClick={() => navigate(`/collections/${collection.id}`)}>
             <Card
@@ -46,7 +48,7 @@ function CollectionCard({ collection, userId }: ICollectionThumb) {
                             gutterBottom
                             variant='h5'
                             component='div'
-                            color={shades.secondary[800]}>
+                            color={colors.secondary[800]}>
                             {collection.name}
                         </Typography>{' '}
                         <ThemeChip themeId={Number(collection.themeId)} />

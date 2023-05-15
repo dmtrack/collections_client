@@ -123,7 +123,7 @@ const UserProfile = () => {
                             <Typography
                                 variant='h4'
                                 textAlign='left'
-                                color={shades.secondary[800]}
+                                // color={shades.secondary[800]}
                                 sx={{
                                     letterSpacing: '-0.5px',
                                     fontWeight: '600',

@@ -1,7 +1,7 @@
 import '../styles/search-styles.css';
 import { FC } from 'react';
 
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { Index, InstantSearch } from 'react-instantsearch-dom';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
 import { SearchInput } from './SearchInput';
@@ -21,6 +21,9 @@ export const SearchDialog: FC = () => {
     const { t } = useTranslation('translation', {
         keyPrefix: 'searchPage',
     });
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
+
     const dispatch = useAppDispatch();
     const { searchOpen } = useApp();
     const searchClient = instantMeiliSearch(
@@ -53,7 +56,7 @@ export const SearchDialog: FC = () => {
                     <Text
                         fontSize='x-large'
                         variant='h5'
-                        color={shades.secondary[800]}
+                        color={colors.secondary[800]}
                         letterSpacing='-0.5px'
                         fontWeight='600'>
                         {t('search')}

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { login } from '../../state/actions/auth.actions';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, useTheme } from '@mui/material';
 import { shades } from '../../theme';
 
 const LoginPage: FC = () => {
@@ -16,7 +16,8 @@ const LoginPage: FC = () => {
     const email = useInput('');
     const password = useInput('');
     const dispatch = useAppDispatch();
-
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const isFormValid = () => email.value && password.value;
 
     const submitHandler = (event: React.FormEvent) => {
@@ -74,7 +75,8 @@ const LoginPage: FC = () => {
                         type='submit'
                         sx={{
                             mt: '12px',
-                            backgroundColor: `${shades.secondary[800]}`,
+                            backgroundColor: `${colors.secondary[800]}`,
+                            color: `${colors.primary[200]}`,
                         }}>
                         {t('submitButton')}
                     </Button>{' '}

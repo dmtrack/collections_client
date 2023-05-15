@@ -2,14 +2,17 @@ import { Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material';
 import { shades } from '../../theme';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'footer',
+    });
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
 
-    const {
-        palette: { neutral },
-    } = useTheme();
     return (
         <>
             {pathname === '/admin' || pathname === '/login' ? null : (
@@ -17,7 +20,6 @@ const Footer = () => {
                     mt='64px'
                     p='24px 0'
                     sx={{
-                        backgroundColor: neutral.light,
                         bottom: '0',
                         width: '100%',
                     }}>
@@ -39,8 +41,8 @@ const Footer = () => {
                                     fontWeight: '800',
                                     fontSize: '20px',
                                 }}
-                                color={shades.secondary[800]}>
-                                The Collections
+                                color={colors.secondary[800]}>
+                                {t('title')}
                             </Box>
                         </Box>
                         {/* <Box>
@@ -67,7 +69,7 @@ const Footer = () => {
                                     letterSpacing: '-0.5px',
                                     fontWeight: '600',
                                 }}>
-                                Contacts
+                                {t('contacts')}
                             </Typography>
                             <Typography mb='12px'>
                                 <a href='https://t.me/dmtrack'>@dmtrack</a>

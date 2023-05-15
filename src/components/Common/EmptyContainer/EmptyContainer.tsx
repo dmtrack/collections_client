@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { shades } from '../../../theme';
 
 interface EmptyContainerProps {
@@ -7,15 +7,17 @@ interface EmptyContainerProps {
 }
 
 function EmptyContainer({ title, text }: EmptyContainerProps) {
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     return (
         <Box mt='96px' textAlign='center' height='115px'>
-            <Typography gutterBottom color={shades.secondary[800]}>
+            <Typography gutterBottom color={colors.secondary[800]}>
                 {title}{' '}
             </Typography>{' '}
             <Typography
                 gutterBottom
                 component='div'
-                color={shades.secondary[800]}>
+                color={colors.secondary[800]}>
                 {text}{' '}
             </Typography>{' '}
         </Box>

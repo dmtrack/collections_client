@@ -11,7 +11,7 @@ import UserEdit from './scenes/userPage/UserEdit';
 import CreateCollection from './scenes/collection/CreateCollection';
 import EditCollection from './scenes/collection/EditCollection';
 import { ToastContainer } from 'react-toastify';
-import Navbar from './scenes/global/Navbar';
+import Navbar from './scenes/global/NavBar/Navbar';
 import Footer from './scenes/global/Footer';
 import { AdminPanel } from './scenes/adminPanel/AdminPanel';
 import Login from './scenes/auth/Login';
@@ -29,6 +29,8 @@ import { useApp } from './hook/appState';
 import Loader from './components/Loader/Loader';
 import ItemPageFile from './scenes/item/ItemPageFile';
 import { getTags } from './state/actions/items.actions';
+import { ColorModeContext, useMode } from './theme';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -86,6 +88,8 @@ const App: React.FC = () => {
         themesLoading ||
         collectionsTopAmountLoading;
 
+    const [theme, colorMode] = useMode();
+
     return (
         <div className='app'>
             {isLoading && <Loader />}
@@ -93,57 +97,72 @@ const App: React.FC = () => {
             <>
                 <BrowserRouter>
                     <Suspense fallback={null}>
-                        <Navbar />
-                        <Breadcrumbs />
-                        <ScrollToTop />
-                        <Routes>
-                            <Route path='/' element={<Home />} />
-                            <Route
-                                path='collections/:collectionId'
-                                element={<Collection />}
-                            />
-                            <Route
-                                path='items/:itemId/'
-                                element={<ItemPageFile />}
-                            />{' '}
-                            {/* <Route
+                        <ColorModeContext.Provider value={colorMode}>
+                            <ThemeProvider theme={theme}>
+                                <CssBaseline />
+
+                                <Navbar />
+                                <Breadcrumbs />
+                                <ScrollToTop />
+                                <Routes>
+                                    <Route path='/' element={<Home />} />
+                                    <Route
+                                        path='collections/:collectionId'
+                                        element={<Collection />}
+                                    />
+                                    <Route
+                                        path='items/:itemId/'
+                                        element={<ItemPageFile />}
+                                    />{' '}
+                                    {/* <Route
                                 path='collections/:collectionId/create/'
                                 element={<CreateItem />}
                             /> */}
-                            <Route
-                                path='users/:userId'
-                                element={<UserProfile />}
-                            />
-                            <Route
-                                path='users/:userId/edit'
-                                element={<UserEdit />}
-                            />
-                            <Route
-                                path='users/:userId/create'
-                                element={<CreateCollection />}
-                            />{' '}
-                            <Route
-                                path='collections/:collectionId/edit'
-                                element={<EditCollection />}
-                            />
-                            <Route path='login/:type?' element={<Login />} />
-                            <Route path='admin' element={<AdminPanel />} />
-                            <Route path='logout' element={<LogOut />} />
-                            <Route path='*' element={<NotfoundPage />} />
-                        </Routes>
-                        <ToastContainer
-                            position='bottom-right'
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme='dark'
-                        />
-                        <Footer />
+                                    <Route
+                                        path='users/:userId'
+                                        element={<UserProfile />}
+                                    />
+                                    <Route
+                                        path='users/:userId/edit'
+                                        element={<UserEdit />}
+                                    />
+                                    <Route
+                                        path='users/:userId/create'
+                                        element={<CreateCollection />}
+                                    />{' '}
+                                    <Route
+                                        path='collections/:collectionId/edit'
+                                        element={<EditCollection />}
+                                    />
+                                    <Route
+                                        path='login/:type?'
+                                        element={<Login />}
+                                    />
+                                    <Route
+                                        path='admin'
+                                        element={<AdminPanel />}
+                                    />
+                                    <Route path='logout' element={<LogOut />} />
+                                    <Route
+                                        path='*'
+                                        element={<NotfoundPage />}
+                                    />
+                                </Routes>
+                                <ToastContainer
+                                    position='bottom-right'
+                                    autoClose={5000}
+                                    hideProgressBar={false}
+                                    newestOnTop={false}
+                                    closeOnClick
+                                    rtl={false}
+                                    pauseOnFocusLoss
+                                    draggable
+                                    pauseOnHover
+                                    theme='dark'
+                                />
+                                <Footer />
+                            </ThemeProvider>
+                        </ColorModeContext.Provider>
                     </Suspense>
                 </BrowserRouter>
             </>

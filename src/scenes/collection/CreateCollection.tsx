@@ -1,4 +1,10 @@
-import { Box, TextField, MenuItem, useMediaQuery } from '@mui/material';
+import {
+    Box,
+    TextField,
+    MenuItem,
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
@@ -39,7 +45,8 @@ const CreateCollection = () => {
     const [configInputs, setConfigInputs] = useState<ItemConfigType[]>([
         { type: '', label: '' },
     ]);
-
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     useEffect(() => {
         if (image) {
             setValue('image', image);
@@ -201,7 +208,7 @@ const CreateCollection = () => {
                                     variant='contained'
                                     type='submit'
                                     sx={{
-                                        backgroundColor: `${shades.secondary[800]}`,
+                                        backgroundColor: `${colors.secondary[800]}`,
                                     }}>
                                     {t('create')}
                                 </Button>{' '}
@@ -210,7 +217,7 @@ const CreateCollection = () => {
                                     variant='contained'
                                     onClick={() => navigate(-1)}
                                     sx={{
-                                        backgroundColor: `${shades.secondary[800]}`,
+                                        backgroundColor: `${colors.secondary[800]}`,
                                     }}>
                                     {t('cancel')}
                                 </Button>{' '}
