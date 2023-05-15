@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { SortTypes } from './global';
+import { ItemConfigType } from '../state/models/ICollection.state'
 
 export interface ICollection {
     id: number;
@@ -48,6 +49,7 @@ export interface ICollectionFormValues {
     themeId: number;
     image: File;
     userId: number;
+    itemConfigs: ItemConfigType[]
 }
 
 export type CustomFieldTypes =
