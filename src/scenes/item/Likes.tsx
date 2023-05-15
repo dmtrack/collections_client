@@ -18,7 +18,7 @@ export const Likes: FC<{ itemId: number }> = ({ itemId }) => {
     const isLiked = !!likes.find((like) => like.userId === userId);
 
     useEffect(() => {
-        if (likes.length > 0 && likes[0].itemId !== itemId) {
+        if (likes.length > 0 && Number(likes[0].itemId) !== Number(itemId)) {
             dispatch(setLikes([]));
             console.log('clear like');
         }

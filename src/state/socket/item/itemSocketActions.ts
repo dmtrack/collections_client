@@ -6,12 +6,11 @@ import {
 } from './itemSocketEvents';
 import { setCommentLoading, setLikesLoading } from '../../slices/item.slice';
 import { AppSocket } from '../../../models/socket/socket';
-import { AppDispatch, GetState, RootState } from '../..';
-import { useAppSelector } from '../../../hook/redux';
+import { AppDispatch, GetState } from '../..';
 
 export const connectItemSocket =
     (itemId: number) => (dispatch: AppDispatch) => {
-        const socket: AppSocket = io(process.env.REACT_APP_SOCKET_URL + '', {
+        const socket: AppSocket = io(process.env.REACT_APP_SOCKET + '', {
             transports: ['websocket'],
         });
         dispatch(socketEvents(socket, itemId));
@@ -20,11 +19,12 @@ export const connectItemSocket =
     };
 
 export const postNewComment =
-    (itemId: number, text: string) => (dispatch: AppDispatch) => {
-        const { userId, name } = useAppSelector(
-            (state: RootState) => state.auth
-        );
-        const socket = useAppSelector((state: RootState) => state.items.socket);
+    (itemId: number, text: string) =>
+    (dispatch: AppDispatch, getState: GetState) => {
+        const {
+            auth: { userId, name },
+            items: { socket },
+        } = getState();
 
         socket?.emit('add:comment', {
             userId: userId,
@@ -32,15 +32,17 @@ export const postNewComment =
             text,
             name,
         });
+
         dispatch(setCommentLoading(true));
     };
 
 export const toggleLike =
     (itemId: number) => (dispatch: AppDispatch, getState: GetState) => {
-        const { userId, name } = useAppSelector(
-            (state: RootState) => state.auth
-        );
-        const socket = useAppSelector((state: RootState) => state.items.socket);
+        const {
+            auth: { userId, name },
+            items: { socket },
+        } = getState();
+
         socket?.emit('set:like', { userId: userId, itemId, name });
         dispatch(setLikesLoading(true));
     };

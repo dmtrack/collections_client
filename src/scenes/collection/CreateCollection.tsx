@@ -27,6 +27,8 @@ import {
 import { toast } from 'react-toastify';
 import { createCollection } from '../../state/actions/collections.actions';
 import { ItemConfigType } from '../../state/models/ICollection.state';
+import { FixedConfigInputs } from '../../components/Collection/ConfigInputs/FixedConfigInputs'
+import { ConfigInputs } from '../../components/Collection/ConfigInputs/ConfigInputs'
 
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -102,6 +104,7 @@ const CreateCollection = () => {
     };
 
     const onSubmit: SubmitHandler<ICollectionFormValues> = (data) => {
+        const itemConfigs = configInputs.filter(config => config.type && config.label)
         if (image && image?.size > MAX_IMAGE_SIZE)
             return toast('The maximum image size is 10MB');
         if (editing) {
@@ -122,7 +125,7 @@ const CreateCollection = () => {
             // }
             // dispatch(editCollection(sendData, navigate));
         } else {
-            dispatch(createCollection({ ...data, userId }, navigate));
+            dispatch(createCollection({ ...data, userId, itemConfigs: configInputs }, navigate));
         }
     };
 
@@ -196,6 +199,8 @@ const CreateCollection = () => {
                                 }
                             />
                         </Box>
+                        <FixedConfigInputs/>
+                        <ConfigInputs configInputs={configInputs} setConfigInputs={setConfigInputs}/>
 
                         {/* <Box>
                     <CustomFieldForm />

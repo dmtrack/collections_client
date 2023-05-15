@@ -2,7 +2,6 @@ import { AppDispatch } from '..';
 import { collectionSlice } from '../slices/collection.slice';
 import collectionService from '../../services/collectionService';
 import { NavigateFunction } from 'react-router-dom';
-import { ICreateCollectionBody } from '../../models/request/collection-body';
 import { saveImageToCloud } from '../../api/firebase/actions';
 import { ICollectionFormValues } from '../../models/ICollection';
 
@@ -131,7 +130,7 @@ export const createCollection = (
     navigate: NavigateFunction
 ) => {
     return async (dispatch: AppDispatch) => {
-        const { image, name, description, userId, themeId } = data;
+        const { image, name, description, userId, themeId, itemConfigs } = data;
         dispatch(collectionSlice.actions.setCollectionsBusy(true));
 
         const imageUrl = await saveImageToCloud(image, 'collections');
@@ -143,9 +142,10 @@ export const createCollection = (
             themeId,
         };
 
-        const response = await collectionService.createCollection(
-            collectionDTO
-        );
+
+        const response = await collectionService.createCollection({
+            collection: collectionDTO, itemConfigs
+        });
         response
             .mapRight(() => navigate(`/users/${userId}`))
             .mapLeft((e: any) => {
