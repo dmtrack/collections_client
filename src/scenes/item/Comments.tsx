@@ -24,7 +24,6 @@ export const Comments: FC<{ itemId: number }> = ({ itemId }) => {
     const { comments, socket, commentLoading } = useAppSelector(
         (state: RootState) => state.items
     );
-    console.log(comments, 'comments');
 
     const { isAuth } = useAppSelector((state: RootState) => state.auth);
     const [commentValue, setCommentValue] = useState('');
@@ -61,15 +60,15 @@ export const Comments: FC<{ itemId: number }> = ({ itemId }) => {
         <>
             <Divider />
             <Box my={2}>
-                <Text variant='h6'>Comments</Text>
-                {comments?.map(({ id, userId, name, text, timestamp }) => (
+                <Text variant='h6'>{t('commentsTitle')}</Text>
+                {comments?.map(({ id, userId, name, text, created }) => (
                     <Box py={1} key={id} className='border-b flex'>
-                        <TypographyLink mr={1} to={`/profile/${userId}`}>
+                        <TypographyLink mr={1} to={`/users/${userId}`}>
                             {name}:
                         </TypographyLink>
                         <Typography alignSelf='center'>{text}</Typography>
                         <Typography fontSize='x-small' ml='auto' minWidth={90}>
-                            {timestampToDateTime(timestamp)}
+                            {timestampToDateTime(created)}
                         </Typography>
                     </Box>
                 ))}

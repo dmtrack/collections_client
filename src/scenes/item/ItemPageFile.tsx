@@ -53,13 +53,13 @@ const ItemPageFile: FC = () => {
 
     return (
         <Box py={1} px={3} my={3} mx='auto' maxWidth='42rem' className='border'>
-            <Box display='flex'>
+            <Box display='flex' alignItems='center'>
                 <Text
                     fontSize='medium'
                     color='gray'
                     mr={1}
                     hidden={!item?.name}>
-                    author
+                    {`${t('createdBy')}:`}
                 </Text>
                 <Link to={`/users/${item?.userId}`} className='link capitalize'>
                     {auth?.name}
@@ -79,13 +79,13 @@ const ItemPageFile: FC = () => {
                         <TransButton
                             onClick={() => setEditDialogOpen(true)}
                             hidden={!hasFullAccess}>
-                            Edit
+                            {t('edit')}
                         </TransButton>
                         <TransButton
                             color='error'
                             onClick={handleOpenDeleteDialogOpen}
                             hidden={!hasFullAccess}>
-                            Delete
+                            {t('delete')}
                         </TransButton>
                     </Box>
                 )}

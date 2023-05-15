@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IComment } from '../../models/IComment';
-import { IItem } from '../../models/IItem';
+import { IComment, IItem } from '../../models/IItem';
 
 interface SearchState {
     searchValue: string;

@@ -102,7 +102,7 @@ export interface IComment {
     itemId: number;
     text: string;
     name: string;
-    timestamp: string;
+    created: string;
 }
 
 export interface ILike {

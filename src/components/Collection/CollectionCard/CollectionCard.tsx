@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ICollection } from '../../../models/ICollection';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -17,9 +17,11 @@ interface ICollectionThumb {
     userId: number;
 }
 
-function CollectionCard({ collection, userId }: ICollectionThumb) {
+function CollectionCard({ collection }: ICollectionThumb) {
     const { collectionId } = useParams();
-    const { t } = useTranslation(['collectionPage']);
+    const { t } = useTranslation('translation', {
+        keyPrefix: 'collections',
+    });
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const [isHovered, setIsHovered] = useState(false);
     const navigate = useNavigate();

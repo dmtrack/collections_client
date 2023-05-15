@@ -10,7 +10,6 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { WithRouterProps, withRouter } from './withRouter';
 import { useTranslation } from 'react-i18next';
 import { v4 } from 'uuid';
-import { Text } from '../components/Common/Text';
 
 const BreadCrumbs = (props: WithRouterProps) => {
     const { t } = useTranslation('translation', { keyPrefix: 'breadcrumb' });
@@ -33,9 +32,7 @@ const BreadCrumbs = (props: WithRouterProps) => {
                         <Link
                             underline='none'
                             onClick={() => navigate('/')}
-                            fontSize='14px'
-                            // sx={{ color: `${colors.primary[500]}` }}
-                        >
+                            fontSize='14px'>
                             {t('home')}
                         </Link>
 
@@ -51,7 +48,6 @@ const BreadCrumbs = (props: WithRouterProps) => {
                                         underline='none'
                                         onClick={() => navigate(routeTo)}
                                         key={v4()}
-                                        // sx={{ color: `${colors.primary[500]}` }}
                                         fontSize='14px'>
                                         {`${t(`${name}`)}`}
                                     </Link>
