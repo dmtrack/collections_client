@@ -51,10 +51,10 @@ const Navbar = () => {
                 left='0'
                 zIndex='1'>
                 <Box
-                    width='80%'
+                    width={isNonMobile ? '80%' : '100%'}
                     margin='auto'
                     display='flex'
-                    justifyContent='space-between'
+                    justifyContent={isNonMobile ? 'space-between' : 'center'}
                     alignItems='center'>
                     {isNonMobile ? (
                         <Box
