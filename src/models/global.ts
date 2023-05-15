@@ -29,3 +29,10 @@ export type {
     ImageType,
     ChangedCommentType,
 };
+
+export interface IContact {
+    id: string;
+    link: string;
+    icon: JSX.Element;
+    title: string;
+}

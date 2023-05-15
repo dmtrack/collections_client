@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material';
 import { shades } from '../../theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { authorsContacts } from '../../utils/constants';
 
 const Footer = () => {
     const { pathname } = useLocation();
@@ -45,44 +46,27 @@ const Footer = () => {
                                 {t('title')}
                             </Box>
                         </Box>
-                        {/* <Box>
-                    <Typography variant='h5' fontWeight='bold' mb='30px'>
-                        About Us
-                    </Typography>
-                    <Typography mb='30px'>Careers</Typography>
-                    <Typography mb='30px'>OurStores</Typography>
-                    <Typography mb='30px'>Terms & Conditions</Typography>
-                </Box>
-                <Box>
-                    <Typography variant='h5' fontWeight='bold' mb='30px'>
-                        Customer Care
-                    </Typography>
-                    <Typography mb='30px'>Help center</Typography>
-                    <Typography mb='30px'>Track order</Typography>
-                    <Typography mb='30px'>Returns & refunds</Typography>
-                </Box> */}
-                        <Box width='clamp(20%, 25%, 40%)'>
-                            <Typography
-                                fontWeight='bold'
-                                mb='12px'
-                                sx={{
-                                    letterSpacing: '-0.5px',
-                                    fontWeight: '600',
-                                }}>
-                                {t('contacts')}
-                            </Typography>
-                            <Typography mb='12px'>
-                                <a href='https://t.me/dmtrack'>@dmtrack</a>
-                            </Typography>
-                            {/* <Typography mb='10px'>
-                        <a href='mailto: dmtrack.dev@gmail.com '>
-                            dmtrack.dev@gmail.com
-                        </a>
-                    </Typography> */}
-                            <Typography mb='12px'>
-                                {' '}
-                                <a href='https://github.com/dmtrack'>GitHub</a>
-                            </Typography>
+
+                        <Box
+                            display='flex'
+                            gap='12px'
+                            alignItems='center'
+                            fontSize='24px'>
+                            <Box
+                                display='flex'
+                                gap='10px'
+                                color={colors.secondary[800]}>
+                                {authorsContacts.map((contact) => (
+                                    <a
+                                        key={contact.id}
+                                        href={contact.link}
+                                        target='_blank'
+                                        title={contact.title}
+                                        rel='noreferrer'>
+                                        {contact.icon}
+                                    </a>
+                                ))}
+                            </Box>
                         </Box>
                     </Box>
                 </Box>
