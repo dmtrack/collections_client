@@ -4,6 +4,7 @@ import collectionService from '../../services/collectionService';
 import { NavigateFunction } from 'react-router-dom';
 import { saveImageToCloud } from '../../api/firebase/actions';
 import { ICollectionFormValues } from '../../models/ICollection';
+import { data } from 'autoprefixer'
 
 export const fetchCollections = () => {
     return async (dispatch: AppDispatch) => {
@@ -185,3 +186,21 @@ export const deleteCollection = (
         dispatch(collectionSlice.actions.setCollectionsBusy(false));
     };
 };
+
+export const fetchItemConfigs = (collectionId: number) => async (dispatch: AppDispatch) => {
+    dispatch(collectionSlice.actions.setCollectionsBusy(true));
+    const response = await collectionService.getItemConfigs(collectionId)
+    response
+      .mapRight(({data: configs}) => {
+          dispatch(collectionSlice.actions.setItemConfigs(configs))
+      })
+      .mapLeft((e: any) => {
+        dispatch(collectionSlice.actions.fetchError(e.response?.data));
+        console.error({
+            type: e.response.statusText,
+            code: e.response.status,
+            message: e.response.data,
+        });
+    })
+    dispatch(collectionSlice.actions.setCollectionsBusy(false));
+}

@@ -11,6 +11,7 @@ import { AuthorizationError } from '../models/errors/AuthorizationError';
 import { DataBaseError } from '../models/errors/DataBaseError';
 import { ICreateCollectionBody } from '../models/request/collection-body';
 import { ICollectionTopAmountResponce } from '../models/response/collectionResponse';
+import { ItemConfigType } from '../state/models/ICollection.state'
 
 export default class collectionService {
     static async getCollections() {
@@ -67,5 +68,8 @@ export default class collectionService {
             AuthorizationError | DataBaseError,
             IDeleteCollectionResponse
         >(`collection/delete/${collectionId}`);
+    }
+    static async getItemConfigs(collectionId: number) {
+        return axiosGet<DataBaseError, ItemConfigType[]>(`collection/item_configs/${collectionId}`);
     }
 }
