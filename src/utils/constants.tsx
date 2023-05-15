@@ -10,6 +10,10 @@ import {
     BsSortUp,
 } from 'react-icons/bs';
 
+import { AiFillGithub, AiTwotoneMail } from 'react-icons/ai';
+import { FaTelegramPlane } from 'react-icons/fa';
+import { IContact } from '../models/global';
+
 const fileTypes = ['JPG', 'JPEG', 'PNG'];
 const customFieldsTypes: CustomFieldTypes[] = [
     'number',
@@ -17,6 +21,28 @@ const customFieldsTypes: CustomFieldTypes[] = [
     'text',
     'date',
     'checkbox',
+];
+
+export const authorsContacts: IContact[] = [
+    {
+        id: '1',
+        link: 'https://github.com/dmtrack',
+        icon: <AiFillGithub />,
+        title: 'My gitHub',
+    },
+    {
+        id: '2',
+        link: 'https://t.me/dmtrack',
+        icon: <FaTelegramPlane />,
+        title: 'Send a message',
+    },
+
+    {
+        id: '3',
+        link: 'mailto:dmtrack.dev@gmail.com',
+        icon: <AiTwotoneMail />,
+        title: 'Send an e-mail',
+    },
 ];
 
 const collectionThemes = [
