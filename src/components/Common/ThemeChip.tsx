@@ -26,7 +26,6 @@ export const ThemeChip: FC<{
     const themeItem = getTheme(themeId);
     const theme = useTheme();
     const colors = shades(theme.palette.mode);
-    console.log(theme.palette.mode);
 
     const handleClick = () => {
         navigate('/', { state: { contentType: 'collections' } });

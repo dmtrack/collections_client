@@ -21,8 +21,8 @@ export function setupStore() {
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware({
                 serializableCheck: {
-                    ignoredActions: ['item/setSocket'],
-                    ignoredPaths: ['item.socket'],
+                    ignoredActions: ['items/setSocket'],
+                    ignoredPaths: ['items.socket'],
                 },
             }),
     });
