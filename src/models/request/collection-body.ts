@@ -1,13 +1,15 @@
-import Collection from '../../scenes/collection/Collection';
 import { ItemConfigType } from '../../state/models/ICollection.state';
 import { IFields, TagType } from '../IItem';
 
 export interface ICreateCollectionBody {
-    name: string;
-    description: string;
-    image: string;
-    userId: number;
-    themeId: number;
+    collection: {
+        name: string;
+        description: string;
+        image: string;
+        userId: number;
+        themeId: number;
+    },
+    itemConfigs: ItemConfigType[]
 }
 
 export interface CreateCollectionPayload {
