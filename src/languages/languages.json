@@ -277,6 +277,7 @@
                 "error": "Unexpected error! Please try again later",
                 "commentsOn": "comments on ",
                 "noComments": "There're no comments yet",
+                "commentsTitle": "Comments",
                 "commentDeleteConfirm": "Are you sure you want to delete the comment?",
                 "commentPlaceholder": "Leave a comment...",
                 "edit": "Edit",
@@ -568,12 +569,13 @@
                 "itemDeleteConfirm": "Вы уверены, что хотите удалить элемент?",
                 "error": "Ошибка! Пожалуйста, повторите попытку позже",
                 "commentsOn": "комментирует ",
+                "commentsTitle": "Комментарии",
                 "noComments": "Комментариев пока что нет",
                 "commentDeleteConfirm": "Вы уверены, что хотите удалить комментарий?",
                 "commentPlaceholder": "Оставьте комментарий...",
                 "edit": "Редактировать",
                 "delete": "Удалить",
-                "backToCollection": "Вернуться к коллеции"
+                "backToCollection": "Вернуться к коллекции"
             },
             "searchPage": {
                 "foundInCollection": "Элементы из коллекций, в описаниях которых был найден текст:",

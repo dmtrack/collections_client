@@ -32,7 +32,7 @@ export const Likes: FC<{ itemId: number }> = ({ itemId }) => {
         <>
             <IconButton
                 onClick={likeHandler}
-                disabled={!isAuth || likesLoading}>
+                disabled={!isAuth || likesLoading || isLiked}>
                 {isLiked ? (
                     <FavoriteIcon className='red' />
                 ) : (

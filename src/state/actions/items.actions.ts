@@ -44,6 +44,24 @@ export const fetchTopRatedItems = () => {
             });
     };
 };
+export const fetchTopCommentsItems = () => {
+    return async (dispatch: AppDispatch) => {
+        dispatch(itemSlice.actions.fetchingTopCommentsItems());
+        const response = await itemService.fetchTopCommentsItems();
+        response
+            .mapRight(({ data: data }) => {
+                dispatch(itemSlice.actions.fetchTopCommentsSuccess(data));
+            })
+            .mapLeft((e: any) => {
+                dispatch(itemSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+    };
+};
 
 export const createItem = (data: ICreateItemPayload) => {
     return async (dispatch: AppDispatch, getState: GetState) => {

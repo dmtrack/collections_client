@@ -13,9 +13,11 @@ const initialState: IItemState = {
     socket: null,
     itemsLoading: false,
     topRatedItemsLoading: false,
+    topCommentsItemsLoading: false,
     error: '',
     items: [],
     topRated: [],
+    topComments: [],
     tags: [],
     likes: [],
     comments: [],
@@ -34,6 +36,9 @@ export const itemSlice = createSlice({
         fetchingTopRatedItems: (state) => {
             state.topRatedItemsLoading = true;
         },
+        fetchingTopCommentsItems: (state) => {
+            state.topCommentsItemsLoading = true;
+        },
         fetchSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.items = action.payload;
             state.itemsLoading = false;
@@ -41,6 +46,13 @@ export const itemSlice = createSlice({
         fetchTopRatedSuccess: (state, action: PayloadAction<IItemResponse>) => {
             state.topRated = action.payload;
             state.topRatedItemsLoading = false;
+        },
+        fetchTopCommentsSuccess: (
+            state,
+            action: PayloadAction<IItemResponse>
+        ) => {
+            state.topComments = action.payload;
+            state.topCommentsItemsLoading = false;
         },
         fetchError: (state, action: PayloadAction<Error>) => {
             state.itemsLoading = false;
