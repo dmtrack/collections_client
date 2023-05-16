@@ -1,6 +1,7 @@
 import { AuthorizationError } from './../models/errors/AuthorizationError';
 import {
     IAuthData,
+    IAuthDataDTO,
     ILoginData,
     IUserLogout,
 } from '../models/response/authResponse';
@@ -9,7 +10,7 @@ import { DataBaseError } from '../models/errors/DataBaseError';
 import { IUserAuthResponse } from '../models/response/authResponse';
 
 export default class AuthService {
-    static async register(data: IAuthData) {
+    static async register(data: IAuthDataDTO) {
         return axiosPost<AuthorizationError | DataBaseError, IUserAuthResponse>(
             '/user/registration',
             data

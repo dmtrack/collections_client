@@ -7,10 +7,6 @@ import { Box } from '@mui/material';
 import { PopularTagCloud } from '../../components/TagCloud/PopularTagCloud';
 
 const Home = () => {
-    const { t } = useTranslation(['home']);
-    const { isAuth } = useAppSelector((state) => state.auth);
-    const navigate = useNavigate();
-
     return (
         <Box className='home'>
             <MainCarousel />

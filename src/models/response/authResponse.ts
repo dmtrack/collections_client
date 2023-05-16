@@ -19,8 +19,16 @@ export interface IAuthData {
     name: string;
     email: string;
     password: string;
+    image: File;
+}
+
+export interface IAuthDataDTO {
+    name: string;
+    email: string;
+    password: string;
     avatarUrl: string;
 }
+
 export interface ILoginData {
     email: string;
     password: string;
