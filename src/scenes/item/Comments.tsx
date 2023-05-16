@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
     Box,
     IconButton,
@@ -12,7 +12,6 @@ import SendIcon from '@mui/icons-material/Send';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '../../state';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
-import icon from '../../utils/emoji.svg';
 import {
     connectItemSocket,
     postNewComment,
@@ -21,7 +20,6 @@ import { toast } from 'react-toastify';
 import { timestampToDateTime } from '../../utils/functions';
 import { TypographyLink } from '../../components/Common/TypographyLink';
 import { Text } from '../../components/Common/Text';
-import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import { shades } from '../../theme';
 
 export const Comments: FC<{ itemId: number }> = ({ itemId }) => {
