@@ -51,14 +51,20 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                             }
                             sx={{
                                 backgroundColor: `${colors.secondary[800]}`,
-                                color: `${colors.primary[200]}`,
+                                color:
+                                    theme.palette.mode === 'light'
+                                        ? `${colors.primary[100]}`
+                                        : `${colors.primary[400]}`,
                             }}>
                             {t('block')}
                         </Button>{' '}
                         <Button
                             sx={{
                                 backgroundColor: `${colors.secondary[800]}`,
-                                color: `${colors.primary[200]}`,
+                                color:
+                                    theme.palette.mode === 'light'
+                                        ? `${colors.primary[100]}`
+                                        : `${colors.primary[400]}`,
                             }}
                             variant='contained'
                             onClick={() => dispatch(toggleUnBlock(dataId))}>
@@ -67,7 +73,10 @@ const UsersList = ({ usersProps }: IUsersListProps) => {
                         <Button
                             sx={{
                                 backgroundColor: `${colors.secondary[800]}`,
-                                color: `${colors.primary[200]}`,
+                                color:
+                                    theme.palette.mode === 'light'
+                                        ? `${colors.primary[100]}`
+                                        : `${colors.primary[400]}`,
                             }}
                             variant='contained'
                             onClick={() =>

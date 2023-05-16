@@ -39,13 +39,15 @@ const NotfoundPage = () => {
                     }}>
                     404
                 </Typography>
-                <Text bgcolor={colors.secondary[800]} textAlign='center'>
-                    {t('pageIsNotFound')}
-                </Text>
+                <Text textAlign='center'>{t('pageIsNotFound')}</Text>
             </Box>
             <Button
                 sx={{
                     backgroundColor: `${colors.secondary[800]}`,
+                    color:
+                        theme.palette.mode === 'light'
+                            ? `${colors.primary[100]}`
+                            : `${colors.primary[400]}`,
                 }}
                 variant='contained'
                 onClick={() => navigate('/')}>
