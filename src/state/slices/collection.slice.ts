@@ -6,8 +6,8 @@ import {
 } from '../../models/ICollection';
 import {
     DeleteCollection,
-    ICollectionState,
-} from '../models/ICollection.state';
+    ICollectionState, ItemConfigType
+} from '../models/ICollection.state'
 import { ICollectionTopAmountResponce } from '../../models/response/collectionResponse';
 
 const initialState: ICollectionState = {
@@ -90,6 +90,9 @@ export const collectionSlice = createSlice({
             state.collectionIsBusy = payload;
         },
         editCollection: (state, action: PayloadAction<DeleteCollection>) => {},
+        setItemConfigs: (state, action: PayloadAction<ItemConfigType[]>) => {
+            state.itemConfigs = action.payload;
+        },
     },
 });
 

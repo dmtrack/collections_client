@@ -26,6 +26,7 @@ import { IItem } from '../../models/IItem';
 import { fetchItems } from '../../state/actions/items.actions';
 import { EditItemDialog } from '../item/EditItemDialog';
 import { DeleteDialog } from '../../components/Modals/DeleteDialog';
+import { fetchItemConfigs } from '../../state/actions/collections.actions'
 
 const CollectionPage = () => {
     const { t } = useTranslation('translation', {
@@ -41,7 +42,8 @@ const CollectionPage = () => {
     const isNonMobile = useMediaQuery('(min-width:600px)');
     useEffect(() => {
         dispatch(fetchItems());
-    }, [dispatch]);
+        if (collectionId) dispatch(fetchItemConfigs(+collectionId))
+    }, [collectionId, dispatch]);
     const [editItemDialogOpen, setEditItemDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
