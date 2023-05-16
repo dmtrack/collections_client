@@ -1,24 +1,21 @@
-import { IUserAuthResponse } from '../models/response/authResponse';
-import { Axios, AxiosResponse } from 'axios';
-import api, { axiosDelete, axiosGet, axiosPost } from '../api/axios/apiClient';
+import { AxiosResponse } from 'axios'
+import api, { axiosDelete, axiosGet, axiosPost } from '../api/axios/apiClient'
 import {
     ICollection,
     IDeleteCollectionResponse,
     IGetCollectionResponse,
-    IGetThemesResponse,
-} from '../models/ICollection';
-import { AuthorizationError } from '../models/errors/AuthorizationError';
-import { DataBaseError } from '../models/errors/DataBaseError';
-import { ICreateCollectionBody } from '../models/request/collection-body';
-import { ICollectionTopAmountResponce } from '../models/response/collectionResponse';
+    IGetThemesResponse
+} from '../models/ICollection'
+import { AuthorizationError } from '../models/errors/AuthorizationError'
+import { DataBaseError } from '../models/errors/DataBaseError'
+import { ICreateCollectionBody } from '../models/request/collection-body'
+import { ICollectionTopAmountResponce } from '../models/response/collectionResponse'
 import { ItemConfigType } from '../state/models/ICollection.state'
 
 export default class collectionService {
     static async getCollections() {
-        return axiosGet<
-            AuthorizationError | DataBaseError,
-            IGetCollectionResponse[]
-        >(`collection/getcollections/`);
+        return axiosGet<AuthorizationError | DataBaseError,
+          IGetCollectionResponse[]>(`collection/getcollections/`)
     }
 
     static async getUserCollections(userId: number) {
@@ -37,15 +34,16 @@ export default class collectionService {
     static async getTopAmountCollections() {
         return axiosGet<
             AuthorizationError | DataBaseError,
-            ICollectionTopAmountResponce[]
-        >(`collection/topamountofitems/`);
+          ICollectionTopAmountResponce[]>(`collection/topamountofitems/`);
     }
 
     static createCollection(data: ICreateCollectionBody) {
-        return axiosPost<
-            AuthorizationError | DataBaseError,
-            ICreateCollectionBody
-        >('collection/create', data);
+        return axiosPost<AuthorizationError | DataBaseError,
+          ICreateCollectionBody>('collection/create', data)
+    }
+
+    static editCollection(data: { collection: ICollection, itemConfigs: ItemConfigType[] }) {
+        return axiosPost<AuthorizationError | DataBaseError, { collection: ICollection, itemConfigs: ItemConfigType }>('collection/edit', data)
     }
 
     // static getOneCollection(id: number): Promise<AxiosResponse> {
@@ -53,10 +51,8 @@ export default class collectionService {
     // }
 
     static async getOneCollection(collectionId: number) {
-        return axiosGet<
-            AuthorizationError | DataBaseError,
-            IGetCollectionResponse
-        >(`collection/getone/${collectionId}`);
+        return axiosGet<AuthorizationError | DataBaseError,
+          IGetCollectionResponse>(`collection/getone/${collectionId}`)
     }
 
     static updateCollection(): Promise<AxiosResponse> {

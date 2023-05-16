@@ -131,7 +131,7 @@ const App: React.FC = () => {
                                         element={<CreateCollection />}
                                     />{' '}
                                     <Route
-                                        path='collections/:collectionId/edit'
+                                        path='collection/:collectionId/edit'
                                         element={<EditCollection />}
                                     />
                                     <Route

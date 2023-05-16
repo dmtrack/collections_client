@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
-import { SortTypes } from './global';
-import { ItemConfigType } from '../state/models/ICollection.state';
+import { AxiosResponse } from 'axios'
+import { SortTypes } from './global'
+import { ItemConfigType } from '../state/models/ICollection.state'
 
 export interface ICollection {
     id: number;
@@ -44,10 +44,11 @@ export interface IGetThemesResponse extends AxiosResponse {
 }
 
 export interface ICollectionFormValues {
+    id?: number
     name: string;
     description: string;
     themeId: number;
-    image: File;
+    image?: File;
     userId: number;
     itemConfigs: ItemConfigType[];
 }

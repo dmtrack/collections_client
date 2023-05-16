@@ -1,30 +1,30 @@
-import { AppDispatch } from '..';
-import { collectionSlice } from '../slices/collection.slice';
-import collectionService from '../../services/collectionService';
-import { NavigateFunction } from 'react-router-dom';
-import { saveImageToCloud } from '../../api/firebase/actions';
-import { ICollectionFormValues } from '../../models/ICollection';
-import { data } from 'autoprefixer'
+import { AppDispatch } from '..'
+import { collectionSlice } from '../slices/collection.slice'
+import collectionService from '../../services/collectionService'
+import { NavigateFunction } from 'react-router-dom'
+import { saveImageToCloud } from '../../api/firebase/actions'
+import { ICollection, ICollectionFormValues } from '../../models/ICollection'
+import { ItemConfigType } from '../models/ICollection.state'
 
 export const fetchCollections = () => {
     return async (dispatch: AppDispatch) => {
-        dispatch(collectionSlice.actions.fetchingCollections());
-        const response = await collectionService.getCollections();
+        dispatch(collectionSlice.actions.fetchingCollections())
+        const response = await collectionService.getCollections()
 
         response
-            .mapRight(({ data: collections }) => {
-                dispatch(
-                    collectionSlice.actions.fetchCollectionsSuccess(collections)
-                );
-            })
-            .mapLeft((e: any) => {
-                dispatch(collectionSlice.actions.fetchError(e.response?.data));
-                console.error({
-                    type: e.response.statusText,
-                    code: e.response.status,
-                    message: e.response.data,
-                });
-            });
+          .mapRight(({ data: collections }) => {
+              dispatch(
+                collectionSlice.actions.fetchCollectionsSuccess(collections)
+              )
+          })
+          .mapLeft((e: any) => {
+              dispatch(collectionSlice.actions.fetchError(e.response?.data))
+              console.error({
+                  type: e.response.statusText,
+                  code: e.response.status,
+                  message: e.response.data
+              })
+          })
     };
 };
 
@@ -131,17 +131,20 @@ export const createCollection = (
     navigate: NavigateFunction
 ) => {
     return async (dispatch: AppDispatch) => {
-        const { image, name, description, userId, themeId, itemConfigs } = data;
-        dispatch(collectionSlice.actions.setCollectionsBusy(true));
+        const { image, name, description, userId, themeId, itemConfigs } = data
+        dispatch(collectionSlice.actions.setCollectionsBusy(true))
+        let imageUrl = ''
+        if (image) {
+            imageUrl = await saveImageToCloud(image, 'collections')
+        }
 
-        const imageUrl = await saveImageToCloud(image, 'collections');
         const collectionDTO = {
             name,
             description,
             userId,
             image: imageUrl,
-            themeId,
-        };
+            themeId
+        }
 
 
         const response = await collectionService.createCollection({
@@ -188,19 +191,52 @@ export const deleteCollection = (
 };
 
 export const fetchItemConfigs = (collectionId: number) => async (dispatch: AppDispatch) => {
-    dispatch(collectionSlice.actions.setCollectionsBusy(true));
+    dispatch(collectionSlice.actions.setCollectionsBusy(true))
     const response = await collectionService.getItemConfigs(collectionId)
     response
-      .mapRight(({data: configs}) => {
+      .mapRight(({ data: configs }) => {
           dispatch(collectionSlice.actions.setItemConfigs(configs))
       })
       .mapLeft((e: any) => {
-        dispatch(collectionSlice.actions.fetchError(e.response?.data));
-        console.error({
-            type: e.response.statusText,
-            code: e.response.status,
-            message: e.response.data,
-        });
+          dispatch(collectionSlice.actions.fetchError(e.response?.data))
+          console.error({
+              type: e.response.statusText,
+              code: e.response.status,
+              message: e.response.data
+          })
+      })
+    dispatch(collectionSlice.actions.setCollectionsBusy(false))
+}
+
+export const editCollection = (
+  collection: ICollection,
+  itemConfigs: ItemConfigType[],
+  navigate: NavigateFunction,
+  newImage?: File
+) => async (dispatch: AppDispatch) => {
+    dispatch(collectionSlice.actions.setCollectionsBusy(true))
+    let imageUrl = ''
+    if (newImage) {
+        imageUrl = await saveImageToCloud(newImage, 'collections')
+    } else {
+        imageUrl = collection.image
+    }
+
+    const collectionDTO: ICollection = { ...collection, image: imageUrl }
+
+    const response = await collectionService.editCollection({
+        collection: collectionDTO, itemConfigs
     })
-    dispatch(collectionSlice.actions.setCollectionsBusy(false));
+    response
+      .mapRight(() => navigate(`/users/${collection.userId}`))
+      .mapLeft((e: any) => {
+          dispatch(collectionSlice.actions.fetchError(e.response?.data))
+          console.error({
+              type: e.response.statusText,
+              code: e.response.status,
+              message: e.response.data
+          })
+      })
+
+    dispatch(collectionSlice.actions.setCollectionsBusy(false))
 }
