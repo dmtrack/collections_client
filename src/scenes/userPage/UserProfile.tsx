@@ -116,7 +116,7 @@ const UserProfile = () => {
                                     )}
                                 </Tooltip>
 
-                                <Tooltip title={t('userEdit')}>
+                                {/* <Tooltip title={t('userEdit')}>
                                     <Link to={`/users/${userId}/edit`}>
                                         {' '}
                                         {isNonMobile ? (
@@ -127,7 +127,7 @@ const UserProfile = () => {
                                             <EditIcon fontSize='large' />
                                         )}
                                     </Link>
-                                </Tooltip>
+                                </Tooltip> */}
                                 <Tooltip title={`${t('userDelete')}`}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
