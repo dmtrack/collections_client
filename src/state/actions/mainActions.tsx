@@ -56,7 +56,6 @@ export const getMostPopularTags = () => async (dispatch: AppDispatch) => {
     const tagCountsResponse = await axiosGet<DbError, ITagCount[]>(
         '/item/popular_tags'
     );
-    console.log(tagCountsResponse);
 
     tagCountsResponse
         .mapRight(({ data: tagCounts }) => dispatch(setTagCounts(tagCounts)))

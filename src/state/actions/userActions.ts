@@ -7,6 +7,8 @@ import localStorageService from '../../services/localStorageService';
 import api from '../../api/axios/apiClient';
 import { logOut } from './auth.actions';
 import UserService from '../../services/userService';
+import { NavigateFunction } from 'react-router-dom';
+import { setLoading } from '../slices/app.slice';
 
 export const fetchUsers = () => {
     return async (dispatch: AppDispatch) => {
@@ -87,6 +89,27 @@ export const deleteUser = (dataId: number[], userId: number) => {
         if (dataId.includes(Number(userId))) {
             dispatch(logOut());
         }
+    };
+};
+
+export const destroyUser = (userId: number, navigate: NavigateFunction) => {
+    return async (dispatch: AppDispatch) => {
+        dispatch(setLoading(true));
+        const response = await UserService.destroyUser(userId);
+        console.log('delete response', response);
+
+        response
+            .mapRight(() => navigate('/'))
+            .mapLeft((e: any) => {
+                dispatch(userSlice.actions.fetchError(e.response?.data));
+                console.error({
+                    type: e.response.statusText,
+                    code: e.response.status,
+                    message: e.response.data,
+                });
+            });
+        dispatch(setLoading(false));
+        dispatch(logOut());
     };
 };
 

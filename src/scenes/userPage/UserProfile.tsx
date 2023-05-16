@@ -21,6 +21,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import EmptyContainer from '../../components/Common/EmptyContainer/EmptyContainer';
 import Loader from '../../components/Loader/Loader';
 import CollectionCardsContainer from '../../components/Collection/CollectionCardContainer/CollectionCardContainer';
+import { DeleteDialog } from '../../components/Modals/DeleteDialog';
+import BackspaceSharpIcon from '@mui/icons-material/BackspaceSharp';
+import { RootState } from '../../state';
 
 const UserProfile = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'profilePage' });
@@ -28,11 +31,14 @@ const UserProfile = () => {
     const dispatch = useAppDispatch();
     const { userId } = useParams();
     const [value, setValue] = useState('collections');
-    const { auth: currentUser } = useAppSelector((state) => state);
+    const { auth: currentUser } = useAppSelector((state: RootState) => state);
     const navigate = useNavigate();
     const isNonMobile = useMediaQuery('(min-width:600px)');
     const [user, setUser] = useState<IUser>();
     const { userCollections } = useAppSelector((state) => state.collections);
+    const { loading } = useAppSelector((state) => state.app);
+
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     const goHome = () => navigate('/');
 
@@ -52,11 +58,19 @@ const UserProfile = () => {
         setValue(newValue);
     };
 
-    const isLoading = collectionsUserLoading;
+    const handleOpenDeleteDialogOpen = (): void => {
+        setDeleteDialogOpen(true);
+    };
+
+    const isLoading = collectionsUserLoading || loading;
     return (
         <>
             {isLoading && <Loader />}
-            <Box width='80%' m='36px auto 80px auto' className='user-profile'>
+            <Box
+                width='80%'
+                minHeight='calc(100vh - 395px)'
+                m='36px auto 80px auto'
+                className='user-profile'>
                 <Box display='flex' columnGap='16px'>
                     {/* IMAGES */}
                     <Box>
@@ -89,7 +103,7 @@ const UserProfile = () => {
                                     </Link>
                                 </Tooltip>
 
-                                <Tooltip title='Home'>
+                                <Tooltip title={t('home')}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
                                             <HomeSharpIcon onClick={goHome} />
@@ -102,7 +116,7 @@ const UserProfile = () => {
                                     )}
                                 </Tooltip>
 
-                                <Tooltip title='Edit user'>
+                                <Tooltip title={t('userEdit')}>
                                     <Link to={`/users/${userId}/edit`}>
                                         {' '}
                                         {isNonMobile ? (
@@ -113,6 +127,23 @@ const UserProfile = () => {
                                             <EditIcon fontSize='large' />
                                         )}
                                     </Link>
+                                </Tooltip>
+                                <Tooltip title={`${t('userDelete')}`}>
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='primary'>
+                                            <BackspaceSharpIcon
+                                                onClick={
+                                                    handleOpenDeleteDialogOpen
+                                                }
+                                            />
+                                        </Fab>
+                                    ) : (
+                                        <BackspaceSharpIcon
+                                            fontSize='large'
+                                            color='primary'
+                                            onClick={handleOpenDeleteDialogOpen}
+                                        />
+                                    )}
                                 </Tooltip>
                             </Box>
                         )}
@@ -159,14 +190,24 @@ const UserProfile = () => {
                                     flexWrap: 'wrap',
                                 },
                             }}>
-                            <Tab label='MY COLLECTIONS' value='collections' />
-                            <Tab label='STATS' value='stats' />
+                            <Tab
+                                label={t('myCollections')}
+                                value='collections'
+                            />
+                            <Tab label={t('stats')} value='stats' />
                         </Tabs>
                     </Box>
                     <Box display='flex' flexWrap='wrap' gap='16px'>
                         {value === 'description' && <div>description</div>}
                         {value === 'reviews' && <div>reviews</div>}
                     </Box>
+                    <DeleteDialog
+                        open={deleteDialogOpen}
+                        onClose={() => setDeleteDialogOpen(false)}
+                        entityId={Number(userId)}
+                        entity={user}
+                        userId={Number(userId)}
+                    />
 
                     {/* RELATED ITEMS */}
                     {value === 'collections' &&
@@ -188,9 +229,7 @@ const UserProfile = () => {
                         <Box
                             mt={isNonMobile ? '32px' : '16px'}
                             width='100%'
-                            height='100%'>
-                            Stats
-                        </Box>
+                            height='100%'></Box>
                     )}
                 </Box>
             </Box>

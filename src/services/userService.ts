@@ -38,4 +38,10 @@ export default class UserService {
             { data: dataId }
         );
     }
+
+    static async destroyUser(userId: number) {
+        return axiosDelete<AuthorizationError | DataBaseError, DeleteUserProp>(
+            `user/destroy/${userId}`
+        );
+    }
 }

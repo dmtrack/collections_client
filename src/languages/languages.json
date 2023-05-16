@@ -92,7 +92,8 @@
                 "admin": "Administrator",
                 "email": "e-mail",
                 "userEdit": "Edit user data",
-                "userDelete": "Delete profile",
+                "userDelete": "Destroy",
+                "home": "Home",
                 "userAdmin": "Make user administrator",
                 "userCollector": "Make user collector",
                 "userBlock": "Block user",
@@ -113,7 +114,8 @@
                 "adminDeleteError": "User is the only administrator and can't be deleted",
                 "myCollections": "My collections",
                 "newCollection": "New collection",
-                "theme": "Theme"
+                "theme": "Theme",
+                "stats": "Stats"
             },
             "usersPage": {
                 "#": "#",
@@ -407,6 +409,9 @@
                 "userUpdateError": "Ошибка! Похоже этот e-mail уже занят",
                 "avatar": "Аватар",
                 "noFile": "Файл отсутствует",
+                "empty": "Коллекций пока что нет..",
+                "emptyAndLoggedIn": "Создайте первую коллекцию!",
+                "emptyAndLoggedOut": "Войдите в аккаунт и создайте первую коллекцию!",
                 "file": "Имя файла: ",
                 "defaultAvatar": "стандартный аватар",
                 "status": "Статус",
@@ -415,7 +420,9 @@
                 "adminDeleteError": "Удаление невозможно, т.к. пользователь - единственный администратор",
                 "myCollections": "Мои коллекции",
                 "newCollection": "Новая коллекция",
-                "theme": "Тема"
+                "theme": "Тема",
+                "home": "На главную",
+                "stats": "Статистика"
             },
             "usersPage": {
                 "#": "#",

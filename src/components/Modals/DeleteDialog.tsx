@@ -12,12 +12,14 @@ import { ICollection } from '../../models/ICollection';
 import { deleteCollection } from '../../state/actions/collections.actions';
 import { IItem } from '../../models/IItem';
 import { deleteItem } from '../../state/actions/items.actions';
+import { IUser } from '../../models/IUser';
+import { deleteUser, destroyUser } from '../../state/actions/userActions';
 
 interface DeleteDialogProps {
     open: boolean;
     onClose: () => void;
     userId: number;
-    entity?: IItem | ICollection;
+    entity?: IItem | ICollection | IUser;
     entityId: number;
     link?: number;
 }
@@ -51,6 +53,11 @@ export const DeleteDialog: FC<DeleteDialogProps> = ({
         }
         if (location.includes('items')) {
             dispatch(deleteItem(entityId, navigate, userId, Number(link)));
+            closeHandler();
+        }
+
+        if (location.includes('users')) {
+            dispatch(destroyUser(userId, navigate));
             closeHandler();
         }
     };
