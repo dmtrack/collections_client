@@ -36,7 +36,7 @@ const LastItemList = () => {
     const colors = shades(theme.palette.mode);
     const topRatedFlat = topRated?.map((element) => {
         return {
-            id: element.id,
+            id: element.itemId,
             count: element.count,
             image: element.item?.image,
             name: element.item?.name,
