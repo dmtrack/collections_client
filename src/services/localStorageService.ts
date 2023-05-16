@@ -1,8 +1,6 @@
 const USERID_KEY = 'USERID_KEY';
 const TOKEN = 'TOKEN';
 const ACCESS = 'ACCESS';
-const SELECTED_LANGUAGE = 'SELECTED_LANGUAGE';
-const LANGUAGE_OBJECT = 'LANGUAGE_OBJECT';
 const THEME = 'APP_THEME';
 const LANG = 'APP_LANGUAGE';
 
@@ -22,24 +20,18 @@ export function setLanguage(language: string) {
     localStorage.setItem(LANG, language);
 }
 
-export function setSelectedLanguage(language: string) {
-    localStorage.setItem(SELECTED_LANGUAGE, language);
-}
-
-export function setSelectedLanguageObject(langObj: any) {
-    localStorage.setItem(LANGUAGE_OBJECT, JSON.stringify(langObj));
-}
-
 export function getSelectedLanguage() {
+    console.log('get theme');
+
     return localStorage.getItem(LANG);
 }
 export function getSelectedTheme() {
     return localStorage.getItem(THEME);
 }
 
-export function getSelectedLanguageObject() {
-    return localStorage.getItem(LANGUAGE_OBJECT);
-}
+// export function getSelectedLanguageObject() {
+//     return localStorage.getItem(LANGUAGE_OBJECT);
+// }
 
 export function removeAuthData() {
     localStorage.removeItem(USERID_KEY);
@@ -63,10 +55,7 @@ const localStorageService = {
     removeAuthData,
     setUser,
     getUserAccess,
-    setSelectedLanguage,
-    setSelectedLanguageObject,
     getSelectedLanguage,
     getSelectedTheme,
-    getSelectedLanguageObject,
 };
 export default localStorageService;

@@ -3,19 +3,30 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../hook/redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useCollection } from '../../hook/collectionStateHook';
-import { Box, Typography, useMediaQuery } from '@mui/material';
-import { deleteItem, fetchItems } from '../../state/actions/items.actions';
+import {
+    Box,
+    Typography,
+    useMediaQuery,
+    Tooltip,
+    Fab,
+    useTheme,
+} from '@mui/material';
 import { timestampToDateTime } from '../../utils/functions';
-import Loader from '../../components/Loader/Loader';
 import { TransButton } from '../../components/Common/TransButton';
-import { DeleteDialog } from '../../components/Modals/DeleteDialog';
 import { Comments } from './Comments';
 import { Text } from '../../components/Common/Text';
-import { EditItemDialog } from './EditItemDialog';
-import BackspaceSharpIcon from '@mui/icons-material/BackspaceSharp';
 import { TagChip } from '../../components/Common/TagChip';
-import { Likes } from './Likes';
 import { ItemFieldView } from './ItemFieldView';
+import { RootState } from '../../state';
+import BackspaceSharpIcon from '@mui/icons-material/BackspaceSharp';
+import EditIcon from '@mui/icons-material/Edit';
+import { shades } from '../../theme';
+import Loader from '../../components/Loader/Loader';
+import { fetchItems } from '../../state/actions/items.actions';
+import { EditItemDialog } from '../item/EditItemDialog';
+import { DeleteDialog } from '../../components/Modals/DeleteDialog';
+import { fetchItemConfigs } from '../../state/actions/collections.actions';
+import { Likes } from './Likes';
 
 const ItemPageFile: FC = () => {
     const { t } = useTranslation('translation', {
@@ -23,7 +34,12 @@ const ItemPageFile: FC = () => {
     });
     const dispatch = useAppDispatch();
     const { itemId } = useParams();
-    const { itemsLoading, items } = useAppSelector((state) => state.items);
+    const { itemsLoading, items } = useAppSelector(
+        (state: RootState) => state.items
+    );
+    const { commentLoading } = useAppSelector(
+        (state: RootState) => state.items
+    );
     const item = items.find((item) => Number(item.id) === Number(itemId));
     const navigate = useNavigate();
     const itemConfigs = useCollection().itemConfigs.filter(
@@ -35,8 +51,9 @@ const ItemPageFile: FC = () => {
         )
     );
 
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const { auth } = useAppSelector((state) => state);
-
     const isAdmin = auth.access.access === 'admin' ? true : false;
     const userId = auth.userId;
     const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -50,83 +67,164 @@ const ItemPageFile: FC = () => {
     const handleOpenDeleteDialogOpen = (): void => {
         setDeleteDialogOpen(true);
     };
-
+    const isLoading = itemsLoading || commentLoading;
     return (
-        <Box py={1} px={3} my={3} mx='auto' maxWidth='42rem' className='border'>
-            <Box display='flex' alignItems='center'>
-                <Text
-                    fontSize='medium'
-                    color='gray'
-                    mr={1}
-                    hidden={!item?.name}>
-                    {`${t('createdBy')}:`}
-                </Text>
-                <Link to={`/users/${item?.userId}`} className='link capitalize'>
-                    {auth?.name}
-                </Link>
-            </Box>
-            <Box p={1} className='flex border-b'>
-                <Box mr='auto'>
-                    <Typography variant='h5'>{item?.name}</Typography>
-                    <Typography fontSize='small' color='gray'>
-                        {timestampToDateTime(item?.created)}
-                    </Typography>
-                </Box>
-                {itemsLoading ? (
-                    <Loader />
-                ) : (
-                    <Box hidden={!hasFullAccess}>
-                        <TransButton
-                            onClick={() => setEditDialogOpen(true)}
-                            hidden={!hasFullAccess}>
-                            {t('edit')}
-                        </TransButton>
-                        <TransButton
-                            color='error'
-                            onClick={handleOpenDeleteDialogOpen}
-                            hidden={!hasFullAccess}>
-                            {t('delete')}
-                        </TransButton>
-                    </Box>
-                )}
+        <>
+            {isLoading && <Loader />}
+            <Box
+                width='80%'
+                minHeight='calc(100vh - 420px)'
+                m='36px auto 80px auto'
+                className='user-profile'>
+                <Box
+                    display='flex'
+                    flexWrap='wrap'
+                    flexDirection={isNonMobile ? 'row' : 'column'}
+                    columnGap='16px'>
+                    {/* IMAGES */}
+                    <Box>
+                        <Box
+                            flex='1'
+                            mb='24px'
+                            borderRadius='15px'
+                            position='relative'>
+                            <img
+                                alt={item?.name}
+                                src={item?.image}
+                                style={{
+                                    objectFit: 'contain',
+                                    borderRadius: '5px',
+                                }}
+                                width='300px'
+                                height='400px'
+                            />
+                        </Box>
+                        {hasFullAccess && (
+                            <Box
+                                justifyContent='center'
+                                display='flex'
+                                gap='12px'>
+                                <Tooltip title={`${t('edit')}`}>
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='primary'>
+                                            <EditIcon
+                                                onClick={() =>
+                                                    setEditDialogOpen(true)
+                                                }
+                                            />
+                                        </Fab>
+                                    ) : (
+                                        <EditIcon
+                                            fontSize='large'
+                                            onClick={() =>
+                                                setEditDialogOpen(true)
+                                            }
+                                        />
+                                    )}
+                                </Tooltip>
 
-                {item && (
-                    <EditItemDialog
-                        collectionId={Number(item?.collectionId)}
-                        open={editDialogOpen}
-                        onClose={() => setEditDialogOpen(false)}
-                        item={item}
-                    />
-                )}
-                <DeleteDialog
-                    open={deleteDialogOpen}
-                    onClose={() => setDeleteDialogOpen(false)}
-                    entityId={Number(item?.id)}
-                    entity={item}
-                    userId={userId}
-                    link={Number(item?.collectionId)}
-                />
-            </Box>
-            <Box display='flex' flexWrap='wrap'>
-                {item?.tags.map((tag) => (
-                    <TagChip key={tag.id + tag.name} tag={tag} />
-                ))}
-            </Box>
-            {itemConfigs.map((config) => (
-                <Box key={config.id}>
-                    <ItemFieldView item={item} config={config} />
+                                <Tooltip title={`${t('delete')}`}>
+                                    {isNonMobile ? (
+                                        <Fab size='small' color='primary'>
+                                            <BackspaceSharpIcon
+                                                onClick={
+                                                    handleOpenDeleteDialogOpen
+                                                }
+                                            />
+                                        </Fab>
+                                    ) : (
+                                        <BackspaceSharpIcon
+                                            fontSize='large'
+                                            color='primary'
+                                            onClick={handleOpenDeleteDialogOpen}
+                                        />
+                                    )}
+                                </Tooltip>
+                            </Box>
+                        )}
+                    </Box>
+
+                    <Box
+                        flex='1'
+                        flexBasis='30%'
+                        mt={isNonMobile ? '0px' : '36px'}
+                        ml={isNonMobile ? '24px' : '0px'}>
+                        <Box m='0px 0 24px 0' textAlign='left'>
+                            <Typography
+                                variant='h4'
+                                color={colors.secondary[800]}
+                                sx={{
+                                    letterSpacing: '-0.5px',
+                                    fontWeight: '600',
+                                }}>
+                                {item?.name} <Likes itemId={Number(itemId)} />
+                            </Typography>
+                            <Typography mt='24px' fontSize='16px'>
+                                {item?.description}
+                            </Typography>
+                            <Typography mt='12px' fontSize='14px'>
+                                <Link
+                                    to={`/users/${item?.userId}`}
+                                    className='link capitalize'>
+                                    {t('createdBy')}: {auth?.name}
+                                </Link>
+                            </Typography>
+
+                            <Typography color='gray' mt='12px' fontSize='14px'>
+                                {t('createdDate')}:{' '}
+                                {timestampToDateTime(item?.created)}
+                            </Typography>
+                            {itemConfigs.map((config) => (
+                                <Box key={config.id}>
+                                    <ItemFieldView
+                                        item={item}
+                                        config={config}
+                                    />
+                                </Box>
+                            ))}
+                            <Box m='24px auto' fontSize='14px'>
+                                {!!item?.tags.length && (
+                                    <Box display='flex' flexWrap='wrap'>
+                                        {item?.tags.map((tag) => (
+                                            <TagChip
+                                                key={tag.id + tag.name}
+                                                tag={tag}
+                                            />
+                                        ))}
+                                    </Box>
+                                )}
+                            </Box>
+                        </Box>
+                    </Box>
+                    <Box
+                        flexBasis='40%'
+                        flexWrap='wrap'
+                        flexGrow='2'
+                        alignSelf='end'
+                        mt={isNonMobile ? 'none' : '16px'}
+                        width='100%'>
+                        <Comments itemId={Number(itemId)} />
+                    </Box>
                 </Box>
-            ))}
-            <Box display='flex' justifyContent='space-between'>
-                <TransButton
-                    size='small'
-                    onClick={() => navigate(`/collections/${collection?.id}`)}>
-                    {t('backToCollection')}
-                </TransButton>
-                <Likes itemId={Number(itemId)} />
             </Box>
-            <Comments itemId={Number(itemId)} />
-        </Box>
+
+            {item && (
+                <EditItemDialog
+                    collectionId={Number(item?.collectionId)}
+                    open={editDialogOpen}
+                    onClose={() => setEditDialogOpen(false)}
+                    item={item}
+                />
+            )}
+            <DeleteDialog
+                open={deleteDialogOpen}
+                onClose={() => setDeleteDialogOpen(false)}
+                entityId={Number(item?.id)}
+                entity={item}
+                userId={userId}
+                link={Number(item?.collectionId)}
+            />
+        </>
     );
 };
 

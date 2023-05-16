@@ -27,8 +27,8 @@ import {
 import { toast } from 'react-toastify';
 import { createCollection } from '../../state/actions/collections.actions';
 import { ItemConfigType } from '../../state/models/ICollection.state';
-import { FixedConfigInputs } from '../../components/Collection/ConfigInputs/FixedConfigInputs'
-import { ConfigInputs } from '../../components/Collection/ConfigInputs/ConfigInputs'
+import { FixedConfigInputs } from '../../components/Collection/ConfigInputs/FixedConfigInputs';
+import { ConfigInputs } from '../../components/Collection/ConfigInputs/ConfigInputs';
 
 const CreateCollection = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'collections' });
@@ -104,7 +104,9 @@ const CreateCollection = () => {
     };
 
     const onSubmit: SubmitHandler<ICollectionFormValues> = (data) => {
-        const itemConfigs = configInputs.filter(config => config.type && config.label)
+        const itemConfigs = configInputs.filter(
+            (config) => config.type && config.label
+        );
         if (image && image?.size > MAX_IMAGE_SIZE)
             return toast('The maximum image size is 10MB');
         if (editing) {
@@ -125,7 +127,12 @@ const CreateCollection = () => {
             // }
             // dispatch(editCollection(sendData, navigate));
         } else {
-            dispatch(createCollection({ ...data, userId, itemConfigs: configInputs }, navigate));
+            dispatch(
+                createCollection(
+                    { ...data, userId, itemConfigs: configInputs },
+                    navigate
+                )
+            );
         }
     };
 
@@ -199,8 +206,11 @@ const CreateCollection = () => {
                                 }
                             />
                         </Box>
-                        <FixedConfigInputs/>
-                        <ConfigInputs configInputs={configInputs} setConfigInputs={setConfigInputs}/>
+                        <FixedConfigInputs />
+                        <ConfigInputs
+                            configInputs={configInputs}
+                            setConfigInputs={setConfigInputs}
+                        />
 
                         {/* <Box>
                     <CustomFieldForm />
@@ -214,6 +224,10 @@ const CreateCollection = () => {
                                     type='submit'
                                     sx={{
                                         backgroundColor: `${colors.secondary[800]}`,
+                                        color:
+                                            theme.palette.mode === 'light'
+                                                ? `${colors.primary[100]}`
+                                                : `${colors.primary[400]}`,
                                     }}>
                                     {t('create')}
                                 </Button>{' '}
@@ -223,6 +237,10 @@ const CreateCollection = () => {
                                     onClick={() => navigate(-1)}
                                     sx={{
                                         backgroundColor: `${colors.secondary[800]}`,
+                                        color:
+                                            theme.palette.mode === 'light'
+                                                ? `${colors.primary[100]}`
+                                                : `${colors.primary[400]}`,
                                     }}>
                                     {t('cancel')}
                                 </Button>{' '}

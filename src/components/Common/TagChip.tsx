@@ -13,7 +13,7 @@ export const TagChip: FC<{ tag: TagType }> = ({ tag }) => {
         // dispatch(setSearchTags([tag]))
     };
     return (
-        <Box mx={0.5}>
+        <Box mx={0.5} display='block' width='auto'>
             <Chip label={tag.name} size='medium' onClick={handleClick} />
         </Box>
     );

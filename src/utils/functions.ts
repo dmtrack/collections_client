@@ -11,7 +11,7 @@ const timestampToDate = (timestamp?: string) => {
 
 const timestampToDateTime = (timestamp?: string) => {
     if (!timestamp) return '';
-    return dayjs(+timestamp).format('HH:mm DD-MM-YY');
+    return dayjs(+timestamp).format('DD.MM.YY HH:mm');
 };
 
 const dateFormat = (date: string) => {

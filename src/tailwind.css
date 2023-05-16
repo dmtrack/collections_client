@@ -48,6 +48,14 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 2fr 3fr;
+    /* row-gap: 64px; */
+    text-align: center;
+}
+
+.item-page {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr 3fr;
     row-gap: 64px;
     text-align: center;
 }
@@ -65,6 +73,134 @@ body {
 .active {
     color: purple;
     cursor: default;
+}
+
+.form {
+    color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 20px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.input {
+    flex-grow: 1;
+    height: 100%;
+}
+
+.input input {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.button {
+    text-align: center;
+}
+
+.button input {
+    cursor: pointer;
+    color: #fff;
+}
+.button input:hover {
+    color: rgb(253, 73, 73);
+}
+
+.messages-dark {
+    flex-grow: 1;
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    background: '#141b2d';
+    padding: 32px;
+    overflow: scroll;
+    color-scheme: dark;
+    overflow-x: hidden;
+}
+
+.messages-light {
+    /* flex-grow: 1; */
+    width: 100%;
+    color: #fff;
+    font-size: 16px;
+    background: '#fcfcfc';
+    padding: 32px;
+    overflow: scroll;
+    color-scheme: light;
+    overflow-x: hidden;
+}
+
+.emoji {
+    width: 40px;
+    cursor: pointer;
+    position: relative;
+}
+
+.emoji img {
+    vertical-align: middle;
+}
+
+.emojies {
+    position: absolute;
+    left: 50%;
+    transform: translate(-80%, -2%);
+    bottom: 100%;
+}
+
+.messages-inside {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.message {
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 100%;
+}
+
+.text {
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #fff;
+}
+
+.user {
+    font-size: 14px;
+    color: rgb(176, 176, 176);
+}
+
+.user {
+    align-items: flex-start;
+}
+
+.user .text {
+    background: #85898c;
+}
+
+.user .user {
+    padding-left: 10px;
+}
+
+.me {
+    align-items: flex-end;
+}
+
+.me .text {
+    background: #392576;
+}
+
+.me .user {
+    padding-right: 10px;
 }
 
 @layer components {

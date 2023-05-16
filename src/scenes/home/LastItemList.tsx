@@ -47,7 +47,7 @@ const LastItemList = () => {
     });
     const topCommentsFlat = topComments?.map((element) => {
         return {
-            id: element.id,
+            id: element.itemId,
             count: element.count,
             image: element.item?.image,
             name: element.item?.name,
@@ -56,8 +56,6 @@ const LastItemList = () => {
             tags: element.tags,
         };
     });
-
-    // const mostCommented = items.slice(items.length - 3, items.length);
 
     const [value, setValue] = useState('newItems');
     const isNonMobile = useMediaQuery('(min-width:600px)');

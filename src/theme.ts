@@ -1,5 +1,6 @@
 import { Palette, createTheme } from '@mui/material/styles';
 import { createContext, useMemo, useState } from 'react';
+import { useAppSelector } from './hook/redux';
 
 export const shades = (mode: string) => ({
     ...(mode === 'dark'
@@ -135,7 +136,8 @@ export const ColorModeContext = createContext({
 });
 
 export const useMode = () => {
-    const [mode, setMode] = useState('dark');
+    const { apptheme } = useAppSelector((state) => state.app);
+    const [mode, setMode] = useState(apptheme);
 
     const colorMode = useMemo(
         () => ({

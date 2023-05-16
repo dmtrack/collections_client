@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { ColorModeContext } from '../../../theme';
 import { NavLink } from 'react-router-dom';
 import { SearchButton } from '../../../components/SearchButton/SearchButton';
-import { setSearchOpen } from '../../../state/slices/app.slice';
+import { setSearchOpen, setTheme } from '../../../state/slices/app.slice';
 import { SearchDialog } from '../../../search/SearchDialog';
 
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -21,6 +21,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import { useContext } from 'react';
 import { shades } from '../../../theme';
 import { MenuSettings } from './MenuSettings';
+import { useApp } from '../../../hook/appState';
 
 const Navbar = () => {
     const { t } = useTranslation('translation', {
@@ -37,6 +38,11 @@ const Navbar = () => {
     const theme = useTheme();
     const colors = shades(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
+
+    const handleChangeTheme = () => {
+        colorMode.toggleColorMode();
+        dispatch(setTheme(theme.palette.mode === 'dark' ? 'light' : 'dark'));
+    };
 
     return (
         <>
@@ -86,7 +92,7 @@ const Navbar = () => {
                                     ? t('ttLightMode')
                                     : t('ttDarkMode')
                             }>
-                            <IconButton onClick={colorMode.toggleColorMode}>
+                            <IconButton onClick={handleChangeTheme}>
                                 {theme.palette.mode === 'light' ? (
                                     <DarkModeOutlinedIcon
                                         sx={{
