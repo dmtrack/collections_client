@@ -72,47 +72,40 @@ The collection has a name, description, picture, theme, list of items. The item 
 
     GET /user/getusers - gets list of all users
     GET /user/getuser/:id - gets particular user
-    PUT /user/block - block user's account
-    PUT /user/unblock - unblock user's account
     DELETE /user/delete - deletes array of users
     DELETE /user/destroy/:id - deletes on user
 
-### Profile routes
+### Admin routes
 
-    POST /profile/confirm_edit - confirmation of the user's email when changing the profile (for logged-in users)
-    POST /profile/edit_by_token - editing a profile by a token (for logged-in users)
-    POST /profile/edit_by_provider - editing a profile using OAuth (for logged-in users)
-    PATCH /profile/edit_avatar - editing a profile avatar (for logged-in users)
-    GET /profile/:userId - get profile by id
-
-### Admin routes (only for admins)
-
-    GET /admin/users - get all users
-    POST /admin/users/status - changing user status (blocked| deleted | active)
-    POST /admin/users/admin_status - adding / removing administrators
+    PUT /user/block - block user's account
+    PUT /user/unblock - unblock user's account
 
 ### Collection routes
 
-    POST /collection - creating a collection (for logged-in users)
-    PATCH /collection - editing a collection (for logged-in users)
-    DELETE /collection - deleting a collection (for logged-in users)
-    GET /collection/:id - get collection by id
-    GET /collection/next - get a range of collections (for lazy loading)
-    GET /collection/themes - get all collection themes
+    POST /collection/create - creates a collection (for logged-in users)
+    GET /getcollections/ gets all collections
+    GET /collectio/getone/:id - get collection by id
+    GET /collection/getthemes - gets all collection themes
+    GET /collection/topamountofitems - get collections with top amount of items
+    PATCH /collection/edit - edits a collection (for logged-in users)
+    DELETE /collection/delete/:id - deleting a collection (for logged-in users)
+    PATCH /collection/edit - edits a collection (for logged-in users)
 
 ### Item routes
 
-    POST /item - creating an item (for logged-in users)
-    PATCH /item - editing an item (for logged-in users)
-    DELETE /item - deleting an item (for logged-in users)
-    GET /item/:id - get item by id
-    GET /item/next - get a range of items (for lazy loading)
-    GET /item/tags - get all tags
-    GET /item/popular_tags - get the 30 most popular tags
+    POST /item/create - creates an item (for logged-in users)
+    GET /item/getitems - gets all items
+    GET /item/getone/:id - gets item by id
+    GET /item/tags - gets all tags
+    GET /item/toprated - gets all tags with top amount of likes
+    GET /item/topcomments - gets all tags with top amount of comments
+
+    PATCH /item/update - edits an item (for logged-in users)
+    DELETE /deleteone/:id - deletes an item (for logged-in users)
 
 ### Dev routes (only for developers)
 
-    POST /dev/meilisearch_setup - set up the full-text engine (meilisearch)
-    POST /dev/indexing/collections - indexing of all collections in the full-text engine
-    POST /dev/indexing/items - indexing of all items in the full-text engine
-    POST /dev/indexing/comments - indexing of all comments in the full-text engine
+    POST /dev/meilisearch_setup - sets up the full-text engine (meilisearch)
+    POST /dev/indexing/collections - indexes of all collections in the full-text engine
+    POST /dev/indexing/items - indexes of all items in the full-text engine
+    POST /dev/indexing/comments - indexes of all comments in the full-text engine
