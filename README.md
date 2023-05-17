@@ -28,6 +28,7 @@ The collection has a name, description, picture, theme, list of items. The item 
 -   reduxjs/toolkit
 -   meilisearch - full-text engine
 -   socket-io - to display likes and comments
+-   firebase storage - to save user avatars and entities images
 -   i18n
 -   @sweet-monads/either - to convenient handling of exceptions and errors
 
