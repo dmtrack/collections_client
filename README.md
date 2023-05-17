@@ -99,7 +99,6 @@ The collection has a name, description, picture, theme, list of items. The item 
     GET /item/tags - gets all tags
     GET /item/toprated - gets all tags with top amount of likes
     GET /item/topcomments - gets all tags with top amount of comments
-
     PATCH /item/update - edits an item (for logged-in users)
     DELETE /deleteone/:id - deletes an item (for logged-in users)
 
