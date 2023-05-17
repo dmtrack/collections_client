@@ -29,7 +29,7 @@ The collection has a name, description, picture, theme, list of items. The item 
 -   meilisearch - full-text engine
 -   socket-io - to display likes and comments
 -   firebase storage - to save user avatars and entities images
--   i18n
+-   i18n - EN/RU localisation
 -   @sweet-monads/either - to convenient handling of exceptions and errors
 
 ### UI
