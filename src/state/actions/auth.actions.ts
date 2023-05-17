@@ -13,7 +13,6 @@ import { setLoading } from '../slices/app.slice';
 
 export const registerUser = (data: IAuthData, navigate: NavigateFunction) => {
     return async (dispatch: AppDispatch) => {
-        console.log('data from authAct', data);
         const { image, name, password, email } = data;
         dispatch(setLoading(true));
 
@@ -24,7 +23,6 @@ export const registerUser = (data: IAuthData, navigate: NavigateFunction) => {
             email,
             avatarUrl: imageUrl,
         };
-        // console.log(userDTO, 'DTO');
 
         const response = await AuthService.register(userDTO);
         response

@@ -10,7 +10,7 @@ it is a web-app for personal collections managements. It was made as a project f
 
 ## Description
 
-This is a web-app for collection management. The collection has a name, description, picture, theme, list of items. The item consists of a name, tags, custom fields, likes and comments. When creating/editing a collection, you can define a list of fields that each item of the collection will have. The collection with all its items and fields can be exported to a CSV file. You can add comments and likes to each item, which will be immediately displayed to other users (using Websocket). An unauthenticated user has read-only access. Authenticated users have access to everything except the admin panel. In the admin panel, you can manage users: delete, block, assign administrators. The administrator can delete, add, edit any collections and items on behalf of the author. An authorized user can only manage their own collections and items. The list of the user's collections can be viewed in his profile. On the main page, you can view the last added items, filter them by tags, and view the most popular tags. You can also see collections sorted by the number of items and filter them by theme. You can register an account using email confirmation or using OAuth (GitHub, Google, Facebook). Full-text site search is available on each page. The app supports 2 languages: English and Russian, as well as two visual themes - dark and light. The app supports 2 languages: English and Russian and two visual themes - dark and light
+The collection has a name, description, picture, theme, list of items. The item consists of a name, tags, custom fields, likes and comments. When creating/editing a collection, you can define a list of fields that each item of the collection will have. The collection with all its items and fields can be exported to a CSV file. You can add comments and likes to each item, which will be immediately displayed to other users (using Websocket). An unauthenticated user has read-only access. Authenticated users have access to everything except the admin panel. In the admin panel, you can manage users: delete, block, assign administrators. The administrator can delete, add, edit any collections and items on behalf of the author. An authorized user can only manage their own collections and items. The list of the user's collections can be viewed in his profile. On the main page, you can view the last added items, filter them by tags, and view the most popular tags. You can also see collections sorted by the number of items and filter them by theme. You can register an account using email confirmation or using OAuth (GitHub, Google, Facebook). Full-text site search is available on each page. The app supports 2 languages: English and Russian, as well as two visual themes - dark and light. The app supports 2 languages: English and Russian and two visual themes - dark and light
 
 ## Preview
 
@@ -62,11 +62,20 @@ This is a web-app for collection management. The collection has a name, descript
 
 ### Authorisation routes
 
-    POST /auth/login - user authorization
-    POST /auth/confirm_register - confirmation of the user's email
-    POST /auth/register - user registration by a token after email confirmation
-    POST /auth/autologin - automatic authorization by a token
-    POST /auth/provider - Registration using OAuth
+    POST /user/registration - user's sign up
+    POST /user/login - user's sign in
+    POST /user/logout - user's logout
+    POST /user/reconnect - reconnect
+    GET /user/refresh - gets refresh tokens
+
+### User routes
+
+    GET /user/getusers - gets list of all users
+    GET /user/getuser/:id - gets particular user
+    PUT /user/block - block user's account
+    PUT /user/unblock - unblock user's account
+    DELETE /user/delete - deletes array of users
+    DELETE /user/destroy/:id - deletes on user
 
 ### Profile routes
 
