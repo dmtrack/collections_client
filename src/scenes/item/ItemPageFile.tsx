@@ -37,10 +37,12 @@ const ItemPageFile: FC = () => {
     const { itemsLoading, items } = useAppSelector(
         (state: RootState) => state.items
     );
+    const { users } = useAppSelector((state) => state.users);
     const { commentLoading } = useAppSelector(
         (state: RootState) => state.items
     );
     const item = items.find((item) => Number(item.id) === Number(itemId));
+    const author = users.find((u) => Number(u.id) === Number(item?.userId));
     const navigate = useNavigate();
     const itemConfigs = useCollection().itemConfigs.filter(
         (config) => !config.hidden
@@ -166,7 +168,7 @@ const ItemPageFile: FC = () => {
                                 <Link
                                     to={`/users/${item?.userId}`}
                                     className='link capitalize'>
-                                    {t('createdBy')}: {auth?.name}
+                                    {t('createdBy')}: {author?.name}
                                 </Link>
                             </Typography>
 
