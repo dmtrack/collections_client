@@ -104,6 +104,7 @@ const DateInput = (props: FieldPropsType) => {
                 {...props.field}
                 label={props.textFieldConfig.label}
                 value={props.field.defaultValue || null}
+                sx={{ mt: '8px', width: '100%' }}
                 // renderInput={(params) => (
                 //     <TextField
                 //         {...params}

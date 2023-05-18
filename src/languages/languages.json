@@ -582,7 +582,7 @@
             "itemPage": {
                 "return": "Вернуться на предыдущую страницу",
                 "itemFrom": "из коллекции ",
-                "createdBy": "Создал(а) ",
+                "createdBy": "Создатель",
                 "createdAt": "в",
                 "createdDate": "Дата создания",
                 "tags": "Тэги",

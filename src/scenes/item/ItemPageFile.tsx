@@ -27,6 +27,7 @@ import { EditItemDialog } from '../item/EditItemDialog';
 import { DeleteDialog } from '../../components/Modals/DeleteDialog';
 import { fetchItemConfigs } from '../../state/actions/collections.actions';
 import { Likes } from './Likes';
+import { fetchUsers } from '../../state/actions/userActions';
 
 const ItemPageFile: FC = () => {
     const { t } = useTranslation('translation', {
@@ -43,7 +44,7 @@ const ItemPageFile: FC = () => {
     );
     const item = items.find((item) => Number(item.id) === Number(itemId));
     const author = users.find((u) => Number(u.id) === Number(item?.userId));
-    const navigate = useNavigate();
+
     const itemConfigs = useCollection().itemConfigs.filter(
         (config) => !config.hidden
     );
@@ -61,6 +62,8 @@ const ItemPageFile: FC = () => {
     const isNonMobile = useMediaQuery('(min-width:600px)');
     useEffect(() => {
         dispatch(fetchItems());
+        dispatch(fetchUsers());
+        dispatch(fetchItemConfigs(Number(collection?.id)));
     }, [dispatch]);
 
     const hasFullAccess = userId && (item?.userId === userId || isAdmin);
@@ -161,30 +164,30 @@ const ItemPageFile: FC = () => {
                                 }}>
                                 {item?.name} <Likes itemId={Number(itemId)} />
                             </Typography>
-                            <Typography mt='24px' fontSize='16px'>
+                            {/* <Typography mt='24px' fontSize='16px'>
                                 {item?.description}
-                            </Typography>
-                            <Typography mt='12px' fontSize='14px'>
-                                <Link
-                                    to={`/users/${item?.userId}`}
-                                    className='link capitalize'>
-                                    {t('createdBy')}: {author?.name}
-                                </Link>
-                            </Typography>
+                            </Typography> */}
 
-                            <Typography color='gray' mt='12px' fontSize='14px'>
-                                {t('createdDate')}:{' '}
-                                {timestampToDateTime(item?.created)}
-                            </Typography>
                             {itemConfigs.map((config) => (
-                                <Box key={config.id}>
+                                <Box key={config.id} mt='12px' fontSize='14px'>
                                     <ItemFieldView
                                         item={item}
                                         config={config}
                                     />
                                 </Box>
                             ))}
-                            <Box m='24px auto' fontSize='14px'>
+                            <Typography mt='36px' fontSize='14px'>
+                                <Link
+                                    to={`/users/${item?.userId}`}
+                                    className='link capitalize'>
+                                    {t('createdBy')}: {author?.name}
+                                </Link>
+                            </Typography>
+                            <Typography color='gray' mt='12px' fontSize='14px'>
+                                {t('createdDate')}:{' '}
+                                {timestampToDateTime(item?.created)}
+                            </Typography>
+                            <Box>
                                 {!!item?.tags.length && (
                                     <Box display='flex' flexWrap='wrap'>
                                         {item?.tags.map((tag) => (

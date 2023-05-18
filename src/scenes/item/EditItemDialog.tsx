@@ -136,7 +136,7 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
                     <Box my={1}>
                         <TagsArea value={addedTags} setValue={setAddedTags} />
                     </Box>
-                    <Box mt={2}>
+                    <Box mt={1}>
                         <DragAndDrop
                             chooseFile={(file: File) => handleSetImage(file)}
                             fileTypes={fileTypes}
@@ -161,7 +161,7 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
                         );
                     })}
                 </Box>
-                <Box display='flex' justifyContent='space-between'>
+                <Box display='flex' justifyContent='space-between' mt='16px'>
                     <TransButton onClick={closeHandler} color='inherit'>
                         {t('cancel')}
                     </TransButton>

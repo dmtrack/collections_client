@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { IItem } from '../../models/IItem';
 import { ItemConfigType } from '../../state/models/ICollection.state';
 import { useApp } from '../../hook/appState';
+import { useLocation } from 'react-router-dom';
 
 interface ItemFieldViewProps {
     item?: IItem;
@@ -15,6 +16,7 @@ interface ItemFieldViewProps {
 }
 
 export const ItemFieldView: FC<ItemFieldViewProps> = ({ config, item }) => {
+    const location = useLocation();
     const sliceType = config.type.slice(0, -1);
     const theme = useApp().apptheme;
     const getView = () => {
@@ -23,7 +25,7 @@ export const ItemFieldView: FC<ItemFieldViewProps> = ({ config, item }) => {
             switch (sliceType) {
                 case 'date':
                     return (
-                        <Typography>
+                        <Typography mt='0px'>
                             {value
                                 ? dayjs(value as string).format('MM-DD-YYYY')
                                 : '-'}
@@ -44,8 +46,20 @@ export const ItemFieldView: FC<ItemFieldViewProps> = ({ config, item }) => {
     };
 
     return (
-        <Box my={1} p={1} className='border rounded' data-color-mode={theme}>
-            <Typography variant='h6'>{config.label}</Typography>
+        <Box
+            display='flex'
+            my={1}
+            p={location.pathname.includes('items') ? 0 : 1}
+            className={
+                location.pathname.includes('items') ? '' : 'border rounded'
+            }
+            data-color-mode={theme}>
+            <Typography
+                m={location.pathname.includes('items') ? '0px' : '24px auto'}
+                mr={location.pathname.includes('items') ? '8px' : 0}
+                fontSize='14px'>
+                {config.label}:
+            </Typography>
             {getView()}
         </Box>
     );
