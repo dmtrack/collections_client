@@ -99,7 +99,7 @@ const ItemPageFile: FC = () => {
                                 height='400px'
                             />
                         </Box>
-                        {hasFullAccess && (
+                        {hasFullAccess ? (
                             <Box
                                 justifyContent='center'
                                 display='flex'
@@ -141,7 +141,7 @@ const ItemPageFile: FC = () => {
                                     )}
                                 </Tooltip>
                             </Box>
-                        )}
+                        ) : null}
                     </Box>
 
                     <Box
