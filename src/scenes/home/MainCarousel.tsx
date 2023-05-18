@@ -84,6 +84,18 @@ const MainCarousel = () => {
                     }}>
                     {t('mainTitle')}
                 </Typography>
+                <Typography
+                    fontSize='18px'
+                    color={colors.secondary[800]}
+                    sx={{
+                        textAlign: 'left',
+                        lineHeight: '1.2',
+                        marginRight: '16px',
+                        marginTop: isNonMobile ? '0px' : '32px',
+                        marginBottom: isNonMobile ? '32px' : '16px',
+                    }}>
+                    {t('mainText')}
+                </Typography>
                 {/* <Box display='flex'>
                     <Box width='100%'>
                         <TagsArea
