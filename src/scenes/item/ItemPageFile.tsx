@@ -176,14 +176,14 @@ const ItemPageFile: FC = () => {
                                     />
                                 </Box>
                             ))}
-                            <Typography mt='36px' fontSize='14px'>
+                            <Typography mt='36px' fontSize='14px' color='gray'>
                                 <Link
                                     to={`/users/${item?.userId}`}
                                     className='link capitalize'>
                                     {t('createdBy')}: {author?.name}
                                 </Link>
                             </Typography>
-                            <Typography color='gray' mt='12px' fontSize='14px'>
+                            <Typography color='gray' mt='4px' fontSize='14px'>
                                 {t('createdDate')}:{' '}
                                 {timestampToDateTime(item?.created)}
                             </Typography>
