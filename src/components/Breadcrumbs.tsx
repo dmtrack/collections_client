@@ -10,6 +10,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { WithRouterProps, withRouter } from './withRouter';
 import { useTranslation } from 'react-i18next';
 import { v4 } from 'uuid';
+import { color } from '@mui/system';
 
 const BreadCrumbs = (props: WithRouterProps) => {
     const { t } = useTranslation('translation', { keyPrefix: 'breadcrumb' });
@@ -30,6 +31,11 @@ const BreadCrumbs = (props: WithRouterProps) => {
                         aria-label='breadcrumb'
                         separator={<NavigateNextIcon />}>
                         <Link
+                            color={
+                                theme.palette.mode === 'light'
+                                    ? colors.primary[500]
+                                    : colors.secondary[800]
+                            }
                             underline='none'
                             onClick={() => navigate('/')}
                             fontSize='14px'>
@@ -45,6 +51,11 @@ const BreadCrumbs = (props: WithRouterProps) => {
                                 let reg = regular.test(name);
                                 return !reg ? (
                                     <Link
+                                        color={
+                                            theme.palette.mode === 'light'
+                                                ? colors.primary[500]
+                                                : colors.secondary[800]
+                                        }
                                         underline='none'
                                         onClick={() => navigate(routeTo)}
                                         key={v4()}
@@ -53,6 +64,11 @@ const BreadCrumbs = (props: WithRouterProps) => {
                                     </Link>
                                 ) : (
                                     <Link
+                                        color={
+                                            theme.palette.mode === 'light'
+                                                ? colors.primary[500]
+                                                : colors.secondary[800]
+                                        }
                                         underline='none'
                                         onClick={() => navigate(routeTo)}
                                         key={v4()}

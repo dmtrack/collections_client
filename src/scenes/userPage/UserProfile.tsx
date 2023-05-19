@@ -6,6 +6,7 @@ import {
     Typography,
     Tooltip,
     Fab,
+    useTheme,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -37,7 +38,8 @@ const UserProfile = () => {
     const [user, setUser] = useState<IUser>();
     const { userCollections } = useAppSelector((state) => state.collections);
     const { loading } = useAppSelector((state) => state.app);
-
+    const theme = useTheme();
+    const colors = shades(theme.palette.mode);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
     const goHome = () => navigate('/');
@@ -154,7 +156,11 @@ const UserProfile = () => {
                             <Typography
                                 variant='h4'
                                 textAlign='left'
-                                // color={shades.secondary[800]}
+                                color={
+                                    theme.palette.mode === 'light'
+                                        ? colors.primary[500]
+                                        : colors.secondary[800]
+                                }
                                 sx={{
                                     letterSpacing: '-0.5px',
                                     fontWeight: '600',

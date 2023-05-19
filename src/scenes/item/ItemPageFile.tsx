@@ -157,7 +157,11 @@ const ItemPageFile: FC = () => {
                         <Box m='0px 0 24px 0' textAlign='left'>
                             <Typography
                                 variant='h4'
-                                color={colors.secondary[800]}
+                                color={
+                                    theme.palette.mode === 'light'
+                                        ? colors.primary[500]
+                                        : colors.secondary[800]
+                                }
                                 sx={{
                                     letterSpacing: '-0.5px',
                                     fontWeight: '600',
