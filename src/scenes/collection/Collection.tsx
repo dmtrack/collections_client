@@ -26,7 +26,7 @@ import { IItem } from '../../models/IItem';
 import { fetchItems } from '../../state/actions/items.actions';
 import { EditItemDialog } from '../item/EditItemDialog';
 import { DeleteDialog } from '../../components/Modals/DeleteDialog';
-import { fetchItemConfigs } from '../../state/actions/collections.actions'
+import { fetchItemConfigs } from '../../state/actions/collections.actions';
 
 const CollectionPage = () => {
     const { t } = useTranslation('translation', {
@@ -42,7 +42,7 @@ const CollectionPage = () => {
     const isNonMobile = useMediaQuery('(min-width:600px)');
     useEffect(() => {
         dispatch(fetchItems());
-        if (collectionId) dispatch(fetchItemConfigs(+collectionId))
+        if (collectionId) dispatch(fetchItemConfigs(+collectionId));
     }, [collectionId, dispatch]);
     const [editItemDialogOpen, setEditItemDialogOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -105,7 +105,7 @@ const CollectionPage = () => {
                                 gap='12px'>
                                 <Tooltip title={`${t('add')}`}>
                                     {isNonMobile ? (
-                                        <Fab size='small' color='secondary'>
+                                        <Fab size='small' color='primary'>
                                             <AddIcon
                                                 onClick={
                                                     handleOpenCreateItemOpen
