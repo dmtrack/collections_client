@@ -89,23 +89,14 @@ const MainCarousel = () => {
                     color={colors.secondary[800]}
                     sx={{
                         textAlign: 'left',
-                        lineHeight: '1.2',
+                        lineHeight: '1.3',
+                        letterSpacing: '-0.5px',
                         marginRight: '16px',
                         marginTop: isNonMobile ? '0px' : '32px',
                         marginBottom: isNonMobile ? '32px' : '16px',
                     }}>
                     {t('mainText')}
                 </Typography>
-                {/* <Box display='flex'>
-                    <Box width='100%'>
-                        <TagsArea
-                            value={searchTags}
-                            setValue={(tags) => dispatch(setSearchTags(tags))}
-                            freeSolo={false}
-                            placeholder='tags search'
-                        />
-                    </Box>
-                </Box> */}
             </Box>
             <Box sx={{ flex: '1' }}>
                 <Carousel
