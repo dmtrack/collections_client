@@ -109,7 +109,7 @@ const ItemPageFile: FC = () => {
                                 justifyContent='center'
                                 display='flex'
                                 gap='12px'>
-                                <Tooltip title={`${t('edit')}`}>
+                                {/* <Tooltip title={`${t('edit')}`}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
                                             <EditIcon
@@ -126,7 +126,7 @@ const ItemPageFile: FC = () => {
                                             }
                                         />
                                     )}
-                                </Tooltip>
+                                </Tooltip> */}
 
                                 <Tooltip title={`${t('delete')}`}>
                                     {isNonMobile ? (
