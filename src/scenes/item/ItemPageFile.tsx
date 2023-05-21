@@ -109,7 +109,7 @@ const ItemPageFile: FC = () => {
                                 justifyContent='center'
                                 display='flex'
                                 gap='12px'>
-                                {/* <Tooltip title={`${t('edit')}`}>
+                                <Tooltip title={`${t('edit')}`}>
                                     {isNonMobile ? (
                                         <Fab size='small' color='primary'>
                                             <EditIcon
@@ -126,7 +126,7 @@ const ItemPageFile: FC = () => {
                                             }
                                         />
                                     )}
-                                </Tooltip> */}
+                                </Tooltip>
 
                                 <Tooltip title={`${t('delete')}`}>
                                     {isNonMobile ? (
@@ -168,9 +168,9 @@ const ItemPageFile: FC = () => {
                                 }}>
                                 {item?.name} <Likes itemId={Number(itemId)} />
                             </Typography>
-                            {/* <Typography mt='24px' fontSize='16px'>
+                            <Typography mt='24px' fontSize='16px'>
                                 {item?.description}
-                            </Typography> */}
+                            </Typography>
 
                             {itemConfigs.map((config) => (
                                 <Box key={config.id} mt='12px' fontSize='14px'>

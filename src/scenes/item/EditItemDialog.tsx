@@ -34,6 +34,7 @@ export const EditItemDialog: FC<EditItemDialogProps> = ({
     const { t } = useTranslation('translation', {
         keyPrefix: 'items',
     });
+
     const theme = useTheme();
     const colors = shades(theme.palette.mode);
     const dispatch = useAppDispatch();

@@ -99,7 +99,11 @@ export const createItem = (data: ICreateItemPayload) => {
 
 export const editItem = (item: IItem) => {
     return async (dispatch: AppDispatch) => {
+        console.log(item, 'item');
+
         const response = await itemService.editItem(item);
+        console.log(response, 'responce');
+
         response
             .mapRight(({ data: item }) => {
                 dispatch(itemSlice.actions.setItem(item));

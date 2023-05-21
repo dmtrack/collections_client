@@ -11,6 +11,7 @@ export interface IItemCreateResponse {
         created?: string;
         collectionId?: number;
         image?: string;
+        description: string;
         comments?: IComment[];
         tags: TagType[];
         likes?: ILike[];
@@ -22,6 +23,7 @@ export interface IItemEditResponse {
     name?: string;
     created?: string;
     collectionId?: number;
+    description: string;
     image?: string;
     comments?: IComment[];
     item?: {

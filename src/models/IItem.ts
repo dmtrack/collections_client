@@ -7,6 +7,7 @@ export interface IItem {
     collectionId?: number;
     userId?: number;
     image?: string;
+    description: string;
     comments?: IComment[];
     item?: {
         image: string;
@@ -26,6 +27,7 @@ export interface IItemForSorting {
     created?: string;
     collectionId?: number;
     image?: string;
+    description: string;
     comments?: IComment[];
     item?: {
         image: string;

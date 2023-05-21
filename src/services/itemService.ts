@@ -5,7 +5,12 @@ import {
 import { ICreateItem, IItem, TagType } from './../models/IItem';
 import { AuthorizationError } from '../models/errors/AuthorizationError';
 
-import { axiosDelete, axiosGet, axiosPost } from '../api/axios/apiClient';
+import {
+    axiosDelete,
+    axiosGet,
+    axiosPost,
+    axiosUpdate,
+} from '../api/axios/apiClient';
 import { DataBaseError } from '../models/errors/DataBaseError';
 import {
     IItemCreateResponse,
@@ -39,10 +44,10 @@ export default class ItemService {
     }
 
     static async editItem(item: IItem) {
-        return axiosPost<AuthorizationError | DataBaseError, IItemEditResponse>(
-            '/item/edit',
-            { item }
-        );
+        return axiosUpdate<
+            AuthorizationError | DataBaseError,
+            IItemEditResponse
+        >('/item/update', { item });
     }
 
     static async deleteItem(id: number) {

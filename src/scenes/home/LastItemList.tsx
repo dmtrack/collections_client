@@ -43,6 +43,7 @@ const LastItemList = () => {
             created: element.item?.created,
             collectionId: Number(element.item?.collectionId),
             tags: element.tags,
+            description: element.description,
         };
     });
     const topCommentsFlat = topComments?.map((element) => {
@@ -54,6 +55,7 @@ const LastItemList = () => {
             created: element.item?.created,
             collectionId: Number(element.item?.collectionId),
             tags: element.tags,
+            description: element.description,
         };
     });
 
