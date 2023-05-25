@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function CollectionsPage() {
+function UsersPage() {
     const navigate = useNavigate();
     useEffect(() => {
         navigate('/');
     }, []);
 
-    return <>Collections page</>;
+    return <>Users page</>;
 }
 
-export default CollectionsPage;
+export default UsersPage;
 
 // import React, { memo } from 'react';
 // import { useTranslation } from 'react-i18next';
