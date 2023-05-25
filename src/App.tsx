@@ -33,6 +33,7 @@ import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import CollectionsPage from './scenes/collection/CollectionsPage';
 import UsersPage from './scenes/userPage/UsersPage';
+import ItemsPage from './scenes/item/ItemsPage';
 
 const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -119,6 +120,10 @@ const App: React.FC = () => {
                                     <Route
                                         path='users'
                                         element={<UsersPage />}
+                                    />{' '}
+                                    <Route
+                                        path='items'
+                                        element={<ItemsPage />}
                                     />
                                     <Route
                                         path='items/:itemId/'
