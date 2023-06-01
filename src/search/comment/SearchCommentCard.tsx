@@ -18,7 +18,7 @@ export const SearchCommentCard = connectHighlight(
         return (
             <Box className='search-card'>
                 <Link
-                    to={`/item/${hit.itemId}`}
+                    to={`/items/${hit.itemId}`}
                     onClick={() => dispatch(setSearchOpen(false))}>
                     <HighlightText highlight={highlightComment} />
                 </Link>
