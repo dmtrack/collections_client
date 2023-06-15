@@ -10,6 +10,7 @@ import {
 import { Text } from './Common/Text';
 import { useTranslation } from 'react-i18next';
 import { shades } from '../theme';
+import { useEffect } from 'react';
 
 const NotfoundPage = () => {
     const { t } = useTranslation('translation', { keyPrefix: 'notFound' });
@@ -20,6 +21,12 @@ const NotfoundPage = () => {
     const goBackPage = () => {
         navigate(-1);
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            navigate('/');
+        }, 3000);
+    }, []);
 
     return (
         <Box
